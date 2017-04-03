@@ -7,7 +7,6 @@ package com.ubt.healthcare;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
 /**
  *
@@ -15,11 +14,16 @@ import javax.ws.rs.Produces;
  */
 @Path("login")
 public class Main {
-    
+
     @GET
     @Path("/msg")
-    public String msg()
-    {
+    public String msg() {
         return "Message";
+    }
+
+    @GET
+    @Path("/hi")
+    public String hi() {
+        return "Hi Message";
     }
 }
