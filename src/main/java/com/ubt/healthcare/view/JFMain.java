@@ -5,10 +5,12 @@
  */
 package com.ubt.healthcare.view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author F
  */
-public class JFMain {
+public class JFMain extends JFrame {
     
 }
