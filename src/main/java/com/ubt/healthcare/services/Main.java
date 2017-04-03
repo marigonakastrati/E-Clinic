@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare;
+package com.ubt.healthcare.services;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,9 +21,4 @@ public class Main {
         return "Message";
     }
 
-    @GET
-    @Path("/hi")
-    public String hi() {
-        return "Hi Message";
-    }
 }
