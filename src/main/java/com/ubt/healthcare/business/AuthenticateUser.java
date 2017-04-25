@@ -5,6 +5,8 @@
  */
 package com.ubt.healthcare.business;
 
+import com.ubt.healthcare.entity.Person;
+
 /*import org.ubt.kiosk.dal.StudentRepository;
 import org.ubt.kiosk.entity.Student;
 */
@@ -20,12 +22,12 @@ public class AuthenticateUser {
     
     public Object authenticate(String user, String password) 
     {
-        Object student =null;
+        Person person =null;
         //student =studentRepository.findById(Integer.parseInt(user));
         
-        if (student != null && hashing.encodehashPassword(password).equals(student.getPasscode())) 
+        if (person != null && hashing.encodehashPassword(password).equals(person.getFirstName())) 
         {
-            return student;
+            return person;
         }
         return null;
     }

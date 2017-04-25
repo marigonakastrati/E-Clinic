@@ -27,38 +27,38 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author F
  */
 @Entity
-@Table(name = "Doctor")
+@Table(name = "Pharmacy_Manager")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d"),
-    @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId")})
-public class Doctor implements Serializable {
+    @NamedQuery(name = "PharmacyManager.findAll", query = "SELECT p FROM PharmacyManager p"),
+    @NamedQuery(name = "PharmacyManager.findByPharmacyManagerId", query = "SELECT p FROM PharmacyManager p WHERE p.pharmacyManagerId = :pharmacyManagerId")})
+public class PharmacyManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "doctor_id")
-    private Integer doctorId;
+    @Column(name = "pharmacy_manager_id")
+    private Integer pharmacyManagerId;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @OneToOne(optional = false)
     private Person personId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
-    private Collection<Schedule> scheduleCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacyManagerId")
+    private Collection<Medicine> medicineCollection;
 
-    public Doctor() {
+    public PharmacyManager() {
     }
 
-    public Doctor(Integer doctorId) {
-        this.doctorId = doctorId;
+    public PharmacyManager(Integer pharmacyManagerId) {
+        this.pharmacyManagerId = pharmacyManagerId;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public Integer getPharmacyManagerId() {
+        return pharmacyManagerId;
     }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
+    public void setPharmacyManagerId(Integer pharmacyManagerId) {
+        this.pharmacyManagerId = pharmacyManagerId;
     }
 
     public Person getPersonId() {
@@ -70,29 +70,29 @@ public class Doctor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Schedule> getScheduleCollection() {
-        return scheduleCollection;
+    public Collection<Medicine> getMedicineCollection() {
+        return medicineCollection;
     }
 
-    public void setScheduleCollection(Collection<Schedule> scheduleCollection) {
-        this.scheduleCollection = scheduleCollection;
+    public void setMedicineCollection(Collection<Medicine> medicineCollection) {
+        this.medicineCollection = medicineCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (doctorId != null ? doctorId.hashCode() : 0);
+        hash += (pharmacyManagerId != null ? pharmacyManagerId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Doctor)) {
+        if (!(object instanceof PharmacyManager)) {
             return false;
         }
-        Doctor other = (Doctor) object;
-        if ((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId))) {
+        PharmacyManager other = (PharmacyManager) object;
+        if ((this.pharmacyManagerId == null && other.pharmacyManagerId != null) || (this.pharmacyManagerId != null && !this.pharmacyManagerId.equals(other.pharmacyManagerId))) {
             return false;
         }
         return true;
@@ -100,7 +100,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Doctor[ doctorId=" + doctorId + " ]";
+        return "com.ubt.healthcare.entity.PharmacyManager[ pharmacyManagerId=" + pharmacyManagerId + " ]";
     }
     
 }

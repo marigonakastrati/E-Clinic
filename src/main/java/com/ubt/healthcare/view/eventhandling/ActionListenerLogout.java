@@ -23,6 +23,6 @@ public class ActionListenerLogout implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cr.showLoginScreen();
+        //cr.showLoginScreen();
     }
 }
