@@ -8,6 +8,7 @@ package com.ubt.healthcare.view.eventhandling;
 import com.ubt.healthcare.view.JFMain;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -25,17 +26,18 @@ public class MouseAdapterCloseWindows extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent arg0) 
     {
+        ImageIcon icHover = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\close-hover.png");
 
         jpinterface.getJlCloseWindowsLoginScreen()
-                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/ubt/kiosk/view/images/close-hover.png")));
+                .setIcon(icHover);
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) 
     {
-
+        ImageIcon icClose = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\close.png");
         jpinterface.getJlCloseWindowsLoginScreen()
-                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/ubt/kiosk/view/images/close.png")));
+                .setIcon(icClose);
 
     }
 

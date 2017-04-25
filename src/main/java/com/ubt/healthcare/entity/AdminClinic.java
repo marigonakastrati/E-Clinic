@@ -28,14 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AdminClinic.findAll", query = "SELECT a FROM AdminClinic a"),
-    @NamedQuery(name = "AdminClinic.findByAdminClinicId", query = "SELECT a FROM AdminClinic a WHERE a.adminClinicId = :adminClinicId")})
+    @NamedQuery(name = "AdminClinic.findByAdminClinicId", query = "SELECT a FROM AdminClinic a WHERE a.adminClinicId = :adminClinicId"),
+    @NamedQuery(name = "AdminClinic.findByPassCode", query = "SELECT a FROM AdminClinic a WHERE a.passCode = :passCode")})
 public class AdminClinic implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "pass_code")
-    private String passCode;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,6 +38,11 @@ public class AdminClinic implements Serializable {
     @NotNull
     @Column(name = "admin_clinic_id")
     private Integer adminClinicId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "pass_code")
+    private String passCode;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @OneToOne(optional = false)
     private Person personId;
@@ -54,12 +54,25 @@ public class AdminClinic implements Serializable {
         this.adminClinicId = adminClinicId;
     }
 
+    public AdminClinic(Integer adminClinicId, String passCode) {
+        this.adminClinicId = adminClinicId;
+        this.passCode = passCode;
+    }
+
     public Integer getAdminClinicId() {
         return adminClinicId;
     }
 
     public void setAdminClinicId(Integer adminClinicId) {
         this.adminClinicId = adminClinicId;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Person getPersonId() {
@@ -93,14 +106,6 @@ public class AdminClinic implements Serializable {
     @Override
     public String toString() {
         return "com.ubt.healthcare.entity.AdminClinic[ adminClinicId=" + adminClinicId + " ]";
-    }
-
-    public String getPassCode() {
-        return passCode;
-    }
-
-    public void setPassCode(String passCode) {
-        this.passCode = passCode;
     }
     
 }

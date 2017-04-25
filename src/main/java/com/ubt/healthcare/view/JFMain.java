@@ -6,6 +6,7 @@
 package com.ubt.healthcare.view;
 
 import com.ubt.healthcare.business.AuthenticateUser;
+import com.ubt.healthcare.entity.AdminClinic;
 import com.ubt.healthcare.entity.Person;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -24,16 +25,18 @@ public class JFMain extends JFrame {
     private JPInformationScreen jpAuthScreen;
     private JPViewScheduleScreen jpViewScheduleScreen;
     private JPStudentEditScreen jpStudentEditScreen;
+    private JPProfile jpProfile;
     private CardLayout clCardlayout ;
     private Person person;
 
     public JFMain(JPMain jpMain, JPLoginScreen jpLoginScreen, JPInformationScreen jpAuthScreen,
-            JPViewScheduleScreen jpViewScheduleScreen, JPStudentEditScreen jpStudentEditScreen) {
+            JPViewScheduleScreen jpViewScheduleScreen, JPStudentEditScreen jpStudentEditScreen,JPProfile jpProfile) {
         this.jpMain = jpMain;
         this.jpLoginScreen = jpLoginScreen;
         this.jpAuthScreen = jpAuthScreen;
         this.jpViewScheduleScreen = jpViewScheduleScreen;
         this.jpStudentEditScreen = jpStudentEditScreen;
+        this.jpProfile = jpProfile;
         clCardlayout = new CardLayout();
         setUndecorated(true);// disable the minimize, maximize, close
         setDefaultCloseOperation(3);
@@ -47,6 +50,7 @@ public class JFMain extends JFrame {
         jpMain.add(jpAuthScreen, "Information Screen");
         jpMain.add(jpStudentEditScreen, "Student");
         jpMain.add(jpViewScheduleScreen, "Schedule");
+        jpMain.add(jpProfile, "Profile");
         clCardlayout.show(jpMain, "Change");
 
         add(jpMain);
@@ -56,16 +60,16 @@ public class JFMain extends JFrame {
         setVisible(true);
     }
 
-    public Person authUser() {
+    public AdminClinic authUser() {
         String id = jpLoginScreen.getJtfstudentId().getText();
         String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
         AuthenticateUser auth = new AuthenticateUser();
-        Person value = (Person)auth.authenticate(id, passcode);
+        AdminClinic value = (AdminClinic)auth.authenticate(id, passcode);
         return value;
     }
 
     public void showStudentInformationScreen() {
-        person = authUser();
+        person = authUser().getPersonId();
         if (person != null) {
             jpAuthScreen.getJtaauthID().setText(person.getPersonId()+ "");
             jpAuthScreen.getJtaauthName().setText(person.getFirstName());
@@ -77,7 +81,8 @@ public class JFMain extends JFrame {
             jpLoginScreen.setVisible(false);
             jpViewScheduleScreen.setVisible(false);
             jpStudentEditScreen.setVisible(false);
-            jpAuthScreen.setVisible(true);
+            jpAuthScreen.setVisible(false);
+            jpProfile.setVisible(true);
             //clCardlayout.next(jpMain);
             //clCardlayout.next(jpMain);
         } else {

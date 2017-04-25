@@ -27,6 +27,7 @@ public class JPLoginScreen extends JPanel{
     private JLabel jlpersonId = new JLabel("");// Student ID
     private JLabel jllogin = new JLabel("");//login JLabel
     private JLabel jlcloseWindows = new JLabel(""); // close windows main screen
+    private JLabel jlBackground = new JLabel("");
 
     public JPLoginScreen() {
         this.setLayout(null);
@@ -44,24 +45,31 @@ public class JPLoginScreen extends JPanel{
         jtfpersonId.setFont(new Font("Tahoma", 1, 16));
         jtfpersonId.setBounds(83, 139, 136, 20);
         
-        //jlpassCode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/textField.png")));
+        //jlpassCode.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/textField.png")));
+        jlpassCode.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\textField.png"));
         jlpassCode.setBounds(78, 133, 145, 30);// 78,133
         
         //jlpersonId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/textField.png")));
+        jlpersonId.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\textField.png"));
         jlpersonId.setBounds(78, 173, 145, 30);//78,173
 
         //jllogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/sign.png")));
+        jllogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\sign.png"));
         jllogin.setBounds(78, 219, 140, 38);
         
         //jlcloseWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/close.png")));
+        jlcloseWindows.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\close.png"));
         jlcloseWindows.setBounds(760, 1, 25, 25);
         
+        jlBackground.setIcon(new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\view\\images\\login-background.png"));
+        jlBackground.setBounds(0, 0, 800, 800);
         this.add(jlpersonId);
         this.add(jtfpersonId);
         this.add(jlpassCode);// disable passcodeLabel if there is no RFID Input
         this.add(jtfpassCode);// disable passcode if there is no RFID Input
         this.add(jllogin);// disable login if there is no RFID Input
         this.add(jlcloseWindows);
+        this.add(jlBackground);
         jtfpersonId.requestFocusInWindow();
 
     }
@@ -100,12 +108,5 @@ public class JPLoginScreen extends JPanel{
         jllogin.addMouseListener(e);
     }
     
-    @Override
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        ImageIcon i = new ImageIcon("/com/ubt/healthcare/view/images/login-background.png");
-        i.paintIcon(this, g, 800, 800);
-    }
     
 }

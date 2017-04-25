@@ -27,7 +27,8 @@ public class Main {
         JPInformationScreen jpStudentInformation = new JPInformationScreen();
         JPViewScheduleScreen jpViewScheduleScreen = new JPViewScheduleScreen();
         JPStudentEditScreen jpStudentEditScreen = new JPStudentEditScreen();
-        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation, jpViewScheduleScreen, jpStudentEditScreen);
+        JPProfile jpProfile = new JPProfile();
+        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation, jpViewScheduleScreen, jpStudentEditScreen,jpProfile);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfMain));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfMain));
