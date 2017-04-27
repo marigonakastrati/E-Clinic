@@ -23,19 +23,16 @@ public class JFMain extends JFrame {
     private JPMain jpMain;
     private JPLoginScreen jpLoginScreen;
     private JPInformationScreen jpAuthScreen;
-    private JPViewScheduleScreen jpViewScheduleScreen;
-    private JPStudentEditScreen jpStudentEditScreen;
     private JPProfile jpProfile;
     private CardLayout clCardlayout ;
     private Person person;
 
-    public JFMain(JPMain jpMain, JPLoginScreen jpLoginScreen, JPInformationScreen jpAuthScreen,
-            JPViewScheduleScreen jpViewScheduleScreen, JPStudentEditScreen jpStudentEditScreen,JPProfile jpProfile) {
+    public JFMain(JPMain jpMain, JPLoginScreen jpLoginScreen, JPInformationScreen jpAuthScreen, JPProfile jpProfile) 
+    {
+              
         this.jpMain = jpMain;
         this.jpLoginScreen = jpLoginScreen;
         this.jpAuthScreen = jpAuthScreen;
-        this.jpViewScheduleScreen = jpViewScheduleScreen;
-        this.jpStudentEditScreen = jpStudentEditScreen;
         this.jpProfile = jpProfile;
         clCardlayout = new CardLayout();
         setUndecorated(true);// disable the minimize, maximize, close
@@ -48,8 +45,6 @@ public class JFMain extends JFrame {
         //jpauthscreen.setLayout(null);
         jpMain.add(jpLoginScreen, "Login Screen");// it works by using the second paramteter to switch the JPanels
         jpMain.add(jpAuthScreen, "Information Screen");
-        jpMain.add(jpStudentEditScreen, "Student");
-        jpMain.add(jpViewScheduleScreen, "Schedule");
         jpMain.add(jpProfile, "Profile");
         clCardlayout.show(jpMain, "Change");
 
@@ -79,8 +74,6 @@ public class JFMain extends JFrame {
             //clCardlayout.show(jpMain, "Information Screen");
             //switchToScreen(informationScreen);
             jpLoginScreen.setVisible(false);
-            jpViewScheduleScreen.setVisible(false);
-            jpStudentEditScreen.setVisible(false);
             jpAuthScreen.setVisible(false);
             jpProfile.setVisible(true);
             //clCardlayout.next(jpMain);
@@ -99,8 +92,6 @@ public class JFMain extends JFrame {
         //switchToScreen(loginScreen);
         //jpViewScheduleScreen.setVisible(false);
         jpAuthScreen.setVisible(false);
-        jpStudentEditScreen.setVisible(false);
-        jpViewScheduleScreen.setVisible(false);
         jpLoginScreen.setVisible(true);
         jpLoginScreen.getJtfstudentId().requestFocusInWindow();// request focus after logout
 
@@ -121,8 +112,6 @@ public class JFMain extends JFrame {
         
         jpAuthScreen.setVisible(false);
         jpLoginScreen.setVisible(false);
-        jpStudentEditScreen.setVisible(false);
-        jpViewScheduleScreen.setVisible(true);
         
     }
     
@@ -136,8 +125,6 @@ public class JFMain extends JFrame {
         
         jpAuthScreen.setVisible(false);
         jpLoginScreen.setVisible(false);
-        jpViewScheduleScreen.setVisible(false);
-        jpStudentEditScreen.setVisible(true);
 
     }
     

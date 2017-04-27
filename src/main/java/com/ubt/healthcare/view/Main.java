@@ -5,12 +5,10 @@
  */
 package com.ubt.healthcare.view;
 
-import com.ubt.healthcare.view.eventhandling.MouseAdapterBackFromEditScreen;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterCloseWindows;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterEditScreen;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterLogOut;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterLogin;
-import com.ubt.healthcare.view.eventhandling.MouseAdapterUpdateStudentEditScreen;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterViewSchedule;
 
 /**
@@ -25,19 +23,14 @@ public class Main {
         JPMain jpMain = new JPMain();
         JPLoginScreen jpLoginScreen = new JPLoginScreen();
         JPInformationScreen jpStudentInformation = new JPInformationScreen();
-        JPViewScheduleScreen jpViewScheduleScreen = new JPViewScheduleScreen();
-        JPStudentEditScreen jpStudentEditScreen = new JPStudentEditScreen();
         JPProfile jpProfile = new JPProfile();
-        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation, jpViewScheduleScreen, jpStudentEditScreen,jpProfile);
+        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation,jpProfile);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfMain));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfMain));
         jpStudentInformation.addEditStudentMouseAdapter(new MouseAdapterEditScreen(jfMain));
         jpStudentInformation.addViewScheduleScreenListener(new MouseAdapterViewSchedule(jfMain));
         jpStudentInformation.addLogOutAdapter(new MouseAdapterLogOut(jfMain));
-        jpStudentEditScreen.addBackMouseAdapter(new MouseAdapterBackFromEditScreen(jfMain));
-        jpStudentEditScreen.addUpdateMouseAdapter(new MouseAdapterUpdateStudentEditScreen(jfMain));
-        jpViewScheduleScreen.addBackMouseAdapter(new MouseAdapterBackFromEditScreen(jfMain));
 
         jfMain.setSize(800, 800);
 
