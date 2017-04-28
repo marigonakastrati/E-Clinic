@@ -24,7 +24,7 @@
         <mapping class="com.ubt.healthcare.entity.HRManager"/>
         <mapping class="com.ubt.healthcare.entity.Medicine"/>
         <mapping class="com.ubt.healthcare.entity.Nurse"/>
-        <mapping class="com.ubt.healthcare.entity.Orders"/>
+        <mapping class="com.ubt.healthcare.entity.Order1"/>
         <mapping class="com.ubt.healthcare.entity.Patient"/>
         <mapping class="com.ubt.healthcare.entity.Pharmacist"/>
         <mapping class="com.ubt.healthcare.entity.PharmacyManager"/>
@@ -34,6 +34,11 @@
         <mapping class="com.ubt.healthcare.entity.Schedule"/>
         <mapping class="com.ubt.healthcare.entity.Visit"/>
         <mapping class="com.ubt.healthcare.entity.Vitals"/>
+        <mapping class="com.ubt.healthcare.entity.EducationProgram"/>
+        <mapping class="com.ubt.healthcare.entity.EducationType"/>
+        <mapping class="com.ubt.healthcare.entity.PersonEducation"/>
+        <mapping class="com.ubt.healthcare.entity.BillPayment"/>
+        <mapping class="com.ubt.healthcare.entity.OrderItem"/>
         
       
     </session-factory>

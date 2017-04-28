@@ -31,9 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p"),
-    @NamedQuery(name = "Prescription.findByPrescriptionId", query = "SELECT p FROM Prescription p WHERE p.prescriptionId = :prescriptionId"),
-    @NamedQuery(name = "Prescription.findByDaysToUse", query = "SELECT p FROM Prescription p WHERE p.daysToUse = :daysToUse"),
-    @NamedQuery(name = "Prescription.findByTimesPerDay", query = "SELECT p FROM Prescription p WHERE p.timesPerDay = :timesPerDay")})
+    @NamedQuery(name = "Prescription.findByPrescriptionId", query = "SELECT p FROM Prescription p WHERE p.prescriptionId = :prescriptionId")})
 public class Prescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,16 +40,14 @@ public class Prescription implements Serializable {
     @NotNull
     @Column(name = "prescription_id")
     private Integer prescriptionId;
-    @Column(name = "days_to_use")
-    private Integer daysToUse;
-    @Column(name = "times_per_day")
-    private Integer timesPerDay;
     @Lob
     @Size(max = 2147483647)
     @Column(name = "desc")
     private String desc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
     private Collection<Visit> visitCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
+    private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
     private Collection<PrescriptionMedicines> prescriptionMedicinesCollection;
 
@@ -70,22 +66,6 @@ public class Prescription implements Serializable {
         this.prescriptionId = prescriptionId;
     }
 
-    public Integer getDaysToUse() {
-        return daysToUse;
-    }
-
-    public void setDaysToUse(Integer daysToUse) {
-        this.daysToUse = daysToUse;
-    }
-
-    public Integer getTimesPerDay() {
-        return timesPerDay;
-    }
-
-    public void setTimesPerDay(Integer timesPerDay) {
-        this.timesPerDay = timesPerDay;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -101,6 +81,15 @@ public class Prescription implements Serializable {
 
     public void setVisitCollection(Collection<Visit> visitCollection) {
         this.visitCollection = visitCollection;
+    }
+
+    @XmlTransient
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
+    }
+
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
     }
 
     @XmlTransient

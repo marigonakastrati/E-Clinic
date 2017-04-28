@@ -6,7 +6,6 @@
 package com.ubt.healthcare.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,14 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -64,8 +62,8 @@ public class Schedule implements Serializable {
     @Column(name = "time_end")
     @Temporal(TemporalType.TIME)
     private Date timeEnd;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduleId")
-    private Collection<BookAppointment> bookAppointmentCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "scheduleId")
+    private BookAppointment bookAppointment;
     @JoinColumn(name = "doctor_id", referencedColumnName = "doctor_id")
     @ManyToOne(optional = false)
     private Doctor doctorId;
@@ -128,13 +126,12 @@ public class Schedule implements Serializable {
         this.timeEnd = timeEnd;
     }
 
-    @XmlTransient
-    public Collection<BookAppointment> getBookAppointmentCollection() {
-        return bookAppointmentCollection;
+    public BookAppointment getBookAppointment() {
+        return bookAppointment;
     }
 
-    public void setBookAppointmentCollection(Collection<BookAppointment> bookAppointmentCollection) {
-        this.bookAppointmentCollection = bookAppointmentCollection;
+    public void setBookAppointment(BookAppointment bookAppointment) {
+        this.bookAppointment = bookAppointment;
     }
 
     public Doctor getDoctorId() {

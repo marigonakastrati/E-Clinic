@@ -58,14 +58,14 @@ public class Medicine implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
-    private Collection<Orders> ordersCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
     private Collection<Alergis> alergisCollection;
     @JoinColumn(name = "pharmacy_manager_id", referencedColumnName = "pharmacy_manager_id")
     @ManyToOne(optional = false)
     private PharmacyManager pharmacyManagerId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
     private Collection<PrescriptionMedicines> prescriptionMedicinesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
+    private Collection<OrderItem> orderItemCollection;
 
     public Medicine() {
     }
@@ -115,15 +115,6 @@ public class Medicine implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
-    }
-
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
-    }
-
-    @XmlTransient
     public Collection<Alergis> getAlergisCollection() {
         return alergisCollection;
     }
@@ -147,6 +138,15 @@ public class Medicine implements Serializable {
 
     public void setPrescriptionMedicinesCollection(Collection<PrescriptionMedicines> prescriptionMedicinesCollection) {
         this.prescriptionMedicinesCollection = prescriptionMedicinesCollection;
+    }
+
+    @XmlTransient
+    public Collection<OrderItem> getOrderItemCollection() {
+        return orderItemCollection;
+    }
+
+    public void setOrderItemCollection(Collection<OrderItem> orderItemCollection) {
+        this.orderItemCollection = orderItemCollection;
     }
 
     @Override

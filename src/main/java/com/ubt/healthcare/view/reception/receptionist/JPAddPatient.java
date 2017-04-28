@@ -9,6 +9,7 @@ package com.ubt.healthcare.view.reception.receptionist;
  *
  * @author F
  */
+@Deprecated
 public class JPAddPatient {
     
 }

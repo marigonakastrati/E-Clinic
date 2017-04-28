@@ -9,6 +9,7 @@ package com.ubt.healthcare.view.patient;
  *
  * @author F
  */
+@Deprecated
 public class JPAppointment {
     
 }

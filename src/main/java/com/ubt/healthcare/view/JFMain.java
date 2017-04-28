@@ -8,6 +8,7 @@ package com.ubt.healthcare.view;
 import com.ubt.healthcare.business.AuthenticateUser;
 import com.ubt.healthcare.entity.AdminClinic;
 import com.ubt.healthcare.entity.Person;
+import com.ubt.healthcare.view.admin.JPAddDoctor;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,16 +25,18 @@ public class JFMain extends JFrame {
     private JPLoginScreen jpLoginScreen;
     private JPInformationScreen jpAuthScreen;
     private JPProfile jpProfile;
+    private JPAddDoctor jpAddDoctor;
     private CardLayout clCardlayout ;
     private Person person;
 
-    public JFMain(JPMain jpMain, JPLoginScreen jpLoginScreen, JPInformationScreen jpAuthScreen, JPProfile jpProfile) 
+    public JFMain(JPMain jpMain, JPLoginScreen jpLoginScreen, JPInformationScreen jpAuthScreen, JPProfile jpProfile,JPAddDoctor jpAddDoctor) 
     {
               
         this.jpMain = jpMain;
         this.jpLoginScreen = jpLoginScreen;
         this.jpAuthScreen = jpAuthScreen;
         this.jpProfile = jpProfile;
+        this.jpAddDoctor  = jpAddDoctor;
         clCardlayout = new CardLayout();
         setUndecorated(true);// disable the minimize, maximize, close
         setDefaultCloseOperation(3);
@@ -46,6 +49,7 @@ public class JFMain extends JFrame {
         jpMain.add(jpLoginScreen, "Login Screen");// it works by using the second paramteter to switch the JPanels
         jpMain.add(jpAuthScreen, "Information Screen");
         jpMain.add(jpProfile, "Profile");
+        jpMain.add(jpAddDoctor, "Add Doctor");
         clCardlayout.show(jpMain, "Change");
 
         add(jpMain);
@@ -76,6 +80,8 @@ public class JFMain extends JFrame {
             jpLoginScreen.setVisible(false);
             jpAuthScreen.setVisible(false);
             jpProfile.setVisible(true);
+            //jpAddDoctor.getjTextField17().setText("TestField");
+            jpAddDoctor.setVisible(false);
             //clCardlayout.next(jpMain);
             //clCardlayout.next(jpMain);
         } else {

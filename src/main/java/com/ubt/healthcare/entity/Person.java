@@ -95,8 +95,6 @@ public class Person implements Serializable {
     private String postCode;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private AdminClinic adminClinic;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Collection<Education> educationCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private PharmacyManager pharmacyManager;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "childId")
@@ -123,6 +121,8 @@ public class Person implements Serializable {
     @JoinColumn(name = "religion_ID", referencedColumnName = "religion_ID")
     @ManyToOne
     private Religion religionID;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<PersonEducation> personEducationCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Nurse nurse;
 
@@ -245,15 +245,6 @@ public class Person implements Serializable {
         this.adminClinic = adminClinic;
     }
 
-    @XmlTransient
-    public Collection<Education> getEducationCollection() {
-        return educationCollection;
-    }
-
-    public void setEducationCollection(Collection<Education> educationCollection) {
-        this.educationCollection = educationCollection;
-    }
-
     public PharmacyManager getPharmacyManager() {
         return pharmacyManager;
     }
@@ -352,6 +343,15 @@ public class Person implements Serializable {
 
     public void setReligionID(Religion religionID) {
         this.religionID = religionID;
+    }
+
+    @XmlTransient
+    public Collection<PersonEducation> getPersonEducationCollection() {
+        return personEducationCollection;
+    }
+
+    public void setPersonEducationCollection(Collection<PersonEducation> personEducationCollection) {
+        this.personEducationCollection = personEducationCollection;
     }
 
     public Nurse getNurse() {

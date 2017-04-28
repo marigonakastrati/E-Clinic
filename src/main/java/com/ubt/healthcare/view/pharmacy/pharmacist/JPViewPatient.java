@@ -9,6 +9,7 @@ package com.ubt.healthcare.view.pharmacy.pharmacist;
  *
  * @author F
  */
+@Deprecated
 public class JPViewPatient {
     
 }

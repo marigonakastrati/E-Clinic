@@ -41,7 +41,7 @@ public class Pharmacist implements Serializable {
     @Column(name = "pharmacist_id")
     private Integer pharmacistId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacistId")
-    private Collection<Orders> ordersCollection;
+    private Collection<Order1> order1Collection;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @OneToOne(optional = false)
     private Person personId;
@@ -62,12 +62,12 @@ public class Pharmacist implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
     }
 
     public Person getPersonId() {

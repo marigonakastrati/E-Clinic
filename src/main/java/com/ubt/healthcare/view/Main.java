@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.view;
 
+import com.ubt.healthcare.view.admin.JPAddDoctor;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterCloseWindows;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterEditScreen;
 import com.ubt.healthcare.view.eventhandling.MouseAdapterLogOut;
@@ -24,7 +25,8 @@ public class Main {
         JPLoginScreen jpLoginScreen = new JPLoginScreen();
         JPInformationScreen jpStudentInformation = new JPInformationScreen();
         JPProfile jpProfile = new JPProfile();
-        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation,jpProfile);
+        JPAddDoctor jpAddDoctor = new JPAddDoctor();
+        JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation,jpProfile,jpAddDoctor);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfMain));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfMain));

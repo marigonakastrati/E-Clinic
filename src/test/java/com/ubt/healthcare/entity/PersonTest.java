@@ -426,8 +426,8 @@ public class PersonTest {
         System.out.println("getEducationCollection");
         Person instance = new Person();
         Collection<Education> expResult = null;
-        Collection<Education> result = instance.getEducationCollection();
-        assertEquals(expResult, result);
+        //Collection<Education> result = instance.getEducationCollection();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -440,7 +440,7 @@ public class PersonTest {
         System.out.println("setEducationCollection");
         Collection<Education> educationCollection = null;
         Person instance = new Person();
-        instance.setEducationCollection(educationCollection);
+        //instance.setEducationCollection(educationCollection);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

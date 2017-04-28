@@ -9,6 +9,7 @@ package com.ubt.healthcare.view.pharmacy.pharmacymanager;
  *
  * @author F
  */
+@Deprecated
 public class JPAddMedicine {
     
 }

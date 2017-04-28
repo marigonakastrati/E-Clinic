@@ -6,17 +6,21 @@
 package com.ubt.healthcare.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +40,8 @@ public class Receptionist implements Serializable {
     @NotNull
     @Column(name = "receptionist_id")
     private Integer receptionistId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receptionistId")
+    private Collection<BillPayment> billPaymentCollection;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @OneToOne(optional = false)
     private Person personId;
@@ -53,6 +59,15 @@ public class Receptionist implements Serializable {
 
     public void setReceptionistId(Integer receptionistId) {
         this.receptionistId = receptionistId;
+    }
+
+    @XmlTransient
+    public Collection<BillPayment> getBillPaymentCollection() {
+        return billPaymentCollection;
+    }
+
+    public void setBillPaymentCollection(Collection<BillPayment> billPaymentCollection) {
+        this.billPaymentCollection = billPaymentCollection;
     }
 
     public Person getPersonId() {

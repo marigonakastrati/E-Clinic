@@ -6,9 +6,7 @@
 package com.ubt.healthcare.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,11 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PrescriptionMedicines.findAll", query = "SELECT p FROM PrescriptionMedicines p"),
-    @NamedQuery(name = "PrescriptionMedicines.findByPrescribedMedicineId", query = "SELECT p FROM PrescriptionMedicines p WHERE p.prescribedMedicineId = :prescribedMedicineId")})
+    @NamedQuery(name = "PrescriptionMedicines.findByPrescribedMedicineId", query = "SELECT p FROM PrescriptionMedicines p WHERE p.prescribedMedicineId = :prescribedMedicineId"),
+    @NamedQuery(name = "PrescriptionMedicines.findByDaysToUse", query = "SELECT p FROM PrescriptionMedicines p WHERE p.daysToUse = :daysToUse"),
+    @NamedQuery(name = "PrescriptionMedicines.findByTimesPerDay", query = "SELECT p FROM PrescriptionMedicines p WHERE p.timesPerDay = :timesPerDay"),
+    @NamedQuery(name = "PrescriptionMedicines.findByComment", query = "SELECT p FROM PrescriptionMedicines p WHERE p.comment = :comment")})
 public class PrescriptionMedicines implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +40,19 @@ public class PrescriptionMedicines implements Serializable {
     @NotNull
     @Column(name = "prescribed_medicine_id")
     private Integer prescribedMedicineId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
-    private Collection<Orders> ordersCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "days_to_use")
+    private int daysToUse;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "times_per_day")
+    private int timesPerDay;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "comment")
+    private String comment;
     @JoinColumn(name = "medicine_id", referencedColumnName = "medicine_id")
     @ManyToOne(optional = false)
     private Medicine medicineId;
@@ -56,6 +67,13 @@ public class PrescriptionMedicines implements Serializable {
         this.prescribedMedicineId = prescribedMedicineId;
     }
 
+    public PrescriptionMedicines(Integer prescribedMedicineId, int daysToUse, int timesPerDay, String comment) {
+        this.prescribedMedicineId = prescribedMedicineId;
+        this.daysToUse = daysToUse;
+        this.timesPerDay = timesPerDay;
+        this.comment = comment;
+    }
+
     public Integer getPrescribedMedicineId() {
         return prescribedMedicineId;
     }
@@ -64,13 +82,28 @@ public class PrescriptionMedicines implements Serializable {
         this.prescribedMedicineId = prescribedMedicineId;
     }
 
-    @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public int getDaysToUse() {
+        return daysToUse;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setDaysToUse(int daysToUse) {
+        this.daysToUse = daysToUse;
+    }
+
+    public int getTimesPerDay() {
+        return timesPerDay;
+    }
+
+    public void setTimesPerDay(int timesPerDay) {
+        this.timesPerDay = timesPerDay;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Medicine getMedicineId() {

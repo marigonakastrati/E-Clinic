@@ -9,6 +9,7 @@ package com.ubt.healthcare.view.admin;
  *
  * @author F
  */
+@Deprecated
 public class JPViewDoctor {
     
 }

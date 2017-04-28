@@ -9,6 +9,7 @@ package com.ubt.healthcare.view;
  *
  * @author F
  */
+@Deprecated
 public class JPChangePassword {
     
 }

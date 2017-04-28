@@ -8,6 +8,7 @@ package com.ubt.healthcare.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,15 +54,14 @@ public class Visit implements Serializable {
     @Size(max = 20)
     @Column(name = "status")
     private String status;
-    @JoinColumn(name = "bill_id", referencedColumnName = "bill_id")
-    @ManyToOne(optional = false)
-    private Bill billId;
     @JoinColumn(name = "book_id", referencedColumnName = "book_id")
     @ManyToOne(optional = false)
     private BookAppointment bookId;
     @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
     @ManyToOne(optional = false)
     private Prescription prescriptionId;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "visitId")
+    private BillPayment billPayment;
 
     public Visit() {
     }
@@ -101,14 +102,6 @@ public class Visit implements Serializable {
         this.status = status;
     }
 
-    public Bill getBillId() {
-        return billId;
-    }
-
-    public void setBillId(Bill billId) {
-        this.billId = billId;
-    }
-
     public BookAppointment getBookId() {
         return bookId;
     }
@@ -123,6 +116,14 @@ public class Visit implements Serializable {
 
     public void setPrescriptionId(Prescription prescriptionId) {
         this.prescriptionId = prescriptionId;
+    }
+
+    public BillPayment getBillPayment() {
+        return billPayment;
+    }
+
+    public void setBillPayment(BillPayment billPayment) {
+        this.billPayment = billPayment;
     }
 
     @Override

@@ -41,11 +41,13 @@ public class Patient implements Serializable {
     @Column(name = "patient_id")
     private Integer patientId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<Orders> ordersCollection;
+    private Collection<BillPayment> billPaymentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
     private Collection<Alergis> alergisCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
     private Collection<BookAppointment> bookAppointmentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
+    private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
     private Collection<EmergencyInformation> emergencyInformationCollection;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
@@ -70,12 +72,12 @@ public class Patient implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
+    public Collection<BillPayment> getBillPaymentCollection() {
+        return billPaymentCollection;
     }
 
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
+    public void setBillPaymentCollection(Collection<BillPayment> billPaymentCollection) {
+        this.billPaymentCollection = billPaymentCollection;
     }
 
     @XmlTransient
@@ -94,6 +96,15 @@ public class Patient implements Serializable {
 
     public void setBookAppointmentCollection(Collection<BookAppointment> bookAppointmentCollection) {
         this.bookAppointmentCollection = bookAppointmentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
+    }
+
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
     }
 
     @XmlTransient

@@ -8,7 +8,11 @@ package com.ubt.healthcare.view.admin;
 /**
  *
  * @author F
+ * We will implement listeners from this class
+ * And we will instantiate this class from Main Window
  */
-public class JPAddDoctor {
+@Deprecated
+public class JPAddDoctor extends JPanelAddDoctor {
+    
     
 }

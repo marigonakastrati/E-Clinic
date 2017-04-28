@@ -49,7 +49,7 @@ public class Bill implements Serializable {
     @Column(name = "payment_type")
     private String paymentType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "billId")
-    private Collection<Visit> visitCollection;
+    private Collection<BillPayment> billPaymentCollection;
 
     public Bill() {
     }
@@ -83,12 +83,12 @@ public class Bill implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Visit> getVisitCollection() {
-        return visitCollection;
+    public Collection<BillPayment> getBillPaymentCollection() {
+        return billPaymentCollection;
     }
 
-    public void setVisitCollection(Collection<Visit> visitCollection) {
-        this.visitCollection = visitCollection;
+    public void setBillPaymentCollection(Collection<BillPayment> billPaymentCollection) {
+        this.billPaymentCollection = billPaymentCollection;
     }
 
     @Override
