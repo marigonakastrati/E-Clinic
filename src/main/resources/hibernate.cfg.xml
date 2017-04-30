@@ -39,6 +39,16 @@
         <mapping class="com.ubt.healthcare.entity.PersonEducation"/>
         <mapping class="com.ubt.healthcare.entity.BillPayment"/>
         <mapping class="com.ubt.healthcare.entity.OrderItem"/>
+        <mapping class="com.ubt.healthcare.entity.Address"/>
+        <mapping class="com.ubt.healthcare.entity.City"/>
+        <mapping class="com.ubt.healthcare.entity.Country"/>
+        <mapping class="com.ubt.healthcare.entity.ApplicationRole"/>
+        <mapping class="com.ubt.healthcare.entity.Group1"/>
+        <mapping class="com.ubt.healthcare.entity.GroupRole"/>
+        <mapping class="com.ubt.healthcare.entity.MartialStatus"/>
+        <mapping class="com.ubt.healthcare.entity.Occupation"/>
+        <mapping class="com.ubt.healthcare.entity.PersonArchive"/>
+        <mapping class="com.ubt.healthcare.entity.UserGroup"/>
         
       
     </session-factory>

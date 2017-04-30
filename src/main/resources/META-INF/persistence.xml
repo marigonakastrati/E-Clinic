@@ -32,6 +32,16 @@
     <class>com.ubt.healthcare.entity.HRManager</class>
     <class>com.ubt.healthcare.entity.Order1</class>
     <class>com.ubt.healthcare.entity.Medicine</class>
+    <class>com.ubt.healthcare.entity.PersonArchive</class>
+    <class>com.ubt.healthcare.entity.ApplicationRole</class>
+    <class>com.ubt.healthcare.entity.Address</class>
+    <class>com.ubt.healthcare.entity.Country</class>
+    <class>com.ubt.healthcare.entity.MartialStatus</class>
+    <class>com.ubt.healthcare.entity.Group1</class>
+    <class>com.ubt.healthcare.entity.UserGroup</class>
+    <class>com.ubt.healthcare.entity.Occupation</class>
+    <class>com.ubt.healthcare.entity.GroupRole</class>
+    <class>com.ubt.healthcare.entity.City</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Clinic"/>
       <property name="javax.persistence.jdbc.user" value="Clinic"/>

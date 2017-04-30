@@ -40,7 +40,9 @@ public class Gender implements Serializable {
     @NotNull
     @Column(name = "gender_id")
     private Integer genderId;
-    @Size(max = 6)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 7)
     @Column(name = "gender_name")
     private String genderName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "genderId")
@@ -51,6 +53,11 @@ public class Gender implements Serializable {
 
     public Gender(Integer genderId) {
         this.genderId = genderId;
+    }
+
+    public Gender(Integer genderId, String genderName) {
+        this.genderId = genderId;
+        this.genderName = genderName;
     }
 
     public Integer getGenderId() {
