@@ -40,15 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findByFirstName", query = "SELECT p FROM Person p WHERE p.firstName = :firstName"),
     @NamedQuery(name = "Person.findByMiddleName", query = "SELECT p FROM Person p WHERE p.middleName = :middleName"),
     @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName"),
-    @NamedQuery(name = "Person.findByDob", query = "SELECT p FROM Person p WHERE p.dob = :dob"),
-    @NamedQuery(name = "Person.findByBirthState", query = "SELECT p FROM Person p WHERE p.birthState = :birthState"),
-    @NamedQuery(name = "Person.findByBirthTown", query = "SELECT p FROM Person p WHERE p.birthTown = :birthTown"),
-    @NamedQuery(name = "Person.findByOccupation", query = "SELECT p FROM Person p WHERE p.occupation = :occupation"),
-    @NamedQuery(name = "Person.findByNationalty", query = "SELECT p FROM Person p WHERE p.nationalty = :nationalty"),
-    @NamedQuery(name = "Person.findByEthnicOrigin", query = "SELECT p FROM Person p WHERE p.ethnicOrigin = :ethnicOrigin"),
-    @NamedQuery(name = "Person.findByMaritalStatuss", query = "SELECT p FROM Person p WHERE p.maritalStatuss = :maritalStatuss"),
-    @NamedQuery(name = "Person.findByCountry", query = "SELECT p FROM Person p WHERE p.country = :country"),
-    @NamedQuery(name = "Person.findByPostCode", query = "SELECT p FROM Person p WHERE p.postCode = :postCode")})
+    @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,33 +58,9 @@ public class Person implements Serializable {
     @Size(max = 20)
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "dob")
+    @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
-    private Date dob;
-    @Size(max = 15)
-    @Column(name = "birth_state")
-    private String birthState;
-    @Size(max = 20)
-    @Column(name = "birth_town")
-    private String birthTown;
-    @Size(max = 20)
-    @Column(name = "occupation")
-    private String occupation;
-    @Size(max = 10)
-    @Column(name = "nationalty")
-    private String nationalty;
-    @Size(max = 10)
-    @Column(name = "ethnic_origin")
-    private String ethnicOrigin;
-    @Size(max = 15)
-    @Column(name = "marital_statuss")
-    private String maritalStatuss;
-    @Size(max = 10)
-    @Column(name = "country")
-    private String country;
-    @Size(max = 5)
-    @Column(name = "post_code")
-    private String postCode;
+    private Date dateOfBirth;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private AdminClinic adminClinic;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
@@ -115,12 +83,21 @@ public class Person implements Serializable {
     private Collection<Contact> contactCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Pharmacist pharmacist;
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @ManyToOne(optional = false)
+    private Address addressId;
+    @JoinColumn(name = "birth_city_id", referencedColumnName = "city_id")
+    @ManyToOne(optional = false)
+    private City birthCityId;
     @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
     @ManyToOne(optional = false)
     private Gender genderId;
-    @JoinColumn(name = "religion_ID", referencedColumnName = "religion_ID")
-    @ManyToOne
-    private Religion religionID;
+    @JoinColumn(name = "martial_status_id", referencedColumnName = "martial_status_id")
+    @ManyToOne(optional = false)
+    private MartialStatus martialStatusId;
+    @JoinColumn(name = "religion_id", referencedColumnName = "religion_id")
+    @ManyToOne(optional = false)
+    private Religion religionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<PersonEducation> personEducationCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
@@ -165,76 +142,12 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
-        return dob;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public String getBirthState() {
-        return birthState;
-    }
-
-    public void setBirthState(String birthState) {
-        this.birthState = birthState;
-    }
-
-    public String getBirthTown() {
-        return birthTown;
-    }
-
-    public void setBirthTown(String birthTown) {
-        this.birthTown = birthTown;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getNationalty() {
-        return nationalty;
-    }
-
-    public void setNationalty(String nationalty) {
-        this.nationalty = nationalty;
-    }
-
-    public String getEthnicOrigin() {
-        return ethnicOrigin;
-    }
-
-    public void setEthnicOrigin(String ethnicOrigin) {
-        this.ethnicOrigin = ethnicOrigin;
-    }
-
-    public String getMaritalStatuss() {
-        return maritalStatuss;
-    }
-
-    public void setMaritalStatuss(String maritalStatuss) {
-        this.maritalStatuss = maritalStatuss;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public AdminClinic getAdminClinic() {
@@ -329,6 +242,22 @@ public class Person implements Serializable {
         this.pharmacist = pharmacist;
     }
 
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    public City getBirthCityId() {
+        return birthCityId;
+    }
+
+    public void setBirthCityId(City birthCityId) {
+        this.birthCityId = birthCityId;
+    }
+
     public Gender getGenderId() {
         return genderId;
     }
@@ -337,12 +266,20 @@ public class Person implements Serializable {
         this.genderId = genderId;
     }
 
-    public Religion getReligionID() {
-        return religionID;
+    public MartialStatus getMartialStatusId() {
+        return martialStatusId;
     }
 
-    public void setReligionID(Religion religionID) {
-        this.religionID = religionID;
+    public void setMartialStatusId(MartialStatus martialStatusId) {
+        this.martialStatusId = martialStatusId;
+    }
+
+    public Religion getReligionId() {
+        return religionId;
+    }
+
+    public void setReligionId(Religion religionId) {
+        this.religionId = religionId;
     }
 
     @XmlTransient

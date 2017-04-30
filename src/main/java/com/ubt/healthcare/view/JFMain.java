@@ -73,8 +73,8 @@ public class JFMain extends JFrame {
             jpAuthScreen.getJtaauthID().setText(person.getPersonId()+ "");
             jpAuthScreen.getJtaauthName().setText(person.getFirstName());
             jpAuthScreen.getJtaauthSurname().setText(person.getLastName());
-            jpAuthScreen.getJtaGroupName().setText(person.getMaritalStatuss());
-            jpAuthScreen.getJtaCity().setText(person.getBirthTown());
+            jpAuthScreen.getJtaGroupName().setText(person.getGenderId().getGenderName());
+            jpAuthScreen.getJtaCity().setText(person.getAddressId().getStreetName());
             //clCardlayout.show(jpMain, "Information Screen");
             //switchToScreen(informationScreen);
             jpLoginScreen.setVisible(false);
