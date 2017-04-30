@@ -13,12 +13,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,10 +33,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p"),
+    @NamedQuery(name = "Patient.findByPassCode", query = "SELECT p FROM Patient p WHERE p.passCode = :passCode"),
     @NamedQuery(name = "Patient.findByPatientId", query = "SELECT p FROM Patient p WHERE p.patientId = :patientId")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "pass_code")
+    private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -50,6 +58,9 @@ public class Patient implements Serializable {
     private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
     private Collection<EmergencyInformation> emergencyInformationCollection;
+    @JoinColumn(name = "occupation_id", referencedColumnName = "occupation_id")
+    @ManyToOne(optional = false)
+    private Occupation occupationId;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @OneToOne(optional = false)
     private Person personId;
@@ -61,6 +72,19 @@ public class Patient implements Serializable {
 
     public Patient(Integer patientId) {
         this.patientId = patientId;
+    }
+
+    public Patient(Integer patientId, String passCode) {
+        this.patientId = patientId;
+        this.passCode = passCode;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Integer getPatientId() {
@@ -114,6 +138,14 @@ public class Patient implements Serializable {
 
     public void setEmergencyInformationCollection(Collection<EmergencyInformation> emergencyInformationCollection) {
         this.emergencyInformationCollection = emergencyInformationCollection;
+    }
+
+    public Occupation getOccupationId() {
+        return occupationId;
+    }
+
+    public void setOccupationId(Occupation occupationId) {
+        this.occupationId = occupationId;
     }
 
     public Person getPersonId() {

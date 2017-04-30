@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,10 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "HRManager.findAll", query = "SELECT h FROM HRManager h"),
+    @NamedQuery(name = "HRManager.findByPassCode", query = "SELECT h FROM HRManager h WHERE h.passCode = :passCode"),
     @NamedQuery(name = "HRManager.findByManagerId", query = "SELECT h FROM HRManager h WHERE h.managerId = :managerId")})
 public class HRManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "pass_code")
+    private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -51,6 +58,19 @@ public class HRManager implements Serializable {
 
     public HRManager(Integer managerId) {
         this.managerId = managerId;
+    }
+
+    public HRManager(Integer managerId, String passCode) {
+        this.managerId = managerId;
+        this.passCode = passCode;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Integer getManagerId() {

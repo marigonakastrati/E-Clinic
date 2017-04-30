@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,10 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nurse.findAll", query = "SELECT n FROM Nurse n"),
+    @NamedQuery(name = "Nurse.findByPassCode", query = "SELECT n FROM Nurse n WHERE n.passCode = :passCode"),
     @NamedQuery(name = "Nurse.findByNurseId", query = "SELECT n FROM Nurse n WHERE n.nurseId = :nurseId")})
 public class Nurse implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "pass_code")
+    private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -45,6 +52,19 @@ public class Nurse implements Serializable {
 
     public Nurse(Integer nurseId) {
         this.nurseId = nurseId;
+    }
+
+    public Nurse(Integer nurseId, String passCode) {
+        this.nurseId = nurseId;
+        this.passCode = passCode;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Integer getNurseId() {

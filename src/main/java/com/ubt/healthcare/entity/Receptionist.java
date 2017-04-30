@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,10 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Receptionist.findAll", query = "SELECT r FROM Receptionist r"),
+    @NamedQuery(name = "Receptionist.findByPassCode", query = "SELECT r FROM Receptionist r WHERE r.passCode = :passCode"),
     @NamedQuery(name = "Receptionist.findByReceptionistId", query = "SELECT r FROM Receptionist r WHERE r.receptionistId = :receptionistId")})
 public class Receptionist implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "pass_code")
+    private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -51,6 +58,19 @@ public class Receptionist implements Serializable {
 
     public Receptionist(Integer receptionistId) {
         this.receptionistId = receptionistId;
+    }
+
+    public Receptionist(Integer receptionistId, String passCode) {
+        this.receptionistId = receptionistId;
+        this.passCode = passCode;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Integer getReceptionistId() {

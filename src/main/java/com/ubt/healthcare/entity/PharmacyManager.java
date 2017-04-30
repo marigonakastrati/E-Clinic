@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,10 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PharmacyManager.findAll", query = "SELECT p FROM PharmacyManager p"),
+    @NamedQuery(name = "PharmacyManager.findByPassCode", query = "SELECT p FROM PharmacyManager p WHERE p.passCode = :passCode"),
     @NamedQuery(name = "PharmacyManager.findByPharmacyManagerId", query = "SELECT p FROM PharmacyManager p WHERE p.pharmacyManagerId = :pharmacyManagerId")})
 public class PharmacyManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "pass_code")
+    private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -51,6 +58,19 @@ public class PharmacyManager implements Serializable {
 
     public PharmacyManager(Integer pharmacyManagerId) {
         this.pharmacyManagerId = pharmacyManagerId;
+    }
+
+    public PharmacyManager(Integer pharmacyManagerId, String passCode) {
+        this.pharmacyManagerId = pharmacyManagerId;
+        this.passCode = passCode;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 
     public Integer getPharmacyManagerId() {
