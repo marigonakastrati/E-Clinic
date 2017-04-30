@@ -27,38 +27,38 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author F
  */
 @Entity
-@Table(name = "Doctor")
+@Table(name = "HRManager")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d"),
-    @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId")})
-public class Doctor implements Serializable {
+    @NamedQuery(name = "HRManager.findAll", query = "SELECT h FROM HRManager h"),
+    @NamedQuery(name = "HRManager.findByManagerId", query = "SELECT h FROM HRManager h WHERE h.managerId = :managerId")})
+public class HRManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "doctor_id")
-    private Integer doctorId;
+    @Column(name = "manager_id")
+    private Integer managerId;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-    @OneToOne(optional = false)
+    @OneToOne
     private Person personId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "managerId")
     private Collection<Schedule> scheduleCollection;
 
-    public Doctor() {
+    public HRManager() {
     }
 
-    public Doctor(Integer doctorId) {
-        this.doctorId = doctorId;
+    public HRManager(Integer managerId) {
+        this.managerId = managerId;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public Integer getManagerId() {
+        return managerId;
     }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
     }
 
     public Person getPersonId() {
@@ -81,18 +81,18 @@ public class Doctor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (doctorId != null ? doctorId.hashCode() : 0);
+        hash += (managerId != null ? managerId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Doctor)) {
+        if (!(object instanceof HRManager)) {
             return false;
         }
-        Doctor other = (Doctor) object;
-        if ((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId))) {
+        HRManager other = (HRManager) object;
+        if ((this.managerId == null && other.managerId != null) || (this.managerId != null && !this.managerId.equals(other.managerId))) {
             return false;
         }
         return true;
@@ -100,7 +100,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Doctor[ doctorId=" + doctorId + " ]";
+        return "com.ubt.healthcare.entity.HRManager[ managerId=" + managerId + " ]";
     }
     
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="Clinic"/>
+  <table-filter match-name="Vitals"/>
+  <table-filter match-name="Visit"/>
+  <table-filter match-name="Bill"/>
+  <table-filter match-name="Nurse"/>
+  <table-filter match-name="BookAppointment"/>
+  <table-filter match-name="Prescription"/>
+  <table-filter match-name="Pharmacy_Manager"/>
+  <table-filter match-name="Education"/>
+  <table-filter match-name="HRManager"/>
+  <table-filter match-name="OrderItem"/>
+  <table-filter match-name="Schedule"/>
+  <table-filter match-name="PersonEducation"/>
+  <table-filter match-name="EducationProgram"/>
+  <table-filter match-name="Contact"/>
+  <table-filter match-name="Gender"/>
+  <table-filter match-name="Receptionist"/>
+  <table-filter match-name="Order"/>
+  <table-filter match-name="Religion"/>
+  <table-filter match-name="Doctor"/>
+  <table-filter match-name="Patient"/>
+  <table-filter match-name="PrescriptionMedicines"/>
+  <table-filter match-name="Alergis"/>
+  <table-filter match-name="Pharmacist"/>
+  <table-filter match-name="BillPayment"/>
+  <table-filter match-name="Medicine"/>
+  <table-filter match-name="Person"/>
+  <table-filter match-name="AdminClinic"/>
+  <table-filter match-name="Guardian"/>
+  <table-filter match-name="EducationType"/>
+  <table-filter match-name="Emergency_Information"/>
+</hibernate-reverse-engineering>

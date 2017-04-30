@@ -5,6 +5,10 @@
  */
 package com.ubt.healthcare.business;
 
+import com.ubt.healthcare.dao.SQLRepository;
+import com.ubt.healthcare.entity.AdminClinic;
+import com.ubt.healthcare.entity.Person;
+
 /*import org.ubt.kiosk.dal.StudentRepository;
 import org.ubt.kiosk.entity.Student;
 */
@@ -15,17 +19,17 @@ import org.ubt.kiosk.entity.Student;
  */
 public class AuthenticateUser {
     //Inject
-    //private StudentRepository studentRepository = new StudentRepository();
+    private SQLRepository sqlRepository = new SQLRepository();
     private PasswordHashing hashing = new PasswordHashing();
     
     public Object authenticate(String user, String password) 
     {
-        Object student =null;
-        //student =studentRepository.findById(Integer.parseInt(user));
+        AdminClinic adminClinic =null;
+        adminClinic =(AdminClinic)sqlRepository.findById(Integer.parseInt(user));// typecast based on its type
         
-        if (student != null && hashing.encodehashPassword(password).equals(student.getPasscode())) 
+        if (adminClinic != null && hashing.encodehashPassword(password).equals(adminClinic.getPassCode())) 
         {
-            return student;
+            return adminClinic;
         }
         return null;
     }

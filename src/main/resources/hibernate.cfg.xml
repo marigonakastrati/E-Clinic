@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=Clinic</property>
+        <property name="hibernate.connection.username">Clinic</property>
+        <property name="hibernate.connection.password">123</property>
+        <property name ="show_sql">true</property>
+        <mapping class="com.ubt.healthcare.entity.AdminClinic"/>
+        <mapping class="com.ubt.healthcare.entity.Person"/>
+        <mapping class="com.ubt.healthcare.entity.Gender"/>
+        <mapping class="com.ubt.healthcare.entity.Religion"/>
+        <mapping class="com.ubt.healthcare.entity.Doctor"/>
+        <mapping class="com.ubt.healthcare.entity.Contact"/>
+        <mapping class="com.ubt.healthcare.entity.Alergis"/>
+        <mapping class="com.ubt.healthcare.entity.Bill"/>
+        <mapping class="com.ubt.healthcare.entity.BookAppointment"/>
+        <mapping class="com.ubt.healthcare.entity.Education"/>
+        <mapping class="com.ubt.healthcare.entity.EmergencyInformation"/>
+        <mapping class="com.ubt.healthcare.entity.Guardian"/>
+        <mapping class="com.ubt.healthcare.entity.HRManager"/>
+        <mapping class="com.ubt.healthcare.entity.Medicine"/>
+        <mapping class="com.ubt.healthcare.entity.Nurse"/>
+        <mapping class="com.ubt.healthcare.entity.Order1"/>
+        <mapping class="com.ubt.healthcare.entity.Patient"/>
+        <mapping class="com.ubt.healthcare.entity.Pharmacist"/>
+        <mapping class="com.ubt.healthcare.entity.PharmacyManager"/>
+        <mapping class="com.ubt.healthcare.entity.Prescription"/>
+        <mapping class="com.ubt.healthcare.entity.PrescriptionMedicines"/>
+        <mapping class="com.ubt.healthcare.entity.Receptionist"/>
+        <mapping class="com.ubt.healthcare.entity.Schedule"/>
+        <mapping class="com.ubt.healthcare.entity.Visit"/>
+        <mapping class="com.ubt.healthcare.entity.Vitals"/>
+        <mapping class="com.ubt.healthcare.entity.EducationProgram"/>
+        <mapping class="com.ubt.healthcare.entity.EducationType"/>
+        <mapping class="com.ubt.healthcare.entity.PersonEducation"/>
+        <mapping class="com.ubt.healthcare.entity.BillPayment"/>
+        <mapping class="com.ubt.healthcare.entity.OrderItem"/>
+        
+      
+    </session-factory>
+</hibernate-configuration>

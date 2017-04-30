@@ -11,10 +11,10 @@ import java.util.List;
  *
  * @author F
  */
-public interface DaoInterface {
+public interface PersistenceInterface {
     
     public void add(Object student);
-    public void edit(Object student);
+    public void update(Object student);
     public void remove(Object student);
     public List<Object> findAll();
     public Object findById(int id);
