@@ -43,22 +43,22 @@ public class SQLRepository implements PersistenceInterface {
     }
 
     @Override
-    public List<Object> findAll() {
+    public List<Object> findAll(String entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         //Query query = session.createQuery("From Patient"); HQL
-        Query query = session.getNamedQuery("Student.findAll");// NamedQuery
+        Query query = session.getNamedQuery(entity);// NamedQuery
         List<Object> list = query.list();
         session.getTransaction().commit();
         return list;
     }
 
     @Override
-    public Object findById(int id) {
+    public Object findById(int id, String entity, String atribute) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.getNamedQuery("AdminClinic.findByAdminClinicId");
-        query.setParameter("adminClinicId", id);
+        Query query = session.getNamedQuery(entity);
+        query.setParameter(atribute, id);
         List<Object> student = query.list();
         session.close();
         return student.get(0);

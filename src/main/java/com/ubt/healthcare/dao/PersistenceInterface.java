@@ -16,6 +16,6 @@ public interface PersistenceInterface {
     public void add(Object student);
     public void update(Object student);
     public void remove(Object student);
-    public List<Object> findAll();
-    public Object findById(int id);
+    public List<Object> findAll(String entity);
+    public Object findById(int id, String entity, String atribute);
 }

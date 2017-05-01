@@ -5,6 +5,21 @@
  */
 package com.ubt.healthcare.entity;
 
+import com.ubt.healthcare.dto.Contact;
+import com.ubt.healthcare.dto.Person;
+import com.ubt.healthcare.dto.AdminClinic;
+import com.ubt.healthcare.dto.Education;
+import com.ubt.healthcare.dto.Guardian;
+import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Nurse;
+import com.ubt.healthcare.dto.Receptionist;
+import com.ubt.healthcare.dto.Religion;
+import com.ubt.healthcare.dto.Pharmacist;
+import com.ubt.healthcare.dto.HRManager;
+import com.ubt.healthcare.dto.EmergencyInformation;
+import com.ubt.healthcare.dto.Patient;
+import com.ubt.healthcare.dto.PharmacyManager;
+import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dao.SQLRepository;
 import java.util.Collection;
 import java.util.Date;

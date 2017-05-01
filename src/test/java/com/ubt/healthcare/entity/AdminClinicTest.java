@@ -5,6 +5,8 @@
  */
 package com.ubt.healthcare.entity;
 
+import com.ubt.healthcare.dto.Person;
+import com.ubt.healthcare.dto.AdminClinic;
 import com.ubt.healthcare.dao.SQLRepository;
 import org.junit.After;
 import org.junit.AfterClass;
