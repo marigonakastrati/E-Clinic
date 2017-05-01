@@ -99,8 +99,8 @@ public class UserGroupTest {
     public void testGetGroupId() {
         System.out.println("getGroupId");
         UserGroup instance = new UserGroup();
-        Group1 expResult = null;
-        Group1 result = instance.getGroupId();
+        LoginGroup expResult = null;
+        LoginGroup result = instance.getGroupId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -112,7 +112,7 @@ public class UserGroupTest {
     @Test
     public void testSetGroupId() {
         System.out.println("setGroupId");
-        Group1 groupId = null;
+        LoginGroup groupId = null;
         UserGroup instance = new UserGroup();
         instance.setGroupId(groupId);
         // TODO review the generated test code and remove the default call to fail.

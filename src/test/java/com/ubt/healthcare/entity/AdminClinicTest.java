@@ -168,7 +168,7 @@ public class AdminClinicTest {
     public void testLogin() {
          AdminClinic admin = new AdminClinic();
          SQLRepository sqlrepo = new SQLRepository();
-         AdminClinic a = (AdminClinic)sqlrepo.findById(50500000);
+         //AdminClinic a = (AdminClinic)sqlrepo.findById(50500000);
          
     }
     
