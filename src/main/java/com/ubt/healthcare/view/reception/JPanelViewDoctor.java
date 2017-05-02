@@ -27,49 +27,49 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel112 = new javax.swing.JLabel();
-        jLabel108 = new javax.swing.JLabel();
-        jLabel109 = new javax.swing.JLabel();
-        jLabel110 = new javax.swing.JLabel();
-        jTextField80 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jTextField81 = new javax.swing.JTextField();
-        jTextField82 = new javax.swing.JTextField();
-        jTextField83 = new javax.swing.JTextField();
+        jlDoctorId = new javax.swing.JLabel();
+        jlName = new javax.swing.JLabel();
+        jlAddress = new javax.swing.JLabel();
+        jlMobile = new javax.swing.JLabel();
+        jtfDoctorId = new javax.swing.JTextField();
+        jbSubmit = new javax.swing.JButton();
+        jtfName = new javax.swing.JTextField();
+        jtfAddress = new javax.swing.JTextField();
+        jtfMobile = new javax.swing.JTextField();
 
-        jLabel112.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel112.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel112.setText("                                       Doctor ID :");
+        jlDoctorId.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jlDoctorId.setForeground(new java.awt.Color(102, 102, 255));
+        jlDoctorId.setText("                                       Doctor ID :");
 
-        jLabel108.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel108.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel108.setText("Name :");
+        jlName.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlName.setForeground(new java.awt.Color(102, 102, 255));
+        jlName.setText("Name :");
 
-        jLabel109.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel109.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel109.setText("Address :");
+        jlAddress.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlAddress.setForeground(new java.awt.Color(102, 102, 255));
+        jlAddress.setText("Address :");
 
-        jLabel110.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel110.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel110.setText("Mobile :");
+        jlMobile.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlMobile.setForeground(new java.awt.Color(102, 102, 255));
+        jlMobile.setText("Mobile :");
 
-        jTextField80.addActionListener(new java.awt.event.ActionListener() {
+        jtfDoctorId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField80ActionPerformed(evt);
+                jtfDoctorIdActionPerformed(evt);
             }
         });
 
-        jButton8.setForeground(new java.awt.Color(0, 153, 204));
-        jButton8.setText("Submit");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jbSubmit.setForeground(new java.awt.Color(0, 153, 204));
+        jbSubmit.setText("Submit");
+        jbSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jbSubmitActionPerformed(evt);
             }
         });
 
-        jTextField83.addActionListener(new java.awt.event.ActionListener() {
+        jtfMobile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField83ActionPerformed(evt);
+                jtfMobileActionPerformed(evt);
             }
         });
 
@@ -81,31 +81,31 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField81, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(120, 120, 120)
-                            .addComponent(jTextField82, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel112)
+                            .addComponent(jlDoctorId)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField80, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel108)
+                        .addComponent(jlName)
                         .addGap(156, 156, 156)
-                        .addComponent(jLabel109)))
+                        .addComponent(jlAddress)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel110, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField83, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51))))
         );
         layout.setVerticalGroup(
@@ -113,45 +113,45 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel112, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField80, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
+                    .addComponent(jlDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbSubmit))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel108)
-                    .addComponent(jLabel109)
-                    .addComponent(jLabel110))
+                    .addComponent(jlName)
+                    .addComponent(jlAddress)
+                    .addComponent(jlMobile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField81, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField83, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField82, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField80ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField80ActionPerformed
+    private void jtfDoctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDoctorIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField80ActionPerformed
+    }//GEN-LAST:event_jtfDoctorIdActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jbSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSubmitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jbSubmitActionPerformed
 
-    private void jTextField83ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField83ActionPerformed
+    private void jtfMobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMobileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField83ActionPerformed
+    }//GEN-LAST:event_jtfMobileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel108;
-    private javax.swing.JLabel jLabel109;
-    private javax.swing.JLabel jLabel110;
-    private javax.swing.JLabel jLabel112;
-    private javax.swing.JTextField jTextField80;
-    private javax.swing.JTextField jTextField81;
-    private javax.swing.JTextField jTextField82;
-    private javax.swing.JTextField jTextField83;
+    private javax.swing.JButton jbSubmit;
+    private javax.swing.JLabel jlAddress;
+    private javax.swing.JLabel jlDoctorId;
+    private javax.swing.JLabel jlMobile;
+    private javax.swing.JLabel jlName;
+    private javax.swing.JTextField jtfAddress;
+    private javax.swing.JTextField jtfDoctorId;
+    private javax.swing.JTextField jtfMobile;
+    private javax.swing.JTextField jtfName;
     // End of variables declaration//GEN-END:variables
 }

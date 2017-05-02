@@ -20,20 +20,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jTextField81" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="jtfName" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jTextField82" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="jtfAddress" min="-2" pref="149" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel112" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlDoctorId" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField80" min="-2" pref="177" max="-2" attributes="0"/>
+                          <Component id="jtfDoctorId" min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel108" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                      <Component id="jLabel109" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlAddress" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -41,19 +41,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton8" min="-2" pref="109" max="-2" attributes="0"/>
+                              <Component id="jbSubmit" min="-2" pref="109" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLabel110" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="jlMobile" min="-2" pref="180" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextField83" min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="jtfMobile" min="-2" pref="149" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -65,21 +65,21 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel112" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="jTextField80" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlDoctorId" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="jtfDoctorId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel109" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel110" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlMobile" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField81" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField83" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField82" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfMobile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfAddress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="164" max="32767" attributes="0"/>
           </Group>
@@ -87,7 +87,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel112">
+    <Component class="javax.swing.JLabel" name="jlDoctorId">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="14" style="0"/>
@@ -98,7 +98,7 @@
         <Property name="text" type="java.lang.String" value="                                       Doctor ID :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel108">
+    <Component class="javax.swing.JLabel" name="jlName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Black" size="12" style="0"/>
@@ -109,7 +109,7 @@
         <Property name="text" type="java.lang.String" value="Name :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel109">
+    <Component class="javax.swing.JLabel" name="jlAddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Black" size="12" style="0"/>
@@ -120,7 +120,7 @@
         <Property name="text" type="java.lang.String" value="Address :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel110">
+    <Component class="javax.swing.JLabel" name="jlMobile">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Black" size="12" style="0"/>
@@ -131,12 +131,12 @@
         <Property name="text" type="java.lang.String" value="Mobile :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField80">
+    <Component class="javax.swing.JTextField" name="jtfDoctorId">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField80ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfDoctorIdActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="jbSubmit">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="99" red="0" type="rgb"/>
@@ -144,16 +144,16 @@
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSubmitActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField81">
+    <Component class="javax.swing.JTextField" name="jtfName">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField82">
+    <Component class="javax.swing.JTextField" name="jtfAddress">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField83">
+    <Component class="javax.swing.JTextField" name="jtfMobile">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField83ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfMobileActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
