@@ -16,49 +16,70 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
-              <Component id="jlLogOut" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jlAddNurse" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAddAdminClinic" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAddPatient" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAddPharmacyManager" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlAddPharmacist" min="-2" max="-2" attributes="0"/>
                   <Component id="jlViewReceptionist" min="-2" max="-2" attributes="0"/>
                   <Component id="jlViewDoctor" min="-2" max="-2" attributes="0"/>
                   <Component id="jlAddReceptionist" min="-2" max="-2" attributes="0"/>
                   <Component id="jlAddDoctor" min="-2" max="-2" attributes="0"/>
                   <Component id="jlViewProfile" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="311" max="32767" attributes="0"/>
-              <Component id="jlBackground" min="-2" pref="139" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace pref="276" max="32767" attributes="0"/>
+                      <Component id="jlBackground" min="-2" pref="139" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="jlLogOut" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="jlBackground" min="-2" pref="123" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="jlViewProfile" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="jlAddDoctor" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="jlBackground" min="-2" pref="123" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jlAddReceptionist" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlAddReceptionist" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+              <Component id="jlAddPharmacist" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="jlAddPharmacyManager" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jlAddPatient" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jlAddAdminClinic" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Component id="jlAddNurse" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jlViewDoctor" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-              <Component id="jlViewReceptionist" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="96" max="32767" attributes="0"/>
-              <Component id="jlLogOut" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlLogOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlViewReceptionist" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -104,6 +125,31 @@
     <Component class="javax.swing.JLabel" name="jlBackground">
       <Properties>
         <Property name="text" type="java.lang.String" value="background"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlAddPharmacist">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Pharmacist"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlAddPharmacyManager">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Pharmacy Manager"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlAddPatient">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Patient"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlAddAdminClinic">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Admin Clinic"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlAddNurse">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Nurse"/>
       </Properties>
     </Component>
   </SubComponents>

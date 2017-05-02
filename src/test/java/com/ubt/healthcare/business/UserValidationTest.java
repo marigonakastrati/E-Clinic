@@ -60,7 +60,7 @@ public class UserValidationTest {
     }
 
     /**
-     * Test of validateDoctor method, of class UserValidation.
+     * Test of validatePerson method, of class UserValidation.
      */
     @Test
     public void testValidateDoctor() {
@@ -68,7 +68,7 @@ public class UserValidationTest {
         Doctor doctor = null;
         UserValidation instance = new UserValidation();
         String expResult = "";
-        String result = instance.validateDoctor(doctor);
+        String result = instance.validatePerson(doctor);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -14,7 +14,13 @@ import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.admin.JFAdmin;
+import com.ubt.healthcare.ui.admin.JPAddAdminClinic;
 import com.ubt.healthcare.ui.admin.JPAddDoctor;
+import com.ubt.healthcare.ui.admin.JPAddNurse;
+import com.ubt.healthcare.ui.admin.JPAddPatient;
+import com.ubt.healthcare.ui.admin.JPAddPharmacist;
+import com.ubt.healthcare.ui.admin.JPAddPharmacyManager;
+import com.ubt.healthcare.ui.admin.JPAddReceptionist;
 import com.ubt.healthcare.ui.admin.JPanelAddReceptionist;
 import com.ubt.healthcare.ui.admin.JPanelAdminScreen;
 import com.ubt.healthcare.ui.admin.JPanelViewDoctor;
@@ -24,7 +30,13 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScre
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistAdminClinic;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistNurse;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPatient;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacyManager;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewReceptionist;
@@ -202,13 +214,19 @@ public class JFLogin extends JFrame {
     public void showAdminScreen(AdminClinic admin)
     {
         JPAddDoctor jpAddDoctor = new JPAddDoctor();
-        JPanelAddReceptionist jpAddReceptionist = new JPanelAddReceptionist();
+        JPAddNurse jpAddNurse = new JPAddNurse();
+        JPAddPatient jpAddPatient = new JPAddPatient();
+        JPAddPharmacyManager jpAddPharmacyManager = new JPAddPharmacyManager();
+        JPAddPharmacist jpAddPharmacist = new JPAddPharmacist();
+        JPAddReceptionist jpAddReceptionist = new JPAddReceptionist();
+        JPAddAdminClinic jpAddAdminClinic = new JPAddAdminClinic();
         JPanelViewDoctor jpViewDoctor = new JPanelViewDoctor();
         JPanelViewReceptionist jpViewReceptionist = new JPanelViewReceptionist();
         JPanelViewProfile jpViewProfile = new JPanelViewProfile();
         JPanelEditProfile jpEditProfile = new JPanelEditProfile();
         JPanelAdminScreen jpAdminScreen = new JPanelAdminScreen();
-        jfAdmin = new JFAdmin(jpAddDoctor,jpAddReceptionist, jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);
+        jfAdmin = new JFAdmin(jpAddDoctor,jpAddNurse,jpAddPatient,jpAddPharmacyManager,jpAddPharmacist,jpAddReceptionist,
+                            jpAddAdminClinic,jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);
         
         // set the Admin profile parameters
         jpViewProfile.getJtfId().setText(String.valueOf(admin.getAdminClinicId()));
@@ -220,8 +238,15 @@ public class JFLogin extends JFrame {
         jpAdminScreen.addViewDoctorMouseAdapter(new MouseAdapterViewDoctor(jfAdmin));
         jpAdminScreen.addViewReceptionistMouseAdapter(new MouseAdapterViewReceptionist(jfAdmin));
         jpAdminScreen.addViewProfileMouseAdapter(new MouseAdapterViewProfile(jfAdmin));
+        
         jpAdminScreen.addAddDoctorMouseAdapter(new MouseAdapterAddDoctorScreen(jfAdmin));
         jpAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
+        
+        jpAdminScreen.addAddAdminClinicMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
+        jpAdminScreen.addAddPharmacyManagerMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
+        jpAdminScreen.addAddNurseMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
+        jpAdminScreen.addAddPatientMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
+        jpAdminScreen.addAddPharmacistMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
         
         jpAddReceptionist.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
         
@@ -229,6 +254,24 @@ public class JFLogin extends JFrame {
         
         jpAddDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
         jpAddDoctor.addRegisterDoctorMouseAdapter(new MouseAdapterPersistDoctor(jfAdmin));
+
+        jpAddNurse.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddNurse.addRegisterDoctorMouseAdapter(new MouseAdapterPersistNurse(jfAdmin));
+
+        jpAddPatient.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddPatient.addRegisterDoctorMouseAdapter(new MouseAdapterPersistPatient(jfAdmin));
+
+        jpAddPharmacyManager.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddPharmacyManager.addRegisterDoctorMouseAdapter(new MouseAdapterPersistPharmacyManager(jfAdmin));
+
+        jpAddPharmacist.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddPharmacist.addRegisterDoctorMouseAdapter(new MouseAdapterPersistPharmacist(jfAdmin));
+
+        jpAddReceptionist.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddReceptionist.addRegisterDoctorMouseAdapter(new MouseAdapterPersistReceptionist(jfAdmin));
+
+        jpAddAdminClinic.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddAdminClinic.addRegisterDoctorMouseAdapter(new MouseAdapterPersistAdminClinic(jfAdmin));
         
         jpViewDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
         

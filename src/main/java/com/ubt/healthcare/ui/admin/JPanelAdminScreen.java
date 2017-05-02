@@ -39,6 +39,11 @@ public class JPanelAdminScreen extends javax.swing.JPanel {
         jlViewReceptionist = new javax.swing.JLabel();
         jlLogOut = new javax.swing.JLabel();
         jlBackground = new javax.swing.JLabel();
+        jlAddPharmacist = new javax.swing.JLabel();
+        jlAddPharmacyManager = new javax.swing.JLabel();
+        jlAddPatient = new javax.swing.JLabel();
+        jlAddAdminClinic = new javax.swing.JLabel();
+        jlAddNurse = new javax.swing.JLabel();
 
         jlViewProfile.setText("ViewProfile");
 
@@ -56,53 +61,86 @@ public class JPanelAdminScreen extends javax.swing.JPanel {
 
         jlBackground.setText("background");
 
+        jlAddPharmacist.setText("Add Pharmacist");
+
+        jlAddPharmacyManager.setText("Add Pharmacy Manager");
+
+        jlAddPatient.setText("Add Patient");
+
+        jlAddAdminClinic.setText("Add Admin Clinic");
+
+        jlAddNurse.setText("Add Nurse");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(jlLogOut)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlAddNurse)
+                    .addComponent(jlAddAdminClinic)
+                    .addComponent(jlAddPatient)
+                    .addComponent(jlAddPharmacyManager)
+                    .addComponent(jlAddPharmacist)
                     .addComponent(jlViewReceptionist)
                     .addComponent(jlViewDoctor)
                     .addComponent(jlAddReceptionist)
                     .addComponent(jlAddDoctor)
                     .addComponent(jlViewProfile))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-                .addComponent(jlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                        .addComponent(jlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jlLogOut)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jlViewProfile)
                         .addGap(41, 41, 41)
-                        .addComponent(jlAddDoctor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlAddReceptionist)
-                .addGap(54, 54, 54)
+                        .addComponent(jlAddDoctor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlAddReceptionist)
+                        .addGap(28, 28, 28)))
+                .addComponent(jlAddPharmacist)
+                .addGap(26, 26, 26)
+                .addComponent(jlAddPharmacyManager)
+                .addGap(18, 18, 18)
+                .addComponent(jlAddPatient)
+                .addGap(18, 18, 18)
+                .addComponent(jlAddAdminClinic)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jlAddNurse)
+                .addGap(18, 18, 18)
                 .addComponent(jlViewDoctor)
-                .addGap(54, 54, 54)
-                .addComponent(jlViewReceptionist)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(jlLogOut)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlLogOut)
+                    .addComponent(jlViewReceptionist))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jlAddAdminClinic;
     private javax.swing.JLabel jlAddDoctor;
+    private javax.swing.JLabel jlAddNurse;
+    private javax.swing.JLabel jlAddPatient;
+    private javax.swing.JLabel jlAddPharmacist;
+    private javax.swing.JLabel jlAddPharmacyManager;
     private javax.swing.JLabel jlAddReceptionist;
     private javax.swing.JLabel jlBackground;
     private javax.swing.JLabel jlLogOut;
@@ -134,4 +172,26 @@ public class JPanelAdminScreen extends javax.swing.JPanel {
      public void addViewReceptionistMouseAdapter(MouseAdapter e) {
         jlViewReceptionist.addMouseListener(e);
     }  
+
+    public void addAddNurseMouseAdapter(MouseAdapter e) {
+        jlAddNurse.addMouseListener(e);
+    }
+
+    public void addAddPatientMouseAdapter(MouseAdapter e) {
+        jlAddPatient.addMouseListener(e);
+    }
+
+    public void addAddAdminClinicMouseAdapter(MouseAdapter e) {
+        jlAddAdminClinic.addMouseListener(e);
+    }
+
+    public void addAddPharmacistMouseAdapter(MouseAdapter e) {
+        jlAddPharmacist.addMouseListener(e);
+    }
+
+    public void addAddPharmacyManagerMouseAdapter(MouseAdapter e) {
+        jlAddPharmacyManager.addMouseListener(e);
+    }
+   
+    
 }
