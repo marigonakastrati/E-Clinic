@@ -6,7 +6,6 @@
 package com.ubt.healthcare.ui.eventhandling;
 
 import com.ubt.healthcare.ui.JFLogin;
-import com.ubt.healthcare.ui.JFMain;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;

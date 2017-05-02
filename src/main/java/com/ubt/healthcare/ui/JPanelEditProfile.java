@@ -16,12 +16,12 @@ import javax.swing.JTextField;
  *
  * @author F
  */
-public class JPanelViewProfile extends javax.swing.JPanel {
+public class JPanelEditProfile extends javax.swing.JPanel {
 
     /**
      * Creates new form JPanelViewProfile
      */
-    public JPanelViewProfile() {
+    public JPanelEditProfile() {
         initComponents();
          ImageIcon update = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\update.png");
          jlUpdate.setIcon(update);

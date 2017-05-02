@@ -14,15 +14,17 @@ import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.admin.JFAdmin;
-import com.ubt.healthcare.ui.admin.JPanelAddDoctor;
+import com.ubt.healthcare.ui.admin.JPAddDoctor;
 import com.ubt.healthcare.ui.admin.JPanelAddReceptionist;
 import com.ubt.healthcare.ui.admin.JPanelAdminScreen;
 import com.ubt.healthcare.ui.admin.JPanelViewDoctor;
 import com.ubt.healthcare.ui.admin.JPanelViewReceptionist;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewReceptionist;
@@ -199,13 +201,14 @@ public class JFLogin extends JFrame {
     */
     public void showAdminScreen(AdminClinic admin)
     {
-        JPanelAddDoctor jpAddDoctor = new JPanelAddDoctor();
+        JPAddDoctor jpAddDoctor = new JPAddDoctor();
         JPanelAddReceptionist jpAddReceptionist = new JPanelAddReceptionist();
         JPanelViewDoctor jpViewDoctor = new JPanelViewDoctor();
         JPanelViewReceptionist jpViewReceptionist = new JPanelViewReceptionist();
         JPanelViewProfile jpViewProfile = new JPanelViewProfile();
+        JPanelEditProfile jpEditProfile = new JPanelEditProfile();
         JPanelAdminScreen jpAdminScreen = new JPanelAdminScreen();
-        jfAdmin = new JFAdmin(jpAddDoctor,jpAddReceptionist, jpViewDoctor, jpViewReceptionist, jpViewProfile, jpAdminScreen, admin);
+        jfAdmin = new JFAdmin(jpAddDoctor,jpAddReceptionist, jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);
         
         // set the Admin profile parameters
         jpViewProfile.getJtfId().setText(String.valueOf(admin.getAdminClinicId()));
@@ -217,14 +220,21 @@ public class JFLogin extends JFrame {
         jpAdminScreen.addViewDoctorMouseAdapter(new MouseAdapterViewDoctor(jfAdmin));
         jpAdminScreen.addViewReceptionistMouseAdapter(new MouseAdapterViewReceptionist(jfAdmin));
         jpAdminScreen.addViewProfileMouseAdapter(new MouseAdapterViewProfile(jfAdmin));
-        jpAdminScreen.addAddDoctorMouseAdapter(new MouseAdapterAddDoctor(jfAdmin));
-        jpAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterAddReceptionist(jfAdmin));
+        jpAdminScreen.addAddDoctorMouseAdapter(new MouseAdapterAddDoctorScreen(jfAdmin));
+        jpAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterAddReceptionistScreen(jfAdmin));
         
         jpAddReceptionist.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
-        jpAddDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
-        jpViewDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        
         jpViewReceptionist.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        
+        jpAddDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpAddDoctor.addRegisterDoctorMouseAdapter(new MouseAdapterPersistDoctor(jfAdmin));
+        
+        jpViewDoctor.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        
+        
         jpViewProfile.addBackToAdminScreenMouseAdapter(new MouseAdapterAdminScreen(jfAdmin));
+        jpViewProfile.addUpdateAdminMouseAdapter(new MouseAdapterEditProfileScreen(jfAdmin));
         
         this.setVisible(false);
         jfAdmin.setSize(800, 800);
@@ -263,4 +273,6 @@ public class JFLogin extends JFrame {
         jfAdmin.dispose();
         
     }
+    
+
 }

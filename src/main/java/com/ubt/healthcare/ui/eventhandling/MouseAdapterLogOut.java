@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.eventhandling;
 
-import com.ubt.healthcare.ui.JFMain;
+import com.ubt.healthcare.ui.JFLogin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
  * @author F
  */
 public class MouseAdapterLogOut extends MouseAdapter{
-    private JFMain jfMain;
+    private JFLogin jfMain;
 
-    public MouseAdapterLogOut(JFMain jfMain) {
+    public MouseAdapterLogOut(JFLogin jfMain) {
         this.jfMain = jfMain;
     }
 

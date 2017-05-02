@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.eventhandling;
+package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.JFLogin;
+import com.ubt.healthcare.ui.admin.JFAdmin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,20 +13,18 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterBackFromEditScreen extends MouseAdapter{
-    private JFLogin jfMain;
+public class MouseAdapterEditProfileScreen extends MouseAdapter{
+    private JFAdmin jfAdmin;
 
-    public MouseAdapterBackFromEditScreen(JFLogin jfMain) {
-        this.jfMain = jfMain;
+    public MouseAdapterEditProfileScreen(JFAdmin jfAdmin) {
+        this.jfAdmin = jfAdmin;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        //jfMain.showStudentInformationScreen();;
+        jfAdmin.showUpdateProfileScreen();;
     }
     
-
-
     
 }

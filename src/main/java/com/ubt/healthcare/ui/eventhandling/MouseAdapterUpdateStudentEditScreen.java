@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.eventhandling;
 
-import com.ubt.healthcare.ui.JFMain;
+import com.ubt.healthcare.ui.JFLogin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
@@ -15,16 +15,16 @@ import javax.swing.JOptionPane;
  * @author F
  */
 public class MouseAdapterUpdateStudentEditScreen extends MouseAdapter{
-    private JFMain jfMain;
+    private JFLogin jfMain;
 
-    public MouseAdapterUpdateStudentEditScreen(JFMain jfMain) {
+    public MouseAdapterUpdateStudentEditScreen(JFLogin jfMain) {
         this.jfMain = jfMain;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) // call the update methods...
     {
-        jfMain.editStudent();
+        //jfMain.editStudent();
         JOptionPane.showMessageDialog(null, " Changes has been made");
     }
     

@@ -11,12 +11,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d"),
     @NamedQuery(name = "Doctor.findByPassCode", query = "SELECT d FROM Doctor d WHERE d.passCode = :passCode"),
-    @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId")})
+    @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId"),
+    @NamedQuery(name = "Doctor.findByPersonId", query = "SELECT d FROM Doctor d WHERE d.personId = :personId")})
 public class Doctor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,7 +47,8 @@ public class Doctor implements Serializable {
     private String passCode;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(generator = "InvSeq")
+    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     @Column(name = "doctor_id")
     private Integer doctorId;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")

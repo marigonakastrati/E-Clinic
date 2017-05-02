@@ -7,7 +7,7 @@ package com.ubt.healthcare.ui.eventhandling;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.ubt.healthcare.ui.JFMain;
+import com.ubt.healthcare.ui.JFLogin;
 
 /**
  *
@@ -15,9 +15,9 @@ import com.ubt.healthcare.ui.JFMain;
  */
 public class ActionListenerLogout implements ActionListener {
 
-    private JFMain cr;
+    private JFLogin cr;
 
-    public ActionListenerLogout(JFMain cr) {
+    public ActionListenerLogout(JFLogin cr) {
         this.cr = cr;
     }
 

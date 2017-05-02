@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.eventhandling;
 
-import com.ubt.healthcare.ui.JFMain;
+import com.ubt.healthcare.ui.JFLogin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
  * @author F
  */
 public class MouseAdapterViewSchedule extends MouseAdapter{
-    private JFMain jfMain;
+    private JFLogin jfMain;
 
-    public MouseAdapterViewSchedule(JFMain jfMain) 
+    public MouseAdapterViewSchedule(JFLogin jfMain) 
     {
         this.jfMain = jfMain;
     }
@@ -24,7 +24,7 @@ public class MouseAdapterViewSchedule extends MouseAdapter{
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jfMain.showViewScheduleScreen();
+        //jfMain.showViewScheduleScreen();
     }
     
 }
