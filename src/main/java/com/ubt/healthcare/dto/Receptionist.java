@@ -8,7 +8,6 @@ package com.ubt.healthcare.dto;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,9 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Receptionist")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Receptionist.findAll", query = "SELECT r FROM Receptionist r"),
-    @NamedQuery(name = "Receptionist.findByPassCode", query = "SELECT r FROM Receptionist r WHERE r.passCode = :passCode"),
-    @NamedQuery(name = "Receptionist.findByReceptionistId", query = "SELECT r FROM Receptionist r WHERE r.receptionistId = :receptionistId")})
+    @NamedQuery(name = "Receptionist.findAll", query = "SELECT r FROM Receptionist r")
+    , @NamedQuery(name = "Receptionist.findByPassCode", query = "SELECT r FROM Receptionist r WHERE r.passCode = :passCode")
+    , @NamedQuery(name = "Receptionist.findByReceptionistId", query = "SELECT r FROM Receptionist r WHERE r.receptionistId = :receptionistId")})
 public class Receptionist implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,9 +46,9 @@ public class Receptionist implements Serializable {
     @NotNull
     @Column(name = "receptionist_id")
     private Integer receptionistId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receptionistId")
+    @OneToMany(mappedBy = "receptionistID")
     private Collection<BillPayment> billPaymentCollection;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
 
@@ -120,7 +119,7 @@ public class Receptionist implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Receptionist[ receptionistId=" + receptionistId + " ]";
+        return "com.ubt.healthcare.dto.Receptionist[ receptionistId=" + receptionistId + " ]";
     }
     
 }

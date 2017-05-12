@@ -341,7 +341,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -352,7 +352,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -397,7 +397,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -470,7 +470,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -481,7 +481,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -560,7 +560,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -571,7 +571,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -650,7 +650,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -661,7 +661,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -740,7 +740,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -751,7 +751,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -830,7 +830,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -841,7 +841,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -886,7 +886,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -925,7 +925,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -964,7 +964,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -1003,7 +1003,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -1042,7 +1042,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);
@@ -1115,7 +1115,7 @@ public class JFAdmin extends JFrame{
         // set actual address id 
         Address add = new Address();
         add.setCityId(cit);
-        add.setPostCode(postCode);
+        add.setBuildingNumber(Integer.parseInt(postCode));
         add.setStreetName(address);
         
         person.setPersonId(Integer.parseInt(personalID));
@@ -1126,7 +1126,7 @@ public class JFAdmin extends JFrame{
         person.setBirthCityId(birthCity);
         person.setGenderId(gen);
         person.setAddressId(add);
-        person.setReligionId(rel);
+        person.setReigionId(rel);
         person.setMartialStatusId(ms);
  
         
@@ -1170,7 +1170,7 @@ public class JFAdmin extends JFrame{
         //Gender genderTo = person.getGenderId();
         Address addressTo = person.getAddressId();
         String streetName = addressTo.getStreetName();
-        String postCode = addressTo.getPostCode();
+        String postCode = addressTo.getBuildingNumber().toString();
         
         addressMsg = userValidation.checkIfAddressExists(streetName,postCode); // if street name and post code and city and county same dont add new address
         personMsg = userValidation.checkIfUserExists(person);

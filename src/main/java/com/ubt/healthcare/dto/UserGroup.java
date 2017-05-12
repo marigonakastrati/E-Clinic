@@ -32,8 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "user_id")
-    private Integer userId;
+    private int userId;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -50,11 +52,16 @@ public class UserGroup implements Serializable {
         this.usrGroupId = usrGroupId;
     }
 
-    public Integer getUserId() {
+    public UserGroup(Integer usrGroupId, int userId) {
+        this.usrGroupId = usrGroupId;
+        this.userId = userId;
+    }
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

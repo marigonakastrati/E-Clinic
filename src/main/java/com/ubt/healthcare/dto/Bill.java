@@ -30,24 +30,24 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Bill")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bill.findAll", query = "SELECT b FROM Bill b"),
-    @NamedQuery(name = "Bill.findByBillId", query = "SELECT b FROM Bill b WHERE b.billId = :billId"),
-    @NamedQuery(name = "Bill.findByAmount", query = "SELECT b FROM Bill b WHERE b.amount = :amount"),
-    @NamedQuery(name = "Bill.findByPaymentType", query = "SELECT b FROM Bill b WHERE b.paymentType = :paymentType")})
+    @NamedQuery(name = "Bill.findAll", query = "SELECT b FROM Bill b")
+    , @NamedQuery(name = "Bill.findByAmount", query = "SELECT b FROM Bill b WHERE b.amount = :amount")
+    , @NamedQuery(name = "Bill.findByPaymentType", query = "SELECT b FROM Bill b WHERE b.paymentType = :paymentType")
+    , @NamedQuery(name = "Bill.findByBillId", query = "SELECT b FROM Bill b WHERE b.billId = :billId")})
 public class Bill implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "bill_id")
-    private Integer billId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "amount")
+    @Column(name = "Amount")
     private BigDecimal amount;
     @Size(max = 25)
     @Column(name = "payment_type")
     private String paymentType;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "BillId")
+    private Integer billId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "billId")
     private Collection<BillPayment> billPaymentCollection;
 
@@ -55,14 +55,6 @@ public class Bill implements Serializable {
     }
 
     public Bill(Integer billId) {
-        this.billId = billId;
-    }
-
-    public Integer getBillId() {
-        return billId;
-    }
-
-    public void setBillId(Integer billId) {
         this.billId = billId;
     }
 
@@ -80,6 +72,14 @@ public class Bill implements Serializable {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public Integer getBillId() {
+        return billId;
+    }
+
+    public void setBillId(Integer billId) {
+        this.billId = billId;
     }
 
     @XmlTransient
@@ -113,7 +113,7 @@ public class Bill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Bill[ billId=" + billId + " ]";
+        return "com.ubt.healthcare.dto.Bill[ billId=" + billId + " ]";
     }
     
 }

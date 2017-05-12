@@ -35,44 +35,67 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Person")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Person.findByPersonId", query = "SELECT p FROM Person p WHERE p.personId = :personId"),
-    @NamedQuery(name = "Person.findByFirstName", query = "SELECT p FROM Person p WHERE p.firstName = :firstName"),
-    @NamedQuery(name = "Person.findByMiddleName", query = "SELECT p FROM Person p WHERE p.middleName = :middleName"),
-    @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName"),
-    @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")})
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+    , @NamedQuery(name = "Person.findByPersonId", query = "SELECT p FROM Person p WHERE p.personId = :personId")
+    , @NamedQuery(name = "Person.findByFirstName", query = "SELECT p FROM Person p WHERE p.firstName = :firstName")
+    , @NamedQuery(name = "Person.findByMiddleName", query = "SELECT p FROM Person p WHERE p.middleName = :middleName")
+    , @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName")
+    , @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "person_id")
+    @Column(name = "PersonId")
     private Integer personId;
-    @Size(max = 20)
-    @Column(name = "first_name")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 40)
+    @Column(name = "FirstName")
     private String firstName;
-    @Size(max = 20)
-    @Column(name = "middle_name")
+    @Size(max = 40)
+    @Column(name = "MiddleName")
     private String middleName;
-    @Size(max = 20)
-    @Column(name = "last_name")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 40)
+    @Column(name = "LastName")
     private String lastName;
-    @Column(name = "date_of_birth")
+    @Column(name = "DateOfBirth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private AdminClinic adminClinic;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private PharmacyManager pharmacyManager;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "childId")
     private Collection<Guardian> guardianCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentID")
     private Collection<Guardian> guardianCollection1;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Receptionist receptionist;
     @OneToOne(mappedBy = "personId")
     private HRManager hRManager;
+    @JoinColumn(name = "AddressId", referencedColumnName = "address_id")
+    @ManyToOne(optional = false)
+    private Address addressId;
+    @JoinColumn(name = "BirthCityId", referencedColumnName = "city_id")
+    @ManyToOne(optional = false)
+    private City birthCityId;
+    @JoinColumn(name = "GenderId", referencedColumnName = "gender_id")
+    @ManyToOne(optional = false)
+    private Gender genderId;
+    @JoinColumn(name = "MartialStatusId", referencedColumnName = "MartialStatusId")
+    @ManyToOne(optional = false)
+    private MartialStatus martialStatusId;
+    @JoinColumn(name = "ReigionId", referencedColumnName = "religion_id")
+    @ManyToOne(optional = false)
+    private Religion reigionId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<PersonEducation> personEducationCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
+    private AdminClinic adminClinic;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<PersonArchive> personArchiveCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<EmergencyInformation> emergencyInformationCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
@@ -83,23 +106,6 @@ public class Person implements Serializable {
     private Collection<Contact> contactCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Pharmacist pharmacist;
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    @ManyToOne(optional = false)
-    private Address addressId;
-    @JoinColumn(name = "birth_city_id", referencedColumnName = "city_id")
-    @ManyToOne(optional = false)
-    private City birthCityId;
-    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
-    @ManyToOne(optional = false)
-    private Gender genderId;
-    @JoinColumn(name = "martial_status_id", referencedColumnName = "martial_status_id")
-    @ManyToOne(optional = false)
-    private MartialStatus martialStatusId;
-    @JoinColumn(name = "religion_id", referencedColumnName = "religion_id")
-    @ManyToOne(optional = false)
-    private Religion religionId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Collection<PersonEducation> personEducationCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Nurse nurse;
 
@@ -108,6 +114,12 @@ public class Person implements Serializable {
 
     public Person(Integer personId) {
         this.personId = personId;
+    }
+
+    public Person(Integer personId, String firstName, String lastName) {
+        this.personId = personId;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Integer getPersonId() {
@@ -148,14 +160,6 @@ public class Person implements Serializable {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public AdminClinic getAdminClinic() {
-        return adminClinic;
-    }
-
-    public void setAdminClinic(AdminClinic adminClinic) {
-        this.adminClinic = adminClinic;
     }
 
     public PharmacyManager getPharmacyManager() {
@@ -200,6 +204,72 @@ public class Person implements Serializable {
         this.hRManager = hRManager;
     }
 
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    public City getBirthCityId() {
+        return birthCityId;
+    }
+
+    public void setBirthCityId(City birthCityId) {
+        this.birthCityId = birthCityId;
+    }
+
+    public Gender getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
+    }
+
+    public MartialStatus getMartialStatusId() {
+        return martialStatusId;
+    }
+
+    public void setMartialStatusId(MartialStatus martialStatusId) {
+        this.martialStatusId = martialStatusId;
+    }
+
+    public Religion getReigionId() {
+        return reigionId;
+    }
+
+    public void setReigionId(Religion reigionId) {
+        this.reigionId = reigionId;
+    }
+
+    @XmlTransient
+    public Collection<PersonEducation> getPersonEducationCollection() {
+        return personEducationCollection;
+    }
+
+    public void setPersonEducationCollection(Collection<PersonEducation> personEducationCollection) {
+        this.personEducationCollection = personEducationCollection;
+    }
+
+    public AdminClinic getAdminClinic() {
+        return adminClinic;
+    }
+
+    public void setAdminClinic(AdminClinic adminClinic) {
+        this.adminClinic = adminClinic;
+    }
+
+    @XmlTransient
+    public Collection<PersonArchive> getPersonArchiveCollection() {
+        return personArchiveCollection;
+    }
+
+    public void setPersonArchiveCollection(Collection<PersonArchive> personArchiveCollection) {
+        this.personArchiveCollection = personArchiveCollection;
+    }
+
     @XmlTransient
     public Collection<EmergencyInformation> getEmergencyInformationCollection() {
         return emergencyInformationCollection;
@@ -242,55 +312,6 @@ public class Person implements Serializable {
         this.pharmacist = pharmacist;
     }
 
-    public Address getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
-    }
-
-    public City getBirthCityId() {
-        return birthCityId;
-    }
-
-    public void setBirthCityId(City birthCityId) {
-        this.birthCityId = birthCityId;
-    }
-
-    public Gender getGenderId() {
-        return genderId;
-    }
-
-    public void setGenderId(Gender genderId) {
-        this.genderId = genderId;
-    }
-
-    public MartialStatus getMartialStatusId() {
-        return martialStatusId;
-    }
-
-    public void setMartialStatusId(MartialStatus martialStatusId) {
-        this.martialStatusId = martialStatusId;
-    }
-
-    public Religion getReligionId() {
-        return religionId;
-    }
-
-    public void setReligionId(Religion religionId) {
-        this.religionId = religionId;
-    }
-
-    @XmlTransient
-    public Collection<PersonEducation> getPersonEducationCollection() {
-        return personEducationCollection;
-    }
-
-    public void setPersonEducationCollection(Collection<PersonEducation> personEducationCollection) {
-        this.personEducationCollection = personEducationCollection;
-    }
-
     public Nurse getNurse() {
         return nurse;
     }
@@ -321,7 +342,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Person[ personId=" + personId + " ]";
+        return "com.ubt.healthcare.dto.Person[ personId=" + personId + " ]";
     }
     
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,25 +27,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author F
  */
 @Entity
-@Table(name = "Alergis")
+@Table(name = "PatientMedicineAllergy")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Alergis.findAll", query = "SELECT a FROM Alergis a"),
-    @NamedQuery(name = "Alergis.findBySeverity", query = "SELECT a FROM Alergis a WHERE a.severity = :severity"),
-    @NamedQuery(name = "Alergis.findByReaction", query = "SELECT a FROM Alergis a WHERE a.reaction = :reaction"),
-    @NamedQuery(name = "Alergis.findByDateOfOnset", query = "SELECT a FROM Alergis a WHERE a.dateOfOnset = :dateOfOnset"),
-    @NamedQuery(name = "Alergis.findByAlergieId", query = "SELECT a FROM Alergis a WHERE a.alergieId = :alergieId")})
-public class Alergis implements Serializable {
+    @NamedQuery(name = "PatientMedicineAllergy.findAll", query = "SELECT p FROM PatientMedicineAllergy p")
+    , @NamedQuery(name = "PatientMedicineAllergy.findByDateOfOnset", query = "SELECT p FROM PatientMedicineAllergy p WHERE p.dateOfOnset = :dateOfOnset")
+    , @NamedQuery(name = "PatientMedicineAllergy.findByAlergieId", query = "SELECT p FROM PatientMedicineAllergy p WHERE p.alergieId = :alergieId")})
+public class PatientMedicineAllergy implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Size(max = 255)
-    @Column(name = "severity")
-    private String severity;
-    @Size(max = 255)
-    @Column(name = "reaction")
-    private String reaction;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "date_of_onset")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfOnset;
     @Id
     @Basic(optional = false)
@@ -53,33 +47,22 @@ public class Alergis implements Serializable {
     @Column(name = "alergie_id")
     private Integer alergieId;
     @JoinColumn(name = "medicine_id", referencedColumnName = "medicine_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Medicine medicineId;
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Patient patientId;
 
-    public Alergis() {
+    public PatientMedicineAllergy() {
     }
 
-    public Alergis(Integer alergieId) {
+    public PatientMedicineAllergy(Integer alergieId) {
         this.alergieId = alergieId;
     }
 
-    public String getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
-
-    public String getReaction() {
-        return reaction;
-    }
-
-    public void setReaction(String reaction) {
-        this.reaction = reaction;
+    public PatientMedicineAllergy(Integer alergieId, Date dateOfOnset) {
+        this.alergieId = alergieId;
+        this.dateOfOnset = dateOfOnset;
     }
 
     public Date getDateOfOnset() {
@@ -124,10 +107,10 @@ public class Alergis implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Alergis)) {
+        if (!(object instanceof PatientMedicineAllergy)) {
             return false;
         }
-        Alergis other = (Alergis) object;
+        PatientMedicineAllergy other = (PatientMedicineAllergy) object;
         if ((this.alergieId == null && other.alergieId != null) || (this.alergieId != null && !this.alergieId.equals(other.alergieId))) {
             return false;
         }
@@ -136,7 +119,7 @@ public class Alergis implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Alergis[ alergieId=" + alergieId + " ]";
+        return "com.ubt.healthcare.dto.PatientMedicineAllergy[ alergieId=" + alergieId + " ]";
     }
     
 }

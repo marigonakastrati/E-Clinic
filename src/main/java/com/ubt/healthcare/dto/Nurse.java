@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Nurse")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Nurse.findAll", query = "SELECT n FROM Nurse n"),
-    @NamedQuery(name = "Nurse.findByPassCode", query = "SELECT n FROM Nurse n WHERE n.passCode = :passCode"),
-    @NamedQuery(name = "Nurse.findByNurseId", query = "SELECT n FROM Nurse n WHERE n.nurseId = :nurseId")})
+    @NamedQuery(name = "Nurse.findAll", query = "SELECT n FROM Nurse n")
+    , @NamedQuery(name = "Nurse.findByPassCode", query = "SELECT n FROM Nurse n WHERE n.passCode = :passCode")
+    , @NamedQuery(name = "Nurse.findByNurseId", query = "SELECT n FROM Nurse n WHERE n.nurseId = :nurseId")})
 public class Nurse implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
-    @Column(name = "pass_code")
+    @Column(name = "PassCode")
     private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "nurse_id")
+    @Column(name = "NurseId")
     private Integer nurseId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
 
@@ -105,7 +105,7 @@ public class Nurse implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Nurse[ nurseId=" + nurseId + " ]";
+        return "com.ubt.healthcare.dto.Nurse[ nurseId=" + nurseId + " ]";
     }
     
 }

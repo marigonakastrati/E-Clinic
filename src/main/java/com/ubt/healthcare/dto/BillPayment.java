@@ -30,32 +30,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "BillPayment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BillPayment.findAll", query = "SELECT b FROM BillPayment b"),
-    @NamedQuery(name = "BillPayment.findByDateOfPayment", query = "SELECT b FROM BillPayment b WHERE b.dateOfPayment = :dateOfPayment"),
-    @NamedQuery(name = "BillPayment.findByBillPaymentId", query = "SELECT b FROM BillPayment b WHERE b.billPaymentId = :billPaymentId")})
+    @NamedQuery(name = "BillPayment.findAll", query = "SELECT b FROM BillPayment b")
+    , @NamedQuery(name = "BillPayment.findByDateOfPayment", query = "SELECT b FROM BillPayment b WHERE b.dateOfPayment = :dateOfPayment")
+    , @NamedQuery(name = "BillPayment.findByBilled", query = "SELECT b FROM BillPayment b WHERE b.billed = :billed")
+    , @NamedQuery(name = "BillPayment.findByBillPaymentId", query = "SELECT b FROM BillPayment b WHERE b.billPaymentId = :billPaymentId")})
 public class BillPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Column(name = "DateOfPayment")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOfPayment;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date_of_payment")
-    @Temporal(TemporalType.DATE)
-    private Date dateOfPayment;
+    @Column(name = "Billed")
+    private boolean billed;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "bill_payment_id")
+    @Column(name = "BillPaymentId")
     private Integer billPaymentId;
-    @JoinColumn(name = "bill_id", referencedColumnName = "bill_id")
+    @JoinColumn(name = "BillId", referencedColumnName = "BillId")
     @ManyToOne(optional = false)
     private Bill billId;
-    @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "PatientId", referencedColumnName = "patient_id")
+    @ManyToOne
     private Patient patientId;
-    @JoinColumn(name = "receptionist_id", referencedColumnName = "receptionist_id")
-    @ManyToOne(optional = false)
-    private Receptionist receptionistId;
-    @JoinColumn(name = "visit_id", referencedColumnName = "visit_id")
+    @JoinColumn(name = "ReceptionistID", referencedColumnName = "receptionist_id")
+    @ManyToOne
+    private Receptionist receptionistID;
+    @JoinColumn(name = "VisitId", referencedColumnName = "VisitId")
     @OneToOne(optional = false)
     private Visit visitId;
 
@@ -66,9 +69,9 @@ public class BillPayment implements Serializable {
         this.billPaymentId = billPaymentId;
     }
 
-    public BillPayment(Integer billPaymentId, Date dateOfPayment) {
+    public BillPayment(Integer billPaymentId, boolean billed) {
         this.billPaymentId = billPaymentId;
-        this.dateOfPayment = dateOfPayment;
+        this.billed = billed;
     }
 
     public Date getDateOfPayment() {
@@ -77,6 +80,14 @@ public class BillPayment implements Serializable {
 
     public void setDateOfPayment(Date dateOfPayment) {
         this.dateOfPayment = dateOfPayment;
+    }
+
+    public boolean getBilled() {
+        return billed;
+    }
+
+    public void setBilled(boolean billed) {
+        this.billed = billed;
     }
 
     public Integer getBillPaymentId() {
@@ -103,12 +114,12 @@ public class BillPayment implements Serializable {
         this.patientId = patientId;
     }
 
-    public Receptionist getReceptionistId() {
-        return receptionistId;
+    public Receptionist getReceptionistID() {
+        return receptionistID;
     }
 
-    public void setReceptionistId(Receptionist receptionistId) {
-        this.receptionistId = receptionistId;
+    public void setReceptionistID(Receptionist receptionistID) {
+        this.receptionistID = receptionistID;
     }
 
     public Visit getVisitId() {
@@ -141,7 +152,7 @@ public class BillPayment implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.BillPayment[ billPaymentId=" + billPaymentId + " ]";
+        return "com.ubt.healthcare.dto.BillPayment[ billPaymentId=" + billPaymentId + " ]";
     }
     
 }

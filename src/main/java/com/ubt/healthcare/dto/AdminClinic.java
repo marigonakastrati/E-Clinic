@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "AdminClinic")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AdminClinic.findAll", query = "SELECT a FROM AdminClinic a"),
-    @NamedQuery(name = "AdminClinic.findByPassCode", query = "SELECT a FROM AdminClinic a WHERE a.passCode = :passCode"),
-    @NamedQuery(name = "AdminClinic.findByAdminClinicId", query = "SELECT a FROM AdminClinic a WHERE a.adminClinicId = :adminClinicId")})
+    @NamedQuery(name = "AdminClinic.findAll", query = "SELECT a FROM AdminClinic a")
+    , @NamedQuery(name = "AdminClinic.findByPassCode", query = "SELECT a FROM AdminClinic a WHERE a.passCode = :passCode")
+    , @NamedQuery(name = "AdminClinic.findByAdminClinicId", query = "SELECT a FROM AdminClinic a WHERE a.adminClinicId = :adminClinicId")})
 public class AdminClinic implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class AdminClinic implements Serializable {
     @NotNull
     @Column(name = "admin_clinic_id")
     private Integer adminClinicId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
 
@@ -105,7 +105,7 @@ public class AdminClinic implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.AdminClinic[ adminClinicId=" + adminClinicId + " ]";
+        return "com.ubt.healthcare.dto.AdminClinic[ adminClinicId=" + adminClinicId + " ]";
     }
     
 }

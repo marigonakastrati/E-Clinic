@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Occupation")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Occupation.findAll", query = "SELECT o FROM Occupation o"),
-    @NamedQuery(name = "Occupation.findByOccupationId", query = "SELECT o FROM Occupation o WHERE o.occupationId = :occupationId"),
-    @NamedQuery(name = "Occupation.findByOccupationName", query = "SELECT o FROM Occupation o WHERE o.occupationName = :occupationName")})
+    @NamedQuery(name = "Occupation.findAll", query = "SELECT o FROM Occupation o")
+    , @NamedQuery(name = "Occupation.findByOccupationId", query = "SELECT o FROM Occupation o WHERE o.occupationId = :occupationId")
+    , @NamedQuery(name = "Occupation.findByOccupationName", query = "SELECT o FROM Occupation o WHERE o.occupationName = :occupationName")})
 public class Occupation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,7 +100,7 @@ public class Occupation implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Occupation[ occupationId=" + occupationId + " ]";
+        return "com.ubt.healthcare.dto.Occupation[ occupationId=" + occupationId + " ]";
     }
     
 }

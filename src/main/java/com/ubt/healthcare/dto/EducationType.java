@@ -29,21 +29,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "EducationType")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EducationType.findAll", query = "SELECT e FROM EducationType e"),
-    @NamedQuery(name = "EducationType.findByEducationTypeId", query = "SELECT e FROM EducationType e WHERE e.educationTypeId = :educationTypeId"),
-    @NamedQuery(name = "EducationType.findByEducationName", query = "SELECT e FROM EducationType e WHERE e.educationName = :educationName")})
+    @NamedQuery(name = "EducationType.findAll", query = "SELECT e FROM EducationType e")
+    , @NamedQuery(name = "EducationType.findByEducationTypeId", query = "SELECT e FROM EducationType e WHERE e.educationTypeId = :educationTypeId")
+    , @NamedQuery(name = "EducationType.findByEducationName", query = "SELECT e FROM EducationType e WHERE e.educationName = :educationName")})
 public class EducationType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "education_type_id")
+    @Column(name = "EducationTypeId")
     private Integer educationTypeId;
     @Size(max = 25)
-    @Column(name = "education_name")
+    @Column(name = "EducationName")
     private String educationName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationTypeId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eucationTypeId")
     private Collection<Education> educationCollection;
 
     public EducationType() {
@@ -100,7 +100,7 @@ public class EducationType implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.EducationType[ educationTypeId=" + educationTypeId + " ]";
+        return "com.ubt.healthcare.dto.EducationType[ educationTypeId=" + educationTypeId + " ]";
     }
     
 }

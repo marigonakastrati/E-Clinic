@@ -31,25 +31,25 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Pharmacist")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pharmacist.findAll", query = "SELECT p FROM Pharmacist p"),
-    @NamedQuery(name = "Pharmacist.findByPassCode", query = "SELECT p FROM Pharmacist p WHERE p.passCode = :passCode"),
-    @NamedQuery(name = "Pharmacist.findByPharmacistId", query = "SELECT p FROM Pharmacist p WHERE p.pharmacistId = :pharmacistId")})
+    @NamedQuery(name = "Pharmacist.findAll", query = "SELECT p FROM Pharmacist p")
+    , @NamedQuery(name = "Pharmacist.findByPassCode", query = "SELECT p FROM Pharmacist p WHERE p.passCode = :passCode")
+    , @NamedQuery(name = "Pharmacist.findByPharmacistId", query = "SELECT p FROM Pharmacist p WHERE p.pharmacistId = :pharmacistId")})
 public class Pharmacist implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
-    @Column(name = "pass_code")
+    @Column(name = "PassCode")
     private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "pharmacist_id")
+    @Column(name = "PharmacistId")
     private Integer pharmacistId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacistId")
     private Collection<Order1> order1Collection;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
 
@@ -120,7 +120,7 @@ public class Pharmacist implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Pharmacist[ pharmacistId=" + pharmacistId + " ]";
+        return "com.ubt.healthcare.dto.Pharmacist[ pharmacistId=" + pharmacistId + " ]";
     }
     
 }

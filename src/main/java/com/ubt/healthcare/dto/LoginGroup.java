@@ -35,12 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "LoginGroup.findByGroupId", query = "SELECT l FROM LoginGroup l WHERE l.groupId = :groupId")})
 public class LoginGroup implements Serializable {
 
-    @OneToMany(mappedBy = "groupId")
-    private Collection<UserGroup> userGroupCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
-    private Collection<GroupRole> groupRoleCollection;
-
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -57,6 +51,10 @@ public class LoginGroup implements Serializable {
     @NotNull
     @Column(name = "group_id")
     private Integer groupId;
+    @OneToMany(mappedBy = "groupId")
+    private Collection<UserGroup> userGroupCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
+    private Collection<GroupRole> groupRoleCollection;
 
     public LoginGroup() {
     }
@@ -95,6 +93,24 @@ public class LoginGroup implements Serializable {
         this.groupId = groupId;
     }
 
+    @XmlTransient
+    public Collection<UserGroup> getUserGroupCollection() {
+        return userGroupCollection;
+    }
+
+    public void setUserGroupCollection(Collection<UserGroup> userGroupCollection) {
+        this.userGroupCollection = userGroupCollection;
+    }
+
+    @XmlTransient
+    public Collection<GroupRole> getGroupRoleCollection() {
+        return groupRoleCollection;
+    }
+
+    public void setGroupRoleCollection(Collection<GroupRole> groupRoleCollection) {
+        this.groupRoleCollection = groupRoleCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -118,24 +134,6 @@ public class LoginGroup implements Serializable {
     @Override
     public String toString() {
         return "com.ubt.healthcare.dto.LoginGroup[ groupId=" + groupId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<GroupRole> getGroupRoleCollection() {
-        return groupRoleCollection;
-    }
-
-    public void setGroupRoleCollection(Collection<GroupRole> groupRoleCollection) {
-        this.groupRoleCollection = groupRoleCollection;
-    }
-
-    @XmlTransient
-    public Collection<UserGroup> getUserGroupCollection() {
-        return userGroupCollection;
-    }
-
-    public void setUserGroupCollection(Collection<UserGroup> userGroupCollection) {
-        this.userGroupCollection = userGroupCollection;
     }
     
 }

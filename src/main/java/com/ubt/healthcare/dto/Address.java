@@ -33,34 +33,39 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Address")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
-    @NamedQuery(name = "Address.findByPostCode", query = "SELECT a FROM Address a WHERE a.postCode = :postCode"),
-    @NamedQuery(name = "Address.findByStreetName", query = "SELECT a FROM Address a WHERE a.streetName = :streetName"),
-    @NamedQuery(name = "Address.findByAppartmentNo", query = "SELECT a FROM Address a WHERE a.appartmentNo = :appartmentNo"),
-    @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId")})
+    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
+    , @NamedQuery(name = "Address.findByBuildingNumber", query = "SELECT a FROM Address a WHERE a.buildingNumber = :buildingNumber")
+    , @NamedQuery(name = "Address.findByStreetName", query = "SELECT a FROM Address a WHERE a.streetName = :streetName")
+    , @NamedQuery(name = "Address.findByAppartmentNumber", query = "SELECT a FROM Address a WHERE a.appartmentNumber = :appartmentNumber")
+    , @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Size(max = 15)
-    @Column(name = "post_code")
-    private String postCode;
+    @Column(name = "building_number")
+    private Integer buildingNumber;
     @Size(max = 256)
     @Column(name = "street_name")
     private String streetName;
-    @Size(max = 25)
-    @Column(name = "appartment_no")
-    private String appartmentNo;
+    @Column(name = "appartment_number")
+    private Integer appartmentNumber;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Column(name = "address_id")
     @GeneratedValue(generator = "InvSeq")
     @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
-    @Column(name = "address_id")
     private Integer addressId;
     @JoinColumn(name = "city_id", referencedColumnName = "city_id")
     @ManyToOne(optional = false)
     private City cityId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
     private Collection<Person> personCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
+    private Collection<Inventory> inventoryCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
+    private Collection<DrugManufacturer> drugManufacturerCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
+    private Collection<InventoryArchive> inventoryArchiveCollection;
 
     public Address() {
     }
@@ -69,12 +74,12 @@ public class Address implements Serializable {
         this.addressId = addressId;
     }
 
-    public String getPostCode() {
-        return postCode;
+    public Integer getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public void setBuildingNumber(Integer buildingNumber) {
+        this.buildingNumber = buildingNumber;
     }
 
     public String getStreetName() {
@@ -85,12 +90,12 @@ public class Address implements Serializable {
         this.streetName = streetName;
     }
 
-    public String getAppartmentNo() {
-        return appartmentNo;
+    public Integer getAppartmentNumber() {
+        return appartmentNumber;
     }
 
-    public void setAppartmentNo(String appartmentNo) {
-        this.appartmentNo = appartmentNo;
+    public void setAppartmentNumber(Integer appartmentNumber) {
+        this.appartmentNumber = appartmentNumber;
     }
 
     public Integer getAddressId() {
@@ -118,6 +123,33 @@ public class Address implements Serializable {
         this.personCollection = personCollection;
     }
 
+    @XmlTransient
+    public Collection<Inventory> getInventoryCollection() {
+        return inventoryCollection;
+    }
+
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
+        this.inventoryCollection = inventoryCollection;
+    }
+
+    @XmlTransient
+    public Collection<DrugManufacturer> getDrugManufacturerCollection() {
+        return drugManufacturerCollection;
+    }
+
+    public void setDrugManufacturerCollection(Collection<DrugManufacturer> drugManufacturerCollection) {
+        this.drugManufacturerCollection = drugManufacturerCollection;
+    }
+
+    @XmlTransient
+    public Collection<InventoryArchive> getInventoryArchiveCollection() {
+        return inventoryArchiveCollection;
+    }
+
+    public void setInventoryArchiveCollection(Collection<InventoryArchive> inventoryArchiveCollection) {
+        this.inventoryArchiveCollection = inventoryArchiveCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -140,7 +172,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Address[ addressId=" + addressId + " ]";
+        return "com.ubt.healthcare.dto.Address[ addressId=" + addressId + " ]";
     }
     
 }

@@ -43,6 +43,27 @@
     <class>com.ubt.healthcare.dto.PrescriptionMedicines</class>
     <class>com.ubt.healthcare.dto.PersonEducation</class>
     <class>com.ubt.healthcare.dto.LoginGroup</class>
+    <class>com.ubt.healthcare.dto.MentalHealth</class>
+    <class>com.ubt.healthcare.dto.PatientSkinHX</class>
+    <class>com.ubt.healthcare.dto.Inventory</class>
+    <class>com.ubt.healthcare.dto.PatientVaccineHX</class>
+    <class>com.ubt.healthcare.dto.InventoryType</class>
+    <class>com.ubt.healthcare.dto.DrugManufacturer</class>
+    <class>com.ubt.healthcare.dto.Vaccine</class>
+    <class>com.ubt.healthcare.dto.PatientVitalHX</class>
+    <class>com.ubt.healthcare.dto.InventoryArchive</class>
+    <class>com.ubt.healthcare.dto.Skin</class>
+    <class>com.ubt.healthcare.dto.InfectiousDisease</class>
+    <class>com.ubt.healthcare.dto.PackageType</class>
+    <class>com.ubt.healthcare.dto.PatientMentalHealthHX</class>
+    <class>com.ubt.healthcare.dto.PatientInfectiousDiseaseHX</class>
+    <class>com.ubt.healthcare.dto.Food</class>
+    <class>com.ubt.healthcare.dto.Surgical</class>
+    <class>com.ubt.healthcare.dto.PatientMedicineAllergy</class>
+    <class>com.ubt.healthcare.dto.PatientFoodAllergylHX</class>
+    <class>com.ubt.healthcare.dto.PatientRelative</class>
+    <class>com.ubt.healthcare.dto.PatientSurgicalHX</class>
+    <class>com.ubt.healthcare.dto.RelativeType</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Clinic"/>
       <property name="javax.persistence.jdbc.user" value="Clinic"/>

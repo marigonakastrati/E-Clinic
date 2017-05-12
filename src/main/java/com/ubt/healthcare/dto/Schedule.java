@@ -6,6 +6,7 @@
 package com.ubt.healthcare.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -16,13 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,58 +34,69 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Schedule")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Schedule.findAll", query = "SELECT s FROM Schedule s"),
-    @NamedQuery(name = "Schedule.findByScheduleId", query = "SELECT s FROM Schedule s WHERE s.scheduleId = :scheduleId"),
-    @NamedQuery(name = "Schedule.findByStatus", query = "SELECT s FROM Schedule s WHERE s.status = :status"),
-    @NamedQuery(name = "Schedule.findByDateStart", query = "SELECT s FROM Schedule s WHERE s.dateStart = :dateStart"),
-    @NamedQuery(name = "Schedule.findByDateEnd", query = "SELECT s FROM Schedule s WHERE s.dateEnd = :dateEnd"),
-    @NamedQuery(name = "Schedule.findByTimeStart", query = "SELECT s FROM Schedule s WHERE s.timeStart = :timeStart"),
-    @NamedQuery(name = "Schedule.findByTimeEnd", query = "SELECT s FROM Schedule s WHERE s.timeEnd = :timeEnd")})
+    @NamedQuery(name = "Schedule.findAll", query = "SELECT s FROM Schedule s")
+    , @NamedQuery(name = "Schedule.findByStatus", query = "SELECT s FROM Schedule s WHERE s.status = :status")
+    , @NamedQuery(name = "Schedule.findByDateStart", query = "SELECT s FROM Schedule s WHERE s.dateStart = :dateStart")
+    , @NamedQuery(name = "Schedule.findByDateEnd", query = "SELECT s FROM Schedule s WHERE s.dateEnd = :dateEnd")
+    , @NamedQuery(name = "Schedule.findByTimeStart", query = "SELECT s FROM Schedule s WHERE s.timeStart = :timeStart")
+    , @NamedQuery(name = "Schedule.findByTimeEnd", query = "SELECT s FROM Schedule s WHERE s.timeEnd = :timeEnd")
+    , @NamedQuery(name = "Schedule.findBySchedule", query = "SELECT s FROM Schedule s WHERE s.schedule = :schedule")})
 public class Schedule implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "status")
+    private String status;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "DateStart")
+    @Temporal(TemporalType.DATE)
+    private Date dateStart;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "DateEnd")
+    @Temporal(TemporalType.DATE)
+    private Date dateEnd;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "TimeStart")
+    @Temporal(TemporalType.TIME)
+    private Date timeStart;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "TimeEnd")
+    @Temporal(TemporalType.TIME)
+    private Date timeEnd;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "schedule_id")
-    private Integer scheduleId;
-    @Size(max = 20)
-    @Column(name = "status")
-    private String status;
-    @Column(name = "date_start")
-    @Temporal(TemporalType.DATE)
-    private Date dateStart;
-    @Column(name = "date_end")
-    @Temporal(TemporalType.DATE)
-    private Date dateEnd;
-    @Column(name = "time_start")
-    @Temporal(TemporalType.TIME)
-    private Date timeStart;
-    @Column(name = "time_end")
-    @Temporal(TemporalType.TIME)
-    private Date timeEnd;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "scheduleId")
-    private BookAppointment bookAppointment;
-    @JoinColumn(name = "doctor_id", referencedColumnName = "doctor_id")
+    @Column(name = "Schedule")
+    private Integer schedule;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduleId")
+    private Collection<BookAppointment> bookAppointmentCollection;
+    @JoinColumn(name = "DoctorId", referencedColumnName = "DoctorId")
     @ManyToOne(optional = false)
     private Doctor doctorId;
-    @JoinColumn(name = "manager_id", referencedColumnName = "manager_id")
+    @JoinColumn(name = "ManagerId", referencedColumnName = "ManagerId")
     @ManyToOne(optional = false)
     private HRManager managerId;
 
     public Schedule() {
     }
 
-    public Schedule(Integer scheduleId) {
-        this.scheduleId = scheduleId;
+    public Schedule(Integer schedule) {
+        this.schedule = schedule;
     }
 
-    public Integer getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(Integer scheduleId) {
-        this.scheduleId = scheduleId;
+    public Schedule(Integer schedule, String status, Date dateStart, Date dateEnd, Date timeStart, Date timeEnd) {
+        this.schedule = schedule;
+        this.status = status;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     public String getStatus() {
@@ -126,12 +139,21 @@ public class Schedule implements Serializable {
         this.timeEnd = timeEnd;
     }
 
-    public BookAppointment getBookAppointment() {
-        return bookAppointment;
+    public Integer getSchedule() {
+        return schedule;
     }
 
-    public void setBookAppointment(BookAppointment bookAppointment) {
-        this.bookAppointment = bookAppointment;
+    public void setSchedule(Integer schedule) {
+        this.schedule = schedule;
+    }
+
+    @XmlTransient
+    public Collection<BookAppointment> getBookAppointmentCollection() {
+        return bookAppointmentCollection;
+    }
+
+    public void setBookAppointmentCollection(Collection<BookAppointment> bookAppointmentCollection) {
+        this.bookAppointmentCollection = bookAppointmentCollection;
     }
 
     public Doctor getDoctorId() {
@@ -153,7 +175,7 @@ public class Schedule implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (scheduleId != null ? scheduleId.hashCode() : 0);
+        hash += (schedule != null ? schedule.hashCode() : 0);
         return hash;
     }
 
@@ -164,7 +186,7 @@ public class Schedule implements Serializable {
             return false;
         }
         Schedule other = (Schedule) object;
-        if ((this.scheduleId == null && other.scheduleId != null) || (this.scheduleId != null && !this.scheduleId.equals(other.scheduleId))) {
+        if ((this.schedule == null && other.schedule != null) || (this.schedule != null && !this.schedule.equals(other.schedule))) {
             return false;
         }
         return true;
@@ -172,7 +194,7 @@ public class Schedule implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Schedule[ scheduleId=" + scheduleId + " ]";
+        return "com.ubt.healthcare.dto.Schedule[ schedule=" + schedule + " ]";
     }
     
 }

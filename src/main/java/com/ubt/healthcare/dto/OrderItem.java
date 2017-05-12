@@ -26,8 +26,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "OrderItem")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
-    @NamedQuery(name = "OrderItem.findByOrderItemId", query = "SELECT o FROM OrderItem o WHERE o.orderItemId = :orderItemId")})
+    @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o")
+    , @NamedQuery(name = "OrderItem.findByOrderItemId", query = "SELECT o FROM OrderItem o WHERE o.orderItemId = :orderItemId")
+    , @NamedQuery(name = "OrderItem.findByItemQuantity", query = "SELECT o FROM OrderItem o WHERE o.itemQuantity = :itemQuantity")})
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,9 +37,13 @@ public class OrderItem implements Serializable {
     @NotNull
     @Column(name = "order_item_id")
     private Integer orderItemId;
-    @JoinColumn(name = "medicine_id", referencedColumnName = "medicine_id")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "item_quantity")
+    private int itemQuantity;
+    @JoinColumn(name = "medicine_id", referencedColumnName = "inventory_id")
     @ManyToOne(optional = false)
-    private Medicine medicineId;
+    private Inventory medicineId;
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     @ManyToOne(optional = false)
     private Order1 orderId;
@@ -50,6 +55,11 @@ public class OrderItem implements Serializable {
         this.orderItemId = orderItemId;
     }
 
+    public OrderItem(Integer orderItemId, int itemQuantity) {
+        this.orderItemId = orderItemId;
+        this.itemQuantity = itemQuantity;
+    }
+
     public Integer getOrderItemId() {
         return orderItemId;
     }
@@ -58,11 +68,19 @@ public class OrderItem implements Serializable {
         this.orderItemId = orderItemId;
     }
 
-    public Medicine getMedicineId() {
+    public int getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
+
+    public Inventory getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(Medicine medicineId) {
+    public void setMedicineId(Inventory medicineId) {
         this.medicineId = medicineId;
     }
 
@@ -96,7 +114,7 @@ public class OrderItem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.OrderItem[ orderItemId=" + orderItemId + " ]";
+        return "com.ubt.healthcare.dto.OrderItem[ orderItemId=" + orderItemId + " ]";
     }
     
 }

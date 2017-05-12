@@ -31,26 +31,26 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Education")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Education.findAll", query = "SELECT e FROM Education e"),
-    @NamedQuery(name = "Education.findByEducationId", query = "SELECT e FROM Education e WHERE e.educationId = :educationId"),
-    @NamedQuery(name = "Education.findByInstitutionName", query = "SELECT e FROM Education e WHERE e.institutionName = :institutionName")})
+    @NamedQuery(name = "Education.findAll", query = "SELECT e FROM Education e")
+    , @NamedQuery(name = "Education.findByEducationId", query = "SELECT e FROM Education e WHERE e.educationId = :educationId")
+    , @NamedQuery(name = "Education.findByInstitutionName", query = "SELECT e FROM Education e WHERE e.institutionName = :institutionName")})
 public class Education implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "education_id")
+    @Column(name = "EducationId")
     private Integer educationId;
     @Size(max = 25)
-    @Column(name = "institution_name")
+    @Column(name = "InstitutionName")
     private String institutionName;
-    @JoinColumn(name = "education_program_id", referencedColumnName = "education_program_id")
+    @JoinColumn(name = "EducationProgramId", referencedColumnName = "EducationProgramId")
     @ManyToOne(optional = false)
     private EducationProgram educationProgramId;
-    @JoinColumn(name = "education_type_id", referencedColumnName = "education_type_id")
+    @JoinColumn(name = "EucationTypeId", referencedColumnName = "EducationTypeId")
     @ManyToOne(optional = false)
-    private EducationType educationTypeId;
+    private EducationType eucationTypeId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationId")
     private Collection<PersonEducation> personEducationCollection;
 
@@ -85,12 +85,12 @@ public class Education implements Serializable {
         this.educationProgramId = educationProgramId;
     }
 
-    public EducationType getEducationTypeId() {
-        return educationTypeId;
+    public EducationType getEucationTypeId() {
+        return eucationTypeId;
     }
 
-    public void setEducationTypeId(EducationType educationTypeId) {
-        this.educationTypeId = educationTypeId;
+    public void setEucationTypeId(EducationType eucationTypeId) {
+        this.eucationTypeId = eucationTypeId;
     }
 
     @XmlTransient
@@ -124,7 +124,7 @@ public class Education implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Education[ educationId=" + educationId + " ]";
+        return "com.ubt.healthcare.dto.Education[ educationId=" + educationId + " ]";
     }
     
 }

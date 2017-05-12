@@ -31,9 +31,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "City")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
-    @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName"),
-    @NamedQuery(name = "City.findByCityId", query = "SELECT c FROM City c WHERE c.cityId = :cityId")})
+    @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
+    , @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")
+    , @NamedQuery(name = "City.findByCityId", query = "SELECT c FROM City c WHERE c.cityId = :cityId")
+    , @NamedQuery(name = "City.findByZipCode", query = "SELECT c FROM City c WHERE c.zipCode = :zipCode")})
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +48,8 @@ public class City implements Serializable {
     @NotNull
     @Column(name = "city_id")
     private Integer cityId;
+    @Column(name = "zip_code")
+    private Integer zipCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
     private Collection<Address> addressCollection;
     @JoinColumn(name = "country_id", referencedColumnName = "country_id")
@@ -81,6 +84,14 @@ public class City implements Serializable {
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
+    }
+
+    public Integer getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(Integer zipCode) {
+        this.zipCode = zipCode;
     }
 
     @XmlTransient
@@ -131,7 +142,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.City[ cityId=" + cityId + " ]";
+        return "com.ubt.healthcare.dto.City[ cityId=" + cityId + " ]";
     }
     
 }

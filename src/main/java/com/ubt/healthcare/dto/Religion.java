@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Religion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Religion.findAll", query = "SELECT r FROM Religion r"),
-    @NamedQuery(name = "Religion.findByName", query = "SELECT r FROM Religion r WHERE r.name = :name"),
-    @NamedQuery(name = "Religion.findByReligionId", query = "SELECT r FROM Religion r WHERE r.religionId = :religionId")})
+    @NamedQuery(name = "Religion.findAll", query = "SELECT r FROM Religion r")
+    , @NamedQuery(name = "Religion.findByName", query = "SELECT r FROM Religion r WHERE r.name = :name")
+    , @NamedQuery(name = "Religion.findByReligionId", query = "SELECT r FROM Religion r WHERE r.religionId = :religionId")})
 public class Religion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,7 +45,7 @@ public class Religion implements Serializable {
     @NotNull
     @Column(name = "religion_id")
     private Integer religionId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "religionId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reigionId")
     private Collection<Person> personCollection;
 
     public Religion() {
@@ -107,7 +107,7 @@ public class Religion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Religion[ religionId=" + religionId + " ]";
+        return "com.ubt.healthcare.dto.Religion[ religionId=" + religionId + " ]";
     }
     
 }

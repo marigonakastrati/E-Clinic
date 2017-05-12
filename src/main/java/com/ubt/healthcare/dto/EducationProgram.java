@@ -29,19 +29,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "EducationProgram")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EducationProgram.findAll", query = "SELECT e FROM EducationProgram e"),
-    @NamedQuery(name = "EducationProgram.findByEducationProgramId", query = "SELECT e FROM EducationProgram e WHERE e.educationProgramId = :educationProgramId"),
-    @NamedQuery(name = "EducationProgram.findByProgramName", query = "SELECT e FROM EducationProgram e WHERE e.programName = :programName")})
+    @NamedQuery(name = "EducationProgram.findAll", query = "SELECT e FROM EducationProgram e")
+    , @NamedQuery(name = "EducationProgram.findByEducationProgramId", query = "SELECT e FROM EducationProgram e WHERE e.educationProgramId = :educationProgramId")
+    , @NamedQuery(name = "EducationProgram.findByProgramName", query = "SELECT e FROM EducationProgram e WHERE e.programName = :programName")})
 public class EducationProgram implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "education_program_id")
+    @Column(name = "EducationProgramId")
     private Integer educationProgramId;
     @Size(max = 50)
-    @Column(name = "program_name")
+    @Column(name = "ProgramName")
     private String programName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "educationProgramId")
     private Collection<Education> educationCollection;
@@ -100,7 +100,7 @@ public class EducationProgram implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.EducationProgram[ educationProgramId=" + educationProgramId + " ]";
+        return "com.ubt.healthcare.dto.EducationProgram[ educationProgramId=" + educationProgramId + " ]";
     }
     
 }

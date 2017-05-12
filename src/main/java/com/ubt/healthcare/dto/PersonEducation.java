@@ -29,28 +29,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "PersonEducation")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PersonEducation.findAll", query = "SELECT p FROM PersonEducation p"),
-    @NamedQuery(name = "PersonEducation.findByDateStart", query = "SELECT p FROM PersonEducation p WHERE p.dateStart = :dateStart"),
-    @NamedQuery(name = "PersonEducation.findByDateEnd", query = "SELECT p FROM PersonEducation p WHERE p.dateEnd = :dateEnd"),
-    @NamedQuery(name = "PersonEducation.findByPersonEducationId", query = "SELECT p FROM PersonEducation p WHERE p.personEducationId = :personEducationId")})
+    @NamedQuery(name = "PersonEducation.findAll", query = "SELECT p FROM PersonEducation p")
+    , @NamedQuery(name = "PersonEducation.findByDateStart", query = "SELECT p FROM PersonEducation p WHERE p.dateStart = :dateStart")
+    , @NamedQuery(name = "PersonEducation.findByDateEnd", query = "SELECT p FROM PersonEducation p WHERE p.dateEnd = :dateEnd")
+    , @NamedQuery(name = "PersonEducation.findByPersonEducationId", query = "SELECT p FROM PersonEducation p WHERE p.personEducationId = :personEducationId")})
 public class PersonEducation implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Column(name = "date_start")
+    @Column(name = "DateStart")
     @Temporal(TemporalType.DATE)
     private Date dateStart;
-    @Column(name = "date_end")
+    @Column(name = "DateEnd")
     @Temporal(TemporalType.DATE)
     private Date dateEnd;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "person_education_id")
+    @Column(name = "PersonEducationId")
     private Integer personEducationId;
-    @JoinColumn(name = "education_id", referencedColumnName = "education_id")
+    @JoinColumn(name = "EducationId", referencedColumnName = "EducationId")
     @ManyToOne(optional = false)
     private Education educationId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person personId;
 
@@ -123,7 +123,7 @@ public class PersonEducation implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.PersonEducation[ personEducationId=" + personEducationId + " ]";
+        return "com.ubt.healthcare.dto.PersonEducation[ personEducationId=" + personEducationId + " ]";
     }
     
 }

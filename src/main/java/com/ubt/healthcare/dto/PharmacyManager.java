@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Pharmacy_Manager")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PharmacyManager.findAll", query = "SELECT p FROM PharmacyManager p"),
-    @NamedQuery(name = "PharmacyManager.findByPassCode", query = "SELECT p FROM PharmacyManager p WHERE p.passCode = :passCode"),
-    @NamedQuery(name = "PharmacyManager.findByPharmacyManagerId", query = "SELECT p FROM PharmacyManager p WHERE p.pharmacyManagerId = :pharmacyManagerId")})
+    @NamedQuery(name = "PharmacyManager.findAll", query = "SELECT p FROM PharmacyManager p")
+    , @NamedQuery(name = "PharmacyManager.findByPassCode", query = "SELECT p FROM PharmacyManager p WHERE p.passCode = :passCode")
+    , @NamedQuery(name = "PharmacyManager.findByPharmacyManagerId", query = "SELECT p FROM PharmacyManager p WHERE p.pharmacyManagerId = :pharmacyManagerId")})
 public class PharmacyManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,11 +47,13 @@ public class PharmacyManager implements Serializable {
     @NotNull
     @Column(name = "pharmacy_manager_id")
     private Integer pharmacyManagerId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacyManagerId")
-    private Collection<Medicine> medicineCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "updatedBy")
+    private Collection<Inventory> inventoryCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "updatedBy")
+    private Collection<InventoryArchive> inventoryArchiveCollection;
 
     public PharmacyManager() {
     }
@@ -90,12 +92,21 @@ public class PharmacyManager implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Medicine> getMedicineCollection() {
-        return medicineCollection;
+    public Collection<Inventory> getInventoryCollection() {
+        return inventoryCollection;
     }
 
-    public void setMedicineCollection(Collection<Medicine> medicineCollection) {
-        this.medicineCollection = medicineCollection;
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
+        this.inventoryCollection = inventoryCollection;
+    }
+
+    @XmlTransient
+    public Collection<InventoryArchive> getInventoryArchiveCollection() {
+        return inventoryArchiveCollection;
+    }
+
+    public void setInventoryArchiveCollection(Collection<InventoryArchive> inventoryArchiveCollection) {
+        this.inventoryArchiveCollection = inventoryArchiveCollection;
     }
 
     @Override
@@ -120,7 +131,7 @@ public class PharmacyManager implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.PharmacyManager[ pharmacyManagerId=" + pharmacyManagerId + " ]";
+        return "com.ubt.healthcare.dto.PharmacyManager[ pharmacyManagerId=" + pharmacyManagerId + " ]";
     }
     
 }

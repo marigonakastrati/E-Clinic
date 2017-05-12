@@ -15,7 +15,6 @@
         <mapping class="com.ubt.healthcare.dto.Religion"/>
         <mapping class="com.ubt.healthcare.dto.Doctor"/>
         <mapping class="com.ubt.healthcare.dto.Contact"/>
-        <mapping class="com.ubt.healthcare.dto.Alergis"/>
         <mapping class="com.ubt.healthcare.dto.Bill"/>
         <mapping class="com.ubt.healthcare.dto.BookAppointment"/>
         <mapping class="com.ubt.healthcare.dto.Education"/>
@@ -49,6 +48,28 @@
         <mapping class="com.ubt.healthcare.dto.Occupation"/>
         <mapping class="com.ubt.healthcare.dto.PersonArchive"/>
         <mapping class="com.ubt.healthcare.dto.UserGroup"/>
+        <mapping class="com.ubt.healthcare.dto.DrugManufacturer"/>
+        <mapping class="com.ubt.healthcare.dto.PackageType"/>
+        <mapping class="com.ubt.healthcare.dto.Inventory"/>
+        <mapping class="com.ubt.healthcare.dto.InventoryType"/>
+        <mapping class="com.ubt.healthcare.dto.PatientInfectiousDiseaseHX"/>
+        <mapping class="com.ubt.healthcare.dto.InfectiousDisease"/>
+        <mapping class="com.ubt.healthcare.dto.PatientMentalHealthHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientSkinHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientVaccineHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientVitalHX"/>
+        <mapping class="com.ubt.healthcare.dto.MentalHealth"/>
+        <mapping class="com.ubt.healthcare.dto.Skin"/>
+        <mapping class="com.ubt.healthcare.dto.Vaccine"/>
+        <mapping class="com.ubt.healthcare.dto.InventoryArchive"/>
+        <mapping class="com.ubt.healthcare.dto.Food"/>
+        <mapping class="com.ubt.healthcare.dto.PackageType"/>
+        <mapping class="com.ubt.healthcare.dto.PatientFoodAllergylHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientMedicineAllergy"/>
+        <mapping class="com.ubt.healthcare.dto.PatientRelative"/>
+        <mapping class="com.ubt.healthcare.dto.PatientSurgicalHX"/>
+        <mapping class="com.ubt.healthcare.dto.RelativeType"/>
+        <mapping class="com.ubt.healthcare.dto.Surgical"/>
         
       
     </session-factory>

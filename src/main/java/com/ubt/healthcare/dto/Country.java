@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Country")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c"),
-    @NamedQuery(name = "Country.findByCountryName", query = "SELECT c FROM Country c WHERE c.countryName = :countryName"),
-    @NamedQuery(name = "Country.findByCountryId", query = "SELECT c FROM Country c WHERE c.countryId = :countryId")})
+    @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
+    , @NamedQuery(name = "Country.findByCountryName", query = "SELECT c FROM Country c WHERE c.countryName = :countryName")
+    , @NamedQuery(name = "Country.findByCountryId", query = "SELECT c FROM Country c WHERE c.countryId = :countryId")})
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -107,7 +107,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Country[ countryId=" + countryId + " ]";
+        return "com.ubt.healthcare.dto.Country[ countryId=" + countryId + " ]";
     }
     
 }

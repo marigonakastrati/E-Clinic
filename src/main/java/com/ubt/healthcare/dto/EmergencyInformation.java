@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Emergency_Information")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EmergencyInformation.findAll", query = "SELECT e FROM EmergencyInformation e"),
-    @NamedQuery(name = "EmergencyInformation.findByEmergencyInfoId", query = "SELECT e FROM EmergencyInformation e WHERE e.emergencyInfoId = :emergencyInfoId")})
+    @NamedQuery(name = "EmergencyInformation.findAll", query = "SELECT e FROM EmergencyInformation e")
+    , @NamedQuery(name = "EmergencyInformation.findByEmergencyInfoId", query = "SELECT e FROM EmergencyInformation e WHERE e.emergencyInfoId = :emergencyInfoId")})
 public class EmergencyInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +39,7 @@ public class EmergencyInformation implements Serializable {
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
     @ManyToOne(optional = false)
     private Patient patientId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person personId;
 
@@ -96,7 +96,7 @@ public class EmergencyInformation implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.EmergencyInformation[ emergencyInfoId=" + emergencyInfoId + " ]";
+        return "com.ubt.healthcare.dto.EmergencyInformation[ emergencyInfoId=" + emergencyInfoId + " ]";
     }
     
 }

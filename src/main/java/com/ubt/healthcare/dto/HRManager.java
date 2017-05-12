@@ -31,23 +31,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "HRManager")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "HRManager.findAll", query = "SELECT h FROM HRManager h"),
-    @NamedQuery(name = "HRManager.findByPassCode", query = "SELECT h FROM HRManager h WHERE h.passCode = :passCode"),
-    @NamedQuery(name = "HRManager.findByManagerId", query = "SELECT h FROM HRManager h WHERE h.managerId = :managerId")})
+    @NamedQuery(name = "HRManager.findAll", query = "SELECT h FROM HRManager h")
+    , @NamedQuery(name = "HRManager.findByPassCode", query = "SELECT h FROM HRManager h WHERE h.passCode = :passCode")
+    , @NamedQuery(name = "HRManager.findByManagerId", query = "SELECT h FROM HRManager h WHERE h.managerId = :managerId")})
 public class HRManager implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
-    @Column(name = "pass_code")
+    @Column(name = "PassCode")
     private String passCode;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "manager_id")
+    @Column(name = "ManagerId")
     private Integer managerId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne
     private Person personId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "managerId")
@@ -120,7 +120,7 @@ public class HRManager implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.HRManager[ managerId=" + managerId + " ]";
+        return "com.ubt.healthcare.dto.HRManager[ managerId=" + managerId + " ]";
     }
     
 }

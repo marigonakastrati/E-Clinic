@@ -33,25 +33,25 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Doctor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d"),
-    @NamedQuery(name = "Doctor.findByPassCode", query = "SELECT d FROM Doctor d WHERE d.passCode = :passCode"),
-    @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId"),
-    @NamedQuery(name = "Doctor.findByPersonId", query = "SELECT d FROM Doctor d WHERE d.personId = :personId")})
+    @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")
+    , @NamedQuery(name = "Doctor.findByPassCode", query = "SELECT d FROM Doctor d WHERE d.passCode = :passCode")
+    , @NamedQuery(name = "Doctor.findByDoctorId", query = "SELECT d FROM Doctor d WHERE d.doctorId = :doctorId")})
 public class Doctor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
-    @Column(name = "pass_code")
+    @Column(name = "PassCode")
     private String passCode;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Column(name = "DoctorId")
     @GeneratedValue(generator = "InvSeq")
     @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
-    @Column(name = "doctor_id")
     private Integer doctorId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
@@ -124,7 +124,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Doctor[ doctorId=" + doctorId + " ]";
+        return "com.ubt.healthcare.dto.Doctor[ doctorId=" + doctorId + " ]";
     }
     
 }

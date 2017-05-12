@@ -7,9 +7,7 @@ package com.ubt.healthcare.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,12 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,40 +28,39 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Medicine")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Medicine.findAll", query = "SELECT m FROM Medicine m"),
-    @NamedQuery(name = "Medicine.findByMedicineId", query = "SELECT m FROM Medicine m WHERE m.medicineId = :medicineId"),
-    @NamedQuery(name = "Medicine.findByMedicineName", query = "SELECT m FROM Medicine m WHERE m.medicineName = :medicineName"),
-    @NamedQuery(name = "Medicine.findByPackageType", query = "SELECT m FROM Medicine m WHERE m.packageType = :packageType"),
-    @NamedQuery(name = "Medicine.findByWeight", query = "SELECT m FROM Medicine m WHERE m.weight = :weight"),
-    @NamedQuery(name = "Medicine.findByPrice", query = "SELECT m FROM Medicine m WHERE m.price = :price")})
+    @NamedQuery(name = "Medicine.findAll", query = "SELECT m FROM Medicine m")
+    , @NamedQuery(name = "Medicine.findByMedicineName", query = "SELECT m FROM Medicine m WHERE m.medicineName = :medicineName")
+    , @NamedQuery(name = "Medicine.findByWeight", query = "SELECT m FROM Medicine m WHERE m.weight = :weight")
+    , @NamedQuery(name = "Medicine.findByPrice", query = "SELECT m FROM Medicine m WHERE m.price = :price")
+    , @NamedQuery(name = "Medicine.findByMedicineId", query = "SELECT m FROM Medicine m WHERE m.medicineId = :medicineId")})
 public class Medicine implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "medicine_name")
+    private String medicineName;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "weight")
+    private int weight;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "price")
+    private BigDecimal price;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "medicine_id")
     private Integer medicineId;
-    @Size(max = 20)
-    @Column(name = "medicine_name")
-    private String medicineName;
-    @Size(max = 20)
-    @Column(name = "package_type")
-    private String packageType;
-    @Column(name = "weight")
-    private Integer weight;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "price")
-    private BigDecimal price;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
-    private Collection<Alergis> alergisCollection;
-    @JoinColumn(name = "pharmacy_manager_id", referencedColumnName = "pharmacy_manager_id")
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "drug_manufacturer_id")
     @ManyToOne(optional = false)
-    private PharmacyManager pharmacyManagerId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
-    private Collection<PrescriptionMedicines> prescriptionMedicinesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
-    private Collection<OrderItem> orderItemCollection;
+    private DrugManufacturer manufacturerId;
+    @JoinColumn(name = "package_type", referencedColumnName = "package_type_id")
+    @ManyToOne(optional = false)
+    private PackageType packageType;
 
     public Medicine() {
     }
@@ -74,12 +69,11 @@ public class Medicine implements Serializable {
         this.medicineId = medicineId;
     }
 
-    public Integer getMedicineId() {
-        return medicineId;
-    }
-
-    public void setMedicineId(Integer medicineId) {
+    public Medicine(Integer medicineId, String medicineName, int weight, BigDecimal price) {
         this.medicineId = medicineId;
+        this.medicineName = medicineName;
+        this.weight = weight;
+        this.price = price;
     }
 
     public String getMedicineName() {
@@ -90,19 +84,11 @@ public class Medicine implements Serializable {
         this.medicineName = medicineName;
     }
 
-    public String getPackageType() {
-        return packageType;
-    }
-
-    public void setPackageType(String packageType) {
-        this.packageType = packageType;
-    }
-
-    public Integer getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -114,39 +100,28 @@ public class Medicine implements Serializable {
         this.price = price;
     }
 
-    @XmlTransient
-    public Collection<Alergis> getAlergisCollection() {
-        return alergisCollection;
+    public Integer getMedicineId() {
+        return medicineId;
     }
 
-    public void setAlergisCollection(Collection<Alergis> alergisCollection) {
-        this.alergisCollection = alergisCollection;
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
     }
 
-    public PharmacyManager getPharmacyManagerId() {
-        return pharmacyManagerId;
+    public DrugManufacturer getManufacturerId() {
+        return manufacturerId;
     }
 
-    public void setPharmacyManagerId(PharmacyManager pharmacyManagerId) {
-        this.pharmacyManagerId = pharmacyManagerId;
+    public void setManufacturerId(DrugManufacturer manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
-    @XmlTransient
-    public Collection<PrescriptionMedicines> getPrescriptionMedicinesCollection() {
-        return prescriptionMedicinesCollection;
+    public PackageType getPackageType() {
+        return packageType;
     }
 
-    public void setPrescriptionMedicinesCollection(Collection<PrescriptionMedicines> prescriptionMedicinesCollection) {
-        this.prescriptionMedicinesCollection = prescriptionMedicinesCollection;
-    }
-
-    @XmlTransient
-    public Collection<OrderItem> getOrderItemCollection() {
-        return orderItemCollection;
-    }
-
-    public void setOrderItemCollection(Collection<OrderItem> orderItemCollection) {
-        this.orderItemCollection = orderItemCollection;
+    public void setPackageType(PackageType packageType) {
+        this.packageType = packageType;
     }
 
     @Override
@@ -171,7 +146,7 @@ public class Medicine implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Medicine[ medicineId=" + medicineId + " ]";
+        return "com.ubt.healthcare.dto.Medicine[ medicineId=" + medicineId + " ]";
     }
     
 }

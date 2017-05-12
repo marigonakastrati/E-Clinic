@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ApplicationRole")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ApplicationRole.findAll", query = "SELECT a FROM ApplicationRole a"),
-    @NamedQuery(name = "ApplicationRole.findByRoleCode", query = "SELECT a FROM ApplicationRole a WHERE a.roleCode = :roleCode"),
-    @NamedQuery(name = "ApplicationRole.findByRoleName", query = "SELECT a FROM ApplicationRole a WHERE a.roleName = :roleName"),
-    @NamedQuery(name = "ApplicationRole.findByRoleId", query = "SELECT a FROM ApplicationRole a WHERE a.roleId = :roleId")})
+    @NamedQuery(name = "ApplicationRole.findAll", query = "SELECT a FROM ApplicationRole a")
+    , @NamedQuery(name = "ApplicationRole.findByRoleCode", query = "SELECT a FROM ApplicationRole a WHERE a.roleCode = :roleCode")
+    , @NamedQuery(name = "ApplicationRole.findByRoleName", query = "SELECT a FROM ApplicationRole a WHERE a.roleName = :roleName")
+    , @NamedQuery(name = "ApplicationRole.findByRoleId", query = "SELECT a FROM ApplicationRole a WHERE a.roleId = :roleId")})
 public class ApplicationRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -122,7 +122,7 @@ public class ApplicationRole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.ApplicationRole[ roleId=" + roleId + " ]";
+        return "com.ubt.healthcare.dto.ApplicationRole[ roleId=" + roleId + " ]";
     }
     
 }

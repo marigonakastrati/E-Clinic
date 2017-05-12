@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,59 +30,57 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "PersonArchive")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PersonArchive.findAll", query = "SELECT p FROM PersonArchive p"),
-    @NamedQuery(name = "PersonArchive.findByPersonId", query = "SELECT p FROM PersonArchive p WHERE p.personId = :personId"),
-    @NamedQuery(name = "PersonArchive.findByFirstName", query = "SELECT p FROM PersonArchive p WHERE p.firstName = :firstName"),
-    @NamedQuery(name = "PersonArchive.findByMiddleName", query = "SELECT p FROM PersonArchive p WHERE p.middleName = :middleName"),
-    @NamedQuery(name = "PersonArchive.findByLastName", query = "SELECT p FROM PersonArchive p WHERE p.lastName = :lastName"),
-    @NamedQuery(name = "PersonArchive.findByReligionId", query = "SELECT p FROM PersonArchive p WHERE p.religionId = :religionId"),
-    @NamedQuery(name = "PersonArchive.findByGenderId", query = "SELECT p FROM PersonArchive p WHERE p.genderId = :genderId"),
-    @NamedQuery(name = "PersonArchive.findByMartialStatusId", query = "SELECT p FROM PersonArchive p WHERE p.martialStatusId = :martialStatusId"),
-    @NamedQuery(name = "PersonArchive.findByAddressId", query = "SELECT p FROM PersonArchive p WHERE p.addressId = :addressId"),
-    @NamedQuery(name = "PersonArchive.findByPersonArchiveId", query = "SELECT p FROM PersonArchive p WHERE p.personArchiveId = :personArchiveId"),
-    @NamedQuery(name = "PersonArchive.findByDateChanged", query = "SELECT p FROM PersonArchive p WHERE p.dateChanged = :dateChanged")})
+    @NamedQuery(name = "PersonArchive.findAll", query = "SELECT p FROM PersonArchive p")
+    , @NamedQuery(name = "PersonArchive.findByFirstName", query = "SELECT p FROM PersonArchive p WHERE p.firstName = :firstName")
+    , @NamedQuery(name = "PersonArchive.findByMiddleName", query = "SELECT p FROM PersonArchive p WHERE p.middleName = :middleName")
+    , @NamedQuery(name = "PersonArchive.findByLastName", query = "SELECT p FROM PersonArchive p WHERE p.lastName = :lastName")
+    , @NamedQuery(name = "PersonArchive.findByReligionId", query = "SELECT p FROM PersonArchive p WHERE p.religionId = :religionId")
+    , @NamedQuery(name = "PersonArchive.findByGenderId", query = "SELECT p FROM PersonArchive p WHERE p.genderId = :genderId")
+    , @NamedQuery(name = "PersonArchive.findByMartialStatusId", query = "SELECT p FROM PersonArchive p WHERE p.martialStatusId = :martialStatusId")
+    , @NamedQuery(name = "PersonArchive.findByAddressId", query = "SELECT p FROM PersonArchive p WHERE p.addressId = :addressId")
+    , @NamedQuery(name = "PersonArchive.findByPersonArchiveId", query = "SELECT p FROM PersonArchive p WHERE p.personArchiveId = :personArchiveId")
+    , @NamedQuery(name = "PersonArchive.findByDateChanged", query = "SELECT p FROM PersonArchive p WHERE p.dateChanged = :dateChanged")})
 public class PersonArchive implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "person_id")
-    private int personId;
     @Size(max = 20)
-    @Column(name = "first_name")
+    @Column(name = "FirstName")
     private String firstName;
     @Size(max = 20)
-    @Column(name = "middle_name")
+    @Column(name = "MiddleName")
     private String middleName;
     @Size(max = 20)
-    @Column(name = "last_name")
+    @Column(name = "LastName")
     private String lastName;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "religion_id")
+    @Column(name = "ReligionId")
     private int religionId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "gender_id")
+    @Column(name = "GenderId")
     private int genderId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "martial_status_id")
+    @Column(name = "MartialStatusId")
     private int martialStatusId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "address_id")
+    @Column(name = "AddressId")
     private int addressId;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "person_archive_id")
+    @Column(name = "PersonArchiveId")
     private Integer personArchiveId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date_changed")
+    @Column(name = "DateChanged")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateChanged;
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
+    @ManyToOne(optional = false)
+    private Person personId;
 
     public PersonArchive() {
     }
@@ -89,22 +89,13 @@ public class PersonArchive implements Serializable {
         this.personArchiveId = personArchiveId;
     }
 
-    public PersonArchive(Integer personArchiveId, int personId, int religionId, int genderId, int martialStatusId, int addressId, Date dateChanged) {
+    public PersonArchive(Integer personArchiveId, int religionId, int genderId, int martialStatusId, int addressId, Date dateChanged) {
         this.personArchiveId = personArchiveId;
-        this.personId = personId;
         this.religionId = religionId;
         this.genderId = genderId;
         this.martialStatusId = martialStatusId;
         this.addressId = addressId;
         this.dateChanged = dateChanged;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public String getFirstName() {
@@ -179,6 +170,14 @@ public class PersonArchive implements Serializable {
         this.dateChanged = dateChanged;
     }
 
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -201,7 +200,7 @@ public class PersonArchive implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.PersonArchive[ personArchiveId=" + personArchiveId + " ]";
+        return "com.ubt.healthcare.dto.PersonArchive[ personArchiveId=" + personArchiveId + " ]";
     }
     
 }

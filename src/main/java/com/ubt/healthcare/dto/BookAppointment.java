@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,49 +34,41 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "BookAppointment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "BookAppointment.findAll", query = "SELECT b FROM BookAppointment b"),
-    @NamedQuery(name = "BookAppointment.findByBookId", query = "SELECT b FROM BookAppointment b WHERE b.bookId = :bookId"),
-    @NamedQuery(name = "BookAppointment.findByDateBooked", query = "SELECT b FROM BookAppointment b WHERE b.dateBooked = :dateBooked"),
-    @NamedQuery(name = "BookAppointment.findByTimeBooked", query = "SELECT b FROM BookAppointment b WHERE b.timeBooked = :timeBooked"),
-    @NamedQuery(name = "BookAppointment.findByStatus", query = "SELECT b FROM BookAppointment b WHERE b.status = :status")})
+    @NamedQuery(name = "BookAppointment.findAll", query = "SELECT b FROM BookAppointment b")
+    , @NamedQuery(name = "BookAppointment.findByDateBooked", query = "SELECT b FROM BookAppointment b WHERE b.dateBooked = :dateBooked")
+    , @NamedQuery(name = "BookAppointment.findByTimeBooked", query = "SELECT b FROM BookAppointment b WHERE b.timeBooked = :timeBooked")
+    , @NamedQuery(name = "BookAppointment.findByStatus", query = "SELECT b FROM BookAppointment b WHERE b.status = :status")
+    , @NamedQuery(name = "BookAppointment.findByBookId", query = "SELECT b FROM BookAppointment b WHERE b.bookId = :bookId")})
 public class BookAppointment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "book_id")
-    private Integer bookId;
-    @Column(name = "date_booked")
+    @Column(name = "DateBooked")
     @Temporal(TemporalType.DATE)
     private Date dateBooked;
-    @Column(name = "time_booked")
+    @Column(name = "TimeBooked")
     @Temporal(TemporalType.TIME)
     private Date timeBooked;
     @Size(max = 20)
     @Column(name = "status")
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<Visit> visitCollection;
-    @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "book_id")
+    private Integer bookId;
+    @JoinColumn(name = "PatientId", referencedColumnName = "patient_id")
     @ManyToOne(optional = false)
     private Patient patientId;
-    @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id")
-    @OneToOne(optional = false)
+    @JoinColumn(name = "ScheduleId", referencedColumnName = "Schedule")
+    @ManyToOne(optional = false)
     private Schedule scheduleId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+    private Collection<Visit> visitCollection;
 
     public BookAppointment() {
     }
 
     public BookAppointment(Integer bookId) {
-        this.bookId = bookId;
-    }
-
-    public Integer getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
@@ -105,13 +96,12 @@ public class BookAppointment implements Serializable {
         this.status = status;
     }
 
-    @XmlTransient
-    public Collection<Visit> getVisitCollection() {
-        return visitCollection;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setVisitCollection(Collection<Visit> visitCollection) {
-        this.visitCollection = visitCollection;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
     public Patient getPatientId() {
@@ -128,6 +118,15 @@ public class BookAppointment implements Serializable {
 
     public void setScheduleId(Schedule scheduleId) {
         this.scheduleId = scheduleId;
+    }
+
+    @XmlTransient
+    public Collection<Visit> getVisitCollection() {
+        return visitCollection;
+    }
+
+    public void setVisitCollection(Collection<Visit> visitCollection) {
+        this.visitCollection = visitCollection;
     }
 
     @Override
@@ -152,7 +151,7 @@ public class BookAppointment implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.BookAppointment[ bookId=" + bookId + " ]";
+        return "com.ubt.healthcare.dto.BookAppointment[ bookId=" + bookId + " ]";
     }
     
 }

@@ -32,36 +32,42 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Visit")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Visit.findAll", query = "SELECT v FROM Visit v"),
-    @NamedQuery(name = "Visit.findByVisitId", query = "SELECT v FROM Visit v WHERE v.visitId = :visitId"),
-    @NamedQuery(name = "Visit.findByDateTimeStart", query = "SELECT v FROM Visit v WHERE v.dateTimeStart = :dateTimeStart"),
-    @NamedQuery(name = "Visit.findByDateTimeEnd", query = "SELECT v FROM Visit v WHERE v.dateTimeEnd = :dateTimeEnd"),
-    @NamedQuery(name = "Visit.findByStatus", query = "SELECT v FROM Visit v WHERE v.status = :status")})
+    @NamedQuery(name = "Visit.findAll", query = "SELECT v FROM Visit v")
+    , @NamedQuery(name = "Visit.findByDateTimeStart", query = "SELECT v FROM Visit v WHERE v.dateTimeStart = :dateTimeStart")
+    , @NamedQuery(name = "Visit.findByDateTimeEnd", query = "SELECT v FROM Visit v WHERE v.dateTimeEnd = :dateTimeEnd")
+    , @NamedQuery(name = "Visit.findByStatus", query = "SELECT v FROM Visit v WHERE v.status = :status")
+    , @NamedQuery(name = "Visit.findByVisitId", query = "SELECT v FROM Visit v WHERE v.visitId = :visitId")})
 public class Visit implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "DateTimeStart")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTimeStart;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "DateTimeEnd")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTimeEnd;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "status")
+    private String status;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "visit_id")
+    @Column(name = "VisitId")
     private Integer visitId;
-    @Column(name = "date_time_start")
-    @Temporal(TemporalType.DATE)
-    private Date dateTimeStart;
-    @Column(name = "date_time_end")
-    @Temporal(TemporalType.DATE)
-    private Date dateTimeEnd;
-    @Size(max = 20)
-    @Column(name = "status")
-    private String status;
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    @ManyToOne(optional = false)
-    private BookAppointment bookId;
-    @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
-    @ManyToOne(optional = false)
-    private Prescription prescriptionId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "visitId")
     private BillPayment billPayment;
+    @JoinColumn(name = "BookId", referencedColumnName = "book_id")
+    @ManyToOne(optional = false)
+    private BookAppointment bookId;
+    @JoinColumn(name = "PrescriptionID", referencedColumnName = "prescription_id")
+    @ManyToOne(optional = false)
+    private Prescription prescriptionID;
 
     public Visit() {
     }
@@ -70,12 +76,11 @@ public class Visit implements Serializable {
         this.visitId = visitId;
     }
 
-    public Integer getVisitId() {
-        return visitId;
-    }
-
-    public void setVisitId(Integer visitId) {
+    public Visit(Integer visitId, Date dateTimeStart, Date dateTimeEnd, String status) {
         this.visitId = visitId;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.status = status;
     }
 
     public Date getDateTimeStart() {
@@ -102,20 +107,12 @@ public class Visit implements Serializable {
         this.status = status;
     }
 
-    public BookAppointment getBookId() {
-        return bookId;
+    public Integer getVisitId() {
+        return visitId;
     }
 
-    public void setBookId(BookAppointment bookId) {
-        this.bookId = bookId;
-    }
-
-    public Prescription getPrescriptionId() {
-        return prescriptionId;
-    }
-
-    public void setPrescriptionId(Prescription prescriptionId) {
-        this.prescriptionId = prescriptionId;
+    public void setVisitId(Integer visitId) {
+        this.visitId = visitId;
     }
 
     public BillPayment getBillPayment() {
@@ -124,6 +121,22 @@ public class Visit implements Serializable {
 
     public void setBillPayment(BillPayment billPayment) {
         this.billPayment = billPayment;
+    }
+
+    public BookAppointment getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(BookAppointment bookId) {
+        this.bookId = bookId;
+    }
+
+    public Prescription getPrescriptionID() {
+        return prescriptionID;
+    }
+
+    public void setPrescriptionID(Prescription prescriptionID) {
+        this.prescriptionID = prescriptionID;
     }
 
     @Override
@@ -148,7 +161,7 @@ public class Visit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Visit[ visitId=" + visitId + " ]";
+        return "com.ubt.healthcare.dto.Visit[ visitId=" + visitId + " ]";
     }
     
 }

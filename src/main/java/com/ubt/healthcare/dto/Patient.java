@@ -6,9 +6,7 @@
 package com.ubt.healthcare.dto;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,13 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,9 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Patient")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p"),
-    @NamedQuery(name = "Patient.findByPassCode", query = "SELECT p FROM Patient p WHERE p.passCode = :passCode"),
-    @NamedQuery(name = "Patient.findByPatientId", query = "SELECT p FROM Patient p WHERE p.patientId = :patientId")})
+    @NamedQuery(name = "Patient.findAll", query = "SELECT p FROM Patient p")
+    , @NamedQuery(name = "Patient.findByPassCode", query = "SELECT p FROM Patient p WHERE p.passCode = :passCode")
+    , @NamedQuery(name = "Patient.findByPatientId", query = "SELECT p FROM Patient p WHERE p.patientId = :patientId")})
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,24 +44,12 @@ public class Patient implements Serializable {
     @NotNull
     @Column(name = "patient_id")
     private Integer patientId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<BillPayment> billPaymentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<Alergis> alergisCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<BookAppointment> bookAppointmentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<Order1> order1Collection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<EmergencyInformation> emergencyInformationCollection;
     @JoinColumn(name = "occupation_id", referencedColumnName = "occupation_id")
     @ManyToOne(optional = false)
     private Occupation occupationId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
     private Person personId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patientId")
-    private Collection<Vitals> vitalsCollection;
 
     public Patient() {
     }
@@ -95,51 +79,6 @@ public class Patient implements Serializable {
         this.patientId = patientId;
     }
 
-    @XmlTransient
-    public Collection<BillPayment> getBillPaymentCollection() {
-        return billPaymentCollection;
-    }
-
-    public void setBillPaymentCollection(Collection<BillPayment> billPaymentCollection) {
-        this.billPaymentCollection = billPaymentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Alergis> getAlergisCollection() {
-        return alergisCollection;
-    }
-
-    public void setAlergisCollection(Collection<Alergis> alergisCollection) {
-        this.alergisCollection = alergisCollection;
-    }
-
-    @XmlTransient
-    public Collection<BookAppointment> getBookAppointmentCollection() {
-        return bookAppointmentCollection;
-    }
-
-    public void setBookAppointmentCollection(Collection<BookAppointment> bookAppointmentCollection) {
-        this.bookAppointmentCollection = bookAppointmentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
-    }
-
-    @XmlTransient
-    public Collection<EmergencyInformation> getEmergencyInformationCollection() {
-        return emergencyInformationCollection;
-    }
-
-    public void setEmergencyInformationCollection(Collection<EmergencyInformation> emergencyInformationCollection) {
-        this.emergencyInformationCollection = emergencyInformationCollection;
-    }
-
     public Occupation getOccupationId() {
         return occupationId;
     }
@@ -154,15 +93,6 @@ public class Patient implements Serializable {
 
     public void setPersonId(Person personId) {
         this.personId = personId;
-    }
-
-    @XmlTransient
-    public Collection<Vitals> getVitalsCollection() {
-        return vitalsCollection;
-    }
-
-    public void setVitalsCollection(Collection<Vitals> vitalsCollection) {
-        this.vitalsCollection = vitalsCollection;
     }
 
     @Override
@@ -187,7 +117,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Patient[ patientId=" + patientId + " ]";
+        return "com.ubt.healthcare.dto.Patient[ patientId=" + patientId + " ]";
     }
     
 }

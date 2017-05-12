@@ -6,7 +6,6 @@
 package com.ubt.healthcare.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -34,30 +33,26 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
-    @NamedQuery(name = "Order1.findByTotalPrice", query = "SELECT o FROM Order1 o WHERE o.totalPrice = :totalPrice"),
-    @NamedQuery(name = "Order1.findByOrderId", query = "SELECT o FROM Order1 o WHERE o.orderId = :orderId"),
-    @NamedQuery(name = "Order1.findByDateOrdered", query = "SELECT o FROM Order1 o WHERE o.dateOrdered = :dateOrdered")})
+    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
+    , @NamedQuery(name = "Order1.findByDateOrdered", query = "SELECT o FROM Order1 o WHERE o.dateOrdered = :dateOrdered")
+    , @NamedQuery(name = "Order1.findByOrderId", query = "SELECT o FROM Order1 o WHERE o.orderId = :orderId")})
 public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "total_price")
-    private BigDecimal totalPrice;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "date_ordered")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOrdered;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "order_id")
     private Integer orderId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date_ordered")
-    @Temporal(TemporalType.DATE)
-    private Date dateOrdered;
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
     @ManyToOne(optional = false)
     private Patient patientId;
-    @JoinColumn(name = "pharmacist_id", referencedColumnName = "pharmacist_id")
+    @JoinColumn(name = "pharmacist_id", referencedColumnName = "PharmacistId")
     @ManyToOne(optional = false)
     private Pharmacist pharmacistId;
     @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
@@ -78,12 +73,12 @@ public class Order1 implements Serializable {
         this.dateOrdered = dateOrdered;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public Date getDateOrdered() {
+        return dateOrdered;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setDateOrdered(Date dateOrdered) {
+        this.dateOrdered = dateOrdered;
     }
 
     public Integer getOrderId() {
@@ -92,14 +87,6 @@ public class Order1 implements Serializable {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public Date getDateOrdered() {
-        return dateOrdered;
-    }
-
-    public void setDateOrdered(Date dateOrdered) {
-        this.dateOrdered = dateOrdered;
     }
 
     public Patient getPatientId() {
@@ -157,7 +144,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Order1[ orderId=" + orderId + " ]";
+        return "com.ubt.healthcare.dto.Order1[ orderId=" + orderId + " ]";
     }
     
 }

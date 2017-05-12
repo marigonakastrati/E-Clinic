@@ -29,21 +29,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MartialStatus")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "MartialStatus.findAll", query = "SELECT m FROM MartialStatus m"),
-    @NamedQuery(name = "MartialStatus.findByMartialStatusId", query = "SELECT m FROM MartialStatus m WHERE m.martialStatusId = :martialStatusId"),
-    @NamedQuery(name = "MartialStatus.findByMartialStatusName", query = "SELECT m FROM MartialStatus m WHERE m.martialStatusName = :martialStatusName")})
+    @NamedQuery(name = "MartialStatus.findAll", query = "SELECT m FROM MartialStatus m")
+    , @NamedQuery(name = "MartialStatus.findByMartialStatusId", query = "SELECT m FROM MartialStatus m WHERE m.martialStatusId = :martialStatusId")
+    , @NamedQuery(name = "MartialStatus.findByMartialStatusName", query = "SELECT m FROM MartialStatus m WHERE m.martialStatusName = :martialStatusName")})
 public class MartialStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "martial_status_id")
+    @Column(name = "MartialStatusId")
     private Integer martialStatusId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "martial_status_name")
+    @Column(name = "MartialStatusName")
     private String martialStatusName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "martialStatusId")
     private Collection<Person> personCollection;
@@ -107,7 +107,7 @@ public class MartialStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.MartialStatus[ martialStatusId=" + martialStatusId + " ]";
+        return "com.ubt.healthcare.dto.MartialStatus[ martialStatusId=" + martialStatusId + " ]";
     }
     
 }

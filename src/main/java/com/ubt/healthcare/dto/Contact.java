@@ -27,25 +27,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Contact")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c"),
-    @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId"),
-    @NamedQuery(name = "Contact.findByType", query = "SELECT c FROM Contact c WHERE c.type = :type"),
-    @NamedQuery(name = "Contact.findByValue", query = "SELECT c FROM Contact c WHERE c.value = :value")})
+    @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
+    , @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")
+    , @NamedQuery(name = "Contact.findByType", query = "SELECT c FROM Contact c WHERE c.type = :type")
+    , @NamedQuery(name = "Contact.findByValue", query = "SELECT c FROM Contact c WHERE c.value = :value")})
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "contact_id")
+    @Column(name = "ContactId")
     private Integer contactId;
     @Size(max = 10)
-    @Column(name = "type")
+    @Column(name = "Type")
     private String type;
     @Size(max = 20)
-    @Column(name = "value")
+    @Column(name = "Value")
     private String value;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person personId;
 
@@ -110,7 +110,7 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Contact[ contactId=" + contactId + " ]";
+        return "com.ubt.healthcare.dto.Contact[ contactId=" + contactId + " ]";
     }
     
 }

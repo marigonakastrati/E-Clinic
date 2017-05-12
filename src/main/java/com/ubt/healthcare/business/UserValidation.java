@@ -60,7 +60,7 @@ public class UserValidation {
         String msg = "Save";
         List<Object> address = (List<Object>) sqlrepo.findAll("Address.findAll");
         for (Object o : address) {
-            if (((Address) o).getPostCode().equals(postCode) && ((Address) o).getStreetName().equals(streetName)) {
+            if (((Address) o).getBuildingNumber().equals(postCode) && ((Address) o).getStreetName().equals(streetName)) {
                 msg = "Exist";
             }
         }

@@ -26,22 +26,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Guardian")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Guardian.findAll", query = "SELECT g FROM Guardian g"),
-    @NamedQuery(name = "Guardian.findByGuardianId", query = "SELECT g FROM Guardian g WHERE g.guardianId = :guardianId")})
+    @NamedQuery(name = "Guardian.findAll", query = "SELECT g FROM Guardian g")
+    , @NamedQuery(name = "Guardian.findByGuardianId", query = "SELECT g FROM Guardian g WHERE g.guardianId = :guardianId")})
 public class Guardian implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "guardian_id")
+    @Column(name = "GuardianId")
     private Integer guardianId;
-    @JoinColumn(name = "child_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "ChildId", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person childId;
-    @JoinColumn(name = "parent_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "ParentID", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
-    private Person parentId;
+    private Person parentID;
 
     public Guardian() {
     }
@@ -66,12 +66,12 @@ public class Guardian implements Serializable {
         this.childId = childId;
     }
 
-    public Person getParentId() {
-        return parentId;
+    public Person getParentID() {
+        return parentID;
     }
 
-    public void setParentId(Person parentId) {
-        this.parentId = parentId;
+    public void setParentID(Person parentID) {
+        this.parentID = parentID;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Guardian implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Guardian[ guardianId=" + guardianId + " ]";
+        return "com.ubt.healthcare.dto.Guardian[ guardianId=" + guardianId + " ]";
     }
     
 }

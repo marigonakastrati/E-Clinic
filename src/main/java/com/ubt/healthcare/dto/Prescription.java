@@ -12,7 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -30,26 +29,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Prescription")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p"),
-    @NamedQuery(name = "Prescription.findByPrescriptionId", query = "SELECT p FROM Prescription p WHERE p.prescriptionId = :prescriptionId")})
+    @NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p")
+    , @NamedQuery(name = "Prescription.findByDesc", query = "SELECT p FROM Prescription p WHERE p.desc = :desc")
+    , @NamedQuery(name = "Prescription.findByPrescriptionId", query = "SELECT p FROM Prescription p WHERE p.prescriptionId = :prescriptionId")})
 public class Prescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "desc")
+    private String desc;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "prescription_id")
     private Integer prescriptionId;
-    @Lob
-    @Size(max = 2147483647)
-    @Column(name = "desc")
-    private String desc;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
-    private Collection<Visit> visitCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
     private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
     private Collection<PrescriptionMedicines> prescriptionMedicinesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionID")
+    private Collection<Visit> visitCollection;
 
     public Prescription() {
     }
@@ -58,12 +59,9 @@ public class Prescription implements Serializable {
         this.prescriptionId = prescriptionId;
     }
 
-    public Integer getPrescriptionId() {
-        return prescriptionId;
-    }
-
-    public void setPrescriptionId(Integer prescriptionId) {
+    public Prescription(Integer prescriptionId, String desc) {
         this.prescriptionId = prescriptionId;
+        this.desc = desc;
     }
 
     public String getDesc() {
@@ -74,13 +72,12 @@ public class Prescription implements Serializable {
         this.desc = desc;
     }
 
-    @XmlTransient
-    public Collection<Visit> getVisitCollection() {
-        return visitCollection;
+    public Integer getPrescriptionId() {
+        return prescriptionId;
     }
 
-    public void setVisitCollection(Collection<Visit> visitCollection) {
-        this.visitCollection = visitCollection;
+    public void setPrescriptionId(Integer prescriptionId) {
+        this.prescriptionId = prescriptionId;
     }
 
     @XmlTransient
@@ -99,6 +96,15 @@ public class Prescription implements Serializable {
 
     public void setPrescriptionMedicinesCollection(Collection<PrescriptionMedicines> prescriptionMedicinesCollection) {
         this.prescriptionMedicinesCollection = prescriptionMedicinesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Visit> getVisitCollection() {
+        return visitCollection;
+    }
+
+    public void setVisitCollection(Collection<Visit> visitCollection) {
+        this.visitCollection = visitCollection;
     }
 
     @Override
@@ -123,7 +129,7 @@ public class Prescription implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.entity.Prescription[ prescriptionId=" + prescriptionId + " ]";
+        return "com.ubt.healthcare.dto.Prescription[ prescriptionId=" + prescriptionId + " ]";
     }
     
 }
