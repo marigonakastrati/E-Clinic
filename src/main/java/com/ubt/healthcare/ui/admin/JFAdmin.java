@@ -70,6 +70,7 @@ public class JFAdmin extends JFrame{
         this.jpViewProfile = jpViewProfile;
         this.jpEditProfile = jpEditProfile;
         this.jpAdminScreen = jpAdminScreen;
+        jspPane = new JScrollPane();
         this.admin = admin;
         this.userValidation = new UserValidation();
         
@@ -82,17 +83,19 @@ public class JFAdmin extends JFrame{
         setLocationRelativeTo(null);
         setBounds(100, 100, 300, 300);
         jpMain.setLayout(clCardlayout);
-        
+        /*
         jpMain.add(jpAdminScreen, "Admin Screen");// it works by using the second paramteter to switch the JPanels
-        jpMain.add(jpViewProfile, "View Profile Screen");// it works by using the second paramteter to switch the JPanels
-        jpMain.add(jpAddDoctor, "Add Doctor Screen");// it works by using the second paramteter to switch the JPanels
-        jpMain.add(jpAddReceptionist, "Add  Receptionist Screen");// it works by using the second paramteter to switch the JPanels
-        jpMain.add(jpViewDoctor, "View Doctor Screen");// it works by using the second paramteter to switch the JPanels
-        jpMain.add(jpViewReceptionist, "View Receptionist Screen");// it works by using the second paramteter to switch the JPanels
-        //jpMain.add(jspPane, "Pane Screen");// it works by using the second paramteter to switch the JPanels
+        jpMain.add(jpViewProfile, "View Profile Screen");
+        jpMain.add(jpAddDoctor, "Add Doctor Screen");
+        jpMain.add(jpAddReceptionist, "Add  Receptionist Screen");
+        jpMain.add(jpViewDoctor, "View Doctor Screen");
+        jpMain.add(jpViewReceptionist, "View Receptionist Screen");
+        jpMain.add(jspPane, "Pane Screen");
         clCardlayout.show(jpMain, "Admin Screen");
-
-        add(jpMain);
+        */
+        //add(jpMain);
+        jspPane.setViewportView(jpAdminScreen);
+        add(jspPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("E Clinic");
         pack();
@@ -103,7 +106,7 @@ public class JFAdmin extends JFrame{
     
     public void showAddDoctorScreen() {
 
-        jpAddDoctor.setVisible(true);
+        /*jpAddDoctor.setVisible(false);
         jpAddNurse.setVisible(false);
         jpAddPatient.setVisible(false);
         jpAddPharmacyManager.setVisible(false);
@@ -114,7 +117,9 @@ public class JFAdmin extends JFrame{
         jpViewReceptionist.setVisible(false);
         jpViewProfile.setVisible(false);
         jpEditProfile.setVisible(false);
-        jpAdminScreen.setVisible(false);
+        jpAdminScreen.setVisible(false);*/
+        jspPane.setViewportView(jpAddDoctor);
+        jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
     }
 
@@ -183,7 +188,7 @@ public class JFAdmin extends JFrame{
     }
 
     public void showViewAdminScreen() {
-        jpAddDoctor.setVisible(false);
+        /*jpAddDoctor.setVisible(false);
         jpAddNurse.setVisible(false);
         jpAddPatient.setVisible(false);
         jpAddPharmacyManager.setVisible(false);
@@ -194,7 +199,8 @@ public class JFAdmin extends JFrame{
         jpViewReceptionist.setVisible(false);
         jpViewProfile.setVisible(false);
         jpEditProfile.setVisible(false);
-        jpAdminScreen.setVisible(true);
+        jpAdminScreen.setVisible(true);*/
+        jspPane.setViewportView(jpAdminScreen);
     }
 
     public void showAddPatientScreen() {

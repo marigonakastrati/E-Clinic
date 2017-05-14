@@ -8,7 +8,6 @@ package com.ubt.healthcare.ui.eventhandling;
 import com.ubt.healthcare.ui.JFLogin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,16 +28,14 @@ public class MouseAdapterLogin extends MouseAdapter{
     
     @Override
      public void mouseEntered(MouseEvent arg0) {
-        ImageIcon icSingHover = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\sign-hover.png");
         jfLogin.getJlLoginLabel()
-                    .setIcon(icSingHover);
+                    .setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/sign-hover.png")));
     }
 
     @Override
     public void mouseExited(MouseEvent arg0) {
-         ImageIcon icSing = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\sign.png");
          jfLogin.getJlLoginLabel()
-                   .setIcon(icSing);
+                   .setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/sign.png")));
     }
 
 }

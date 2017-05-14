@@ -27,8 +27,7 @@ public class MouseAdapterCloseWindows extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent arg0) 
     {
-        ImageIcon icHover = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\close-hover.png");
-        //ImageIcon ic =new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/textField.png"));
+        ImageIcon icHover =new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close-hover.png"));
         jpinterface.getJlCloseWindowsLoginScreen()
                 .setIcon(icHover);
     }
@@ -36,10 +35,9 @@ public class MouseAdapterCloseWindows extends MouseAdapter {
     @Override
     public void mouseExited(MouseEvent arg0) 
     {
-        ImageIcon icClose = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\close.png");
+        ImageIcon icClose =new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close.png"));
         jpinterface.getJlCloseWindowsLoginScreen()
                 .setIcon(icClose);
-
     }
 
     @Override

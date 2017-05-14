@@ -44,23 +44,19 @@ public class JPLoginScreen extends JPanel{
         jtfpersonId.setFont(new Font("Tahoma", 1, 16));
         jtfpersonId.setBounds(83, 139, 136, 20);
         
-        //jlpassCode.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/textField.png")));
-        jlpassCode.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\textField.png"));
+        jlpassCode.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/textField.png")));
         jlpassCode.setBounds(78, 133, 145, 30);// 78,133
         
-        //jlpersonId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/textField.png")));
-        jlpersonId.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\textField.png"));
+        jlpersonId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/textField.png")));
         jlpersonId.setBounds(78, 173, 145, 30);//78,173
 
-        //jllogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/sign.png")));
-        jllogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\sign.png"));
+        jllogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/sign.png")));
         jllogin.setBounds(78, 219, 140, 38);
         
-        //jlcloseWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/view/images/close.png")));
-        jlcloseWindows.setIcon(new javax.swing.ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\close.png"));
+        jlcloseWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close.png")));
         jlcloseWindows.setBounds(760, 1, 25, 25);
         
-        jlBackground.setIcon(new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\login-background.png"));
+        jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/login-background.png")));
         jlBackground.setBounds(0, 0, 800, 800);
         this.add(jlpersonId);
         this.add(jtfpersonId);

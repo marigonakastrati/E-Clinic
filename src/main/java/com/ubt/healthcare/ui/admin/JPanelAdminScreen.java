@@ -19,7 +19,7 @@ public class JPanelAdminScreen extends javax.swing.JPanel {
      */
     public JPanelAdminScreen() {
         initComponents();
-        jlBackground.setIcon(new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\login-background.png"));
+        jlBackground.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/login-background.png")));
         jlBackground.setBounds(0, 0, 800, 800);
     }
 

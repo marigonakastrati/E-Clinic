@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.admin;
+package com.ubt.healthcare.ui;
 
 import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.dto.Doctor;
@@ -17,16 +17,16 @@ import javax.swing.JTextField;
  *
  * @author F
  */
-public class JPanelViewDoctor extends javax.swing.JPanel {
-    
-    private Doctor doctor;
+public class JIFViewDoctor extends javax.swing.JInternalFrame {
+
+   private Doctor doctor;
     private DoctorService doctorService;
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
-
     /**
-     * Creates new form JPanelViewDoctor
+     * Creates new form JIFDoctor
      */
-    public JPanelViewDoctor() {
+    public JIFViewDoctor() {
+
         doctorTableModelViewDoctor = new DoctorTableModelViewDoctor();
         initComponents();
     }
@@ -51,6 +51,15 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
         jcbSearchByCity = new javax.swing.JComboBox<>();
         jbSearchDoctor = new javax.swing.JButton();
         jlClose = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Find Doctor Screen");
+        setToolTipText("");
+        setName(""); // NOI18N
+        setVisible(true);
 
         jlSelect.setText("Select");
 
@@ -83,8 +92,8 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
 
         jlClose.setText("Close");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -100,7 +109,7 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
                                 .addGap(271, 271, 271)
                                 .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(82, 82, 82)
-                                .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                                 .addGap(282, 282, 282))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,13 +155,15 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
                         .addComponent(jcbSearchByCity)
                         .addComponent(jtfSearchBySurName)))
                 .addGap(39, 39, 39)
-                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(8, 8, 8))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -170,7 +181,7 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
     private javax.swing.JTextField jtfSearchBySurName;
     // End of variables declaration//GEN-END:variables
  
-    public void addBackToAdminScreenMouseAdapter(MouseAdapter e) {
+     public void addBackToAdminScreenMouseAdapter(MouseAdapter e) {
         jlSelect.addMouseListener(e);
     }
     
@@ -207,4 +218,5 @@ public class JPanelViewDoctor extends javax.swing.JPanel {
         doctorTableModelViewDoctor.fireTableDataChanged();
         //selectindexchanges... todo
     }
+     
 }

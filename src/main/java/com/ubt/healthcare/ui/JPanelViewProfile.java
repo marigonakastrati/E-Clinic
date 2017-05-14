@@ -23,9 +23,8 @@ public class JPanelViewProfile extends javax.swing.JPanel {
      */
     public JPanelViewProfile() {
         initComponents();
-         ImageIcon update = new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\update.png");
-         jlUpdate.setIcon(update);
-         jlBack.setIcon(new ImageIcon("C:\\Users\\F\\Documents\\NetBeansProjects\\Health-care-Maven\\src\\main\\java\\com\\ubt\\healthcare\\ui\\images\\back.png"));
+         jlUpdate.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/update.png")));
+         jlBack.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/back.png")));
         
     }
 

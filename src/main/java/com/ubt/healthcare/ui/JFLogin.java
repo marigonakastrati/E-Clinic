@@ -14,6 +14,8 @@ import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.admin.JFAdmin;
+import com.ubt.healthcare.ui.admin.JFAdminScreen;
+import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JPAddAdminClinic;
 import com.ubt.healthcare.ui.admin.JPAddDoctor;
 import com.ubt.healthcare.ui.admin.JPAddNurse;
@@ -28,6 +30,7 @@ import com.ubt.healthcare.ui.admin.JPanelViewReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistAdminClinic;
@@ -37,6 +40,7 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPatient;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacyManager;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistReceptionist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorPanel;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewReceptionist;
@@ -45,9 +49,12 @@ import com.ubt.healthcare.ui.patient.JFPatient;
 import com.ubt.healthcare.ui.pharmacy.pharmacist.JFPharmacist;
 import com.ubt.healthcare.ui.pharmacy.pharmacymanager.JFPharmacyManager;
 import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -138,7 +145,8 @@ public class JFLogin extends JFrame {
             Doctor doctor = (Doctor)authUser.authenticateDoctor(user, passcode);
             if(doctor != null)
             {
-                showDoctorScreen(doctor);
+                //showDoctorScreen(doctor); old version with jpane
+                showDoctorFrameScreen(doctor); // new version with jinternalpane
             }
             else
             {
@@ -317,5 +325,21 @@ public class JFLogin extends JFrame {
         
     }
     
+    public void showDoctorFrameScreen(Doctor doctor)
+    {
+        
+        JIFDoctor ilfDoctor = new JIFDoctor();
+        JIFViewDoctor ilfViewDoctor = new JIFViewDoctor();
+        
+        JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor,ilfViewDoctor);
+        
+        jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
+        ilfDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorPanel(jfAdminScreen));
+        
+        ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorPanel(jfAdminScreen));
+  
+        this.setVisible(false);
+        jfAdminScreen.setVisible(true);
+    }
 
 }

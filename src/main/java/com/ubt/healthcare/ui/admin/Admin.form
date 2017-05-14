@@ -1583,10 +1583,8 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jlPersonalId" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jlBirthPlace" min="-2" pref="74" max="-2" attributes="0"/>
                                               <Component id="jlPlace" alignment="1" min="-2" max="-2" attributes="0"/>
                                               <Component id="jlSex" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -1596,13 +1594,16 @@
                                       <Component id="jlParentsInformation" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jlDateOfBirth" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jlFathersName" min="-2" pref="86" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jlBirthPlace" min="-2" pref="74" max="-2" attributes="0"/>
+                                      <Component id="jlDateOfBirth" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Component id="jlMothersSurname" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1724,7 +1725,7 @@
                                           <Component id="jlDegrees" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlCurrentPosition" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
@@ -1781,11 +1782,19 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlOccupation" min="-2" pref="84" max="-2" attributes="0"/>
-                                          <Component id="jlMothersName" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="jlMaritalStatus" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jlOccupation" min="-2" pref="84" max="-2" attributes="0"/>
+                                                  <Component id="jlMothersName" min="-2" pref="92" max="-2" attributes="0"/>
+                                                  <Component id="jlMaritalStatus" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jlPersonalId" min="-2" pref="74" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jtfDateOfBirth" min="-2" pref="150" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1864,12 +1873,10 @@
                           <Component id="jtfWorkPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jlBirthPlace" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jtfMobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jlMobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtfMobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlMobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlBirthPlace" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -2313,7 +2320,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="99" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="         City :"/>
+                <Property name="text" type="java.lang.String" value="City :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jtfAddress2">

@@ -16,28 +16,28 @@ import org.hibernate.Session;
 public class SQLRepository implements PersistenceInterface {
 
     @Override
-    public void add(Object student) {
+    public void add(Object entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(student);
+        session.save(entity);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void update(Object student) {
+    public void update(Object entity ){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(student);
+        session.update(entity);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void remove(Object student) {
+    public void remove(Object entity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.delete(student);
+        session.delete(entity);
         session.getTransaction().commit();
         session.close();
     }

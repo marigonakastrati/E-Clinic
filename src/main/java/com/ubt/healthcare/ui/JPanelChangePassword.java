@@ -117,7 +117,7 @@ public class JPanelChangePassword extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSubmit)
                     .addComponent(jbCancel))
-                .addContainerGap(974, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

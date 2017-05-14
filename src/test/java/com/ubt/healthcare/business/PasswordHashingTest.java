@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.business;
 
+import java.net.URL;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -66,6 +67,17 @@ public class PasswordHashingTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+     @Test
+    public void testClassPath()
+    {
+        System.out.println(this.getClass().getResource("."));
+        Class<? extends Class> aClass = PasswordHashing.class.getClass();
+        URL url = aClass.getResource("/com/ubt/healthcare/business");
+        
+        System.out.println(url.toString());
+        
     }
     
 }
