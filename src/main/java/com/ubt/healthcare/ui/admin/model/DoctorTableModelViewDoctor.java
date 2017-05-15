@@ -47,6 +47,12 @@ public class DoctorTableModelViewDoctor extends AbstractTableModel {
     public void remove(int row){
         data.remove(row);
     }
+    
+    public void removeAll()
+    {
+        
+        data.removeAll(data);
+    }
 
     public Doctor getDoctor(int index){
         return data.get(index);

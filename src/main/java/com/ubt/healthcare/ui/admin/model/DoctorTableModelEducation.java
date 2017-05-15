@@ -5,7 +5,6 @@
  */
 package com.ubt.healthcare.ui.admin.model;
 
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.PersonEducation;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

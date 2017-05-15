@@ -142,7 +142,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.City[ cityId=" + cityId + " ]";
+        return cityName;
     }
     
 }

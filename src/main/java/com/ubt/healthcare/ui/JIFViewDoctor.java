@@ -5,12 +5,16 @@
  */
 package com.ubt.healthcare.ui;
 
+import com.ubt.healthcare.business.CityService;
 import com.ubt.healthcare.business.DoctorService;
+import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.ui.admin.model.DoctorComboBoxModelCity;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelViewDoctor;
 import java.awt.event.MouseAdapter;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -19,15 +23,18 @@ import javax.swing.JTextField;
  */
 public class JIFViewDoctor extends javax.swing.JInternalFrame {
 
-   private Doctor doctor;
+    private Doctor doctor;
     private DoctorService doctorService;
+    private CityService cityService;
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
+    private DoctorComboBoxModelCity doctorComboboxCity;
     /**
      * Creates new form JIFDoctor
      */
     public JIFViewDoctor() {
 
         doctorTableModelViewDoctor = new DoctorTableModelViewDoctor();
+        cityService = new CityService();
         initComponents();
     }
 
@@ -48,7 +55,7 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
         jlSearchBySurName = new javax.swing.JLabel();
         jtfSearchBySurName = new javax.swing.JTextField();
         jlSearchByCity = new javax.swing.JLabel();
-        jcbSearchByCity = new javax.swing.JComboBox<>();
+        jcbSearchByCity = new javax.swing.JComboBox();
         jbSearchDoctor = new javax.swing.JButton();
         jlClose = new javax.swing.JLabel();
 
@@ -65,24 +72,20 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
 
         jtDoctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jcpDoctor.setViewportView(jtDoctorTable);
 
         jlSearchByName.setText("Name");
 
-        jtfSearchByName.setText("jTextField1");
-
         jlSearchBySurName.setText("Surname");
-
-        jtfSearchBySurName.setText("jTextField2");
 
         jlSearchByCity.setText("City");
 
@@ -106,34 +109,32 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
                                 .addComponent(jcpDoctor)
                                 .addGap(53, 53, 53))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(271, 271, 271)
-                                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(82, 82, 82)
-                                .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                                .addGap(282, 282, 282))))
+                                .addGap(317, 317, 317)
+                                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                                .addGap(90, 90, 90)
+                                .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                .addGap(228, 228, 228))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfSearchByName)
-                                .addGap(83, 83, 83))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jtfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfSearchBySurName)
-                                .addGap(21, 21, 21))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlSearchBySurName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(122, 122, 122)))
+                                .addGap(122, 122, 122))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfSearchBySurName, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlSearchByCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(165, 165, 165))
+                                .addGap(185, 185, 185))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbSearchByCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(38, 38, 38)))
-                        .addGap(20, 20, 20)
+                                .addComponent(jcbSearchByCity, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
@@ -155,7 +156,7 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
                         .addComponent(jcbSearchByCity)
                         .addComponent(jtfSearchBySurName)))
                 .addGap(39, 39, 39)
-                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
@@ -169,7 +170,7 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbSearchDoctor;
-    private javax.swing.JComboBox<String> jcbSearchByCity;
+    private javax.swing.JComboBox jcbSearchByCity;
     private javax.swing.JScrollPane jcpDoctor;
     private javax.swing.JLabel jlClose;
     private javax.swing.JLabel jlSearchByCity;
@@ -181,7 +182,7 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfSearchBySurName;
     // End of variables declaration//GEN-END:variables
  
-     public void addBackToAdminScreenMouseAdapter(MouseAdapter e) {
+     public void addSelectDoctorPanelMouseAdapter(MouseAdapter e) {
         jlSelect.addMouseListener(e);
     }
     
@@ -195,6 +196,9 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
 
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
+    }
+    public void setCityService(CityService cityService) {
+        this.cityService = cityService;
     }
 
     public JComboBox<String> getJcbSearchByCity() {
@@ -217,6 +221,21 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
         jtDoctorTable.setModel(doctorTableModelViewDoctor);
         doctorTableModelViewDoctor.fireTableDataChanged();
         //selectindexchanges... todo
+    }
+    public void loadCityComboBox()
+    {
+        List<City> city = cityService.findAllCity();
+        doctorComboboxCity = new DoctorComboBoxModelCity(city);
+        jcbSearchByCity.setModel(doctorComboboxCity);
+        jcbSearchByCity.repaint();
+    } 
+
+    public DoctorTableModelViewDoctor getDoctorTableModelViewDoctor() {
+        return doctorTableModelViewDoctor;
+    }
+
+    public JTable getJtDoctorTable() {
+        return jtDoctorTable;
     }
      
 }

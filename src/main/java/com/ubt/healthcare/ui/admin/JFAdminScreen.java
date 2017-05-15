@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin;
 
+import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.JIFViewDoctor;
 import java.awt.event.MouseAdapter;
 import javax.swing.JOptionPane;
@@ -214,11 +215,15 @@ public class JFAdminScreen extends javax.swing.JFrame {
         }
     }
     
-    public void showSearchDoctorPanel()
+    public void searchDoctorInternalPane()
     {
-        String nameOfDctor = jifDoctor.getJtfSearchByName().getText();
-        String surnameOfDctor = jifDoctor.getJtfSearchBySurName().getText();
-        String cityOfDoctor = (String)jifDoctor.getJcbSearchByCity().getSelectedItem();
+        String cityOfDoctor = "";
+        String nameOfDctor = jifViewDoctor.getJtfSearchByName().getText();
+        String surnameOfDctor = jifViewDoctor.getJtfSearchBySurName().getText();
+        if(jifViewDoctor.getJcbSearchByCity().getSelectedIndex()>=0)
+        {
+             cityOfDoctor = (String)jifViewDoctor.getJcbSearchByCity().getSelectedItem().toString();
+        }
         if(nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() ==0)
         {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the Doctor you are looking for");
@@ -228,16 +233,58 @@ public class JFAdminScreen extends javax.swing.JFrame {
             // check for input validation ....
         }
         else
-        {   jdpPaneHandler.add(jifViewDoctor);
-            jifViewDoctor.show();
+        {   
             jifViewDoctor.setDoctor(jifDoctor.getDoctor());
             jifViewDoctor.setDoctorService(jifDoctor.getDoctorService());
             jifViewDoctor.getJtfSearchByName().setText(nameOfDctor);
             jifViewDoctor.getJtfSearchBySurName().setText(surnameOfDctor);
             jifViewDoctor.getJcbSearchByCity().setSelectedIndex(1); // fix with jcomboboxmodel...
             jifViewDoctor.loadDoctorListTable();
+           
             
             // update the jpanel to view the doctors table...
         }
     }
+    
+    public void openSelectedDoctor()
+    {
+        // get the selected doctor
+        //jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(1);
+        
+        //clear the fields of JIFViewDoctor
+        jifViewDoctor.getJtfSearchByName().setText("");
+        jifViewDoctor.getJtfSearchBySurName().setText("");
+        jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+        
+        // close the JIFViewDoctor
+        jifViewDoctor.dispose();
+        
+        int row = jifViewDoctor.getJtDoctorTable().getSelectedRow();// do not allow multiple row selection
+        if(row>=0)
+        {
+            jifDoctor.setDoctor(jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row));
+            Doctor doc = jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row);
+             //update the JIFDoctor fields with doctors object
+             jifDoctor.getJtfFirstName().setText("");
+             
+        }
+        
+
+        
+       
+    }
+    
+    public void showSearchDoctorInternalFrame()
+    {
+        // remove internalframe from desktop pane
+        jdpPaneHandler.remove(jifViewDoctor);
+        
+        jdpPaneHandler.add(jifViewDoctor);
+        
+        jifViewDoctor.show();
+        
+        // load city combobox
+        jifViewDoctor.loadCityComboBox();
+    }
+
 }

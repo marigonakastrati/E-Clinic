@@ -18,6 +18,8 @@ import java.util.List;
 public class DoctorService {
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
+    private List<PersonEducation> personEducation;
+    private List<Doctor> doctorRepo;
 
     public DoctorService() 
     {
@@ -28,9 +30,11 @@ public class DoctorService {
     public List<PersonEducation> findEducation(Doctor doctor)
     {
         List<PersonEducation> prsonEduc= new ArrayList<>();
-        List<PersonEducation> list= null;
-        list = (List<PersonEducation>)(Object)sqlRepository.findAll("PersonEducation.findAll");
-        for(PersonEducation perEducation : list)
+        if(personEducation == null)
+        {
+             personEducation = (List<PersonEducation>)(Object)sqlRepository.findAll("PersonEducation.findAll");
+        }
+        for(PersonEducation perEducation : personEducation)
         {
             if(perEducation.getPersonId().getPersonId() == doctor.getPersonId().getPersonId())
             {
@@ -39,10 +43,19 @@ public class DoctorService {
         }
         return prsonEduc;
     }
-    
+    /**
+     Fix the Validation...
+     * @param name
+     * @param surname
+     * @param city
+     * @return List 
+     */
     public List<Doctor> findDoctorsByParameters(String name, String surname, String city)
     {    
-        List<Doctor> list = (List<Doctor>)(Object)sqlRepository.findAll("Doctor.findAll");
+        if(doctorRepo == null)
+        {
+            doctorRepo = (List<Doctor>)(Object)sqlRepository.findAll("Doctor.findAll");
+        }
         List<Doctor> doctorList= new ArrayList<>();
         
         if(inputValidation.validateInput(name))
@@ -51,7 +64,7 @@ public class DoctorService {
             {
                 if(inputValidation.validateInput(city))
                 {
-                    list.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
+                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
                                         && doctor.getPersonId().getLastName().equals(surname)
                                         && doctor.getPersonId().getAddressId().getCityId()
                                         .getCityName().equals(city))).forEachOrdered((doctor) -> {
@@ -60,7 +73,7 @@ public class DoctorService {
                 }
                 else
                 {
-                    list.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
+                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
                                             && doctor.getPersonId().getLastName().equals(surname))).forEachOrdered((doctor) -> {
                                                     doctorList.add(doctor);
                     });
@@ -69,7 +82,7 @@ public class DoctorService {
             }
             else
             {
-                list.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
+                doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
                                          .forEachOrdered((doctor) -> {
                                              doctorList.add(doctor);
                 });
@@ -81,7 +94,7 @@ public class DoctorService {
             {
                 if(inputValidation.validateInput(city))
                 {
-                    list.stream().filter((doctor) -> (doctor.getPersonId().getLastName()
+                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName()
                                         .equals(surname) && doctor.getPersonId().getAddressId()
                                         .getCityId().getCityName().equals(city)))
                                         .forEachOrdered((doctor) -> {
@@ -91,7 +104,7 @@ public class DoctorService {
             }
             else
             {
-                list.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
+                doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
                                         .forEachOrdered((doctor) -> {
                                             doctorList.add(doctor);
                 });
@@ -100,7 +113,7 @@ public class DoctorService {
         }
         else
         {
-            list.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                                         .getCityId().getCityName().equals(city)))
                                         .forEachOrdered((doctor) -> {
                                              doctorList.add(doctor);

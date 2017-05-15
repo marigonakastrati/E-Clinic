@@ -110,7 +110,7 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Contact[ contactId=" + contactId + " ]";
+        return value;
     }
     
 }
