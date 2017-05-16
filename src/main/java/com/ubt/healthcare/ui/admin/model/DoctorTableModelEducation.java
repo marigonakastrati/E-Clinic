@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class DoctorTableModelEducation extends AbstractTableModel {
 
-    private final String[] columnNames = {"Emri", "Mbiemri", "Ditelindja", "Mosha"};
+    private final String[] columnNames = {"Program Type", "Education Type", "Institution", "Date Start", "Date End"};
 
     private List<PersonEducation> data;
 
@@ -55,15 +55,27 @@ public class DoctorTableModelEducation extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         PersonEducation s = (PersonEducation)data.get(rowIndex);
         switch(columnIndex){
-            
+
             case 0:
-                return s.getPersonId().getFirstName();
+            {
+                return s.getEducationId().getEducationProgramId().getProgramName();
+            }
             case 1:
-                return s.getPersonId().getLastName();
+            {
+                return s.getEducationId().getEucationTypeId().getEducationName();
+            }
             case 2:
-                return s.getPersonId().getDateOfBirth(); 
-             case 3: 
-                 return s.getPersonId().getDateOfBirth();    
+            {
+                return s.getEducationId().getInstitutionName();
+            }
+            case 3:
+            {
+                return s.getDateStart().toString();
+            }
+            case 4:
+            {
+                return s.getDateEnd().toString();
+            }
             
             default:
                 return null;

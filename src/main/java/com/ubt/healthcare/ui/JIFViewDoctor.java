@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -58,12 +59,9 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
         jlSearchByCity = new javax.swing.JLabel();
         jcbSearchByCity = new javax.swing.JComboBox();
         jbSearchDoctor = new javax.swing.JButton();
-        jlClose = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Find Doctor Screen");
         setToolTipText("");
         setName(""); // NOI18N
@@ -94,8 +92,6 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
 
         jbSearchDoctor.setText("Search");
 
-        jlClose.setText("Close");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,22 +101,14 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jcpDoctor)
-                                .addGap(53, 53, 53))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(317, 317, 317)
-                                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                                .addGap(90, 90, 90)
-                                .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                .addGap(228, 228, 228))))
+                        .addComponent(jcpDoctor)
+                        .addGap(53, 53, 53))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 97, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -128,16 +116,20 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
                                 .addGap(122, 122, 122))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtfSearchBySurName, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlSearchByCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlSearchByCity, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                                 .addGap(185, 185, 185))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jcbSearchByCity, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(474, 474, 474))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,11 +149,9 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
                         .addComponent(jcbSearchByCity)
                         .addComponent(jtfSearchBySurName)))
                 .addGap(39, 39, 39)
-                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                    .addComponent(jlClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );
 
@@ -173,7 +163,6 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSearchDoctor;
     private javax.swing.JComboBox jcbSearchByCity;
     private javax.swing.JScrollPane jcpDoctor;
-    private javax.swing.JLabel jlClose;
     private javax.swing.JLabel jlSearchByCity;
     private javax.swing.JLabel jlSearchByName;
     private javax.swing.JLabel jlSearchBySurName;
@@ -255,6 +244,35 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
             loadDoctorListTable(nameOfDctor,surnameOfDctor,cityOfDoctor);
            
 
+        }
+    }
+    
+      static
+    {
+        try 
+         {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
+            {
+                if ("Nimbus".equals(info.getName())) 
+                {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
+                    /*jdpPaneHandler.setUI(new DesktopPaneUI() {
+                        @Override
+                        public void installUI(JComponent ui) {
+                            try {
+                                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel.");
+
+                            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+                            }
+                        }
+                    });*/
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException  |InstantiationException | IllegalAccessException  | UnsupportedLookAndFeelException ex) 
+        {
+            System.out.println("UI Manager not found");
         }
     }
 }

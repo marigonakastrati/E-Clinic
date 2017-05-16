@@ -30,7 +30,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
     {
         this.jifDoctor = jifDoctor;
 
-        frameStlye();
+        //frameStlye();
         initComponents();
     }
 
@@ -187,36 +187,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);*/
 
     }
-    
-    private void frameStlye()
-    {
-        try 
-         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
-            {
-                if ("Nimbus".equals(info.getName())) 
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    
-                    /*jdpPaneHandler.setUI(new DesktopPaneUI() {
-                        @Override
-                        public void installUI(JComponent ui) {
-                            try {
-                                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel.");
 
-                            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-                            }
-                        }
-                    });*/
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException  |InstantiationException | IllegalAccessException  | UnsupportedLookAndFeelException ex) 
-        {
-            System.out.println("UI Manager not found");
-        }
-    }
-  
     public void showSearchDoctorInternalFrame()
     {
         // remove internalframe from desktop pane

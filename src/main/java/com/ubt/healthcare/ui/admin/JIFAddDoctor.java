@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author F
  */
-public class JIFDoctor extends javax.swing.JInternalFrame {
+public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
     private DoctorTableModelEducation doctorTableModelEducation;
     private DoctorService doctorService;
@@ -30,7 +30,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
      * Creates new form JIFDoctor
      * @param jifViewDoctor
      */
-    public JIFDoctor(JIFViewDoctor jifViewDoctor ) {
+    public JIFAddDoctor(JIFViewDoctor jifViewDoctor ) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
@@ -64,12 +64,9 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfGender = new javax.swing.JTextField();
         jlMaritalStatus = new javax.swing.JLabel();
         jtfMaritalStatus = new javax.swing.JTextField();
-        jlAddress1 = new javax.swing.JLabel();
         jtfAddress1 = new javax.swing.JTextField();
         jlCity = new javax.swing.JLabel();
-        jtfCity = new javax.swing.JTextField();
         jlCountry = new javax.swing.JLabel();
-        jtfCountry = new javax.swing.JTextField();
         jlHomePhone = new javax.swing.JLabel();
         jtfHomePhone = new javax.swing.JTextField();
         jlWorkPhone = new javax.swing.JLabel();
@@ -78,6 +75,20 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfMobilePhone = new javax.swing.JTextField();
         jlEmail = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
+        jlPassword = new javax.swing.JLabel();
+        jpwPassword = new javax.swing.JPasswordField();
+        jlDateOfBirth = new javax.swing.JLabel();
+        jdchDateOfBirth = new com.toedter.calendar.JDateChooser();
+        jlBirthPlace1 = new javax.swing.JLabel();
+        jcbBirthPlace = new javax.swing.JComboBox<>();
+        jlContactInformation = new javax.swing.JLabel();
+        jlAddressInformation = new javax.swing.JLabel();
+        jlPersonalInformation = new javax.swing.JLabel();
+        jcbCountry = new javax.swing.JComboBox<>();
+        jcbCity = new javax.swing.JComboBox<>();
+        jlAddress2 = new javax.swing.JLabel();
+        jlBuildingNumber = new javax.swing.JLabel();
+        jtfBuildingNumber = new javax.swing.JTextField();
         jspEducationDetails = new javax.swing.JScrollPane();
         jtEducationDetails = new javax.swing.JTable();
         jbUpdate = new javax.swing.JButton();
@@ -88,7 +99,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Doctor Screen");
+        setTitle("Add Doctor Screen");
         setToolTipText("");
         setName(""); // NOI18N
         setVisible(true);
@@ -126,9 +137,6 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jlMaritalStatus.setForeground(new java.awt.Color(0, 153, 204));
         jlMaritalStatus.setText("Marital Status :");
 
-        jlAddress1.setForeground(new java.awt.Color(0, 153, 204));
-        jlAddress1.setText("Address 1 :");
-
         jlCity.setForeground(new java.awt.Color(0, 153, 204));
         jlCity.setText("City :");
 
@@ -147,76 +155,137 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jlEmail.setForeground(new java.awt.Color(0, 153, 204));
         jlEmail.setText(" E-mail :");
 
+        jlPassword.setForeground(new java.awt.Color(0, 153, 204));
+        jlPassword.setText("Password :");
+
+        jlDateOfBirth.setForeground(new java.awt.Color(0, 153, 204));
+        jlDateOfBirth.setText("    Date of Birth :");
+
+        jlBirthPlace1.setForeground(new java.awt.Color(0, 153, 204));
+        jlBirthPlace1.setText("  Birth Place ");
+
+        jlContactInformation.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlContactInformation.setForeground(new java.awt.Color(102, 102, 255));
+        jlContactInformation.setText("Contact Information");
+
+        jlAddressInformation.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlAddressInformation.setForeground(new java.awt.Color(102, 102, 255));
+        jlAddressInformation.setText("      Address Information ");
+
+        jlPersonalInformation.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jlPersonalInformation.setForeground(new java.awt.Color(102, 102, 255));
+        jlPersonalInformation.setText("Personal Information ");
+
+        jlAddress2.setForeground(new java.awt.Color(0, 153, 204));
+        jlAddress2.setText("Address  :");
+
+        jlBuildingNumber.setForeground(new java.awt.Color(0, 153, 204));
+        jlBuildingNumber.setText("Building Number :");
+
         javax.swing.GroupLayout jpPersonalInformationLayout = new javax.swing.GroupLayout(jpPersonalInformation);
         jpPersonalInformation.setLayout(jpPersonalInformationLayout);
         jpPersonalInformationLayout.setHorizontalGroup(
             jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(22, 22, 22)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlSex)
-                            .addComponent(jlBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlMaritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 13, Short.MAX_VALUE))
-                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jlMiddleName)
-                        .addComponent(jlFirstName)
-                        .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                            .addComponent(jlLastName)
-                            .addGap(2, 2, 2))
-                        .addComponent(jlPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2)
-                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addComponent(jtfMiddleName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addComponent(jtfLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addComponent(jtfPersonalId)
-                    .addComponent(jtfBirthCity)
-                    .addComponent(jtfGender)
-                    .addComponent(jtfMaritalStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
-                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
-                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlWorkPhone))
-                                .addGap(18, 18, 18)
+                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfWorkPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlSex)
+                                            .addComponent(jlBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jlMaritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jlPassword))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jlMiddleName)
+                                        .addComponent(jlFirstName)
+                                        .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                            .addComponent(jlLastName)
+                                            .addGap(2, 2, 2))
+                                        .addComponent(jlPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(2, 2, 2)
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jpwPassword)
+                                    .addComponent(jtfFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(jtfMiddleName, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(jtfLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(jtfPersonalId, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfBirthCity, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfGender, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfMaritalStatus, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE))
+                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlDateOfBirth, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlBirthPlace1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jcbBirthPlace, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jdchDateOfBirth, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlPersonalInformation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlAddressInformation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
                                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlMobilePhone)
-                                    .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfEmail)
-                                    .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(167, 167, 167))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlAddress1)
-                            .addComponent(jlCountry)
-                            .addComponent(jlCity, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(349, 349, 349))))
+                                    .addComponent(jlCity, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlAddress2)
+                                    .addComponent(jlCountry)
+                                    .addComponent(jlBuildingNumber))
+                                .addGap(27, 27, 27)
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jcbCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfBuildingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfAddress1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(197, 197, 197))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(jlContactInformation)
+                            .addGap(317, 317, 317))
+                        .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                            .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlMobilePhone)
+                                            .addComponent(jlWorkPhone))
+                                        .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                            .addComponent(jlHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(3, 3, 3)))
+                                    .addGap(30, 30, 30)
+                                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfWorkPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(183, 183, 183)))))
         );
         jpPersonalInformationLayout.setVerticalGroup(
             jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(5, 5, 5)
+                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlAddressInformation)
+                    .addComponent(jlPersonalInformation))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlAddress1))
+                    .addComponent(jlAddress2))
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,21 +299,24 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCity, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jlCity, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlCountry))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jlCountry)
+                    .addComponent(jcbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlBirthPlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfBirthCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfBuildingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlBuildingNumber)))
+                .addGap(18, 18, 18)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlBirthPlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfBirthCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlSex, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,23 +324,37 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfMaritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlMaritalStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(91, 91, 91))
-                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlHomePhone)
-                            .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jpwPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlPassword))
+                        .addGap(29, 29, 29)
+                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlDateOfBirth)
+                            .addComponent(jdchDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlBirthPlace1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80))
+                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                        .addComponent(jlContactInformation)
+                        .addGap(18, 18, 18)
+                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlMobilePhone)
+                            .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlWorkPhone)
                             .addComponent(jtfWorkPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(23, 23, 23)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlMobilePhone))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jlHomePhone)
+                            .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -317,7 +403,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                         .addComponent(jbAddNewDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)))
+                        .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1022, Short.MAX_VALUE)))
                 .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
@@ -329,7 +415,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                     .addComponent(jbAddNewDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(175, 175, 175)
-                .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addComponent(jtpDoctorDetails)
                 .addGap(36, 36, 36))
         );
 
@@ -353,10 +439,19 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAddNewDoctor;
     private javax.swing.JButton jbSearchDoctor;
     private javax.swing.JButton jbUpdate;
-    private javax.swing.JLabel jlAddress1;
+    private javax.swing.JComboBox<String> jcbBirthPlace;
+    private javax.swing.JComboBox<String> jcbCity;
+    private javax.swing.JComboBox<String> jcbCountry;
+    private com.toedter.calendar.JDateChooser jdchDateOfBirth;
+    private javax.swing.JLabel jlAddress2;
+    private javax.swing.JLabel jlAddressInformation;
     private javax.swing.JLabel jlBirthPlace;
+    private javax.swing.JLabel jlBirthPlace1;
+    private javax.swing.JLabel jlBuildingNumber;
     private javax.swing.JLabel jlCity;
+    private javax.swing.JLabel jlContactInformation;
     private javax.swing.JLabel jlCountry;
+    private javax.swing.JLabel jlDateOfBirth;
     private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlFirstName;
     private javax.swing.JLabel jlHomePhone;
@@ -364,17 +459,19 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlMaritalStatus;
     private javax.swing.JLabel jlMiddleName;
     private javax.swing.JLabel jlMobilePhone;
+    private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlPersonalId;
+    private javax.swing.JLabel jlPersonalInformation;
     private javax.swing.JLabel jlSex;
     private javax.swing.JLabel jlWorkPhone;
     private javax.swing.JPanel jpPersonalInformation;
+    private javax.swing.JPasswordField jpwPassword;
     private javax.swing.JScrollPane jspEducationDetails;
     private javax.swing.JScrollPane jspPersonalInformation;
     private javax.swing.JTable jtEducationDetails;
     private javax.swing.JTextField jtfAddress1;
     private javax.swing.JTextField jtfBirthCity;
-    private javax.swing.JTextField jtfCity;
-    private javax.swing.JTextField jtfCountry;
+    private javax.swing.JTextField jtfBuildingNumber;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfFirstName;
     private javax.swing.JTextField jtfGender;
@@ -414,14 +511,6 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
     public JTextField getJtfAddress1() {
         return jtfAddress1;
-    }
-
-    public JTextField getJtfCity1() {
-        return jtfCity;
-    }
-
-    public JTextField getJtfCountry() {
-        return jtfCountry;
     }
 
     public JTextField getJtfEmail() {

@@ -10,6 +10,7 @@ import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.PersonEducation;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -36,7 +37,7 @@ public class DoctorService {
         }
         for(PersonEducation perEducation : personEducation)
         {
-            if(perEducation.getPersonId().getPersonId() == doctor.getPersonId().getPersonId())
+            if(Objects.equals(perEducation.getPersonId().getPersonId(), doctor.getPersonId().getPersonId()))
             {
                 prsonEduc.add(perEducation);
             }
