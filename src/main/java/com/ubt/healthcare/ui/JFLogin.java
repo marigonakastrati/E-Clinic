@@ -45,10 +45,6 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctorInt
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewReceptionist;
-import com.ubt.healthcare.ui.doctor.JFDoctor;
-import com.ubt.healthcare.ui.patient.JFPatient;
-import com.ubt.healthcare.ui.pharmacy.pharmacist.JFPharmacist;
-import com.ubt.healthcare.ui.pharmacy.pharmacymanager.JFPharmacyManager;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -290,21 +286,21 @@ public class JFLogin extends JFrame {
     }
     
     public void showPatientScreen(Patient patient) {
-        JFPatient jfPatient = new JFPatient();
+        //JFPatient jfPatient = new JFPatient();
              // call the listeners and JPanels
     }
 
     public void showDoctorScreen(Doctor doctor) {
-       JFDoctor jfDoctor = new JFDoctor();
+       //JFDoctor jfDoctor = new JFDoctor();
              // call the listeners and JPanels
     }
 
     public void showPharmacistScreen(Pharmacist pharmacist) {
-       JFPharmacist jfPharmacist = new JFPharmacist();
+       //JFPharmacist jfPharmacist = new JFPharmacist();
              // call the listeners and JPanels
     }
     public void showPharmacyManagerScreen(PharmacyManager pharmacyManager) {
-        JFPharmacyManager jfPharmacyManager = new JFPharmacyManager();
+        //JFPharmacyManager jfPharmacyManager = new JFPharmacyManager();
             // call the listeners and JPanels
     }
     
