@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin.model;
 
+import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Doctor;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -68,9 +69,17 @@ public class DoctorTableModelViewDoctor extends AbstractTableModel {
                 return s.getPersonId().getLastName();
             case 2:
                 return s.getPersonId().getAddressId().getCityId().getCityName(); 
-             case 3: 
-                 return s.getPersonId().getContactCollection().stream().findFirst().toString();    
-            
+            case 3: 
+             {
+                 for(Contact c : s.getPersonId().getContactCollection())
+                 {
+                    if(c.getType().trim().equals("MOB"))
+                    {
+                        return c.getValue();
+                    }
+                 }
+                  return "";
+             }
             default:
                 return null;
         }

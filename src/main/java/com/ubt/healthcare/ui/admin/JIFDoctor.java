@@ -8,9 +8,11 @@ package com.ubt.healthcare.ui.admin;
 import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.PersonEducation;
+import com.ubt.healthcare.ui.JIFViewDoctor;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -22,15 +24,18 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private DoctorTableModelEducation doctorTableModelEducation;
     private DoctorService doctorService;
     private Doctor doctor;
+    private JIFViewDoctor jifViewDoctor;
 
     /**
      * Creates new form JIFDoctor
+     * @param jifViewDoctor
      */
-    public JIFDoctor() {
+    public JIFDoctor(JIFViewDoctor jifViewDoctor ) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
+        this.jifViewDoctor = jifViewDoctor;
     }
 
     /**
@@ -463,6 +468,54 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         return jtfWorkPhone;
     }
 
+    public void viewSelectedDoctor() 
+    {
+
+        int row = jifViewDoctor.getJtDoctorTable().getSelectedRow();// do not allow multiple row selection
+        if (row > -1) 
+        {
+            
+            // get selected doctor
+            doctor = jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row);
+            
+            //update the JIFDoctor fields with doctors object
+            updateDoctorFields(doctor);
+            
+            //clear the fields of JIFViewDoctor
+            jifViewDoctor.getJtfSearchByName().setText("");
+            jifViewDoctor.getJtfSearchBySurName().setText("");
+            
+            // check if no item found...
+            jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+
+        }
+        else// if no row selected display message that no row is selected 
+        {
+            JOptionPane.showMessageDialog(rootPane, "No Doctor Selected");
+            //clear the fields of JIFViewDoctor
+            jifViewDoctor.getJtfSearchByName().setText("");
+            jifViewDoctor.getJtfSearchBySurName().setText("");
+            
+            // check if no item found...
+            jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+            
+        }
+        
+        // close the JIFViewDoctor
+        jifViewDoctor.dispose();
+        this.show();
+
+    }
+ 
+
+    public JIFViewDoctor getJifViewDoctor() {
+        return jifViewDoctor;
+    }
      
+    private void  updateDoctorFields(Doctor doctor)
+    {
+        jtfFirstName.setText(doctor.getPersonId().getFirstName());
+        jtfLastName.setText(doctor.getPersonId().getLastName());
+    }
     
 }

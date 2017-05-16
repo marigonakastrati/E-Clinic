@@ -18,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class JFAdminScreen extends javax.swing.JFrame {
 
     private JIFDoctor jifDoctor;
-    private JIFViewDoctor jifViewDoctor;
+
     /**
      * Creates new form JFAdminScreen
      */
@@ -26,10 +26,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JFAdminScreen(JIFDoctor jifDoctor,JIFViewDoctor jifViewDoctor )
+    public JFAdminScreen(JIFDoctor jifDoctor)
     {
         this.jifDoctor = jifDoctor;
-        this.jifViewDoctor = jifViewDoctor;
+
         frameStlye();
         initComponents();
     }
@@ -177,8 +177,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlPharmacyManager.addMouseListener(e);
     }
     
-    public void showDoctorScreen() {
-
+    public void showDoctorScreen() 
+    {
+        
+        jdpPaneHandler.remove(jifDoctor);
         jdpPaneHandler.add(jifDoctor);
         jifDoctor.show();
         /*jspPane.setViewportView(jpAddDoctor);
@@ -214,77 +216,25 @@ public class JFAdminScreen extends javax.swing.JFrame {
             System.out.println("UI Manager not found");
         }
     }
-    
-    public void searchDoctorInternalPane()
-    {
-        String cityOfDoctor = "";
-        String nameOfDctor = jifViewDoctor.getJtfSearchByName().getText();
-        String surnameOfDctor = jifViewDoctor.getJtfSearchBySurName().getText();
-        if(jifViewDoctor.getJcbSearchByCity().getSelectedIndex()>=0)
-        {
-             cityOfDoctor = (String)jifViewDoctor.getJcbSearchByCity().getSelectedItem().toString();
-        }
-        if(nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() ==0)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the Doctor you are looking for");
-        }
-        else if (nameOfDctor.equals("REGEX"))
-        {
-            // check for input validation ....
-        }
-        else
-        {   
-            jifViewDoctor.setDoctor(jifDoctor.getDoctor());
-            jifViewDoctor.setDoctorService(jifDoctor.getDoctorService());
-            jifViewDoctor.getJtfSearchByName().setText(nameOfDctor);
-            jifViewDoctor.getJtfSearchBySurName().setText(surnameOfDctor);
-            jifViewDoctor.getJcbSearchByCity().setSelectedIndex(1); // fix with jcomboboxmodel...
-            jifViewDoctor.loadDoctorListTable();
-           
-            
-            // update the jpanel to view the doctors table...
-        }
-    }
-    
-    public void openSelectedDoctor()
-    {
-        // get the selected doctor
-        //jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(1);
-        
-        //clear the fields of JIFViewDoctor
-        jifViewDoctor.getJtfSearchByName().setText("");
-        jifViewDoctor.getJtfSearchBySurName().setText("");
-        jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
-        
-        // close the JIFViewDoctor
-        jifViewDoctor.dispose();
-        
-        int row = jifViewDoctor.getJtDoctorTable().getSelectedRow();// do not allow multiple row selection
-        if(row>=0)
-        {
-            jifDoctor.setDoctor(jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row));
-            Doctor doc = jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row);
-             //update the JIFDoctor fields with doctors object
-             jifDoctor.getJtfFirstName().setText("");
-             
-        }
-        
-
-        
-       
-    }
-    
+  
     public void showSearchDoctorInternalFrame()
     {
         // remove internalframe from desktop pane
-        jdpPaneHandler.remove(jifViewDoctor);
+        jdpPaneHandler.remove(jifDoctor.getJifViewDoctor());
         
-        jdpPaneHandler.add(jifViewDoctor);
+        jdpPaneHandler.add(jifDoctor.getJifViewDoctor());
         
-        jifViewDoctor.show();
+        jifDoctor.getJifViewDoctor().show();
         
         // load city combobox
-        jifViewDoctor.loadCityComboBox();
+        jifDoctor.getJifViewDoctor().loadCityComboBox();
+        
+        // set the DoctorService
+        jifDoctor.getJifViewDoctor().setDoctorService(jifDoctor.getDoctorService());
+        //set Doctor
+        jifDoctor.getJifViewDoctor().setDoctor(jifDoctor.getDoctor());
+        // hide the View Doctor Internal Pane
+        jifDoctor.hide();
     }
 
 }

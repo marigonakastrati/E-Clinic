@@ -14,6 +14,7 @@ import com.ubt.healthcare.ui.admin.model.DoctorTableModelViewDoctor;
 import java.awt.event.MouseAdapter;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -28,12 +29,12 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
     private CityService cityService;
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
     private DoctorComboBoxModelCity doctorComboboxCity;
+    private List<Doctor> doctorList;
     /**
      * Creates new form JIFDoctor
      */
     public JIFViewDoctor() {
 
-        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor();
         cityService = new CityService();
         initComponents();
     }
@@ -213,15 +214,14 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
         return jtfSearchBySurName;
     }
     
-    public void loadDoctorListTable()
-    {
-        List<Doctor> list = doctorService.findDoctorsByParameters(jtfSearchByName.getText(),jtfSearchBySurName.getText(),
-                                                jcbSearchByCity.getSelectedItem().toString());
-        doctorTableModelViewDoctor.add(list);
+    public void loadDoctorListTable(String name, String surname, String city)
+    {  
+        doctorList = doctorService.findDoctorsByParameters(name,surname, city);                                 
+        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(doctorList);
         jtDoctorTable.setModel(doctorTableModelViewDoctor);
         doctorTableModelViewDoctor.fireTableDataChanged();
-        //selectindexchanges... todo
     }
+    
     public void loadCityComboBox()
     {
         List<City> city = cityService.findAllCity();
@@ -238,4 +238,23 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
         return jtDoctorTable;
     }
      
+       // method which searches for Doctor 
+    public void searchDoctorInternalPane()
+    {
+        String nameOfDctor = jtfSearchByName.getText();
+        String surnameOfDctor = jtfSearchBySurName.getText();
+        String cityOfDoctor = jcbSearchByCity.getSelectedIndex()<0? "":jcbSearchByCity.getSelectedItem().toString();
+        
+        if(nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() == 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the Doctor you are looking for");
+        }
+        else
+        {   
+
+            loadDoctorListTable(nameOfDctor,surnameOfDctor,cityOfDoctor);
+           
+
+        }
+    }
 }

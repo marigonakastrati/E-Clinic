@@ -326,16 +326,21 @@ public class JFLogin extends JFrame {
     public void showDoctorFrameScreen(Doctor doctor)
     {
         
-        JIFDoctor ilfDoctor = new JIFDoctor();
-        JIFViewDoctor ilfViewDoctor = new JIFViewDoctor();
+        JIFViewDoctor ilfViewDoctor = new JIFViewDoctor();      
         
-        JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor,ilfViewDoctor);
+        
+        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor);
+        
+        
+        JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor);
         
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreenInternalFrame(jfAdminScreen));
+        
         ilfDoctor.addSearchDoctorInternalFrameMouseAdapter(new MouseAdapterShowSearchDoctorInternalFrame(jfAdminScreen));
         
-        ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(jfAdminScreen));
-        ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(jfAdminScreen));
+        ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(ilfViewDoctor));
+        
+        ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(ilfDoctor));
   
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

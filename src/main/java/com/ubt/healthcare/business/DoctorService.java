@@ -57,67 +57,65 @@ public class DoctorService {
             doctorRepo = (List<Doctor>)(Object)sqlRepository.findAll("Doctor.findAll");
         }
         List<Doctor> doctorList= new ArrayList<>();
+        List<Doctor> surNameList= new ArrayList<>();
+        List<Doctor> cityList= new ArrayList<>();
         
         if(inputValidation.validateInput(name))
         {
+            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
+                                         .forEachOrdered((doctor) -> {
+                                             doctorList.add(doctor);});
             if(inputValidation.validateInput(surname))
             {
+                
+                doctorList.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
+                                         .forEachOrdered((doctor) -> {
+                                             surNameList.add(doctor);});
+                
                 if(inputValidation.validateInput(city))
                 {
-                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
-                                        && doctor.getPersonId().getLastName().equals(surname)
-                                        && doctor.getPersonId().getAddressId().getCityId()
-                                        .getCityName().equals(city))).forEachOrdered((doctor) -> {
-                                             doctorList.add(doctor);
-                    });
+                   doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                                            .getCityId().getCityName().equals(city)))
+                                            .forEachOrdered((doctor) -> {
+                                             cityList.add(doctor);});
+                   return cityList;
                 }
-                else
-                {
-                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name) 
-                                            && doctor.getPersonId().getLastName().equals(surname))).forEachOrdered((doctor) -> {
-                                                    doctorList.add(doctor);
-                    });
-                    
-                }
+                 return surNameList;
             }
-            else
+            else if (inputValidation.validateInput(city))
             {
-                doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
-                                         .forEachOrdered((doctor) -> {
-                                             doctorList.add(doctor);
-                });
+                
+                 doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                                            .getCityId().getCityName().equals(city)))
+                                            .forEachOrdered((doctor) -> {
+                                             cityList.add(doctor);});  
+                 return cityList;
             }
+            return doctorList;
         }
         else if (inputValidation.validateInput(surname))
         {
+            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
+                                         .forEachOrdered((doctor) -> {
+                                             doctorList.add(doctor);});
             if(inputValidation.validateInput(city))
             {
-                if(inputValidation.validateInput(city))
-                {
-                    doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName()
-                                        .equals(surname) && doctor.getPersonId().getAddressId()
-                                        .getCityId().getCityName().equals(city)))
-                                        .forEachOrdered((doctor) -> {
-                                             doctorList.add(doctor);
-                    });
-                }
+                 doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                                            .getCityId().getCityName().equals(city)))
+                                            .forEachOrdered((doctor) -> {
+                                             cityList.add(doctor);});  
+                 return cityList;
             }
-            else
-            {
-                doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
-                                        .forEachOrdered((doctor) -> {
-                                            doctorList.add(doctor);
-                });
-                
-            }
+            return doctorList;
+            
         }
-        else
-        {
+        else {
             doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
-                                        .getCityId().getCityName().equals(city)))
-                                        .forEachOrdered((doctor) -> {
-                                             doctorList.add(doctor);
-                });
+                    .getCityId().getCityName().equals(city)))
+                    .forEachOrdered((doctor) -> {
+                        doctorList.add(doctor);
+                    });
+
         }
         
         return doctorList;
