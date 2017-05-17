@@ -21,6 +21,8 @@ public class DoctorService {
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
     private List<Doctor> doctorRepo;
+    private boolean personEducationChanged;//use it as synchronization mechanizim...
+    private boolean doctorRepoChanged;
 
     public DoctorService() 
     {
@@ -123,5 +125,21 @@ public class DoctorService {
     }
     
    
+    public void persistDoctor(Doctor doctor, String sex, String martialStatus,String birthPlace, String address, 
+            String city, String country, String buildingNumber, String mobilePhone, 
+            String workPhone, String homePhone,String email, List<PersonEducation> personEducation )
+    {
+        
+        for (PersonEducation personEducation1 : personEducation) {
+            // save the education data on database...
+             // link the person education with education data
+            
+        }
+        //math the combobox values and get the actual orm 
+        // save the related objects with person 
+        //e. i City has relation with person 
+        
+       
+    }
 
 }

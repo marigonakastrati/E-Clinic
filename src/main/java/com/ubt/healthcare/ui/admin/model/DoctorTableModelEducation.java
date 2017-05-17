@@ -51,6 +51,12 @@ public class DoctorTableModelEducation extends AbstractTableModel {
     public PersonEducation getDoctor(int index){
         return data.get(index);
     }
+    
+    public List<PersonEducation> getPersonEducation()
+    {
+        return data;
+    }
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         PersonEducation s = (PersonEducation)data.get(rowIndex);

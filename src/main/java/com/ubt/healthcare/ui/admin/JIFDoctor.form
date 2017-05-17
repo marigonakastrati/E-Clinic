@@ -35,7 +35,7 @@
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="jbSearchDoctor" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Component id="jbUpdate" max="32767" attributes="0"/>
+                      <Component id="jbEdit" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                       <Component id="jbAddNewDoctor" max="32767" attributes="0"/>
                   </Group>
@@ -53,7 +53,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbUpdate" alignment="3" max="32767" attributes="0"/>
+                  <Component id="jbEdit" alignment="3" max="32767" attributes="0"/>
                   <Component id="jbAddNewDoctor" alignment="3" max="32767" attributes="0"/>
                   <Component id="jbSearchDoctor" alignment="3" max="32767" attributes="0"/>
               </Group>
@@ -423,12 +423,12 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jbUpdate">
+    <Component class="javax.swing.JButton" name="jbEdit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
+        <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbUpdateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEditActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbSearchDoctor">

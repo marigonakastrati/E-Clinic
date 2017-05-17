@@ -6,11 +6,13 @@
 package com.ubt.healthcare.ui.admin;
 
 import com.ubt.healthcare.business.DoctorService;
+import com.ubt.healthcare.business.PasswordHashing;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.ui.JIFViewDoctor;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,17 +27,22 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private DoctorService doctorService;
     private Doctor doctor;
     private JIFViewDoctor jifViewDoctor;
+    private JIFAddDoctor jifAddDoctor;
+    private PasswordHashing passwordHashing;
 
     /**
      * Creates new form JIFDoctor
      * @param jifViewDoctor
+     * @param jifAddDoctor
      */
-    public JIFDoctor(JIFViewDoctor jifViewDoctor ) {
+    public JIFDoctor(JIFViewDoctor jifViewDoctor,JIFAddDoctor jifAddDoctor ) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
+        passwordHashing = new PasswordHashing();
         this.jifViewDoctor = jifViewDoctor;
+        this.jifAddDoctor = jifAddDoctor;
     }
 
     /**
@@ -80,7 +87,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfEmail = new javax.swing.JTextField();
         jspEducationDetails = new javax.swing.JScrollPane();
         jtEducationDetails = new javax.swing.JTable();
-        jbUpdate = new javax.swing.JButton();
+        jbEdit = new javax.swing.JButton();
         jbSearchDoctor = new javax.swing.JButton();
         jbAddNewDoctor = new javax.swing.JButton();
 
@@ -291,10 +298,10 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
         jtpDoctorDetails.addTab("Education Details", jspEducationDetails);
 
-        jbUpdate.setText("Update");
-        jbUpdate.addActionListener(new java.awt.event.ActionListener() {
+        jbEdit.setText("Edit");
+        jbEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbUpdateActionPerformed(evt);
+                jbEditActionPerformed(evt);
             }
         });
 
@@ -312,7 +319,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                         .addGap(69, 69, 69)
                         .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(94, 94, 94)
-                        .addComponent(jbUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(94, 94, 94)
                         .addComponent(jbAddNewDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -325,7 +332,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbAddNewDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(175, 175, 175)
@@ -336,9 +343,9 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpdateActionPerformed
+    private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbUpdateActionPerformed
+    }//GEN-LAST:event_jbEditActionPerformed
 
     private void jtfFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFirstNameActionPerformed
         // TODO add your handling code here:
@@ -351,8 +358,8 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAddNewDoctor;
+    private javax.swing.JButton jbEdit;
     private javax.swing.JButton jbSearchDoctor;
-    private javax.swing.JButton jbUpdate;
     private javax.swing.JLabel jlAddress1;
     private javax.swing.JLabel jlBirthPlace;
     private javax.swing.JLabel jlCity;
@@ -396,10 +403,14 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         // selectedIndexChange Method...
     }
     
-     public void addSearchDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+    public void addSearchDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbSearchDoctor.addMouseListener(e);
     }
 
+    public void addAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbAddNewDoctor.addMouseListener(e);
+    }
+    
     public DoctorService getDoctorService() {
         return doctorService;
     }
@@ -524,4 +535,58 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfMaritalStatus.setText(doctor.getPersonId().getMartialStatusId().getMartialStatusName());
     }
     
+    public void saveDoctorInternalFrameAddDoctor()
+    {
+        //jifAddDoctor.getT
+        // check if all mandatory fields are not empty
+        // if so warn the user don't let move to next step
+        //if user has typed just education and no personal infromation don't let move on next step
+        
+        //save doctor on database using doctor service
+        String personId = jifAddDoctor.getJtfPersonalId().getText();
+        String firstName = jifAddDoctor.getJtfFirstName().getText();
+        String middleName = jifAddDoctor.getJtfMiddleName().getText();
+        String lastName = jifAddDoctor.getJtfLastName().getText();
+        String sex = jifAddDoctor.getJcbGender().getSelectedItem().toString();
+        String martialStatus = jifAddDoctor.getJcbMaritalStatus().getSelectedItem().toString();
+        String password = new String(jifAddDoctor.getJpfPassword().getPassword());
+        Date dateOfBirth = jifAddDoctor.getJdchDateOfBirth().getDate();
+        String birthPlace = jifAddDoctor.getJcbBirthPlace().getSelectedItem().toString();
+        String address = jifAddDoctor.getJtfAddress().getText();
+        String city = jifAddDoctor.getJcbCity().getSelectedItem().toString();
+        String country = jifAddDoctor.getJcbCountry().getSelectedItem().toString();
+        String buildingNumber = jifAddDoctor.getJtfBuildingNumber().getText();
+        String mobilePhone = jifAddDoctor.getJtfMobilePhone().getText();
+        String workPhone = jifAddDoctor.getJtfWorkPhone().getText();
+        String homePhone = jifAddDoctor.getJtfHomePhone().getText();
+        String email = jifAddDoctor.getJtfEmail().getText();
+        
+        doctor.getPersonId().setPersonId(Integer.parseInt(personId));
+        doctor.getPersonId().setFirstName(firstName);
+        doctor.getPersonId().setMiddleName(middleName);
+        doctor.getPersonId().setLastName(lastName);
+        doctor.setPassCode(passwordHashing.encodehashPassword(password));
+        doctor.getPersonId().setDateOfBirth(dateOfBirth);
+      
+        doctorService.persistDoctor(doctor, sex, martialStatus, birthPlace, address, city, country, 
+                buildingNumber, mobilePhone, workPhone, homePhone,email, jifAddDoctor.getDoctorTableModelEducation().getPersonEducation());
+
+        // save education details on database using education service
+        
+        // close the add new doctor 
+        
+        // update the fields on jifDoctor to see the newly added doctor
+        
+    }
+    
+    public void closeAddNewDoctorInternalFrameAddDoctor()
+    {
+        // clear the fields of addnewdoctor
+        
+        //close the internalframe
+        
+        //open the doctor internalframe
+        
+        //keep the fields as they where before
+    }
 }

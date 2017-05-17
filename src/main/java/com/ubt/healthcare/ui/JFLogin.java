@@ -15,6 +15,7 @@ import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.admin.JFAdmin;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
+import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JPAddAdminClinic;
 import com.ubt.healthcare.ui.admin.JPAddDoctor;
@@ -323,9 +324,9 @@ public class JFLogin extends JFrame {
     {
         
         JIFViewDoctor ilfViewDoctor = new JIFViewDoctor();      
+        JIFAddDoctor jifAddDoctor = new JIFAddDoctor();
         
-        
-        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor);
+        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor);
         
         
         JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor);
