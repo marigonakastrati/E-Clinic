@@ -407,7 +407,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jbSearchDoctor.addMouseListener(e);
     }
 
-    public void addAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+    public void addOpenAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbAddNewDoctor.addMouseListener(e);
     }
     
@@ -419,6 +419,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         return doctor;
     }
 
+    
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
@@ -523,6 +524,11 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     public JIFViewDoctor getJifViewDoctor() {
         return jifViewDoctor;
     }
+    
+    public JIFAddDoctor getJifAddDoctor() {
+        return jifAddDoctor;
+    }
+    
      
     private void  updateDoctorFields(Doctor doctor)
     {
@@ -571,22 +577,41 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         doctorService.persistDoctor(doctor, sex, martialStatus, birthPlace, address, city, country, 
                 buildingNumber, mobilePhone, workPhone, homePhone,email, jifAddDoctor.getDoctorTableModelEducation().getPersonEducation());
 
-        // save education details on database using education service
+        // clear the Fields 
+        clearAddDoctorFields();
         
         // close the add new doctor 
-        
+        jifAddDoctor.dispose();
+        this.show();
         // update the fields on jifDoctor to see the newly added doctor
+        updateDoctorFields(doctor);
+        loadEducationTable();
         
     }
     
     public void closeAddNewDoctorInternalFrameAddDoctor()
     {
         // clear the fields of addnewdoctor
-        
+        clearAddDoctorFields();
         //close the internalframe
         
         //open the doctor internalframe
         
         //keep the fields as they where before
     }
+    
+    private void clearAddDoctorFields()
+    {
+        jifAddDoctor.getJtfFirstName().setText("");
+        jifAddDoctor.getJtfLastName().setText("");
+        jifAddDoctor.getJtfMiddleName().setText("");
+        jifAddDoctor.getJtfPersonalId().setText("");
+        jifAddDoctor.getJtfMobilePhone().setText("");
+        jifAddDoctor.getJtfEmail().setText("");
+        jifAddDoctor.getJtfAddress().setText("");
+        jifAddDoctor.getJtfBuildingNumber().setText("");
+        jifAddDoctor.getJpfPassword().setText("");
+        jifAddDoctor.getJtfPersonalId().setText("");
+    }
+    
 }

@@ -655,7 +655,7 @@ public class JPAddAdminClinic extends javax.swing.JPanel {
         }
     }
     
-    public void fillComboBoxCity()
+    public void fillComboBoxMartialStatus()
     {
         List <Object> obj = loadTable.fillComboBoxBirthCity();
         for(Object o : obj)

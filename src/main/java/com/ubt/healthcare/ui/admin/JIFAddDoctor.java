@@ -7,13 +7,23 @@ package com.ubt.healthcare.ui.admin;
 
 import com.toedter.calendar.JDateChooser;
 import com.ubt.healthcare.business.DoctorService;
+import com.ubt.healthcare.business.LoadTables;
+import com.ubt.healthcare.dto.City;
+import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Education;
+import com.ubt.healthcare.dto.EducationProgram;
+import com.ubt.healthcare.dto.EducationType;
+import com.ubt.healthcare.dto.Gender;
+import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.ui.JIFViewDoctor;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -31,6 +41,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private DoctorService doctorService;
     private Doctor doctor;
     private JIFViewDoctor jifViewDoctor;
+    private LoadTables loadTable;
 
     /**
      * Creates new form JIFDoctor
@@ -41,6 +52,14 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
+        loadTable = new LoadTables();
+        bindTheEducationTableModel();
+        fillComboBoxBirthCity();
+        fillComboBoxCountry();
+        fillComboBoxCity();
+        fillComboBoxSex();
+        fillComboBoxMartialStatus();
+        fillComboBoxEducationType();
     }
 
     /**
@@ -95,7 +114,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         jspEducationDetails = new javax.swing.JScrollPane();
         jpEducationDetails = new javax.swing.JPanel();
         jlProgramType = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jtfProgram = new javax.swing.JTextField();
         jlEducationType = new javax.swing.JLabel();
         jspEducationDetailsTable = new javax.swing.JScrollPane();
         jtEducationDetails = new javax.swing.JTable();
@@ -103,12 +122,12 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         jtfInstitution = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jbSaveEducation = new javax.swing.JButton();
-        jbDelete = new javax.swing.JButton();
+        jbDeleteEducation = new javax.swing.JButton();
         jbCancel = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jdchDOB = new com.toedter.calendar.JDateChooser();
-        jdchDOB1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jdchDateEnd = new com.toedter.calendar.JDateChooser();
+        jdchDateStart = new com.toedter.calendar.JDateChooser();
+        jcbEducationType = new javax.swing.JComboBox<>();
         jbClose = new javax.swing.JButton();
         jbSaveDoctor = new javax.swing.JButton();
 
@@ -124,12 +143,6 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         jlFirstName.setForeground(new java.awt.Color(0, 153, 204));
         jlFirstName.setText("First name :");
 
-        jtfFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfFirstNameActionPerformed(evt);
-            }
-        });
-
         jlMiddleName.setForeground(new java.awt.Color(0, 153, 204));
         jlMiddleName.setText("Middle name :");
 
@@ -138,12 +151,6 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
         jlPersonalId.setForeground(new java.awt.Color(0, 153, 204));
         jlPersonalId.setText("Personal ID :");
-
-        jtfPersonalId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPersonalIdActionPerformed(evt);
-            }
-        });
 
         jlSex.setForeground(new java.awt.Color(0, 153, 204));
         jlSex.setText("Sex :");
@@ -195,12 +202,6 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
         jlBuildingNumber.setForeground(new java.awt.Color(0, 153, 204));
         jlBuildingNumber.setText("Building Number :");
-
-        jpfPassword.setText("jPasswordField1");
-
-        jcbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jcbMaritalStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jpPersonalInformationLayout = new javax.swing.GroupLayout(jpPersonalInformation);
         jpPersonalInformation.setLayout(jpPersonalInformationLayout);
@@ -375,7 +376,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
         jtpDoctorDetails.addTab("Personal Information", jspPersonalInformation);
 
-        jlProgramType.setText("Program Type");
+        jlProgramType.setText("Program");
 
         jlEducationType.setText("Education Type");
 
@@ -398,13 +399,11 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
         jbSaveEducation.setText("Save");
 
-        jbDelete.setText("Delete");
+        jbDeleteEducation.setText("Delete");
 
         jbCancel.setText("Cancel");
 
         jLabel8.setText("Date End");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jpEducationDetailsLayout = new javax.swing.GroupLayout(jpEducationDetails);
         jpEducationDetails.setLayout(jpEducationDetailsLayout);
@@ -416,11 +415,11 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlProgramType)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlEducationType)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcbEducationType, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlInstitution)
@@ -428,19 +427,19 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jdchDOB1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdchDateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8))
                             .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jdchDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jdchDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                         .addGap(379, 379, 379)
                         .addComponent(jbSaveEducation, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbDeleteEducation, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
@@ -460,16 +459,16 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                             .addComponent(jlProgramType)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtfProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcbEducationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEducationDetailsLayout.createSequentialGroup()
                             .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
                                 .addComponent(jLabel8))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jdchDOB1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jdchDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jdchDateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdchDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                         .addComponent(jlEducationType)
                         .addGap(29, 29, 29))
@@ -480,7 +479,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                 .addGap(99, 99, 99)
                 .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSaveEducation)
-                    .addComponent(jbDelete)
+                    .addComponent(jbDeleteEducation)
                     .addComponent(jbCancel))
                 .addGap(308, 308, 308))
         );
@@ -498,19 +497,17 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1116, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1116, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(jbSaveDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(22, 22, 22)
-                    .addComponent(jbSaveDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(758, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -518,45 +515,33 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                 .addGap(63, 63, 63)
                 .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
-                .addComponent(jbClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbClose, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jbSaveDoctor))
                 .addGap(22, 22, 22))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(560, 560, 560)
-                    .addComponent(jbSaveDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(17, 17, 17)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfPersonalIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPersonalIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfPersonalIdActionPerformed
-
-    private void jtfFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFirstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfFirstNameActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbClose;
-    private javax.swing.JButton jbDelete;
+    private javax.swing.JButton jbDeleteEducation;
     private javax.swing.JButton jbSaveDoctor;
     private javax.swing.JButton jbSaveEducation;
     private javax.swing.JComboBox<String> jcbBirthPlace;
     private javax.swing.JComboBox<String> jcbCity;
     private javax.swing.JComboBox<String> jcbCountry;
+    private javax.swing.JComboBox<String> jcbEducationType;
     private javax.swing.JComboBox<String> jcbGender;
     private javax.swing.JComboBox<String> jcbMaritalStatus;
-    private com.toedter.calendar.JDateChooser jdchDOB;
-    private com.toedter.calendar.JDateChooser jdchDOB1;
+    private com.toedter.calendar.JDateChooser jdchDateEnd;
     private com.toedter.calendar.JDateChooser jdchDateOfBirth;
+    private com.toedter.calendar.JDateChooser jdchDateStart;
     private javax.swing.JLabel jlAddress2;
     private javax.swing.JLabel jlAddressInformation;
     private javax.swing.JLabel jlBirthPlace1;
@@ -597,19 +582,28 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfMiddleName;
     private javax.swing.JTextField jtfMobilePhone;
     private javax.swing.JTextField jtfPersonalId;
+    private javax.swing.JTextField jtfProgram;
     private javax.swing.JTextField jtfWorkPhone;
     private javax.swing.JTabbedPane jtpDoctorDetails;
     // End of variables declaration//GEN-END:variables
  
-    public void loadEducationTable() {
-        List<PersonEducation> doctorEducation = doctorService.findEducation(doctor);
-        doctorTableModelEducation.add(doctorEducation);
-        jtEducationDetails.setModel(doctorTableModelEducation);
-        doctorTableModelEducation.fireTableDataChanged();
-        // selectedIndexChange Method...
-    }
      public void addAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbClose.addMouseListener(e);
+    }
+     
+    public void addSaveEducationDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbSaveEducation.addMouseListener(e);
+    }
+    public void addSaveDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbSaveDoctor.addMouseListener(e);
+    }
+    
+    public void addDeleteEducationDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbDeleteEducation.addMouseListener(e);
+    }
+    
+    public void addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbCancel.addMouseListener(e);
     }
      
     public DoctorService getDoctorService() {
@@ -685,11 +679,11 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     }
 
     public JDateChooser getJdchDOB() {
-        return jdchDOB;
+        return jdchDateEnd;
     }
 
     public JDateChooser getJdchDOB1() {
-        return jdchDOB1;
+        return jdchDateStart;
     }
 
     public JDateChooser getJdchDateOfBirth() {
@@ -712,7 +706,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         return doctorTableModelEducation;
     }
     
-    public void selectedTableRow()
+    public void educationTableRowSelectionListener()
     {
         final ListSelectionModel selectedModel = jtEducationDetails.getSelectionModel();
         selectedModel.addListSelectionListener(new ListSelectionListener() {
@@ -723,14 +717,227 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                 {
                     return;
                 }
-               int selectedIndex = selectedModel.getAnchorSelectionIndex();
-               if(selectedIndex>-1)
+               int selectedRow = selectedModel.getAnchorSelectionIndex();
+               if(selectedRow>-1)
                {
-                   // get the selected education from jtable which is save on arrayList
+                   // get the selected education from jtable which is saved on arrayList
                    //and update the jtfields which they can edit
-                   jtEducationDetails.getValueAt(ERROR, WIDTH);
+                   PersonEducation pe = doctorTableModelEducation.getPersonEducation(selectedRow);
+                   jdchDateEnd.setDate(pe.getDateEnd());
+                   jdchDateStart.setDate(pe.getDateStart());
+                   jtfInstitution.setText(pe.getEducationId().getInstitutionName());
+                   jcbEducationType.setSelectedIndex(getSelectedEducationType(pe.getEducationId().getEucationTypeId().getEducationName()));// implement combobox model that i can get the index of certain string saved on object personEducation...
+                   jtfProgram.setText(pe.getEducationId().getEducationProgramId().getProgramName());
                }
             }
         });
     }
+    
+    public void addEducation()
+    {
+        // update the arraylist of education with new values from jtfields
+        int row = jtEducationDetails.getSelectedRow();
+            if (jtfProgram.getText().equals("")) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Emrin e Programit te studimeve :", "Error", JOptionPane.ERROR_MESSAGE);
+
+            } else if (jtfInstitution.getText().equals("")) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani emrin e institutit :", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }else if (jdchDateEnd.getDate() == null ) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Daten e Mbarimit :", "Error", JOptionPane.ERROR_MESSAGE);
+            }else if (jdchDateStart.getDate() == null ) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Daten e Fillimit :", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (jdchDateStart.getDate().toString().equals("")) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Daten e Fillimit :", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }else if (jcbEducationType.getSelectedItem().toString().equals("")) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem selektoni Llojin e edukimit :", "Error", JOptionPane.ERROR_MESSAGE);
+            }else if (jdchDateEnd.getDate().toString().equals("")) 
+            {
+                JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Daten e Mbarimit :", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                if (row == -1) 
+                {
+                    // add new education
+                    PersonEducation personEducation = new PersonEducation();
+                    Education education = new Education();
+                    EducationType educationType = new EducationType();
+                    EducationProgram educationProgram = new EducationProgram();
+                    
+                    personEducation.setDateEnd(jdchDateEnd.getDate());
+                    personEducation.setDateStart(jdchDateStart.getDate());
+                    education.setInstitutionName(jtfInstitution.getText());
+                    educationType.setEducationName(jcbEducationType.getSelectedItem().toString());
+                    educationProgram.setProgramName(jtfProgram.getText());
+                    
+                    education.setEducationProgramId(educationProgram);
+                    education.setEucationTypeId(educationType);
+                    personEducation.setEducationId(education);
+                    
+                    
+                    doctorTableModelEducation.getPersonEducation().add(personEducation);
+                    
+                    JOptionPane.showMessageDialog(this, "E dhëna u ruajt me sukses !");
+                } else 
+                {
+                    // edit the current education
+                    PersonEducation personEducation = doctorTableModelEducation.getPersonEducation(row);
+                    
+                    Education education = new Education();
+                    EducationType educationType = new EducationType();
+                    EducationProgram educationProgram = new EducationProgram();
+                    
+                    personEducation.setDateEnd(jdchDateEnd.getDate());
+                    personEducation.setDateStart(jdchDateStart.getDate());
+                    education.setInstitutionName(jtfInstitution.getText());
+                    educationType.setEducationName(jcbEducationType.getSelectedItem().toString());
+                    educationProgram.setProgramName(jtfProgram.getText());
+                    
+                    education.setEducationProgramId(educationProgram);
+                    education.setEucationTypeId(educationType);
+                    personEducation.setEducationId(education);
+                    
+                    doctorTableModelEducation.getPersonEducation().set(row, personEducation);
+                }
+                clearFields(1);
+                fillTheEducationTable();
+            }
+        
+    }
+    
+    public void deleteEducation()
+    {
+        // delete the selected row from jtable and arrayList
+        try
+        {
+            int row = jtEducationDetails.getSelectedRow();
+            if(row >-1)
+            {
+                Object[] ob = {"Po", "Jo"};
+                int i = javax.swing.JOptionPane.showOptionDialog(this, "A dëshironi ta fshini ?", "Fshirja", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
+                if (i == 0) 
+                {
+                    
+
+                    doctorTableModelEducation.remove(row);
+                    clearFields(0);
+                    fillTheEducationTable();
+                    JOptionPane.showMessageDialog(this, "E dhëna është fshir me sukses !");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Nuk keni selektuar asgjë për të fshir !");
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+    
+       public void fillComboBoxBirthCity()
+    {
+        List <Object> obj = loadTable.fillComboBoxBirthCity();
+        for(Object o : obj)
+        {
+            jcbBirthPlace.addItem(((City)o).getCityName());
+        }
+    }
+    
+    public void fillComboBoxCountry()
+    {
+        List <Object> obj = loadTable.fillComboBoxCountry();
+        for(Object o : obj)
+        {
+            jcbCountry.addItem(((Country)o).getCountryName());
+        }
+    }
+    
+    public void fillComboBoxCity()
+    {
+        List <Object> obj = loadTable.fillComboBoxBirthCity();
+        for(Object o : obj)
+        {
+            jcbCity.addItem(((City)o).getCityName());
+        }
+    }
+    
+    public void fillComboBoxSex()
+    {
+        List <Object> obj = loadTable.fillComboBoxSex();
+        for(Object o : obj)
+        {
+            jcbGender.addItem(((Gender)o).getGenderName());
+        }
+    }
+    
+   public void fillComboBoxMartialStatus()
+    {
+        List <Object> obj = loadTable.fillComboBoxMartialStatus();
+        for(Object o : obj)
+        {
+            jcbMaritalStatus.addItem(((MartialStatus)o).getMartialStatusName());
+        }
+    }
+   
+   public void fillComboBoxEducationType()
+    {
+        List <Object> obj = loadTable.fillComboBoxEducationType();
+        for(Object o : obj)
+        {
+            jcbEducationType.addItem(((EducationType)o).getEducationName());
+        }
+    }
+   
+   public void clearFields(int i)
+   {
+       // clear the fields after savind the Doctor..
+       if(i == 1) // if no element on table it throws exception if we try to clear the table...
+        jtEducationDetails.clearSelection();
+       
+       jdchDateEnd.setDate(null);
+       jdchDateStart.setDate(null);
+       jtfInstitution.setText("");
+       jcbEducationType.setSelectedIndex(-1);
+       jtfProgram.setText("");
+   }
+   
+   private void fillTheEducationTable()
+   {
+        doctorTableModelEducation.fireTableDataChanged();
+        
+        
+   }
+   
+   private void bindTheEducationTableModel()
+   {
+       doctorTableModelEducation.add(new ArrayList<>());
+       jtEducationDetails.setModel(doctorTableModelEducation);
+       fillTheEducationTable();
+       educationTableRowSelectionListener();
+   }
+   
+   public int getSelectedEducationType(String educationType)
+   {
+        List<EducationType> fillComboBoxEducationType = (List<EducationType>)(Object)loadTable.fillComboBoxEducationType();
+       int i =0;
+       for (EducationType object : fillComboBoxEducationType) 
+       {
+           if(object.getEducationName().equals(educationType))
+           {
+               return i;
+           }
+           i++;
+       }
+       return -1;
+   }
 }

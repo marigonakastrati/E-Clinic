@@ -188,27 +188,27 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
-    public void showSearchDoctorInternalFrame()
+    public void showAddDoctorInternalFrame()
     {
         // remove internalframe from desktop pane
-        jdpPaneHandler.remove(jifDoctor.getJifViewDoctor());
+        jdpPaneHandler.remove(jifDoctor.getJifAddDoctor());
         
-        jdpPaneHandler.add(jifDoctor.getJifViewDoctor());
+        jdpPaneHandler.add(jifDoctor.getJifAddDoctor());
         
-        jifDoctor.getJifViewDoctor().show();
+        jifDoctor.getJifAddDoctor().show();
         
         // load city combobox
-        jifDoctor.getJifViewDoctor().loadCityComboBox();
+        //jifDoctor.getJifAddDoctor().loadCityComboBox();
         
         // set the DoctorService
-        jifDoctor.getJifViewDoctor().setDoctorService(jifDoctor.getDoctorService());
+        //jifDoctor.getJifViewDoctor().setDoctorService(jifDoctor.getDoctorService());
         //set Doctor
-        jifDoctor.getJifViewDoctor().setDoctor(jifDoctor.getDoctor());
+        //jifDoctor.getJifViewDoctor().setDoctor(jifDoctor.getDoctor());
         // hide the View Doctor Internal Pane
         jifDoctor.hide();
     }
 
-     public void showAddDoctorInternalFrame()
+     public void showSearchDoctorInternalFrame()
     {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifViewDoctor());

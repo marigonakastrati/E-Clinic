@@ -9,6 +9,7 @@ import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.AdminClinic;
 import com.ubt.healthcare.dto.City;
+import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Gender;
@@ -164,11 +165,11 @@ public class UserValidation {
         return msg;
     }
 
-    public MartialStatus findTheMartialStatus() {
+    public MartialStatus findTheMartialStatus(String martialStatus) {
         MartialStatus msg = null;
         List<Object> docs = (List<Object>) sqlrepo.findAll("MartialStatus.findAll");
         for (Object o : docs) {
-            if (((MartialStatus) o).getMartialStatusName().equals("Single")) {
+            if (((MartialStatus) o).getMartialStatusName().equals(martialStatus)) {
                 msg = (MartialStatus) o;
             }
         }
@@ -188,11 +189,11 @@ public class UserValidation {
         return msg;
     }
 
-    public Gender findTheGender() {
+    public Gender findTheGender(String gender) {
         Gender msg = null;
         List<Object> docs = (List<Object>) sqlrepo.findAll("Gender.findAll");
         for (Object o : docs) {
-            if (((Gender) o).getGenderName().trim().equals("FEMALE")) {
+            if (((Gender) o).getGenderName().trim().equals(gender)) {
                 msg = (Gender) o;
             }
         }
@@ -218,6 +219,18 @@ public class UserValidation {
         for (Object o : docs) {
             if (((City) o).getCityName().equals(country)) {
                 msg = (City) o;
+            }
+        }
+
+        return msg;
+    }
+    
+       public Contact findTheContact(String contactValue) {
+        Contact msg = null;
+        List<Object> docs = (List<Object>) sqlrepo.findAll("City.findAll");
+        for (Object o : docs) {
+            if (((Contact) o).getValue().equals(contactValue)) {
+                msg = (Contact) o;
             }
         }
 

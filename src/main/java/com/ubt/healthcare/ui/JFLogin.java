@@ -30,6 +30,8 @@ import com.ubt.healthcare.ui.admin.JPanelViewReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedDoctorEducationInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreenInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
@@ -40,8 +42,11 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPatient;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacyManager;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistReceptionist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearchInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
@@ -334,10 +339,16 @@ public class JFLogin extends JFrame {
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreenInternalFrame(jfAdminScreen));
         
         ilfDoctor.addSearchDoctorInternalFrameMouseAdapter(new MouseAdapterShowSearchDoctorInternalFrame(jfAdminScreen));
+        ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctorInternalFrame(jfAdminScreen));
         
         ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(ilfViewDoctor));
         
         ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(ilfDoctor));
+        
+        jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorInternalFrame(ilfDoctor));
+        jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveDoctorEducationInternalFrame(jifAddDoctor));
+        jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionDoctorEducationInternalFrame(jifAddDoctor));
+        jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedDoctorEducationInternalFrame(jifAddDoctor));
   
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

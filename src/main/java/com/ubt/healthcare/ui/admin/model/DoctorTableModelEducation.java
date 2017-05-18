@@ -48,7 +48,7 @@ public class DoctorTableModelEducation extends AbstractTableModel {
         data.remove(row);
     }
 
-    public PersonEducation getDoctor(int index){
+    public PersonEducation getPersonEducation(int index){
         return data.get(index);
     }
     

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
@@ -30,23 +30,20 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jtpDoctorDetails" pref="1116" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jtpDoctorDetails" pref="1116" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+                      <Component id="jbSaveDoctor" min="-2" pref="236" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jbClose" min="-2" pref="360" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="jbSaveDoctor" min="-2" pref="360" max="-2" attributes="0"/>
-                  <EmptySpace pref="758" max="32767" attributes="0"/>
-              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,15 +53,11 @@
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Component id="jtpDoctorDetails" min="-2" pref="433" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="jbClose" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="560" max="-2" attributes="0"/>
-                  <Component id="jbSaveDoctor" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbClose" alignment="3" pref="29" max="32767" attributes="0"/>
+                  <Component id="jbSaveDoctor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -320,9 +313,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfFirstName">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfFirstNameActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlMiddleName">
                   <Properties>
@@ -353,9 +343,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfPersonalId">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfPersonalIdActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlSex">
                   <Properties>
@@ -539,19 +526,11 @@
                 <Component class="javax.swing.JTextField" name="jtfBuildingNumber">
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="jpfPassword">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jcbGender">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -561,12 +540,7 @@
                 <Component class="javax.swing.JComboBox" name="jcbMaritalStatus">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -599,12 +573,12 @@
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jlProgramType" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField3" min="-2" pref="188" max="-2" attributes="0"/>
+                                      <Component id="jtfProgram" min="-2" pref="188" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jlEducationType" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" pref="208" max="-2" attributes="0"/>
+                                      <Component id="jcbEducationType" min="-2" pref="208" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -614,7 +588,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jdchDOB1" min="-2" pref="186" max="-2" attributes="0"/>
+                                      <Component id="jdchDateStart" min="-2" pref="186" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -623,7 +597,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jdchDOB" min="-2" pref="186" max="-2" attributes="0"/>
+                                          <Component id="jdchDateEnd" min="-2" pref="186" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -631,7 +605,7 @@
                                   <EmptySpace min="-2" pref="379" max="-2" attributes="0"/>
                                   <Component id="jbSaveEducation" min="-2" pref="106" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jbDelete" min="-2" pref="106" max="-2" attributes="0"/>
+                                  <Component id="jbDeleteEducation" min="-2" pref="106" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jbCancel" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
@@ -656,8 +630,8 @@
                                       <Component id="jlProgramType" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jtfProgram" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jcbEducationType" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -667,8 +641,8 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jdchDOB1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jdchDOB" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jdchDateStart" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jdchDateEnd" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -685,7 +659,7 @@
                           <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jbSaveEducation" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbDeleteEducation" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
@@ -696,10 +670,10 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jlProgramType">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Program Type"/>
+                    <Property name="text" type="java.lang.String" value="Program"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
+                <Component class="javax.swing.JTextField" name="jtfProgram">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jlEducationType">
                   <Properties>
@@ -777,7 +751,7 @@
                     <Property name="text" type="java.lang.String" value="Save"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jbDelete">
+                <Component class="javax.swing.JButton" name="jbDeleteEducation">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Delete"/>
                   </Properties>
@@ -792,19 +766,14 @@
                     <Property name="text" type="java.lang.String" value="Date End"/>
                   </Properties>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jdchDOB">
+                <Component class="com.toedter.calendar.JDateChooser" name="jdchDateEnd">
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jdchDOB1">
+                <Component class="com.toedter.calendar.JDateChooser" name="jdchDateStart">
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="jcbEducationType">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>

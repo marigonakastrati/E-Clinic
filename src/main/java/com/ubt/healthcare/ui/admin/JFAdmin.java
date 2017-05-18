@@ -33,6 +33,7 @@ import javax.swing.JScrollPane;
  *
  * @author F
  */
+@Deprecated
 public class JFAdmin extends JFrame{
     
     private JPAddDoctor jpAddDoctor;
