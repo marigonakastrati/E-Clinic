@@ -96,9 +96,13 @@
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="jlBirthPlace1" min="-2" pref="74" max="-2" attributes="0"/>
                                               <Component id="jlDateOfBirth" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jlReligion" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Component id="jcbBirthPlace" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jcbBirthPlace" max="32767" attributes="0"/>
+                                              <Component id="jcbReligion" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -272,7 +276,12 @@
                                       <Component id="jlBirthPlace1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jcbBirthPlace" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jcbReligion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlReligion" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jlContactInformation" min="-2" max="-2" attributes="0"/>
@@ -546,6 +555,24 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jcbReligion">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlReligion">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="99" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Religion"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

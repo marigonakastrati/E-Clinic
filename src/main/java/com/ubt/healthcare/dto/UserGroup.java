@@ -9,11 +9,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,6 +42,8 @@ public class UserGroup implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "usr_group_id")
+    @GeneratedValue(generator = "InvSeq")
+    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer usrGroupId;
     @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     @ManyToOne
@@ -105,5 +109,5 @@ public class UserGroup implements Serializable {
     public String toString() {
         return "com.ubt.healthcare.dto.UserGroup[ usrGroupId=" + usrGroupId + " ]";
     }
-    
+
 }

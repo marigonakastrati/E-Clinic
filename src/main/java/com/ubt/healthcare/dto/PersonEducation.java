@@ -10,11 +10,13 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +48,8 @@ public class PersonEducation implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PersonEducationId")
+    @GeneratedValue(generator = "InvSeq")
+    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer personEducationId;
     @JoinColumn(name = "EducationId", referencedColumnName = "EducationId")
     @ManyToOne(optional = false)
@@ -125,5 +129,5 @@ public class PersonEducation implements Serializable {
     public String toString() {
         return "com.ubt.healthcare.dto.PersonEducation[ personEducationId=" + personEducationId + " ]";
     }
-    
+
 }

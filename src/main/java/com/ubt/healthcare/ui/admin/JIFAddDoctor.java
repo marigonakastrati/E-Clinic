@@ -17,7 +17,7 @@ import com.ubt.healthcare.dto.EducationType;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.PersonEducation;
-import com.ubt.healthcare.ui.JIFViewDoctor;
+import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private DoctorTableModelEducation doctorTableModelEducation;
     private DoctorService doctorService;
     private Doctor doctor;
-    private JIFViewDoctor jifViewDoctor;
+    private JIFSearchDoctor jifViewDoctor;
     private LoadTables loadTable;
 
     /**
@@ -60,6 +60,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         fillComboBoxSex();
         fillComboBoxMartialStatus();
         fillComboBoxEducationType();
+        fillComboBoxReligion();
     }
 
     /**
@@ -111,6 +112,8 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         jpfPassword = new javax.swing.JPasswordField();
         jcbGender = new javax.swing.JComboBox<>();
         jcbMaritalStatus = new javax.swing.JComboBox<>();
+        jcbReligion = new javax.swing.JComboBox<>();
+        jlReligion = new javax.swing.JLabel();
         jspEducationDetails = new javax.swing.JScrollPane();
         jpEducationDetails = new javax.swing.JPanel();
         jlProgramType = new javax.swing.JLabel();
@@ -203,6 +206,9 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         jlBuildingNumber.setForeground(new java.awt.Color(0, 153, 204));
         jlBuildingNumber.setText("Building Number :");
 
+        jlReligion.setForeground(new java.awt.Color(0, 153, 204));
+        jlReligion.setText("Religion");
+
         javax.swing.GroupLayout jpPersonalInformationLayout = new javax.swing.GroupLayout(jpPersonalInformation);
         jpPersonalInformation.setLayout(jpPersonalInformationLayout);
         jpPersonalInformationLayout.setHorizontalGroup(
@@ -218,9 +224,12 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jlBirthPlace1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlDateOfBirth))
+                                    .addComponent(jlDateOfBirth)
+                                    .addComponent(jlReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
-                                .addComponent(jcbBirthPlace, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbBirthPlace, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbReligion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jdchDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -350,7 +359,11 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlBirthPlace1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbBirthPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbReligion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addComponent(jlContactInformation)
                         .addGap(18, 18, 18)
@@ -539,6 +552,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbEducationType;
     private javax.swing.JComboBox<String> jcbGender;
     private javax.swing.JComboBox<String> jcbMaritalStatus;
+    private javax.swing.JComboBox<String> jcbReligion;
     private com.toedter.calendar.JDateChooser jdchDateEnd;
     private com.toedter.calendar.JDateChooser jdchDateOfBirth;
     private com.toedter.calendar.JDateChooser jdchDateStart;
@@ -563,6 +577,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlPersonalId;
     private javax.swing.JLabel jlPersonalInformation;
     private javax.swing.JLabel jlProgramType;
+    private javax.swing.JLabel jlReligion;
     private javax.swing.JLabel jlSex;
     private javax.swing.JLabel jlWorkPhone;
     private javax.swing.JPanel jpEducationDetails;
@@ -654,7 +669,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         return jtfWorkPhone;
     }
  
-    public JIFViewDoctor getJifViewDoctor() {
+    public JIFSearchDoctor getJifViewDoctor() {
         return jifViewDoctor;
     }
 
@@ -672,6 +687,10 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
 
     public JComboBox<String> getJcbGender() {
         return jcbGender;
+    }
+    
+    public JComboBox<String> getJcbReligion() {
+        return jcbReligion;
     }
 
     public JComboBox<String> getJcbMaritalStatus() {
@@ -898,6 +917,14 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         }
     }
    
+    public void fillComboBoxReligion()
+    {
+        List <Object> obj = loadTable.fillComboBoxReligion();
+        for(Object o : obj)
+        {
+            jcbReligion.addItem(((Religion)o).getName());
+        }
+    }
    public void clearFields(int i)
    {
        // clear the fields after savind the Doctor..

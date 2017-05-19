@@ -5,11 +5,12 @@
  */
 package com.ubt.healthcare.ui.admin;
 
+import com.ubt.healthcare.business.ContactService;
 import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.business.PasswordHashing;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.PersonEducation;
-import com.ubt.healthcare.ui.JIFViewDoctor;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
 import java.util.Date;
@@ -25,8 +26,9 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
     private DoctorTableModelEducation doctorTableModelEducation;
     private DoctorService doctorService;
+    private ContactService contactService;
     private Doctor doctor;
-    private JIFViewDoctor jifViewDoctor;
+    private JIFSearchDoctor jifViewDoctor;
     private JIFAddDoctor jifAddDoctor;
     private PasswordHashing passwordHashing;
 
@@ -35,11 +37,12 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
      * @param jifViewDoctor
      * @param jifAddDoctor
      */
-    public JIFDoctor(JIFViewDoctor jifViewDoctor,JIFAddDoctor jifAddDoctor ) {
+    public JIFDoctor(JIFSearchDoctor jifViewDoctor,JIFAddDoctor jifAddDoctor ) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
+        contactService = new ContactService();
         passwordHashing = new PasswordHashing();
         this.jifViewDoctor = jifViewDoctor;
         this.jifAddDoctor = jifAddDoctor;
@@ -494,7 +497,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
             updateDoctorFields(doctor);
             loadEducationTable();
             
-            //clear the fields of JIFViewDoctor
+            //clear the fields of JIFSearchDoctor
             jifViewDoctor.getJtfSearchByName().setText("");
             jifViewDoctor.getJtfSearchBySurName().setText("");
             
@@ -505,7 +508,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         else// if no row selected display message that no row is selected 
         {
             JOptionPane.showMessageDialog(rootPane, "No Doctor Selected");
-            //clear the fields of JIFViewDoctor
+            //clear the fields of JIFSearchDoctor
             jifViewDoctor.getJtfSearchByName().setText("");
             jifViewDoctor.getJtfSearchBySurName().setText("");
             
@@ -514,14 +517,14 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
             
         }
         
-        // close the JIFViewDoctor
+        // close the JIFSearchDoctor
         jifViewDoctor.dispose();
         this.show();
 
     }
  
 
-    public JIFViewDoctor getJifViewDoctor() {
+    public JIFSearchDoctor getJifViewDoctor() {
         return jifViewDoctor;
     }
     
@@ -566,6 +569,13 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         String workPhone = jifAddDoctor.getJtfWorkPhone().getText();
         String homePhone = jifAddDoctor.getJtfHomePhone().getText();
         String email = jifAddDoctor.getJtfEmail().getText();
+        String religion = jifAddDoctor.getJcbReligion().getSelectedItem().toString();
+        
+        doctor = new Doctor();
+        Person person = new Person();
+        
+        doctor.setPersonId(person);
+        person.setDoctor(doctor);
         
         doctor.getPersonId().setPersonId(Integer.parseInt(personId));
         doctor.getPersonId().setFirstName(firstName);
@@ -574,9 +584,17 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         doctor.setPassCode(passwordHashing.encodehashPassword(password));
         doctor.getPersonId().setDateOfBirth(dateOfBirth);
       
+        // validate doctor input
         doctorService.persistDoctor(doctor, sex, martialStatus, birthPlace, address, city, country, 
-                buildingNumber, mobilePhone, workPhone, homePhone,email, jifAddDoctor.getDoctorTableModelEducation().getPersonEducation());
+                buildingNumber, mobilePhone, workPhone, homePhone,email, religion,jifAddDoctor.getDoctorTableModelEducation().getPersonEducation());
 
+        //validate contact input
+        // save the conntact details...
+        contactService.persistContact(person, "EMAIL", email);
+        contactService.persistContact(person, "HOME", homePhone);
+        contactService.persistContact(person, "WORK", workPhone);
+        contactService.persistContact(person, "MOB", mobilePhone);
+        
         // clear the Fields 
         clearAddDoctorFields();
         

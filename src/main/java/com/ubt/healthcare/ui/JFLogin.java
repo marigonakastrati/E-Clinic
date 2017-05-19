@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.ui;
 
+import com.ubt.healthcare.ui.admin.JIFSearchDoctor;
 import com.ubt.healthcare.business.AuthenticateUser;
 import com.ubt.healthcare.business.UserGroupAuthorization;
 import com.ubt.healthcare.business.UserValidation;
@@ -231,10 +232,10 @@ public class JFLogin extends JFrame {
         JPanelViewDoctor jpViewDoctor = new JPanelViewDoctor();
         JPanelViewReceptionist jpViewReceptionist = new JPanelViewReceptionist();
         JPanelViewProfile jpViewProfile = new JPanelViewProfile();
-        JPanelEditProfile jpEditProfile = new JPanelEditProfile();
+        //JPanelEditProfile jpEditProfile = new JPanelEditProfile();
         JPanelAdminScreen jpAdminScreen = new JPanelAdminScreen();
-        jfAdmin = new JFAdmin(jpAddDoctor,jpAddNurse,jpAddPatient,jpAddPharmacyManager,jpAddPharmacist,jpAddReceptionist,
-                            jpAddAdminClinic,jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);
+        /*jfAdmin = new JFAdmin(jpAddDoctor,jpAddNurse,jpAddPatient,jpAddPharmacyManager,jpAddPharmacist,jpAddReceptionist,
+                            jpAddAdminClinic,jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);*/
         
         // set the Admin profile parameters
         jpViewProfile.getJtfId().setText(String.valueOf(admin.getAdminClinicId()));
@@ -328,7 +329,7 @@ public class JFLogin extends JFrame {
     public void showDoctorFrameScreen(Doctor doctor)
     {
         
-        JIFViewDoctor ilfViewDoctor = new JIFViewDoctor();      
+        JIFSearchDoctor ilfViewDoctor = new JIFSearchDoctor();      
         JIFAddDoctor jifAddDoctor = new JIFAddDoctor();
         
         JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor);

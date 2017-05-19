@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui;
+package com.ubt.healthcare.ui.admin;
 
 import com.ubt.healthcare.business.CityService;
 import com.ubt.healthcare.business.DoctorService;
@@ -23,7 +23,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author F
  */
-public class JIFViewDoctor extends javax.swing.JInternalFrame {
+public class JIFSearchDoctor extends javax.swing.JInternalFrame {
 
     private Doctor doctor;
     private DoctorService doctorService;
@@ -34,7 +34,7 @@ public class JIFViewDoctor extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDoctor
      */
-    public JIFViewDoctor() {
+    public JIFSearchDoctor() {
 
         cityService = new CityService();
         initComponents();

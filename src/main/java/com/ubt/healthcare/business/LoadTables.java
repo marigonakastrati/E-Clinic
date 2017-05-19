@@ -50,5 +50,12 @@ public class LoadTables {
 
         return obj;
     }
+    
+    public List<Object> fillComboBoxReligion() {
+        List<Object> obj;
+        obj = userGroupRoleRepo.findAll("Religion.findAll");;
+
+        return obj;
+    }
 
 }

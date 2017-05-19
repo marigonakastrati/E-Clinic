@@ -6,7 +6,6 @@
 package com.ubt.healthcare.ui.admin;
 
 import com.ubt.healthcare.dto.Doctor;
-import com.ubt.healthcare.ui.JIFViewDoctor;
 import java.awt.event.MouseAdapter;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
