@@ -64,13 +64,13 @@ public class ContactService {
             if (contactType.equals("EMAIL")) {
                 persistEmail(value, person);
             }
-            if (contactType.equals("HOME")) {
+            else if (contactType.equals("HOME")) {
                 persistHomeNumber(value, person);
             }
-            if (contactType.equals("WORK")) {
+            else if (contactType.equals("WORK")) {
                 persistWorkNumber(value, person);
             }
-            if (contactType.equals("MOB")) {
+            else if (contactType.equals("MOB")) {
                 persistMobileNumber(value, person);
             }
         }

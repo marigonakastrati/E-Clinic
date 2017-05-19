@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  *
  * @author F
  */
-public class DoctorService {
+public class PersonEducationService {
 
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
@@ -38,7 +38,7 @@ public class DoctorService {
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
 
-    public DoctorService() {
+    public PersonEducationService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
         userValidation = new UserValidation();

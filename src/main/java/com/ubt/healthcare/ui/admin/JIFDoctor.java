@@ -588,12 +588,28 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         doctorService.persistDoctor(doctor, sex, martialStatus, birthPlace, address, city, country, 
                 buildingNumber, mobilePhone, workPhone, homePhone,email, religion,jifAddDoctor.getDoctorTableModelEducation().getPersonEducation());
 
+        // save the education details...
+        //iterate as long as there is personEducation
+        
+        // get the educationType 
+        
+        //check if educationProgram exists, if not create new and save with educationProgramService
+        
+        // check if education exists, if not create new and save with educationService
+        
+        //set the education of PersonEdcation object
+        
+        //persist personEducation Object in db 
+        
+        
         //validate contact input
         // save the conntact details...
         contactService.persistContact(person, "EMAIL", email);
         contactService.persistContact(person, "HOME", homePhone);
         contactService.persistContact(person, "WORK", workPhone);
         contactService.persistContact(person, "MOB", mobilePhone);
+        
+        
         
         // clear the Fields 
         clearAddDoctorFields();
