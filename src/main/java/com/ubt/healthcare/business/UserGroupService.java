@@ -7,36 +7,36 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.City;
+import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.UserGroup;
 import java.util.List;
 
 /**
  *
  * @author F
  */
-public class CityService {
+public class UserGroupService {
 
     private SQLRepository sqlRepository;
     private List<City> city; // caching machanisim 
 
-    public CityService() {
+    public UserGroupService() {
         sqlRepository = new SQLRepository();
     }
 
-    public List<City> findAllCity() {
-
-        return city == null ? (List<City>) (Object) sqlRepository.findAll("City.findAll") : city;
-    }
-
-    public City findTheCity(String country) {
-        City msg = null;
-        List<Object> docs = (List<Object>) sqlRepository.findAll("City.findAll");
+    public String checkIfUserGroupExists(Doctor p) {
+        String msg = "Save";
+        List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
-            if (((City) o).getCityName().equals(country)) {
-                msg = (City) o;
+            if (((UserGroup) o).getUserId() == p.getDoctorId()) {
+                return "Exist";
             }
         }
 
         return msg;
     }
 
+    public void persistUserInUserGroup(UserGroup userGroup) {
+        sqlRepository.add(userGroup);
+    }
 }

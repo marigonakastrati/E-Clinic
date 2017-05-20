@@ -28,8 +28,8 @@ import javax.swing.JOptionPane;
  *
  * @author F
  */
-public class EducationProgramService {
-    
+public class GenderService {
+
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
@@ -37,26 +37,23 @@ public class EducationProgramService {
     private UserValidation userValidation;
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
-    
-    public EducationProgramService() {
+
+    public GenderService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
         userValidation = new UserValidation();
     }
-    
-    public EducationProgram findTheEducationProgram(String educationProgram) {
-        EducationProgram msg = null;
-        List<Object> docs = (List<Object>) sqlRepository.findAll("EducationProgram.findAll");
+
+  
+    public Gender findTheGender(String gender) {
+        Gender msg = null;
+        List<Object> docs = (List<Object>) sqlRepository.findAll("Gender.findAll");
         for (Object o : docs) {
-            if (((EducationProgram) o).getProgramName().equals(educationProgram)) {
-                msg = (EducationProgram) o;
+            if (((Gender) o).getGenderName().trim().equals(gender.trim())) {
+                msg = (Gender) o;
             }
         }
-        
+
         return msg;
-    }
-    
-    public void persistEducationProgram(EducationProgram educationProgram) {
-        sqlRepository.add(educationProgram);
     }
 }

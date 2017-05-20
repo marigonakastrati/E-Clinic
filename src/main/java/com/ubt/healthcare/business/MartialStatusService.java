@@ -7,16 +7,15 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.PersonEducation;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
  * @author F
  */
-public class PersonEducationService {
+public class MartialStatusService {
 
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
@@ -26,30 +25,21 @@ public class PersonEducationService {
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
 
-    public PersonEducationService() {
+    public MartialStatusService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
         userValidation = new UserValidation();
     }
 
-    public void persistPersonEducation(PersonEducation personEducation) {
-
-        //make the connection between the tables and  save just education pojo
-        sqlRepository.add(personEducation);
-
-        // return "Education Saved";
-    }
-
-    public List<PersonEducation> findEducation(Doctor doctor) {
-        List<PersonEducation> prsonEduc = new ArrayList<>();
-        if (personEducation == null) {
-            personEducation = (List<PersonEducation>) (Object) sqlRepository.findAll("PersonEducation.findAll");
-        }
-        for (PersonEducation perEducation : personEducation) {
-            if (Objects.equals(perEducation.getPersonId().getPersonId(), doctor.getPersonId().getPersonId())) {
-                prsonEduc.add(perEducation);
+    public MartialStatus findTheMartialStatus(String martialStatus) {
+        MartialStatus msg = null;
+        List<Object> docs = (List<Object>) sqlRepository.findAll("MartialStatus.findAll");
+        for (Object o : docs) {
+            if (((MartialStatus) o).getMartialStatusName().equals(martialStatus)) {
+                msg = (MartialStatus) o;
             }
         }
-        return prsonEduc;
+
+        return msg;
     }
 }

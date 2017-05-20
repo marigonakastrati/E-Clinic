@@ -7,32 +7,28 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.City;
+import com.ubt.healthcare.dto.Country;
 import java.util.List;
 
 /**
  *
  * @author F
  */
-public class CityService {
+public class CountryService {
 
     private SQLRepository sqlRepository;
     private List<City> city; // caching machanisim 
 
-    public CityService() {
+    public CountryService() {
         sqlRepository = new SQLRepository();
     }
 
-    public List<City> findAllCity() {
-
-        return city == null ? (List<City>) (Object) sqlRepository.findAll("City.findAll") : city;
-    }
-
-    public City findTheCity(String country) {
-        City msg = null;
-        List<Object> docs = (List<Object>) sqlRepository.findAll("City.findAll");
+  public Country findTheCountry(String country) {
+        Country msg = null;
+        List<Object> docs = (List<Object>) sqlRepository.findAll("Country.findAll");
         for (Object o : docs) {
-            if (((City) o).getCityName().equals(country)) {
-                msg = (City) o;
+            if (((Country) o).getCountryName().equals(country)) {
+                msg = (Country) o;
             }
         }
 
