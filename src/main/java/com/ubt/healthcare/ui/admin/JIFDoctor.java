@@ -14,7 +14,7 @@ import com.ubt.healthcare.business.EducationProgramService;
 import com.ubt.healthcare.business.EducationService;
 import com.ubt.healthcare.business.EducationTypeService;
 import com.ubt.healthcare.business.GenderService;
-import com.ubt.healthcare.business.InputValidation;
+import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.business.LoginGroupService;
 import com.ubt.healthcare.business.MartialStatusService;
 import com.ubt.healthcare.business.PasswordHashing;
@@ -24,6 +24,7 @@ import com.ubt.healthcare.business.ReligionService;
 import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
+import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Education;
@@ -37,9 +38,11 @@ import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -99,6 +102,11 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         inputValidation = new InputValidation();
         this.jifViewDoctor = jifViewDoctor;
         this.jifAddDoctor = jifAddDoctor;
+        setEditableJTextFields(false);
+        jspPersonalInformation.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspPersonalInformation.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetails.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetails.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     /**
@@ -128,7 +136,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jlMaritalStatus = new javax.swing.JLabel();
         jtfMaritalStatus = new javax.swing.JTextField();
         jlAddress1 = new javax.swing.JLabel();
-        jtfAddress1 = new javax.swing.JTextField();
+        jtfAddress = new javax.swing.JTextField();
         jlCity = new javax.swing.JLabel();
         jtfCity = new javax.swing.JTextField();
         jlCountry = new javax.swing.JLabel();
@@ -190,13 +198,19 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jlMaritalStatus.setText("Marital Status :");
 
         jlAddress1.setForeground(new java.awt.Color(0, 153, 204));
-        jlAddress1.setText("Address 1 :");
+        jlAddress1.setText("Address :");
 
         jlCity.setForeground(new java.awt.Color(0, 153, 204));
         jlCity.setText("City :");
 
         jlCountry.setForeground(new java.awt.Color(0, 153, 204));
         jlCountry.setText("   Country :");
+
+        jtfCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCountryActionPerformed(evt);
+            }
+        });
 
         jlHomePhone.setForeground(new java.awt.Color(0, 153, 204));
         jlHomePhone.setText("Home Phone :");
@@ -240,7 +254,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                     .addComponent(jtfBirthCity)
                     .addComponent(jtfGender)
                     .addComponent(jtfMaritalStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +268,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                                     .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
                                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jlMobilePhone)
@@ -278,7 +292,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfPersonalId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAddress1))
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
@@ -341,13 +355,13 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
         jtEducationDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jspEducationDetails.setViewportView(jtEducationDetails);
@@ -411,6 +425,10 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPersonalIdActionPerformed
 
+    private void jtfCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCountryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCountryActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAddNewDoctor;
@@ -434,7 +452,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jspEducationDetails;
     private javax.swing.JScrollPane jspPersonalInformation;
     private javax.swing.JTable jtEducationDetails;
-    private javax.swing.JTextField jtfAddress1;
+    private javax.swing.JTextField jtfAddress;
     private javax.swing.JTextField jtfBirthCity;
     private javax.swing.JTextField jtfCity;
     private javax.swing.JTextField jtfCountry;
@@ -480,7 +498,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     }
 
     public JTextField getJtfAddress1() {
-        return jtfAddress1;
+        return jtfAddress;
     }
 
     public JTextField getJtfCity1() {
@@ -562,10 +580,14 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
             jifViewDoctor.getJtfSearchBySurName().setText("");
 
             // check if no item found...
-            jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+            if (jifViewDoctor.getDoctorList() != null) {
+                jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+            }
 
         }
-
+        if (jifViewDoctor.getJtDoctorTable() != null) {
+            jifViewDoctor.getJtDoctorTable().clearSelection();
+        }
         // close the JIFSearchDoctor
         jifViewDoctor.dispose();
         this.show();
@@ -588,6 +610,39 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfBirthCity.setText(doctor.getPersonId().getBirthCityId().getCityName());
         jtfGender.setText(doctor.getPersonId().getGenderId().getGenderName());
         jtfMaritalStatus.setText(doctor.getPersonId().getMartialStatusId().getMartialStatusName());
+        jtfAddress.setText(doctor.getPersonId().getAddressId().getStreetName());
+        jtfCity.setText(doctor.getPersonId().getAddressId().getCityId().getCityName());
+        jtfCountry.setText(doctor.getPersonId().getAddressId().getCityId().getCountryId().getCountryName());
+        Collection<Contact> contactCollection = doctor.getPersonId().getContactCollection();
+        if (contactCollection != null && contactCollection.size() > 0) {
+            for (Contact contact : contactCollection) {
+
+                switch (contact.getType().trim()) {
+                    case "HOME":
+                        jtfHomePhone.setText(contact.getValue());
+                        break;
+                    case "WORK":
+                        jtfWorkPhone.setText(contact.getValue());
+                        break;
+                    case "MOB":
+                        jtfMobilePhone.setText(contact.getValue());
+                        break;
+                    case "EMAIL":
+                        jtfEmail.setText(contact.getValue());
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        } else {
+            jtfHomePhone.setText("");
+            jtfWorkPhone.setText("");
+            jtfMobilePhone.setText("");
+            jtfEmail.setText("");
+
+        }
+
     }
 
     public void saveDoctorInternalFrameAddDoctor() {
@@ -620,9 +675,23 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         if (!("Valid".equals(inputValidation.validatePersonID(personId)))) {
             JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonID(personId));
         } else if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonID(personId));
-        } else if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
-
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName));
+        } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName));
+        } else if (!("Valid".equals(inputValidation.validatePersonDateOfBirth(dateOfBirth)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonDateOfBirth(dateOfBirth));
+        } else if (!("Valid".equals(inputValidation.validateAddress(address)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateAddress(address));
+        } else if (!("Valid".equals(inputValidation.validateBuildingNumber(buildingNumber)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateBuildingNumber(buildingNumber));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(mobilePhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(mobilePhone));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(workPhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(workPhone));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(homePhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(homePhone));
+        } else if (!("Valid".equals(inputValidation.validateEmail(email)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateEmail(email));
         } else {
 
             // else we can persist the data....
@@ -720,6 +789,9 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         clearAddDoctorFields();
         //close the internalframe
 
+        // close the add new doctor 
+        jifAddDoctor.dispose();
+        this.show();
         //open the doctor internalframe
         //keep the fields as they where before
     }
@@ -730,11 +802,13 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jifAddDoctor.getJtfMiddleName().setText("");
         jifAddDoctor.getJtfPersonalId().setText("");
         jifAddDoctor.getJtfMobilePhone().setText("");
+        jifAddDoctor.getJtfHomePhone().setText("");
+        jifAddDoctor.getJtfWorkPhone().setText("");
         jifAddDoctor.getJtfEmail().setText("");
         jifAddDoctor.getJtfAddress().setText("");
         jifAddDoctor.getJtfBuildingNumber().setText("");
         jifAddDoctor.getJpfPassword().setText("");
-        jifAddDoctor.getJtfPersonalId().setText("");
+
     }
 
     private void persistEducation() {
@@ -786,5 +860,22 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
         }
 
+    }
+
+    public void setEditableJTextFields(boolean isEditable) {
+        jtfPersonalId.setEditable(isEditable);
+        jtfFirstName.setEditable(isEditable);
+        jtfMiddleName.setEditable(isEditable);
+        jtfLastName.setEditable(isEditable);
+        jtfBirthCity.setEditable(isEditable);
+        jtfGender.setEditable(isEditable);
+        jtfMaritalStatus.setEditable(isEditable);
+        jtfAddress.setEditable(isEditable);
+        jtfCity.setEditable(isEditable);
+        jtfCountry.setEditable(isEditable);
+        jtfHomePhone.setEditable(isEditable);
+        jtfWorkPhone.setEditable(isEditable);
+        jtfMobilePhone.setEditable(isEditable);
+        jtfEmail.setEditable(isEditable);
     }
 }

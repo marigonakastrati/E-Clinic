@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -38,6 +39,8 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
 
         cityService = new CityService();
         initComponents();
+        jspDoctorTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspDoctorTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     /**
@@ -50,14 +53,14 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jlSelect = new javax.swing.JLabel();
-        jcpDoctor = new javax.swing.JScrollPane();
+        jspDoctorTable = new javax.swing.JScrollPane();
         jtDoctorTable = new javax.swing.JTable();
         jlSearchByName = new javax.swing.JLabel();
         jtfSearchByName = new javax.swing.JTextField();
         jlSearchBySurName = new javax.swing.JLabel();
         jtfSearchBySurName = new javax.swing.JTextField();
         jlSearchByCity = new javax.swing.JLabel();
-        jcbSearchByCity = new javax.swing.JComboBox();
+        jcbSearchByCity = new javax.swing.JComboBox<>();
         jbSearchDoctor = new javax.swing.JButton();
 
         setClosable(true);
@@ -80,7 +83,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
 
             }
         ));
-        jcpDoctor.setViewportView(jtDoctorTable);
+        jspDoctorTable.setViewportView(jtDoctorTable);
 
         jlSearchByName.setText("Name");
 
@@ -101,7 +104,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jcpDoctor)
+                        .addComponent(jspDoctorTable)
                         .addGap(53, 53, 53))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +152,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
                         .addComponent(jcbSearchByCity)
                         .addComponent(jtfSearchBySurName)))
                 .addGap(39, 39, 39)
-                .addComponent(jcpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jspDoctorTable, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
@@ -162,11 +165,11 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbSearchDoctor;
     private javax.swing.JComboBox jcbSearchByCity;
-    private javax.swing.JScrollPane jcpDoctor;
     private javax.swing.JLabel jlSearchByCity;
     private javax.swing.JLabel jlSearchByName;
     private javax.swing.JLabel jlSearchBySurName;
     private javax.swing.JLabel jlSelect;
+    private javax.swing.JScrollPane jspDoctorTable;
     private javax.swing.JTable jtDoctorTable;
     private javax.swing.JTextField jtfSearchByName;
     private javax.swing.JTextField jtfSearchBySurName;
@@ -202,6 +205,11 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     public JTextField getJtfSearchBySurName() {
         return jtfSearchBySurName;
     }
+
+    public List<Doctor> getDoctorList() {
+        return doctorList;
+    }
+    
     
     public void loadDoctorListTable(String name, String surname, String city)
     {  

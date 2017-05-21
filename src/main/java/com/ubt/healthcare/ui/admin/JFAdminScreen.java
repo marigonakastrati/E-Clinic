@@ -5,10 +5,8 @@
  */
 package com.ubt.healthcare.ui.admin;
 
-import com.ubt.healthcare.dto.Doctor;
 import java.awt.event.MouseAdapter;
-import javax.swing.JOptionPane;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -31,6 +29,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
         //frameStlye();
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**

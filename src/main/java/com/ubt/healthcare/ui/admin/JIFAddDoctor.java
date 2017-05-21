@@ -19,12 +19,14 @@ import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
+import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -42,6 +44,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     private Doctor doctor;
     private JIFSearchDoctor jifViewDoctor;
     private LoadTables loadTable;
+    private InputValidation inputValidation;
 
     /**
      * Creates new form JIFDoctor
@@ -53,6 +56,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
         loadTable = new LoadTables();
+        inputValidation = new InputValidation();
         bindTheEducationTableModel();
         fillComboBoxBirthCity();
         fillComboBoxCountry();
@@ -61,6 +65,13 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         fillComboBoxMartialStatus();
         fillComboBoxEducationType();
         fillComboBoxReligion();
+        
+        jspPersonalInformation.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspPersonalInformation.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetails.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetails.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetailsTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jspEducationDetailsTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     /**
@@ -228,7 +239,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                                     .addComponent(jlReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbBirthPlace, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbBirthPlace, 0, 119, Short.MAX_VALUE)
                                     .addComponent(jcbReligion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -246,7 +257,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                                                     .addComponent(jlSex)
                                                     .addComponent(jlLastName))
                                                 .addGap(2, 2, 2)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
                                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jlPassword)
@@ -458,7 +469,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jspEducationDetailsTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1075, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEducationDetailsLayout.setVerticalGroup(
             jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,7 +505,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                     .addComponent(jbSaveEducation)
                     .addComponent(jbDeleteEducation)
                     .addComponent(jbCancel))
-                .addGap(308, 308, 308))
+                .addContainerGap())
         );
 
         jspEducationDetails.setViewportView(jpEducationDetails);
@@ -782,6 +793,10 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(this, "Ju lutem Shkruani Daten e Mbarimit :", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            else if(!("Valid".equals(inputValidation.validateEducationDateStartEnd(jdchDateStart.getDate(), jdchDateEnd.getDate()))))
+            {
+                JOptionPane.showMessageDialog(this, inputValidation.validateEducationDateStartEnd(jdchDateStart.getDate(), jdchDateEnd.getDate()), "Error", JOptionPane.ERROR_MESSAGE);
+            }
             else
             {
                 if (row == -1) 
@@ -791,6 +806,8 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
                     Education education = new Education();
                     EducationType educationType = new EducationType();
                     EducationProgram educationProgram = new EducationProgram();
+                    
+                    //validate input
                     
                     personEducation.setDateEnd(jdchDateEnd.getDate());
                     personEducation.setDateStart(jdchDateStart.getDate());

@@ -33,7 +33,7 @@ public class JPAddAdminClinic extends javax.swing.JPanel {
         loadTable = new LoadTables();
         fillComboBoxBirthCity();
         fillComboBoxCountry();
-        fillComboBoxCity();
+        //fillComboBoxCity();
     }
 
     /**

@@ -84,4 +84,9 @@ public class DoctorTableModelViewDoctor extends AbstractTableModel {
                 return null;
         }
     }
+    
+    public List<Doctor> getDoctorList()
+    {
+        return data;
+    }
 }

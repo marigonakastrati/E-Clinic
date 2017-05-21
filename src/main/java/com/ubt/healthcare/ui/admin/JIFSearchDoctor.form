@@ -32,7 +32,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="jcpDoctor" max="32767" attributes="0"/>
+                      <Component id="jspDoctorTable" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -98,7 +98,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="jcpDoctor" pref="466" max="32767" attributes="0"/>
+              <Component id="jspDoctorTable" pref="466" max="32767" attributes="0"/>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="jlSelect" pref="24" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -112,7 +112,7 @@
         <Property name="text" type="java.lang.String" value="Select"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jcpDoctor">
+    <Container class="javax.swing.JScrollPane" name="jspDoctorTable">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>

@@ -100,7 +100,7 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jcbBirthPlace" max="32767" attributes="0"/>
+                                              <Component id="jcbBirthPlace" pref="119" max="32767" attributes="0"/>
                                               <Component id="jcbReligion" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -124,7 +124,7 @@
                                                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -641,7 +641,7 @@
                                   <Component id="jspEducationDetailsTable" min="-2" pref="1075" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -689,7 +689,7 @@
                               <Component id="jbDeleteEducation" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

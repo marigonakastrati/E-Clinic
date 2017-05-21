@@ -32,6 +32,7 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedDoctorEducationInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreenInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
@@ -350,6 +351,7 @@ public class JFLogin extends JFrame {
         jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveDoctorEducationInternalFrame(jifAddDoctor));
         jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionDoctorEducationInternalFrame(jifAddDoctor));
         jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedDoctorEducationInternalFrame(jifAddDoctor));
+        jifAddDoctor.addAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctorInternalFrame(ilfDoctor));
   
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
