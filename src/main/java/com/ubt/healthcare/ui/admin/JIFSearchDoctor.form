@@ -2,7 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Find Doctor Screen"/>
     <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -39,39 +38,39 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlSearchByName" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jtfSearchByName" min="-2" pref="173" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
+                              <Component id="jtfSearchByName" pref="198" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jlSearchBySurName" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jtfSearchBySurName" min="-2" pref="235" max="-2" attributes="0"/>
-                              <EmptySpace pref="104" max="32767" attributes="0"/>
+                              <Component id="jtfSearchBySurName" pref="260" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jlSearchByCity" pref="118" max="32767" attributes="0"/>
+                              <Component id="jlSearchByCity" pref="143" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jcbSearchByCity" min="-2" pref="195" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jcbSearchByCity" pref="220" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jbSearchDoctor" pref="173" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jbSearchDoctor" pref="98" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jlSelect" min="-2" pref="142" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="500" max="-2" attributes="0"/>
+              <Component id="jlSelect" pref="0" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -89,7 +88,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="jtfSearchByName" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfSearchByName" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jbSearchDoctor" alignment="3" max="32767" attributes="0"/>
@@ -98,9 +97,9 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="jspDoctorTable" pref="466" max="32767" attributes="0"/>
+              <Component id="jspDoctorTable" pref="468" max="32767" attributes="0"/>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Component id="jlSelect" pref="24" max="32767" attributes="0"/>
+              <Component id="jlSelect" pref="25" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
       </Group>

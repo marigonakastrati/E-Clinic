@@ -30,7 +30,7 @@ public class DoctorTableModelEducation extends AbstractTableModel {
         this.data = data;
     }
 
-     @Override
+    @Override
     public int getRowCount() {
         return data.size();
     }
@@ -39,50 +39,50 @@ public class DoctorTableModelEducation extends AbstractTableModel {
     public int getColumnCount() {
         return columnNames.length;
     }
-    
+
     @Override
-    public String getColumnName(int col){
+    public String getColumnName(int col) {
         return columnNames[col];
     }
-    public void remove(int row){
+
+    public void remove(int row) {
         data.remove(row);
     }
 
-    public PersonEducation getPersonEducation(int index){
+    public PersonEducation getPersonEducation(int index) {
         return data.get(index);
     }
-    
-    public List<PersonEducation> getPersonEducation()
-    {
+
+    public void removeAll() {
+
+        data.removeAll(data);
+    }
+
+    public List<PersonEducation> getPersonEducation() {
         return data;
     }
-    
+
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PersonEducation s = (PersonEducation)data.get(rowIndex);
-        switch(columnIndex){
+        PersonEducation s = (PersonEducation) data.get(rowIndex);
+        switch (columnIndex) {
 
-            case 0:
-            {
+            case 0: {
                 return s.getEducationId().getEducationProgramId().getProgramName();
             }
-            case 1:
-            {
+            case 1: {
                 return s.getEducationId().getEucationTypeId().getEducationName();
             }
-            case 2:
-            {
+            case 2: {
                 return s.getEducationId().getInstitutionName();
             }
-            case 3:
-            {
+            case 3: {
                 return s.getDateStart().toString();
             }
-            case 4:
-            {
+            case 4: {
                 return s.getDateEnd().toString();
             }
-            
+
             default:
                 return null;
         }

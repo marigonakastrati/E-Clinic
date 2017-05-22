@@ -40,10 +40,9 @@ public class AddressService {
         String msg = "Save";
         List<Object> address = (List<Object>) sqlRepository.findAll("Address.findAll");
         for (Object o : address) {
-            if (((Address) o).getCityId().getCityId().intValue() == addressToMatch.getCityId().getCityId().intValue() &&
-                       ((Address) o).getBuildingNumber()== addressToMatch.getBuildingNumber() &&
-                     ((Address) o).getStreetName().equals(addressToMatch.getStreetName()) ) 
-            {
+            if (((Address) o).getCityId().getCityId().intValue() == addressToMatch.getCityId().getCityId().intValue()
+                    && ((Address) o).getBuildingNumber() == addressToMatch.getBuildingNumber()
+                    && ((Address) o).getStreetName().equals(addressToMatch.getStreetName())) {
                 return "Exist";
             }
         }
@@ -51,8 +50,7 @@ public class AddressService {
         return msg;
     }
     
-    public void persistAddress(Address address)
-    {
+    public void persistAddress(Address address) {
         sqlRepository.add(address);
     }
 }

@@ -22,9 +22,8 @@ public class JFAdminScreen extends javax.swing.JFrame {
     public JFAdminScreen() {
         initComponents();
     }
-    
-    public JFAdminScreen(JIFDoctor jifDoctor)
-    {
+
+    public JFAdminScreen(JIFDoctor jifDoctor) {
         this.jifDoctor = jifDoctor;
 
         //frameStlye();
@@ -127,7 +126,6 @@ public class JFAdminScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jdpPaneHandler;
@@ -140,24 +138,22 @@ public class JFAdminScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jlProfile;
     private javax.swing.JLabel jlReceptionist;
     // End of variables declaration//GEN-END:variables
- 
+
     public void addLogOutMouseAdapter(MouseAdapter e) {
         jlLogout.addMouseListener(e);
     }
-    
+
     public void addDoctorScreenMouseAdapter(MouseAdapter e) {
         jlDoctor.addMouseListener(e);
     }
-    
-     public void addAddReceptionistMouseAdapter(MouseAdapter e) {
+
+    public void addAddReceptionistMouseAdapter(MouseAdapter e) {
         jlReceptionist.addMouseListener(e);
     }
-     
-     
-     public void addViewProfileMouseAdapter(MouseAdapter e) {
+
+    public void addViewProfileMouseAdapter(MouseAdapter e) {
         jlProfile.addMouseListener(e);
-    } 
-     
+    }
 
     public void addNurseScreenMouseAdapter(MouseAdapter e) {
         jlNurse.addMouseListener(e);
@@ -174,10 +170,9 @@ public class JFAdminScreen extends javax.swing.JFrame {
     public void addPharmacyManagerScreenMouseAdapter(MouseAdapter e) {
         jlPharmacyManager.addMouseListener(e);
     }
-    
-    public void showDoctorScreen() 
-    {
-        
+
+    public void showDoctorScreen() {
+
         jdpPaneHandler.remove(jifDoctor);
         jdpPaneHandler.add(jifDoctor);
         jifDoctor.show();
@@ -186,18 +181,16 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
-    public void showAddDoctorInternalFrame()
-    {
+    public void showAddDoctorInternalFrame() {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifAddDoctor());
-        
+
         jdpPaneHandler.add(jifDoctor.getJifAddDoctor());
-        
+
         jifDoctor.getJifAddDoctor().show();
-        
+
         // load city combobox
         //jifDoctor.getJifAddDoctor().loadCityComboBox();
-        
         // set the DoctorService
         //jifDoctor.getJifViewDoctor().setDoctorService(jifDoctor.getDoctorService());
         //set Doctor
@@ -206,23 +199,34 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jifDoctor.hide();
     }
 
-     public void showSearchDoctorInternalFrame()
-    {
+    public void showSearchDoctorInternalFrame() {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifViewDoctor());
-        
+
         jdpPaneHandler.add(jifDoctor.getJifViewDoctor());
-        
+
         jifDoctor.getJifViewDoctor().show();
-        
+
         // load city combobox
         jifDoctor.getJifViewDoctor().loadCityComboBox();
-        
+
         // set the DoctorService
         jifDoctor.getJifViewDoctor().setDoctorService(jifDoctor.getDoctorService());
         //set Doctor
         jifDoctor.getJifViewDoctor().setDoctor(jifDoctor.getDoctor());
         // hide the View Doctor Internal Pane
         jifDoctor.hide();
+    }
+
+    public void showAddCityInternalFrame() {
+        jdpPaneHandler.remove(jifDoctor.getJifAddCity());
+        jdpPaneHandler.add(jifDoctor.getJifAddCity());
+        jifDoctor.getJifAddCity().show();
+    }
+
+    public void showAddCountryInternalFrame() {
+        jdpPaneHandler.remove(jifDoctor.getJifAddCountry());
+        jdpPaneHandler.add(jifDoctor.getJifAddCountry());
+        jifDoctor.getJifAddCountry().show();
     }
 }

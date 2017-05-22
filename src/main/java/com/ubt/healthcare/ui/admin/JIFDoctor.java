@@ -36,6 +36,8 @@ import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.UserGroup;
+import com.ubt.healthcare.ui.JIFAddCity;
+import com.ubt.healthcare.ui.JIFAddCountry;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelEducation;
 import java.awt.event.MouseAdapter;
 import java.util.Collection;
@@ -52,6 +54,7 @@ import javax.swing.JTextField;
 public class JIFDoctor extends javax.swing.JInternalFrame {
 
     private DoctorTableModelEducation doctorTableModelEducation;
+    private List<PersonEducation> doctorEducation;
     private DoctorService doctorService;
     private ContactService contactService;
     private EducationTypeService educationTypeService;
@@ -69,17 +72,23 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private LoginGroupService loginGroupService;
     private Doctor doctor;
     private JIFSearchDoctor jifViewDoctor;
+    private JIFEditDoctor jifEditDoctor;
     private JIFAddDoctor jifAddDoctor;
     private PasswordHashing passwordHashing;
     private InputValidation inputValidation;
+    private JIFAddCity jifAddCity;
+    private JIFAddCountry jifAddCountry;
 
     /**
      * Creates new form JIFDoctor
      *
      * @param jifViewDoctor
      * @param jifAddDoctor
+     * @param jifEditDoctor
+     * @param jifAddCity
+     * @param jifAddCountry
      */
-    public JIFDoctor(JIFSearchDoctor jifViewDoctor, JIFAddDoctor jifAddDoctor) {
+    public JIFDoctor(JIFSearchDoctor jifViewDoctor, JIFAddDoctor jifAddDoctor, JIFEditDoctor jifEditDoctor, JIFAddCity jifAddCity, JIFAddCountry jifAddCountry) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
@@ -102,7 +111,10 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         inputValidation = new InputValidation();
         this.jifViewDoctor = jifViewDoctor;
         this.jifAddDoctor = jifAddDoctor;
-        setEditableJTextFields(false);
+        this.jifEditDoctor = jifEditDoctor;
+        this.jifAddCity = jifAddCity;
+        this.jifAddCountry = jifAddCountry;
+        this.setEditableJTextFields(false);
         jspPersonalInformation.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jspPersonalInformation.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jspEducationDetails.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -470,7 +482,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void loadEducationTable() {
-        List<PersonEducation> doctorEducation = personEducationService.findEducation(doctor);
+        doctorEducation = personEducationService.findEducation(doctor);
         doctorTableModelEducation.add(doctorEducation);
         jtEducationDetails.setModel(doctorTableModelEducation);
         doctorTableModelEducation.fireTableDataChanged();
@@ -583,7 +595,10 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
             if (jifViewDoctor.getDoctorList() != null) {
                 jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
             }
-
+            clearViewDoctorFields();
+            if (doctorEducation != null && doctorEducation.size() > 0) {
+                doctorTableModelEducation.removeAll();
+            }
         }
         if (jifViewDoctor.getJtDoctorTable() != null) {
             jifViewDoctor.getJtDoctorTable().clearSelection();
@@ -811,6 +826,24 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
     }
 
+    private void clearViewDoctorFields() {
+        jtfPersonalId.setText("");
+        jtfFirstName.setText("");
+        jtfLastName.setText("");
+        jtfMiddleName.setText("");
+        jtfBirthCity.setText("");
+        jtfGender.setText("");
+        jtfMaritalStatus.setText("");
+        jtfAddress.setText("");
+        jtfCity.setText("");
+        jtfCountry.setText("");
+        jtfMobilePhone.setText("");
+        jtfWorkPhone.setText("");
+        jtfEmail.setText("");
+        jtfHomePhone.setText("");
+
+    }
+
     private void persistEducation() {
 
         // save the education details...
@@ -878,4 +911,13 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         jtfMobilePhone.setEditable(isEditable);
         jtfEmail.setEditable(isEditable);
     }
+
+    public JIFAddCity getJifAddCity() {
+        return jifAddCity;
+    }
+
+    public JIFAddCountry getJifAddCountry() {
+        return jifAddCountry;
+    }
+
 }

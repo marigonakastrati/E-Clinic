@@ -60,10 +60,9 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
         jlSearchBySurName = new javax.swing.JLabel();
         jtfSearchBySurName = new javax.swing.JTextField();
         jlSearchByCity = new javax.swing.JLabel();
-        jcbSearchByCity = new javax.swing.JComboBox<>();
+        jcbSearchByCity = new javax.swing.JComboBox();
         jbSearchDoctor = new javax.swing.JButton();
 
-        setClosable(true);
         setIconifiable(true);
         setTitle("Find Doctor Screen");
         setToolTipText("");
@@ -110,28 +109,28 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 97, Short.MAX_VALUE)))
+                                .addComponent(jtfSearchByName, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                .addGap(97, 97, 97)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlSearchBySurName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(122, 122, 122))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfSearchBySurName, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)))
+                                .addComponent(jtfSearchBySurName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                .addGap(104, 104, 104)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlSearchByCity, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                                .addComponent(jlSearchByCity, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                                 .addGap(185, 185, 185))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcbSearchByCity, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                .addComponent(jcbSearchByCity, 0, 220, Short.MAX_VALUE)
+                                .addGap(108, 108, 108)))
+                        .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(500, 500, 500)
+                .addComponent(jlSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(474, 474, 474))
         );
         layout.setVerticalGroup(
@@ -146,15 +145,15 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jtfSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfSearchByName))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jcbSearchByCity)
                         .addComponent(jtfSearchBySurName)))
                 .addGap(39, 39, 39)
-                .addComponent(jspDoctorTable, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jspDoctorTable, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addComponent(jlSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );
 
@@ -194,7 +193,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
         this.cityService = cityService;
     }
 
-    public JComboBox<String> getJcbSearchByCity() {
+    public JComboBox getJcbSearchByCity() {
         return jcbSearchByCity;
     }
 

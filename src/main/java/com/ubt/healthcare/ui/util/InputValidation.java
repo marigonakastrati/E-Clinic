@@ -20,6 +20,9 @@ public class InputValidation {
     private static final String TYPE_YOUR_PHONE_NUMBER = "Type your Phone Number";
     private static final String TYPE_YOUR_BIRTH_DAY = "Type your BirthDay";
     private static final String TYPE_YOUR_EMAIL = "Type your Email";
+    private static final String TYPE_COUNTRY_NAME = "Type country name";
+    private static final String TYPE_CITY_NAME = "Type city name";
+    private static final String TYPE_ZIP_CODE = "Type zip code";
     private static final String TYPE_YOUR_FIRST_NAME = "Type you First Name";
     private static final String TYPE_YOUR_LAST_NAME = "Type you Last Name";
     private static final String TYPE_ONLY_NUMBERS = "You shoud type only numbers";
@@ -130,6 +133,36 @@ public class InputValidation {
         }
         if (!(NOT_EMAIL_FORMAT_PATTERN.matcher(email).matches())) {
             return TYPE_YUOR_EMAIL_PROPERLY;
+        }
+        return VALID;
+    }
+    
+     public String validateCountryName(String countrName) {
+        if (countrName == null || countrName.trim().isEmpty()) {
+            return TYPE_COUNTRY_NAME;
+        }
+        if (!(NOT_CHARACTER_PATTERN.matcher(countrName).matches())) {
+            return TYPE_ONLY_CHARACTERS;
+        }
+        return VALID;
+    }
+     
+     public String validateCityName(String cityName) {
+        if (cityName == null || cityName.trim().isEmpty()) {
+            return TYPE_CITY_NAME;
+        }
+        if (!(NOT_CHARACTER_PATTERN.matcher(cityName).matches())) {
+            return TYPE_ONLY_CHARACTERS;
+        }
+        return VALID;
+    }
+     
+      public String validateZipCode(String cityName) {
+        if (cityName == null || cityName.trim().isEmpty()) {
+            return TYPE_ZIP_CODE;
+        }
+        if (!(NOT_NUMBER_PATTERN.matcher(cityName).matches())) {
+            return TYPE_ONLY_NUMBERS;
         }
         return VALID;
     }

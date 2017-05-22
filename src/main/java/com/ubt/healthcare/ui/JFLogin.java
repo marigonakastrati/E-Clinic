@@ -18,6 +18,7 @@ import com.ubt.healthcare.ui.admin.JFAdmin;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctor;
+import com.ubt.healthcare.ui.admin.JIFEditDoctor;
 import com.ubt.healthcare.ui.admin.JPAddAdminClinic;
 import com.ubt.healthcare.ui.admin.JPAddDoctor;
 import com.ubt.healthcare.ui.admin.JPAddNurse;
@@ -32,6 +33,9 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCityAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCityEditDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCountryInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedDoctorEducationInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreenInternalFrame;
@@ -44,11 +48,16 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPatient;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacyManager;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistReceptionist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityEditDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountryInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveDoctorEducationInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearchInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
@@ -332,8 +341,12 @@ public class JFLogin extends JFrame {
         
         JIFSearchDoctor ilfViewDoctor = new JIFSearchDoctor();      
         JIFAddDoctor jifAddDoctor = new JIFAddDoctor();
+        JIFEditDoctor jifEditDoctor = new JIFEditDoctor();
         
-        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor);
+        JIFAddCity jifAddCity = new JIFAddCity();
+        JIFAddCountry jifAddCountry = new JIFAddCountry();
+        
+        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor,jifEditDoctor, jifAddCity,jifAddCountry);
         
         
         JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor);
@@ -344,7 +357,6 @@ public class JFLogin extends JFrame {
         ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctorInternalFrame(jfAdminScreen));
         
         ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(ilfViewDoctor));
-        
         ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(ilfDoctor));
         
         jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorInternalFrame(ilfDoctor));
@@ -352,6 +364,18 @@ public class JFLogin extends JFrame {
         jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionDoctorEducationInternalFrame(jifAddDoctor));
         jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedDoctorEducationInternalFrame(jifAddDoctor));
         jifAddDoctor.addAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctorInternalFrame(ilfDoctor));
+        jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctorInternalFrame(jfAdminScreen));
+        
+        jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
+        
+        jifAddCity.addSaveCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityAddDoctorInternalFrame(jifAddDoctor));
+        jifAddCity.addSaveCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityEditDoctorInternalFrame(jifEditDoctor));
+        jifAddCity.addCloseCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityAddDoctorInternalFrame(jifAddDoctor));
+        jifAddCity.addCloseCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityEditDoctorInternalFrame(jifEditDoctor));
+        
+        jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountryInternalFrame(jifAddCity));
+        jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountryInternalFrame(jifAddCity));
+        
   
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

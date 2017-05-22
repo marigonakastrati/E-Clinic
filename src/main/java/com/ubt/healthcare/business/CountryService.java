@@ -6,6 +6,7 @@
 package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
+import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Country;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CountryService {
         sqlRepository = new SQLRepository();
     }
 
-  public Country findTheCountry(String country) {
+    public Country findTheCountry(String country) {
         Country msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("Country.findAll");
         for (Object o : docs) {
@@ -35,4 +36,19 @@ public class CountryService {
         return msg;
     }
 
+    public String checkIfCountryExists(String country) {
+        String msg = "Save";
+        List<Object> countryList = (List<Object>) sqlRepository.findAll("Country.findAll");
+        for (Object o : countryList) {
+            if (((Country) o).getCountryName().equals(country)) {
+                return "Exist";
+            }
+        }
+
+        return msg;
+    }
+
+    public void persistCountry(Country country) {
+        sqlRepository.add(country);
+    }
 }

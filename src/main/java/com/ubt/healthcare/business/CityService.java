@@ -27,16 +27,32 @@ public class CityService {
         return city == null ? (List<City>) (Object) sqlRepository.findAll("City.findAll") : city;
     }
 
-    public City findTheCity(String country) {
+    public City findTheCity(String city) {
         City msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("City.findAll");
         for (Object o : docs) {
-            if (((City) o).getCityName().equals(country)) {
+            if (((City) o).getCityName().equals(city)) {
                 msg = (City) o;
             }
         }
 
         return msg;
+    }
+    
+    public String checkIfCityExists(String cityName) {
+        String msg = "Save";
+        List<Object> cityList = (List<Object>) sqlRepository.findAll("City.findAll");
+        for (Object o : cityList) {
+            if (((City) o).getCityName().equals(cityName)) {
+                return "Exist";
+            }
+        }
+
+        return msg;
+    }
+
+    public void persistCity(City city) {
+        sqlRepository.add(city);
     }
 
 }
