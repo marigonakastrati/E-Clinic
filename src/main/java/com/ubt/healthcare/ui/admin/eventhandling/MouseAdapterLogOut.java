@@ -23,7 +23,7 @@ public class MouseAdapterLogOut extends MouseAdapter{
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jfLogin.showLoginScreen();;
+        jfLogin.showLoginScreen();
     }
     
     

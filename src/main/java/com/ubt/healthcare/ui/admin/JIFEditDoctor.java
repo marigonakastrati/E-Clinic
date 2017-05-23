@@ -8,13 +8,13 @@ package com.ubt.healthcare.ui.admin;
 import com.toedter.calendar.JDateChooser;
 import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.business.LoadTables;
+import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Education;
 import com.ubt.healthcare.dto.EducationProgram;
 import com.ubt.healthcare.dto.EducationType;
-import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.dto.Religion;
@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -41,6 +40,8 @@ import javax.swing.event.ListSelectionListener;
 public class JIFEditDoctor extends javax.swing.JInternalFrame {
 
     private DoctorTableModelEducation doctorTableModelEducation;
+    private PersonEducationService personEducationService;
+    private List<PersonEducation> doctorEducation;
     private DoctorService doctorService;
     private Doctor doctor;
     private LoadTables loadTable;
@@ -58,11 +59,11 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         doctorService = new DoctorService();
         loadTable = new LoadTables();
         inputValidation = new InputValidation();
+        personEducationService = new PersonEducationService();
         jifAddCity = new JIFAddCity();
         bindTheEducationTableModel();
         fillComboBoxCountry();
-        fillComboBoxCity();
-        fillComboBoxSex();
+        fillComboBoxCity();;
         fillComboBoxMartialStatus();
         fillComboBoxEducationType();
         fillComboBoxReligion();
@@ -93,33 +94,20 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         jtfMiddleName = new javax.swing.JTextField();
         jlLastName = new javax.swing.JLabel();
         jtfLastName = new javax.swing.JTextField();
-        jlSex = new javax.swing.JLabel();
         jlMaritalStatus = new javax.swing.JLabel();
         jtfAddress = new javax.swing.JTextField();
         jlCity = new javax.swing.JLabel();
         jlCountry = new javax.swing.JLabel();
-        jlHomePhone = new javax.swing.JLabel();
-        jtfHomePhone = new javax.swing.JTextField();
-        jlWorkPhone = new javax.swing.JLabel();
-        jtfWorkPhone = new javax.swing.JTextField();
-        jlMobilePhone = new javax.swing.JLabel();
-        jtfMobilePhone = new javax.swing.JTextField();
-        jtfEmail = new javax.swing.JTextField();
-        jlPassword = new javax.swing.JLabel();
-        jlContactInformation = new javax.swing.JLabel();
         jlAddressInformation = new javax.swing.JLabel();
         jcbCountry = new javax.swing.JComboBox<>();
         jcbCity = new javax.swing.JComboBox<>();
         jlAddress2 = new javax.swing.JLabel();
         jlBuildingNumber = new javax.swing.JLabel();
         jtfBuildingNumber = new javax.swing.JTextField();
-        jcbGender = new javax.swing.JComboBox<>();
         jcbMaritalStatus = new javax.swing.JComboBox<>();
         jcbReligion = new javax.swing.JComboBox<>();
         jlReligion = new javax.swing.JLabel();
         jlPersonalInformation = new javax.swing.JLabel();
-        jlEmail = new javax.swing.JLabel();
-        jpfPassword = new javax.swing.JPasswordField();
         jbAddCity = new javax.swing.JButton();
         jspEducationDetails = new javax.swing.JScrollPane();
         jpEducationDetails = new javax.swing.JPanel();
@@ -163,9 +151,6 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         jlLastName.setForeground(new java.awt.Color(0, 153, 204));
         jlLastName.setText("Last Name :");
 
-        jlSex.setForeground(new java.awt.Color(0, 153, 204));
-        jlSex.setText("Sex :");
-
         jlMaritalStatus.setForeground(new java.awt.Color(0, 153, 204));
         jlMaritalStatus.setText("Marital Status :");
 
@@ -174,22 +159,6 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
 
         jlCountry.setForeground(new java.awt.Color(0, 153, 204));
         jlCountry.setText("Country :");
-
-        jlHomePhone.setForeground(new java.awt.Color(0, 153, 204));
-        jlHomePhone.setText("Home Phone :");
-
-        jlWorkPhone.setForeground(new java.awt.Color(0, 153, 204));
-        jlWorkPhone.setText(" Work Phone :");
-
-        jlMobilePhone.setForeground(new java.awt.Color(0, 153, 204));
-        jlMobilePhone.setText("Mobile Phone :");
-
-        jlPassword.setForeground(new java.awt.Color(0, 153, 204));
-        jlPassword.setText("Password :");
-
-        jlContactInformation.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jlContactInformation.setForeground(new java.awt.Color(102, 102, 255));
-        jlContactInformation.setText("Contact Information");
 
         jlAddressInformation.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jlAddressInformation.setForeground(new java.awt.Color(102, 102, 255));
@@ -214,66 +183,52 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         jlPersonalInformation.setForeground(new java.awt.Color(102, 102, 255));
         jlPersonalInformation.setText("      Personal Information ");
 
-        jlEmail.setForeground(new java.awt.Color(0, 153, 204));
-        jlEmail.setText("Email :");
-
         jbAddCity.setText("Add City");
 
         javax.swing.GroupLayout jpPersonalInformationLayout = new javax.swing.GroupLayout(jpPersonalInformation);
         jpPersonalInformation.setLayout(jpPersonalInformationLayout);
         jpPersonalInformationLayout.setHorizontalGroup(
             jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jlPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(316, 316, 316)
+                .addComponent(jlAddressInformation)
+                .addGap(212, 212, 212))
             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlMaritalStatus)
-                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jlSex, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jlFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29)
+                        .addGap(30, 30, 30)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcbReligion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbMaritalStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbGender, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfMiddleName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfFirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpfPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(269, 269, 269)
+                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jlFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(29, 29, 29)
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfMiddleName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfFirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlMaritalStatus)
+                                    .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
+                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbMaritalStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jlReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(194, 194, 194)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addComponent(jlAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jtfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jlContactInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlWorkPhone)
-                    .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jtfWorkPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                            .addComponent(jlMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                        .addComponent(jlHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
@@ -291,18 +246,12 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
                                 .addComponent(jbAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtfBuildingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPersonalInformationLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jlPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
-                .addGap(144, 144, 144)
-                .addComponent(jlAddressInformation)
-                .addGap(384, 384, 384))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
-        jpPersonalInformationLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jcbCity, jcbCountry, jtfAddress, jtfBuildingNumber, jtfEmail, jtfHomePhone, jtfMobilePhone, jtfWorkPhone});
+        jpPersonalInformationLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jcbCity, jcbCountry, jtfAddress, jtfBuildingNumber});
 
-        jpPersonalInformationLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jcbGender, jcbMaritalStatus, jcbReligion, jtfFirstName, jtfLastName, jtfMiddleName});
+        jpPersonalInformationLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jcbMaritalStatus, jcbReligion, jtfFirstName, jtfLastName, jtfMiddleName});
 
         jpPersonalInformationLayout.setVerticalGroup(
             jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,8 +278,9 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlBuildingNumber)
-                            .addComponent(jtfBuildingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jtfBuildingNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbMaritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlMaritalStatus)))
                     .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,47 +292,12 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlLastName))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlSex))
-                        .addGap(31, 31, 31)
-                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                .addComponent(jlMaritalStatus)
-                                .addGap(120, 120, 120))
-                            .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jcbMaritalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlContactInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jcbReligion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jlReligion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(jpPersonalInformationLayout.createSequentialGroup()
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jlMobilePhone)
-                                            .addComponent(jtfMobilePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jlWorkPhone)
-                                            .addComponent(jtfWorkPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(13, 13, 13)
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jlHomePhone)
-                                            .addComponent(jtfHomePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jlEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addGap(355, 355, 355))
+                            .addComponent(jlLastName))))
+                .addGap(18, 18, 18)
+                .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbReligion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlReligion))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         jspPersonalInformation.setViewportView(jpPersonalInformation);
@@ -426,81 +341,80 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jbSaveEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jbDeleteEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(323, 323, 323))
+                        .addComponent(jlProgramType, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                        .addGap(86, 86, 86))
+                    .addComponent(jtfProgram))
+                .addGap(48, 48, 48)
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jlProgramType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(86, 86, 86))
-                            .addComponent(jtfProgram))
-                        .addGap(63, 63, 63)
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jlEducationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jcbEducationType, 0, 145, Short.MAX_VALUE)
-                                .addGap(24, 24, 24)))
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jlInstitution, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(79, 79, 79))
-                            .addComponent(jtfInstitution))
-                        .addGap(88, 88, 88)
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(75, 75, 75))
-                            .addComponent(jdchDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                        .addGap(80, 80, 80)
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEducationDetailsLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(118, 118, 118))
-                            .addComponent(jdchDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(138, 138, 138))))
+                        .addComponent(jlEducationType, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE))
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addComponent(jcbEducationType, 0, 193, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)))
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addComponent(jlInstitution, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addGap(79, 79, 79))
+                    .addComponent(jtfInstitution))
+                .addGap(42, 42, 42)
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                        .addGap(75, 75, 75))
+                    .addComponent(jdchDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                        .addGap(118, 118, 118))
+                    .addComponent(jdchDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(87, 87, 87))
             .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jspEducationDetailsTable)
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jspEducationDetailsTable)
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jbSaveEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jbDeleteEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(144, 144, 144)))
                 .addContainerGap())
         );
         jpEducationDetailsLayout.setVerticalGroup(
             jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jspEducationDetailsTable, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpEducationDetailsLayout.createSequentialGroup()
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlInstitution, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jdchDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdchDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfInstitution)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpEducationDetailsLayout.createSequentialGroup()
+                .addComponent(jspEducationDetailsTable, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlProgramType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlEducationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfProgram)
-                            .addComponent(jcbEducationType))))
+                            .addComponent(jcbEducationType)))
+                    .addGroup(jpEducationDetailsLayout.createSequentialGroup()
+                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlInstitution, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfInstitution)
+                            .addComponent(jdchDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdchDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpEducationDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSaveEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbDeleteEducation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(69, 69, 69))
+                .addContainerGap())
         );
 
         jspEducationDetails.setViewportView(jpEducationDetails);
@@ -523,7 +437,7 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(jbSaveDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(300, 300, 300)
+                        .addGap(313, 313, 313)
                         .addComponent(jbClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(45, 45, 45)))
                 .addContainerGap())
@@ -533,11 +447,11 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSaveDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
 
         pack();
@@ -565,7 +479,6 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcbCity;
     private javax.swing.JComboBox<String> jcbCountry;
     private javax.swing.JComboBox<String> jcbEducationType;
-    private javax.swing.JComboBox<String> jcbGender;
     private javax.swing.JComboBox<String> jcbMaritalStatus;
     private javax.swing.JComboBox<String> jcbReligion;
     private com.toedter.calendar.JDateChooser jdchDateEnd;
@@ -574,45 +487,33 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlAddressInformation;
     private javax.swing.JLabel jlBuildingNumber;
     private javax.swing.JLabel jlCity;
-    private javax.swing.JLabel jlContactInformation;
     private javax.swing.JLabel jlCountry;
     private javax.swing.JLabel jlEducationType;
-    private javax.swing.JLabel jlEmail;
     private javax.swing.JLabel jlFirstName;
-    private javax.swing.JLabel jlHomePhone;
     private javax.swing.JLabel jlInstitution;
     private javax.swing.JLabel jlLastName;
     private javax.swing.JLabel jlMaritalStatus;
     private javax.swing.JLabel jlMiddleName;
-    private javax.swing.JLabel jlMobilePhone;
-    private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlPersonalInformation;
     private javax.swing.JLabel jlProgramType;
     private javax.swing.JLabel jlReligion;
-    private javax.swing.JLabel jlSex;
-    private javax.swing.JLabel jlWorkPhone;
     private javax.swing.JPanel jpEducationDetails;
     private javax.swing.JPanel jpPersonalInformation;
-    private javax.swing.JPasswordField jpfPassword;
     private javax.swing.JScrollPane jspEducationDetails;
     private javax.swing.JScrollPane jspEducationDetailsTable;
     private javax.swing.JScrollPane jspPersonalInformation;
     private javax.swing.JTable jtEducationDetails;
     private javax.swing.JTextField jtfAddress;
     private javax.swing.JTextField jtfBuildingNumber;
-    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfFirstName;
-    private javax.swing.JTextField jtfHomePhone;
     private javax.swing.JTextField jtfInstitution;
     private javax.swing.JTextField jtfLastName;
     private javax.swing.JTextField jtfMiddleName;
-    private javax.swing.JTextField jtfMobilePhone;
     private javax.swing.JTextField jtfProgram;
-    private javax.swing.JTextField jtfWorkPhone;
     private javax.swing.JTabbedPane jtpDoctorDetails;
     // End of variables declaration//GEN-END:variables
 
-    public void addAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+    public void addCloseAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbClose.addMouseListener(e);
     }
 
@@ -648,16 +549,8 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         return jtfAddress;
     }
 
-    public JTextField getJtfEmail() {
-        return jtfEmail;
-    }
-
     public JTextField getJtfFirstName() {
         return jtfFirstName;
-    }
-
-    public JTextField getJtfHomePhone() {
-        return jtfHomePhone;
     }
 
     public JTextField getJtfLastName() {
@@ -668,24 +561,12 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         return jtfMiddleName;
     }
 
-    public JTextField getJtfMobilePhone() {
-        return jtfMobilePhone;
-    }
-
-    public JTextField getJtfWorkPhone() {
-        return jtfWorkPhone;
-    }
-
     public JComboBox<String> getJcbCity() {
         return jcbCity;
     }
 
     public JComboBox<String> getJcbCountry() {
         return jcbCountry;
-    }
-
-    public JComboBox<String> getJcbGender() {
-        return jcbGender;
     }
 
     public JComboBox<String> getJcbReligion() {
@@ -702,10 +583,6 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
 
     public JDateChooser getJdchDOB1() {
         return jdchDateStart;
-    }
-
-    public JPasswordField getJpfPassword() {
-        return jpfPassword;
     }
 
     public JTextField getJtfBuildingNumber() {
@@ -860,13 +737,6 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         }
     }
 
-    public void fillComboBoxSex() {
-        List<Object> obj = loadTable.fillComboBoxSex();
-        for (Object o : obj) {
-            jcbGender.addItem(((Gender) o).getGenderName());
-        }
-    }
-
     public void fillComboBoxMartialStatus() {
         List<Object> obj = loadTable.fillComboBoxMartialStatus();
         for (Object o : obj) {
@@ -947,8 +817,29 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         jifAddCity.closeSaveNewCityInternlaPaneListener();
         fillComboBoxCity();
     }
-    
-     public void showAddCityScreen() {
+
+    public void showAddCityScreen() {
         jifAddCity.show();
+    }
+
+    public void updateDoctorFields(Doctor doctor) {
+        jtfFirstName.setText(doctor.getPersonId().getFirstName());
+        jtfLastName.setText(doctor.getPersonId().getLastName());
+        jtfMiddleName.setText(doctor.getPersonId().getMiddleName());
+        jcbCity.setSelectedItem(doctor.getPersonId().getAddressId().getCityId().getCityName());
+        jcbMaritalStatus.setSelectedItem(doctor.getPersonId().getMartialStatusId().getMartialStatusName());
+        jtfAddress.setText(doctor.getPersonId().getAddressId().getStreetName());
+        jcbCountry.setSelectedItem(doctor.getPersonId().getAddressId().getCityId().getCountryId().getCountryName());
+        jtfBuildingNumber.setText(String.valueOf(doctor.getPersonId().getAddressId().getBuildingNumber()));
+        loadEducationTable();
+
+    }
+
+    public void loadEducationTable() {
+        doctorEducation = personEducationService.findEducation(doctor);
+        doctorTableModelEducation.add(doctorEducation);
+        jtEducationDetails.setModel(doctorTableModelEducation);
+        doctorTableModelEducation.fireTableDataChanged();
+        // selectedIndexChange Method...
     }
 }

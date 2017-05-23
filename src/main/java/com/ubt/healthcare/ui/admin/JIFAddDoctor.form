@@ -49,17 +49,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jtpDoctorDetails" pref="761" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Group type="102" alignment="3" attributes="0">
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="jbClose" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="3" attributes="0">
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="jbSaveDoctor" max="32767" attributes="0"/>
-                  </Group>
+              <Component id="jtpDoctorDetails" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jbClose" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jbSaveDoctor" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
@@ -96,7 +90,6 @@
                                       <Component id="jlBirthPlace1" min="-2" pref="91" max="-2" attributes="0"/>
                                       <Component id="jlReligion" min="-2" pref="78" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -162,10 +155,6 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="182" max="32767" attributes="0"/>
-                                  <Component id="jtfAddress" linkSize="7" min="-2" pref="147" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -220,6 +209,7 @@
                                               <Component id="jtfBuildingNumber" linkSize="7" min="-2" pref="120" max="-2" attributes="0"/>
                                               <Component id="jcbCountry" linkSize="7" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                               <Component id="jcbCity" linkSize="7" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                              <Component id="jtfAddress" linkSize="7" min="-2" pref="147" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -230,7 +220,6 @@
                                   <EmptySpace min="43" pref="43" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jbAddCity" min="-2" pref="103" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="381" max="-2" attributes="0"/>
                       </Group>
@@ -315,15 +304,12 @@
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Group type="102" alignment="3" attributes="0">
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jlAddress2" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Component id="jtfAddress" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="3" attributes="0">
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                          <Component id="jlAddress2" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -345,34 +331,31 @@
                                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                           <Component id="jlContactInformation" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jlBuildingNumber" min="-2" pref="22" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jlBuildingNumber" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Group type="102" alignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="jlMobilePhone" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jtfMobilePhone" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jtfMobilePhone" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Group type="102" alignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="jlWorkPhone" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jtfWorkPhone" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jtfWorkPhone" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Group type="102" alignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="jlHomePhone" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jtfHomePhone" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="jtfHomePhone" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -713,10 +696,7 @@
                                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jdchDateEnd" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="jdchDateEnd" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               </Group>
@@ -770,7 +750,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="198" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="200" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jbSaveEducation" alignment="3" max="32767" attributes="0"/>
                               <Component id="jbDeleteEducation" alignment="3" max="32767" attributes="0"/>

@@ -23,20 +23,26 @@ public class PersonEducationService {
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
     private List<Doctor> doctorRepo;
-    private UserValidation userValidation;
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
 
     public PersonEducationService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
-        userValidation = new UserValidation();
     }
 
     public void persistPersonEducation(PersonEducation personEducation) {
 
         //make the connection between the tables and  save just education pojo
         sqlRepository.add(personEducation);
+
+        // return "Education Saved";
+    }
+
+    public void editPersonEducation(PersonEducation personEducation) {
+
+        //make the connection between the tables and  save just education pojo
+        sqlRepository.update(personEducation);
 
         // return "Education Saved";
     }
@@ -52,5 +58,10 @@ public class PersonEducationService {
             }
         }
         return prsonEduc;
+    }
+    
+    public void forceFetchFromDatabase()
+    {
+        personEducation = null;
     }
 }

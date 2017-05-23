@@ -19,16 +19,15 @@ import java.util.List;
 public class DoctorService {
 
     private SQLRepository sqlRepository;
-    private InputValidation inputValidation;;
+    private InputValidation inputValidation;
+    ;
     private List<Doctor> doctorRepo;
-    private UserValidation userValidation;
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
 
     public DoctorService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
-        userValidation = new UserValidation();
     }
 
     /**
@@ -115,6 +114,22 @@ public class DoctorService {
 
         if ("Save".equals(doctorMsg)) {
             sqlRepository.add(person);
+
+        }
+
+        return doctorMsg;
+    }
+
+    public String editDoctor(Doctor doctor) {
+
+        String doctorMsg = null;
+
+        Person person = doctor.getPersonId();
+
+        doctorMsg = checkIfDoctorExists(doctor);
+
+        if ("Exist".equals(doctorMsg)) {
+            sqlRepository.update(person);
 
         }
 

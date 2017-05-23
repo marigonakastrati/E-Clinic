@@ -55,10 +55,10 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
 
         jbClose = new javax.swing.JButton();
         jbSaveCity = new javax.swing.JButton();
-        jlProgramType = new javax.swing.JLabel();
+        jlCityName = new javax.swing.JLabel();
         jtfCityName = new javax.swing.JTextField();
-        jlEducationType = new javax.swing.JLabel();
-        jlInstitution = new javax.swing.JLabel();
+        jlCountry = new javax.swing.JLabel();
+        jlZipCode = new javax.swing.JLabel();
         jtfZipCode = new javax.swing.JTextField();
         jcbCountry = new javax.swing.JComboBox<>();
         jbAddCountry = new javax.swing.JButton();
@@ -72,14 +72,19 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
         setVisible(true);
 
         jbClose.setText("Close");
+        jbClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCloseActionPerformed(evt);
+            }
+        });
 
         jbSaveCity.setText("Save");
 
-        jlProgramType.setText("City Name");
+        jlCityName.setText("City Name");
 
-        jlEducationType.setText("Country");
+        jlCountry.setText("Country");
 
-        jlInstitution.setText("Zip Code");
+        jlZipCode.setText("Zip Code");
 
         jbAddCountry.setText("Add Country");
         jbAddCountry.addActionListener(new java.awt.event.ActionListener() {
@@ -101,11 +106,11 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
                         .addComponent(jbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlProgramType, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlEducationType, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jcbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
@@ -113,7 +118,7 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlInstitution, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -122,9 +127,9 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlProgramType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlEducationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlInstitution, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlCityName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlCountry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlZipCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfCityName)
@@ -145,15 +150,21 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
         jifAddCountry.show();
     }//GEN-LAST:event_jbAddCountryActionPerformed
 
+    private void jbCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCloseActionPerformed
+        this.dispose();
+        jtfCityName.setText("");
+        jtfZipCode.setText("");
+    }//GEN-LAST:event_jbCloseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAddCountry;
     private javax.swing.JButton jbClose;
     private javax.swing.JButton jbSaveCity;
     private javax.swing.JComboBox<String> jcbCountry;
-    private javax.swing.JLabel jlEducationType;
-    private javax.swing.JLabel jlInstitution;
-    private javax.swing.JLabel jlProgramType;
+    private javax.swing.JLabel jlCityName;
+    private javax.swing.JLabel jlCountry;
+    private javax.swing.JLabel jlZipCode;
     private javax.swing.JTextField jtfCityName;
     private javax.swing.JTextField jtfZipCode;
     // End of variables declaration//GEN-END:variables
@@ -191,8 +202,8 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
         String countryName = jcbCountry.getSelectedItem().toString();
         Country country = countryService.findTheCountry(countryName);
 
-        if (!("Valid".equals(inputValidation.validateCityName(countryName)))) {
-            return inputValidation.validateCityName(countryName);
+        if (!("Valid".equals(inputValidation.validateCityName(cityName)))) {
+            return inputValidation.validateCityName(cityName);
         } else if (!("Valid".equals(inputValidation.validateZipCode(zipCode)))) {
             return inputValidation.validateZipCode(zipCode);
         } else {
@@ -227,10 +238,6 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
     }
 
     public void addCloseCityEditDoctorInternalFrameMouseAdapter(MouseAdapter e) {
-        jbClose.addMouseListener(e);
-    }
-
-    public void addCloseCityAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbClose.addMouseListener(e);
     }
 

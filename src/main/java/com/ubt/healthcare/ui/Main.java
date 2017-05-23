@@ -5,6 +5,8 @@
  */
 package com.ubt.healthcare.ui;
 
+import com.ubt.healthcare.ui.admin.JFAdminScreen;
+import com.ubt.healthcare.ui.eventhandling.KeyListenerLogin;
 import com.ubt.healthcare.ui.eventhandling.MouseAdapterCloseWindows;
 import com.ubt.healthcare.ui.eventhandling.MouseAdapterLogin;
 
@@ -19,14 +21,16 @@ public class Main {
         
         JPMain jpMain = new JPMain();
         JPLoginScreen jpLoginScreen = new JPLoginScreen();
+        JFAdminScreen jfAdminScreen = new JFAdminScreen();
         //JPInformationScreen jpStudentInformation = new JPInformationScreen();
         //JPProfile jpProfile = new JPProfile();
         //JPAddDoctor jpAddDoctor = new JPAddDoctor();
         //JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation,jpProfile,jpAddDoctor);
-        JFLogin jfLogin = new JFLogin(jpMain, jpLoginScreen);
+        JFLogin jfLogin = new JFLogin(jpMain, jpLoginScreen,jfAdminScreen);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfLogin));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfLogin));
+        jpLoginScreen.addLoginEnterKeyListener(new KeyListenerLogin(jfLogin));
         /*jpStudentInformation.addEditStudentMouseAdapter(new MouseAdapterEditScreen(jfMain));
         jpStudentInformation.addViewScheduleScreenListener(new MouseAdapterViewSchedule(jfMain));
         jpStudentInformation.addLogOutAdapter(new MouseAdapterLogOut(jfMain));*/

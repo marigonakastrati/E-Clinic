@@ -28,7 +28,7 @@ public class SQLRepository implements PersistenceInterface {
     public void update(Object entity ){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(entity);
+        session.merge(entity);
         session.getTransaction().commit();
         session.close();
     }

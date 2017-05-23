@@ -6,7 +6,11 @@
 package com.ubt.healthcare.ui.admin;
 
 import java.awt.event.MouseAdapter;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -222,6 +226,11 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jdpPaneHandler.remove(jifDoctor.getJifAddCity());
         jdpPaneHandler.add(jifDoctor.getJifAddCity());
         jifDoctor.getJifAddCity().show();
+        try {
+            jifDoctor.getJifAddCity().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(JFAdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void showAddCountryInternalFrame() {
@@ -229,4 +238,29 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jdpPaneHandler.add(jifDoctor.getJifAddCountry());
         jifDoctor.getJifAddCountry().show();
     }
+
+    public void showEditDoctorInternalFrame() {
+
+        if (jifDoctor.getDoctor() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Choose doctor you want to edit");
+        } else {
+            // remove internalframe from desktop pane
+            jdpPaneHandler.remove(jifDoctor.getJifEditDoctor());
+
+            jdpPaneHandler.add(jifDoctor.getJifEditDoctor());
+
+            jifDoctor.getJifEditDoctor().show();
+
+            jifDoctor.getJifEditDoctor().setDoctor(jifDoctor.getDoctor());
+            jifDoctor.getJifEditDoctor().updateDoctorFields(jifDoctor.getDoctor());
+
+            // hide the View Doctor Internal Pane
+            jifDoctor.hide();
+        }
+    }
+
+    public JIFDoctor getJifDoctor() {
+        return jifDoctor;
+    }
+
 }

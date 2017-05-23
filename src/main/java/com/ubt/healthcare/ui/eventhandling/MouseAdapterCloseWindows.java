@@ -17,18 +17,18 @@ import javax.swing.ImageIcon;
  */
 public class MouseAdapterCloseWindows extends MouseAdapter {
 
-    private JFLogin jpinterface;
+    private JFLogin jfLogin;
     
-    public MouseAdapterCloseWindows(JFLogin jpinterface) 
+    public MouseAdapterCloseWindows(JFLogin jfLogin) 
     {
-        this.jpinterface = jpinterface;
+        this.jfLogin = jfLogin;
     }
 
     @Override
     public void mouseEntered(MouseEvent arg0) 
     {
         ImageIcon icHover =new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close-hover.png"));
-        jpinterface.getJlCloseWindowsLoginScreen()
+        jfLogin.getJlCloseWindowsLoginScreen()
                 .setIcon(icHover);
     }
 
@@ -36,7 +36,7 @@ public class MouseAdapterCloseWindows extends MouseAdapter {
     public void mouseExited(MouseEvent arg0) 
     {
         ImageIcon icClose =new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close.png"));
-        jpinterface.getJlCloseWindowsLoginScreen()
+        jfLogin.getJlCloseWindowsLoginScreen()
                 .setIcon(icClose);
     }
 

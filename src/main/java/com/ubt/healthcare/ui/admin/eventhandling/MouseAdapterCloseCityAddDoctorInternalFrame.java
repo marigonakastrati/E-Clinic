@@ -13,7 +13,8 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterCloseCityAddDoctorInternalFrame extends MouseAdapter{
+public class MouseAdapterCloseCityAddDoctorInternalFrame extends MouseAdapter {
+
     private JIFAddDoctor jifAddDoctor;
 
     public MouseAdapterCloseCityAddDoctorInternalFrame(JIFAddDoctor jifAddDoctor) {
@@ -21,10 +22,10 @@ public class MouseAdapterCloseCityAddDoctorInternalFrame extends MouseAdapter{
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) 
-    {
-        jifAddDoctor.closeSaveNewCityInternlaPaneListener();
+    public void mouseClicked(MouseEvent arg0) {
+        if (jifAddDoctor.isVisible()) {
+            jifAddDoctor.closeSaveNewCityInternlaPaneListener();
+        }
     }
-    
-    
+
 }

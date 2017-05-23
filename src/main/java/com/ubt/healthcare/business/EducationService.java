@@ -22,14 +22,12 @@ public class EducationService {
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
     private List<Doctor> doctorRepo;
-    private UserValidation userValidation;
     private boolean personEducationChanged;//use it as synchronization mechanizm...
     private boolean doctorRepoChanged;
 
     public EducationService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
-        userValidation = new UserValidation();
     }
 
     public Education findTheEducation(String institutionName, String programName, String educationType) {

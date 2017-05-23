@@ -23,6 +23,8 @@ public class InputValidation {
     private static final String TYPE_COUNTRY_NAME = "Type country name";
     private static final String TYPE_CITY_NAME = "Type city name";
     private static final String TYPE_ZIP_CODE = "Type zip code";
+    private static final String TYPE_USER_NAME = "Type user name";
+    private static final String TYPE_PASSWORD = "Type password";
     private static final String TYPE_YOUR_FIRST_NAME = "Type you First Name";
     private static final String TYPE_YOUR_LAST_NAME = "Type you Last Name";
     private static final String TYPE_ONLY_NUMBERS = "You shoud type only numbers";
@@ -36,7 +38,7 @@ public class InputValidation {
     private static final String VALID = "Valid";
     private static final Pattern NOT_NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final Pattern NOT_CHARACTER_PATTERN = Pattern.compile("[A-Za-z]+");
-    private static final Pattern NOT_CHARACTER_NOT_NUMBER_PATTERN = Pattern.compile("[A-Za-z0-9]+");
+    private static final Pattern NOT_CHARACTER_NOT_NUMBER_PATTERN = Pattern.compile("[A-Za-z0-9\\s]+");
     private static final Pattern NOT_EMAIL_FORMAT_PATTERN = Pattern.compile("([a-z0-9])+@([\\S+\\.])+(com|edu|org|net|co.uk)");
 
     public boolean validateInput(String msg) {
@@ -136,8 +138,8 @@ public class InputValidation {
         }
         return VALID;
     }
-    
-     public String validateCountryName(String countrName) {
+
+    public String validateCountryName(String countrName) {
         if (countrName == null || countrName.trim().isEmpty()) {
             return TYPE_COUNTRY_NAME;
         }
@@ -146,8 +148,8 @@ public class InputValidation {
         }
         return VALID;
     }
-     
-     public String validateCityName(String cityName) {
+
+    public String validateCityName(String cityName) {
         if (cityName == null || cityName.trim().isEmpty()) {
             return TYPE_CITY_NAME;
         }
@@ -156,14 +158,42 @@ public class InputValidation {
         }
         return VALID;
     }
-     
-      public String validateZipCode(String cityName) {
+
+    public String validateZipCode(String cityName) {
         if (cityName == null || cityName.trim().isEmpty()) {
             return TYPE_ZIP_CODE;
         }
         if (!(NOT_NUMBER_PATTERN.matcher(cityName).matches())) {
             return TYPE_ONLY_NUMBERS;
         }
+        return VALID;
+    }
+
+    public String validateHomeNumber(String phoneNumber) {
+        if (!(NOT_NUMBER_PATTERN.matcher(phoneNumber).matches())) {
+            return TYPE_ONLY_NUMBERS;
+        }
+        if (phoneNumber.trim().length() < 6) {
+            return TYPE_MIN_PHONE_NUMBERS;
+        }
+        return VALID;
+    }
+
+    public String validateUserName(String userName) {
+        if (userName == null || userName.trim().isEmpty()) {
+            return TYPE_USER_NAME;
+        }
+        if (!(NOT_NUMBER_PATTERN.matcher(userName).matches())) {
+            return TYPE_ONLY_NUMBERS;
+        }
+        return VALID;
+    }
+
+    public String validatePassword(String password) {
+        if (password == null || password.trim().isEmpty()) {
+            return TYPE_PASSWORD;
+        }
+
         return VALID;
     }
 }

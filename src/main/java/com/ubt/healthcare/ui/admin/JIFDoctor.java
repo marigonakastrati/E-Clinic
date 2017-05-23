@@ -18,6 +18,7 @@ import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.business.LoginGroupService;
 import com.ubt.healthcare.business.MartialStatusService;
 import com.ubt.healthcare.business.PasswordHashing;
+import com.ubt.healthcare.business.PersonArchiveService;
 import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.business.PersonService;
 import com.ubt.healthcare.business.ReligionService;
@@ -33,6 +34,7 @@ import com.ubt.healthcare.dto.EducationType;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.Person;
+import com.ubt.healthcare.dto.PersonArchive;
 import com.ubt.healthcare.dto.PersonEducation;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.UserGroup;
@@ -68,10 +70,11 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
     private ReligionService religionService;
     private AddressService addressService;
     private PersonService personService;
+    private PersonArchiveService personArchiveService;
     private UserGroupService userGroupService;
     private LoginGroupService loginGroupService;
     private Doctor doctor;
-    private JIFSearchDoctor jifViewDoctor;
+    private JIFSearchDoctor jifSearchDoctor;
     private JIFEditDoctor jifEditDoctor;
     private JIFAddDoctor jifAddDoctor;
     private PasswordHashing passwordHashing;
@@ -107,9 +110,10 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         personService = new PersonService();
         userGroupService = new UserGroupService();
         loginGroupService = new LoginGroupService();
+        personArchiveService = new PersonArchiveService();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
-        this.jifViewDoctor = jifViewDoctor;
+        this.jifSearchDoctor = jifViewDoctor;
         this.jifAddDoctor = jifAddDoctor;
         this.jifEditDoctor = jifEditDoctor;
         this.jifAddCity = jifAddCity;
@@ -417,7 +421,7 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
                     .addComponent(jbEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbAddNewDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbSearchDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(175, 175, 175)
+                .addGap(178, 178, 178)
                 .addComponent(jtpDoctorDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
         );
@@ -489,12 +493,22 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         // selectedIndexChange Method...
     }
 
+    public void loadEducationTable(boolean forceFetchFromDb) {
+        if(forceFetchFromDb)
+            personEducationService.forceFetchFromDatabase();
+            
+        loadEducationTable();
+    }
     public void addSearchDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbSearchDoctor.addMouseListener(e);
     }
 
     public void addOpenAddDoctorInternalFrameMouseAdapter(MouseAdapter e) {
         jbAddNewDoctor.addMouseListener(e);
+    }
+
+    public void addEditDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbEdit.addMouseListener(e);
     }
 
     public DoctorService getDoctorService() {
@@ -567,54 +581,58 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
 
     public void viewSelectedDoctor() {
 
-        int row = jifViewDoctor.getJtDoctorTable().getSelectedRow();// do not allow multiple row selection
+        int row = jifSearchDoctor.getJtDoctorTable().getSelectedRow();// do not allow multiple row selection
         if (row > -1) {
 
             // get selected doctor
-            doctor = jifViewDoctor.getDoctorTableModelViewDoctor().getDoctor(row);
+            doctor = jifSearchDoctor.getDoctorTableModelViewDoctor().getDoctor(row);
 
             //update the JIFDoctor fields with doctors object
             updateDoctorFields(doctor);
             loadEducationTable();
 
             //clear the fields of JIFSearchDoctor
-            jifViewDoctor.getJtfSearchByName().setText("");
-            jifViewDoctor.getJtfSearchBySurName().setText("");
+            jifSearchDoctor.getJtfSearchByName().setText("");
+            jifSearchDoctor.getJtfSearchBySurName().setText("");
 
             // check if no item found...
-            jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+            jifSearchDoctor.getDoctorTableModelViewDoctor().removeAll();
 
         } else// if no row selected display message that no row is selected 
         {
             JOptionPane.showMessageDialog(rootPane, "No Doctor Selected");
             //clear the fields of JIFSearchDoctor
-            jifViewDoctor.getJtfSearchByName().setText("");
-            jifViewDoctor.getJtfSearchBySurName().setText("");
+            jifSearchDoctor.getJtfSearchByName().setText("");
+            jifSearchDoctor.getJtfSearchBySurName().setText("");
 
             // check if no item found...
-            if (jifViewDoctor.getDoctorList() != null) {
-                jifViewDoctor.getDoctorTableModelViewDoctor().removeAll();
+            if (jifSearchDoctor.getDoctorList() != null) {
+                jifSearchDoctor.getDoctorTableModelViewDoctor().removeAll();
             }
             clearViewDoctorFields();
             if (doctorEducation != null && doctorEducation.size() > 0) {
                 doctorTableModelEducation.removeAll();
             }
         }
-        if (jifViewDoctor.getJtDoctorTable() != null) {
-            jifViewDoctor.getJtDoctorTable().clearSelection();
+        if (jifSearchDoctor.getJtDoctorTable() != null) {
+            jifSearchDoctor.getJtDoctorTable().clearSelection();
         }
         // close the JIFSearchDoctor
-        jifViewDoctor.dispose();
+        jifSearchDoctor.dispose();
         this.show();
 
     }
 
     public JIFSearchDoctor getJifViewDoctor() {
-        return jifViewDoctor;
+        return jifSearchDoctor;
     }
 
     public JIFAddDoctor getJifAddDoctor() {
         return jifAddDoctor;
+    }
+
+    public JIFEditDoctor getJifEditDoctor() {
+        return jifEditDoctor;
     }
 
     private void updateDoctorFields(Doctor doctor) {
@@ -811,6 +829,18 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         //keep the fields as they where before
     }
 
+    public void closeEditDoctorInternalFrameAddDoctor() {
+        // clear the fields of addnewdoctor
+        clearAddDoctorFields();
+        //close the internalframe
+
+        // close the add new doctor 
+        jifEditDoctor.dispose();
+        this.show();
+        //open the doctor internalframe
+        //keep the fields as they where before
+    }
+
     private void clearAddDoctorFields() {
         jifAddDoctor.getJtfFirstName().setText("");
         jifAddDoctor.getJtfLastName().setText("");
@@ -920,4 +950,175 @@ public class JIFDoctor extends javax.swing.JInternalFrame {
         return jifAddCountry;
     }
 
+    public void editDoctorInternalFrameAddDoctor() {
+        //jifAddDoctor.getT
+        // check if all mandatory fields are not empty
+        // if so warn the user don't let move to next step
+        //if user has typed just education and no personal infromation don't let move on next step
+
+        //save doctor on database using doctor service
+        String firstName = jifEditDoctor.getJtfFirstName().getText();
+        String middleName = jifEditDoctor.getJtfMiddleName().getText();
+        String lastName = jifEditDoctor.getJtfLastName().getText();
+        String martialStatus = jifEditDoctor.getJcbMaritalStatus().getSelectedItem().toString();
+        String address = jifEditDoctor.getJtfAddress().getText();
+        String city = jifEditDoctor.getJcbCity().getSelectedItem().toString();
+        String country = jifEditDoctor.getJcbCountry().getSelectedItem().toString();
+        String buildingNumber = jifEditDoctor.getJtfBuildingNumber().getText();
+        String religion = jifEditDoctor.getJcbReligion().getSelectedItem().toString();
+
+        //validate all inputs which are not taken from combobox...
+        if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName) + " on your first name");
+        } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName) + " on your last name");
+        } else if (!("Valid".equals(inputValidation.validateAddress(address)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateAddress(address) + " on your address");
+        } else if (!("Valid".equals(inputValidation.validateBuildingNumber(buildingNumber)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateBuildingNumber(buildingNumber) + " on your building number");
+        } else if (firstName.equals(jifEditDoctor.getDoctor().getPersonId().getFirstName()) && lastName.equals(jifEditDoctor.getDoctor().getPersonId().getLastName())
+                && middleName.equals(jifEditDoctor.getDoctor().getPersonId().getMiddleName())
+                && martialStatus.equals(jifEditDoctor.getDoctor().getPersonId().getMartialStatusId().getMartialStatusName())
+                && religion.equals(jifEditDoctor.getDoctor().getPersonId().getReigionId().getName())
+                && address.equals(jifEditDoctor.getDoctor().getPersonId().getAddressId().getStreetName())
+                && country.equals(jifEditDoctor.getDoctor().getPersonId().getAddressId().getCityId().getCountryId().getCountryName())
+                && city.equals(jifEditDoctor.getDoctor().getPersonId().getAddressId().getCityId().getCityName())
+                && buildingNumber.equals(String.valueOf(jifEditDoctor.getDoctor().getPersonId().getAddressId().getBuildingNumber()))
+                && (!checkEducationChangedEditDoctor())) {
+
+            JOptionPane.showMessageDialog(rootPane, "No changes made");
+        } else {
+
+            PersonArchive personArchive = new PersonArchive();
+            personArchive.setFirstName(doctor.getPersonId().getFirstName());
+            personArchive.setLastName(doctor.getPersonId().getLastName());
+            personArchive.setMiddleName(doctor.getPersonId().getMiddleName());
+            personArchive.setGenderId(doctor.getPersonId().getGenderId().getGenderId());
+            personArchive.setAddressId(doctor.getPersonId().getAddressId().getAddressId());
+            personArchive.setMartialStatusId(doctor.getPersonId().getMartialStatusId().getMartialStatusId());
+            personArchive.setPersonId(doctor.getPersonId());
+            personArchive.setReligionId(doctor.getPersonId().getReigionId().getReligionId());
+            personArchive.setDateChanged(new Date());
+
+            // else we can persist the data....
+            doctor = jifEditDoctor.getDoctor();
+
+            doctor.getPersonId().setFirstName(firstName);
+            doctor.getPersonId().setMiddleName(middleName);
+            doctor.getPersonId().setLastName(lastName);
+
+            MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
+            Country findTheCountry = countryService.findTheCountry(country);
+            Religion findTheReligion = religionService.findTheReligion(religion);
+            City findTheCity = cityService.findTheCity(city);
+
+            findTheCity.setCountryId(findTheCountry);
+
+            Address theAddress = new Address();
+
+            theAddress.setStreetName(address);
+            theAddress.setCityId(findTheCity);
+            theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
+
+            theAddress = addressService.findTheAddress(theAddress);
+
+            //set the combobox values to doctor
+            doctor.getPersonId().setMartialStatusId(findTheMartialStatus);
+            doctor.getPersonId().setAddressId(theAddress);
+            doctor.getPersonId().setReigionId(findTheReligion);
+
+            //before we save the address make sure the user doesn't exist in db. Some users may overload the db with many addresses if we dont check
+            String personMsg = personService.checkIfUserExists(doctor.getPersonId());
+
+            if ("Exist".equals(personMsg)) {
+
+                // store address 
+                String addressMsg = addressService.checkIfAddressExists(theAddress);
+                if ("Save".equals(addressMsg)) {
+                    addressService.persistAddress(theAddress);
+                }
+                String doctorSavedMsg = doctorService.editDoctor(doctor);
+                if ("Exist".equals(doctorSavedMsg)) {
+                    personArchiveService.persistPersonArchive(personArchive);
+                    editEducation();
+                }
+
+                JOptionPane.showMessageDialog(null, "User is edited");// if doctor is not saved do not save other stuff.
+
+                // clear the Fields 
+                clearAddDoctorFields();
+
+                // close the add new doctor 
+                jifEditDoctor.dispose();
+                this.show();
+                // update the fields on jifDoctor to see the newly added doctor
+                updateDoctorFields(doctor);
+                loadEducationTable(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "User is not changed");
+            }
+        }
+
+    }
+
+    private boolean checkEducationChangedEditDoctor() {
+        // get the education from person object
+        Collection<PersonEducation> personEducation = doctor.getPersonId().getPersonEducationCollection();
+        // get education from jifEditDoctor table model
+        //compare date start and date end
+        // if not same return true, else false 
+        return jifEditDoctor.getDoctorTableModelEducation().getPersonEducation().containsAll(personEducation);
+    }
+
+    private void editEducation() {
+
+        // save the education details...
+        int i = 0;
+        //iterate as long as there is personEducation
+        for (PersonEducation pe : jifEditDoctor.getDoctorTableModelEducation().getPersonEducation()) {
+
+            Education education = null;
+            EducationType educationType = null;
+            EducationProgram educationProgram = null;
+
+            // get the educationType 
+            educationType = educationTypeService.findTheEducationType(pe.getEducationId().getEucationTypeId().getEducationName());
+
+            //check if educationProgram exists, if not create new and save with educationProgramService
+            educationProgram = educationProgramService.findTheEducationProgram(pe.getEducationId().getEducationProgramId().getProgramName());
+            if (educationProgram == null) {
+                educationProgram = new EducationProgram();
+                educationProgram.setProgramName(pe.getEducationId().getEducationProgramId().getProgramName());
+                // persist the educationprogram
+                educationProgramService.persistEducationProgram(educationProgram);
+                education = new Education();
+                education.setInstitutionName(pe.getEducationId().getInstitutionName());
+
+            } else {
+
+                // check if education exists, if not create new and save with educationService
+                education = educationService.findTheEducation(pe.getEducationId().getInstitutionName(), educationProgram.getProgramName(), educationType.getEducationName());
+                if (education == null) {
+                    education = new Education();
+                    education.setInstitutionName(pe.getEducationId().getInstitutionName());
+
+                    //set the education of PersonEdcation object
+                    education.setEucationTypeId(educationType);
+                    education.setEducationProgramId(educationProgram);
+
+                    // persist the educationprogram
+                    educationService.persistEducation(education);
+                }
+            }
+
+            jifEditDoctor.getDoctorTableModelEducation().getPersonEducation().get(i).setEducationId(education);
+            jifEditDoctor.getDoctorTableModelEducation().getPersonEducation().get(i).setPersonId(doctor.getPersonId());
+
+            //persist personEducation Object in db 
+            personEducationService.editPersonEducation(jifEditDoctor.getDoctorTableModelEducation().getPersonEducation().get(i++));
+
+        }
+
+    }
 }

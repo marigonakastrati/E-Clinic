@@ -7,51 +7,31 @@ package com.ubt.healthcare.ui;
 
 import com.ubt.healthcare.ui.admin.JIFSearchDoctor;
 import com.ubt.healthcare.business.AuthenticateUser;
-import com.ubt.healthcare.business.UserGroupAuthorization;
-import com.ubt.healthcare.business.UserValidation;
+import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.AdminClinic;
 import com.ubt.healthcare.dto.Patient;
 import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
-import com.ubt.healthcare.ui.admin.JFAdmin;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JIFEditDoctor;
-import com.ubt.healthcare.ui.admin.JPAddAdminClinic;
-import com.ubt.healthcare.ui.admin.JPAddDoctor;
-import com.ubt.healthcare.ui.admin.JPAddNurse;
-import com.ubt.healthcare.ui.admin.JPAddPatient;
-import com.ubt.healthcare.ui.admin.JPAddPharmacist;
-import com.ubt.healthcare.ui.admin.JPAddPharmacyManager;
-import com.ubt.healthcare.ui.admin.JPAddReceptionist;
-import com.ubt.healthcare.ui.admin.JPanelAdminScreen;
-import com.ubt.healthcare.ui.admin.JPanelViewDoctor;
-import com.ubt.healthcare.ui.admin.JPanelViewReceptionist;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddDoctorScreen;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAddReceptionistScreen;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterAdminScreen;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionDoctorEducationInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCityAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCityEditDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCountryInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreenInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditProfileScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistAdminClinic;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistNurse;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPatient;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacist;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistPharmacyManager;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPersistReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityAddDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountryInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveDoctorEducationInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearchInternalFrame;
@@ -59,9 +39,7 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctorIntern
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityEditDoctorInternalFrame;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewProfile;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterViewReceptionist;
+import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -75,19 +53,19 @@ public class JFLogin extends JFrame {
 
     private JPLoginScreen jpLoginScreen;
     private JPMain jpMain;
-    private JFAdmin jfAdmin;
-    private CardLayout clCardlayout ;
-    private UserValidation userValidation;
-    private UserGroupAuthorization userGroupAuthorization;
-    private AuthenticateUser authUser ;
+    private CardLayout clCardlayout;
+    private JFAdminScreen jfAdminScreen;
+    private UserGroupService userGroupService;
+    private AuthenticateUser authUser;
+    private InputValidation inputValidation;
 
-    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen) 
-    {
+    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen, JFAdminScreen jfAdminScreen) {
         this.jpLoginScreen = jpLoginScreen;
         this.jpMain = jpMain;
-        this.userValidation = new UserValidation();
-        this.userGroupAuthorization = new UserGroupAuthorization();
+        this.jfAdminScreen = jfAdminScreen;
         this.authUser = new AuthenticateUser();
+        userGroupService = new UserGroupService();
+        inputValidation = new InputValidation();
         clCardlayout = new CardLayout();
         setUndecorated(true);// disable the minimize, maximize, close
         setDefaultCloseOperation(3);
@@ -95,7 +73,6 @@ public class JFLogin extends JFrame {
         setBounds(100, 100, 300, 300);
         jpMain.setLayout(clCardlayout);
 
-        
         jpMain.add(jpLoginScreen, "Login Screen");// it works by using the second paramteter to switch the JPanels
         clCardlayout.show(jpMain, "Show");
 
@@ -107,112 +84,89 @@ public class JFLogin extends JFrame {
 
     }
 
-    public void authenticateUser() 
-    {
+    public void authenticateUser() {
         String user = jpLoginScreen.getJtfUserId().getText();
+        String password = new String(jpLoginScreen.getJtfpassCode().getPassword());
         /*find if the user typed exists on table UserGroupRoles 
             and determine its group based on the group type show the appropiate JFrame 
             e.g. JFAdmin, JFDoctor which on its self has JPViewSample JPanels...
             when the user presses logout the JFrame should terminate
             but the JFLogin should not...*/
-        String msg = userValidation.validateUser(user);// input validation
-        if("Validated".equals(msg))
-        {
-            String userRole = userGroupAuthorization.authorization(user);// role validation
-            swithToRole(userRole, user);
-        }
-        else if ("The user is empty".equals(msg))
-        {
-             JOptionPane.showMessageDialog(null, "User Name is Empty");
-        }
-        else
-        {
+
+        //check if user is empty
+        String msgUser = inputValidation.validateUserName(user);
+        String msgPassword = inputValidation.validatePassword(password);
+        if ("Valid".equals(msgUser) && "Valid".equals(msgPassword)) {
+            String userMsg = userGroupService.checkIfUserxists(user);
+            if ("Valid".equals(userMsg)) {
+                String userRole = userGroupService.authorization(user);// role validation
+                swithToRole(userRole, user);
+            } else if ("Wrong".equals(userMsg)) {
+                JOptionPane.showMessageDialog(null, "User Name is " + userMsg);
+
+            }
+        } else if ("Type user name".equals(msgUser)) {
+            JOptionPane.showMessageDialog(null, "User Name is Empty");
+        } else if ("You shoud type only numbers".equals(msgUser)) {
+            JOptionPane.showMessageDialog(null, msgUser);
+        } else {
             JOptionPane.showMessageDialog(null, "Type the correct login information");
         }
-        
-        
 
     }
-    
-    private void swithToRole(String userRole, String user)
-    {
-        if ("AdminClinic".equals(userRole)) 
-        {
+
+    private void swithToRole(String userRole, String user) {
+        if ("AdminClinic".equals(userRole)) {
             String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            AdminClinic admin = (AdminClinic)authUser.authenticateAdminClinic(user, passcode);
-            if(admin != null)
-            {
+            AdminClinic admin = (AdminClinic) authUser.authenticateAdminClinic(user, passcode);
+            if (admin != null) {
                 showAdminScreen(admin);
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Wrong passcode");
                 // clear the filed from jpLoginscreen...
-            }        
-        } 
-        else if ("Doctor".equals(userRole)) 
-        {
+            }
+        } else if ("Doctor".equals(userRole)) {
             String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Doctor doctor = (Doctor)authUser.authenticateDoctor(user, passcode);
-            if(doctor != null)
-            {
+            Doctor doctor = (Doctor) authUser.authenticateDoctor(user, passcode);
+            if (doctor != null) {
                 //showDoctorScreen(doctor); old version with jpane
                 showDoctorFrameScreen(doctor); // new version with jinternalpane
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Wrong passcode");
                 // clear the filed from jpLoginscreen...
-            }      
-            
-        } 
-        else if ("Patient".equals(userRole)) 
-        {
+            }
+
+        } else if ("Patient".equals(userRole)) {
             String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Patient patient = (Patient)authUser.authenticatePatient(user, passcode);
-            if(patient != null)
-            {
+            Patient patient = (Patient) authUser.authenticatePatient(user, passcode);
+            if (patient != null) {
                 showPatientScreen(patient);
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Wrong passcode");
                 // clear the filed from jpLoginscreen...
-            }   
-            
-        } 
-        else if ("Pharmacist".equals(userRole)) 
-        {
+            }
+
+        } else if ("Pharmacist".equals(userRole)) {
             String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Pharmacist pharmacist = (Pharmacist)authUser.authenticatePharmacist(user, passcode);
-            if(pharmacist != null)
-            {
+            Pharmacist pharmacist = (Pharmacist) authUser.authenticatePharmacist(user, passcode);
+            if (pharmacist != null) {
                 showPharmacistScreen(pharmacist);
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Wrong passcode");
                 // clear the filed from jpLoginscreen...
-            }   
-            
-        } 
-        else if ("PharmacyManager".equals(userRole)) 
-        {
+            }
+
+        } else if ("PharmacyManager".equals(userRole)) {
             String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            PharmacyManager pharmacyManager = (PharmacyManager)authUser.authenticatePharmacyManager(user, passcode);
-            if(pharmacyManager != null)
-            {
+            PharmacyManager pharmacyManager = (PharmacyManager) authUser.authenticatePharmacyManager(user, passcode);
+            if (pharmacyManager != null) {
                 showPharmacyManagerScreen(pharmacyManager);
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Wrong passcode");
                 // clear the filed from jpLoginscreen...
-            }   
-           
-        }
-        else
-        {
+            }
+
+        } else {
             JOptionPane.showMessageDialog(null, "Credentials wrong");
             // clear the filed from jpLoginscreen...
         }
@@ -225,14 +179,13 @@ public class JFLogin extends JFrame {
     public JLabel getJlLoginLabel() {
         return jpLoginScreen.getJllogin();
     }
-    
+
     /*
         create method which does instatiate the JFAdmin and its dependencies 
         and sets the values after authentication...
-    */
-    public void showAdminScreen(AdminClinic admin)
-    {
-        JPAddDoctor jpAddDoctor = new JPAddDoctor();
+     */
+    public void showAdminScreen(AdminClinic admin) {
+        /*JPAddDoctor jpAddDoctor = new JPAddDoctor();
         JPAddNurse jpAddNurse = new JPAddNurse();
         JPAddPatient jpAddPatient = new JPAddPatient();
         JPAddPharmacyManager jpAddPharmacyManager = new JPAddPharmacyManager();
@@ -246,12 +199,12 @@ public class JFLogin extends JFrame {
         JPanelAdminScreen jpAdminScreen = new JPanelAdminScreen();
         /*jfAdmin = new JFAdmin(jpAddDoctor,jpAddNurse,jpAddPatient,jpAddPharmacyManager,jpAddPharmacist,jpAddReceptionist,
                             jpAddAdminClinic,jpViewDoctor, jpViewReceptionist, jpViewProfile, jpEditProfile, jpAdminScreen, admin);*/
-        
+
         // set the Admin profile parameters
-        jpViewProfile.getJtfId().setText(String.valueOf(admin.getAdminClinicId()));
+        /*jpViewProfile.getJtfId().setText(String.valueOf(admin.getAdminClinicId()));
         jpViewProfile.getJtfName().setText(String.valueOf(admin.getPersonId().getFirstName()));
-        jpViewProfile.getJtfSurName().setText(String.valueOf(admin.getPersonId().getLastName()));
-        
+        jpViewProfile.getJtfSurName().setText(String.valueOf(admin.getPersonId().getLastName()));*/
+ /*
         // call the listeners and JPanels
         jpAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
         jpAdminScreen.addViewDoctorMouseAdapter(new MouseAdapterViewDoctor(jfAdmin));
@@ -299,84 +252,85 @@ public class JFLogin extends JFrame {
         jpViewProfile.addUpdateAdminMouseAdapter(new MouseAdapterEditProfileScreen(jfAdmin));
         
         this.setVisible(false);
-        jfAdmin.setSize(800, 800);
+        jfAdmin.setSize(800, 800);*/
     }
-    
+
     public void showPatientScreen(Patient patient) {
         //JFPatient jfPatient = new JFPatient();
-             // call the listeners and JPanels
+        // call the listeners and JPanels
     }
 
     public void showDoctorScreen(Doctor doctor) {
-       //JFDoctor jfDoctor = new JFDoctor();
-             // call the listeners and JPanels
+        //JFDoctor jfDoctor = new JFDoctor();
+        // call the listeners and JPanels
     }
 
     public void showPharmacistScreen(Pharmacist pharmacist) {
-       //JFPharmacist jfPharmacist = new JFPharmacist();
-             // call the listeners and JPanels
+        //JFPharmacist jfPharmacist = new JFPharmacist();
+        // call the listeners and JPanels
     }
+
     public void showPharmacyManagerScreen(PharmacyManager pharmacyManager) {
         //JFPharmacyManager jfPharmacyManager = new JFPharmacyManager();
-            // call the listeners and JPanels
+        // call the listeners and JPanels
     }
-    
-    public void showLoginScreen()
-    {
+
+    public void showLoginScreen() {
         jpLoginScreen.getJtfUserId().setText("");
         jpLoginScreen.getJtfpassCode().setText("");
         jpLoginScreen.getJtfUserId().requestFocusInWindow();
-        //clCardlayout.show(jpMain, "Login Screen"); Maybe i will not use CardLayout
-        //clCardlayout.previous(jpMain);
-        //switchToScreen(loginScreen);
-        //jpViewScheduleScreen.setVisible(false);
         setVisible(true);
         jpLoginScreen.setVisible(true);
-        jfAdmin.dispose();
-        
+        jfAdminScreen.dispose();
+        jfAdminScreen.setVisible(false);
+
     }
-    
-    public void showDoctorFrameScreen(Doctor doctor)
-    {
-        
-        JIFSearchDoctor ilfViewDoctor = new JIFSearchDoctor();      
+
+    public void showDoctorFrameScreen(Doctor doctor) {
+
+        JIFSearchDoctor ilfViewDoctor = new JIFSearchDoctor();
         JIFAddDoctor jifAddDoctor = new JIFAddDoctor();
         JIFEditDoctor jifEditDoctor = new JIFEditDoctor();
-        
+
         JIFAddCity jifAddCity = new JIFAddCity();
         JIFAddCountry jifAddCountry = new JIFAddCountry();
-        
-        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor,jifEditDoctor, jifAddCity,jifAddCountry);
-        
-        
-        JFAdminScreen jfAdminScreen = new JFAdminScreen(ilfDoctor);
-        
+
+        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor, jifEditDoctor, jifAddCity, jifAddCountry);
+
+        jfAdminScreen = new JFAdminScreen(ilfDoctor);
+
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreenInternalFrame(jfAdminScreen));
-        
+        jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
+
         ilfDoctor.addSearchDoctorInternalFrameMouseAdapter(new MouseAdapterShowSearchDoctorInternalFrame(jfAdminScreen));
         ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctorInternalFrame(jfAdminScreen));
-        
+        ilfDoctor.addEditDoctorInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
+
         ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(ilfViewDoctor));
         ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(ilfDoctor));
-        
+
         jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorInternalFrame(ilfDoctor));
-        jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveDoctorEducationInternalFrame(jifAddDoctor));
-        jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionDoctorEducationInternalFrame(jifAddDoctor));
-        jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedDoctorEducationInternalFrame(jifAddDoctor));
-        jifAddDoctor.addAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctorInternalFrame(ilfDoctor));
+        jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationAddDoctorInternalFrame(jifAddDoctor));
+        jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationAddDoctorInternalFrame(jifAddDoctor));
+        jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame(jifAddDoctor));
+        jifAddDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctorInternalFrame(ilfDoctor));
         jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctorInternalFrame(jfAdminScreen));
-        
-        jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
-        
+
+        //jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
+        jifEditDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterEditDoctorInternalFrame(ilfDoctor));
+        jifEditDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseEditDoctorInternalFrame(ilfDoctor));
+        jifEditDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationEditDoctorInternalFrame(jifEditDoctor));
+        jifEditDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationEditDoctorInternalFrame(jifEditDoctor));
+        jifEditDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationEditDoctorInternalFrame(jifEditDoctor));
+
         jifAddCity.addSaveCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityAddDoctorInternalFrame(jifAddDoctor));
         jifAddCity.addSaveCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityEditDoctorInternalFrame(jifEditDoctor));
-        jifAddCity.addCloseCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityAddDoctorInternalFrame(jifAddDoctor));
-        jifAddCity.addCloseCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityEditDoctorInternalFrame(jifEditDoctor));
-        
+        //jifAddCity.addCloseCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityAddDoctorInternalFrame(jifAddDoctor));
+        //jifAddCity.addCloseCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityEditDoctorInternalFrame(jifEditDoctor));
+
         jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountryInternalFrame(jifAddCity));
         jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountryInternalFrame(jifAddCity));
-        
-  
+
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
     }

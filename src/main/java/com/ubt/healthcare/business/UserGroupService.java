@@ -39,4 +39,26 @@ public class UserGroupService {
     public void persistUserInUserGroup(UserGroup userGroup) {
         sqlRepository.add(userGroup);
     }
+
+    // if user i found the the UserGroupRole table
+    public String authorization(String user) {
+        final String entiy = "UserGroup.findByUserId";
+        final String attribute = "userId";
+        UserGroup userGroup = (UserGroup) sqlRepository.findById(Integer.parseInt(user), entiy, attribute);
+
+        return userGroup.getGroupId().getGroupName();
+    }
+
+    public String checkIfUserxists(String user) {
+        String msg = "Wrong";
+        List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
+        for (Object o : docs) {
+            if (((UserGroup) o).getUserId() == Integer.parseInt(user)) {
+                return "Valid";
+            }
+        }
+
+        return msg;
+    }
+
 }

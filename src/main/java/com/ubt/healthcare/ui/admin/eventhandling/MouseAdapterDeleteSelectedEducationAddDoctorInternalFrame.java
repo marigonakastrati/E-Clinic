@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JFAdmin;
+import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterPersistDoctor extends MouseAdapter{
-    private JFAdmin jfAdmin;
+public class MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame extends MouseAdapter{
+    private JIFAddDoctor jidAddDoctor;
 
-    public MouseAdapterPersistDoctor(JFAdmin jfAdmin) {
-        this.jfAdmin = jfAdmin;
+    public MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame(JIFAddDoctor jidAddDoctor) {
+        this.jidAddDoctor = jidAddDoctor;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jfAdmin.persistDoctor();
+        jidAddDoctor.deleteEducation();
     }
     
     

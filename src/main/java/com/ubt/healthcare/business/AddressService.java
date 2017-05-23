@@ -53,4 +53,8 @@ public class AddressService {
     public void persistAddress(Address address) {
         sqlRepository.add(address);
     }
+    
+       public void editAddress(Address address) {
+        sqlRepository.update(address);
+    }
 }

@@ -126,5 +126,123 @@ public class InputValidationTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of validateAddress method, of class InputValidation.
+     */
+    @Test
+    public void testValidateAddress() {
+        System.out.println("validateAddress");
+        String address = "12 validateAddress 12 test dsd $";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateAddress(address);
+        System.out.println(result);
+    }
+
+    /**
+     * Test of validateBuildingNumber method, of class InputValidation.
+     */
+    @Test
+    public void testValidateBuildingNumber() {
+        System.out.println("validateBuildingNumber");
+        String buildingNumber = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateBuildingNumber(buildingNumber);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validatePhoneNumber method, of class InputValidation.
+     */
+    @Test
+    public void testValidatePhoneNumber() {
+        System.out.println("validatePhoneNumber");
+        String phoneNumber = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validatePhoneNumber(phoneNumber);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validateEmail method, of class InputValidation.
+     */
+    @Test
+    public void testValidateEmail() {
+        System.out.println("validateEmail");
+        String email = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateEmail(email);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validateCountryName method, of class InputValidation.
+     */
+    @Test
+    public void testValidateCountryName() {
+        System.out.println("validateCountryName");
+        String countrName = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateCountryName(countrName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validateCityName method, of class InputValidation.
+     */
+    @Test
+    public void testValidateCityName() {
+        System.out.println("validateCityName");
+        String cityName = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateCityName(cityName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validateZipCode method, of class InputValidation.
+     */
+    @Test
+    public void testValidateZipCode() {
+        System.out.println("validateZipCode");
+        String cityName = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateZipCode(cityName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of validateHomeNumber method, of class InputValidation.
+     */
+    @Test
+    public void testValidateHomeNumber() {
+        System.out.println("validateHomeNumber");
+        String phoneNumber = "";
+        InputValidation instance = new InputValidation();
+        String expResult = "";
+        String result = instance.validateHomeNumber(phoneNumber);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
