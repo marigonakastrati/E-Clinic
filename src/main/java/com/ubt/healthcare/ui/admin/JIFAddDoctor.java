@@ -50,15 +50,16 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDoctor
      *
+     * @param jifAddCity
      */
-    public JIFAddDoctor() {
+    public JIFAddDoctor(JIFAddCity jifAddCity) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
         doctorService = new DoctorService();
         loadTable = new LoadTables();
         inputValidation = new InputValidation();
-        jifAddCity = new JIFAddCity();
+        this.jifAddCity = jifAddCity;
         bindTheEducationTableModel();
         fillComboBoxBirthCity();
         fillComboBoxCountry();
@@ -1046,7 +1047,4 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
         fillComboBoxCity();
     }
 
-    public void showAddCityScreen() {
-        jifAddCity.setVisible(true);
-    }
 }

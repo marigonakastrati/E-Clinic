@@ -13,10 +13,10 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterSaveNewDoctorInternalFrame extends MouseAdapter{
+public class MouseAdapterSaveNewDoctor extends MouseAdapter{
     private JIFDoctor jifDoctorScreen;
 
-    public MouseAdapterSaveNewDoctorInternalFrame(JIFDoctor jifDoctorScreen) {
+    public MouseAdapterSaveNewDoctor(JIFDoctor jifDoctorScreen) {
         this.jifDoctorScreen = jifDoctorScreen;
     }
 

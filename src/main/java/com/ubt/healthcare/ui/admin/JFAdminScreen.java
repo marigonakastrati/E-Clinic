@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -237,6 +238,11 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jdpPaneHandler.remove(jifDoctor.getJifAddCountry());
         jdpPaneHandler.add(jifDoctor.getJifAddCountry());
         jifDoctor.getJifAddCountry().show();
+        try {
+            jifDoctor.getJifAddCountry().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(JFAdminScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void showEditDoctorInternalFrame() {
@@ -263,4 +269,27 @@ public class JFAdminScreen extends javax.swing.JFrame {
         return jifDoctor;
     }
 
+    static {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+
+                    /*jdpPaneHandler.setUI(new DesktopPaneUI() {
+                        @Override
+                        public void installUI(JComponent ui) {
+                            try {
+                                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel.");
+
+                            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+                            }
+                        }
+                    });*/
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("UI Manager not found");
+        }
+    }
 }

@@ -14,6 +14,8 @@ import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.event.MouseAdapter;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -31,15 +33,16 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDoctor
      *
+     * @param jifAddCountry
      */
-    public JIFAddCity() {
+    public JIFAddCity(JIFAddCountry jifAddCountry) {
 
         initComponents();
         cityService = new CityService();
         countryService = new CountryService();
         loadTable = new LoadTables();
         inputValidation = new InputValidation();
-        jifAddCountry = new JIFAddCountry();
+        this.jifAddCountry = jifAddCountry;
         fillComboBoxCountry();
 
     }
@@ -87,11 +90,6 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
         jlZipCode.setText("Zip Code");
 
         jbAddCountry.setText("Add Country");
-        jbAddCountry.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAddCountryActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,7 +97,7 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbSaveCity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -140,15 +138,11 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSaveCity)
                     .addComponent(jbClose))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbAddCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddCountryActionPerformed
-        jifAddCountry.show();
-    }//GEN-LAST:event_jbAddCountryActionPerformed
 
     private void jbCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCloseActionPerformed
         this.dispose();
@@ -212,6 +206,7 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
                 city = new City();
                 city.setCityName(cityName);
                 city.setCountryId(country);
+                city.setZipCode(Integer.parseInt(zipCode));
                 cityService.persistCity(city);
                 jtfCityName.setText("");
                 jtfZipCode.setText("");
@@ -244,4 +239,9 @@ public class JIFAddCity extends javax.swing.JInternalFrame {
     public void addAddCountryInternalFrameMouseAdapter(MouseAdapter e) {
         jbAddCountry.addMouseListener(e);
     }
+
+    public JTextField getJtfCityName() {
+        return jtfCityName;
+    }
+
 }

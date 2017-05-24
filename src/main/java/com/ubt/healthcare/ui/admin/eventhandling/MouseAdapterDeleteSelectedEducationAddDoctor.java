@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterSaveEducationAddDoctorInternalFrame extends MouseAdapter{
+public class MouseAdapterDeleteSelectedEducationAddDoctor extends MouseAdapter{
     private JIFAddDoctor jidAddDoctor;
 
-    public MouseAdapterSaveEducationAddDoctorInternalFrame(JIFAddDoctor jidAddDoctor) {
+    public MouseAdapterDeleteSelectedEducationAddDoctor(JIFAddDoctor jidAddDoctor) {
         this.jidAddDoctor = jidAddDoctor;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jidAddDoctor.addEducation();
+        jidAddDoctor.deleteEducation();
     }
     
     

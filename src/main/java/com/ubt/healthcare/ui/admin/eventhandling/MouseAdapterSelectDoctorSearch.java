@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.JIFAddCity;
+import com.ubt.healthcare.ui.admin.JIFDoctor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterCloseCountryInternalFrame extends MouseAdapter{
-    private JIFAddCity jifAddCity;
+public class MouseAdapterSelectDoctorSearch extends MouseAdapter{
+    private JIFDoctor jifDoctorScreen;
 
-    public MouseAdapterCloseCountryInternalFrame(JIFAddCity jifAddCity) {
-        this.jifAddCity = jifAddCity;
+    public MouseAdapterSelectDoctorSearch(JIFDoctor jifDoctorScreen) {
+        this.jifDoctorScreen = jifDoctorScreen;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jifAddCity.closeSaveNewCountrInternlaPaneListener();
+        jifDoctorScreen.viewSelectedDoctor();
     }
     
     

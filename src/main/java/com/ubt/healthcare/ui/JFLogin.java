@@ -17,28 +17,28 @@ import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JIFEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCountryInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreenInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationEditDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCountry;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseEditDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationEditDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountryInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearchInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityEditDoctorInternalFrame;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctorInternalFrame;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountry;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearch;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCountryAddDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowEditDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctor;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -288,48 +288,48 @@ public class JFLogin extends JFrame {
 
     public void showDoctorFrameScreen(Doctor doctor) {
 
-        JIFSearchDoctor ilfViewDoctor = new JIFSearchDoctor();
-        JIFAddDoctor jifAddDoctor = new JIFAddDoctor();
-        JIFEditDoctor jifEditDoctor = new JIFEditDoctor();
-
-        JIFAddCity jifAddCity = new JIFAddCity();
         JIFAddCountry jifAddCountry = new JIFAddCountry();
+        JIFAddCity jifAddCity = new JIFAddCity(jifAddCountry);
+        JIFSearchDoctor jifSearchDoctor = new JIFSearchDoctor();
+        JIFAddDoctor jifAddDoctor = new JIFAddDoctor(jifAddCity);
+        JIFEditDoctor jifEditDoctor = new JIFEditDoctor(jifAddCity);
 
-        JIFDoctor ilfDoctor = new JIFDoctor(ilfViewDoctor, jifAddDoctor, jifEditDoctor, jifAddCity, jifAddCountry);
+        JIFDoctor ilfDoctor = new JIFDoctor(jifSearchDoctor, jifAddDoctor, jifEditDoctor, jifAddCity, jifAddCountry);
 
         jfAdminScreen = new JFAdminScreen(ilfDoctor);
 
-        jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreenInternalFrame(jfAdminScreen));
+        jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
 
-        ilfDoctor.addSearchDoctorInternalFrameMouseAdapter(new MouseAdapterShowSearchDoctorInternalFrame(jfAdminScreen));
-        ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctorInternalFrame(jfAdminScreen));
-        ilfDoctor.addEditDoctorInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
+        ilfDoctor.addSearchDoctorInternalFrameMouseAdapter(new MouseAdapterShowSearchDoctor(jfAdminScreen));
+        ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctor(jfAdminScreen));
+        ilfDoctor.addEditDoctorInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
 
-        ilfViewDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorInternalFrame(ilfViewDoctor));
-        ilfViewDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearchInternalFrame(ilfDoctor));
+        jifSearchDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
+        jifSearchDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearch(ilfDoctor));
 
-        jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorInternalFrame(ilfDoctor));
-        jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationAddDoctorInternalFrame(jifAddDoctor));
-        jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationAddDoctorInternalFrame(jifAddDoctor));
-        jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationAddDoctorInternalFrame(jifAddDoctor));
-        jifAddDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctorInternalFrame(ilfDoctor));
-        jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctorInternalFrame(jfAdminScreen));
+        jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctor(ilfDoctor));
+        jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationAddDoctor(jifAddDoctor));
+        jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationAddDoctor(jifAddDoctor));
+        jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationAddDoctor(jifAddDoctor));
+        jifAddDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseSaveNewDoctor(ilfDoctor));
+        jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctor(jfAdminScreen));
 
-        //jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityEditDoctorInternalFrame(jfAdminScreen));
-        jifEditDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterEditDoctorInternalFrame(ilfDoctor));
-        jifEditDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseEditDoctorInternalFrame(ilfDoctor));
-        jifEditDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationEditDoctorInternalFrame(jifEditDoctor));
-        jifEditDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationEditDoctorInternalFrame(jifEditDoctor));
-        jifEditDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationEditDoctorInternalFrame(jifEditDoctor));
+        //jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
+        jifEditDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterEditDoctor(ilfDoctor));
+        jifEditDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseEditDoctor(ilfDoctor));
+        jifEditDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationEditDoctor(jifEditDoctor));
+        jifEditDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationEditDoctor(jifEditDoctor));
+        jifEditDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationEditDoctor(jifEditDoctor));
 
-        jifAddCity.addSaveCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityAddDoctorInternalFrame(jifAddDoctor));
-        jifAddCity.addSaveCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityEditDoctorInternalFrame(jifEditDoctor));
+        jifAddCity.addSaveCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityAddDoctor(jifAddDoctor));
+        //jifAddCity.addSaveCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterSaveCityEditDoctor(jifEditDoctor));
         //jifAddCity.addCloseCityAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityAddDoctorInternalFrame(jifAddDoctor));
         //jifAddCity.addCloseCityEditDoctorInternalFrameMouseAdapter(new MouseAdapterCloseCityEditDoctorInternalFrame(jifEditDoctor));
+        jifAddCity.addAddCountryInternalFrameMouseAdapter(new MouseAdapterShowCountryAddDoctor(jfAdminScreen));
 
-        jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountryInternalFrame(jifAddCity));
-        jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountryInternalFrame(jifAddCity));
+        jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountry(jifAddCity));
+        jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountry(jifAddCity));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

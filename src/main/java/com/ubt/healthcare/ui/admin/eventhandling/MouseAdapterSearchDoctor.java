@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JIFEditDoctor;
+import com.ubt.healthcare.ui.admin.JIFSearchDoctor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterSaveEducationEditDoctorInternalFrame extends MouseAdapter{
-    private JIFEditDoctor jidEditDoctor;
+public class MouseAdapterSearchDoctor extends MouseAdapter{
+    private JIFSearchDoctor jifSearchDoctor;
 
-    public MouseAdapterSaveEducationEditDoctorInternalFrame(JIFEditDoctor jidEditDoctor) {
-        this.jidEditDoctor = jidEditDoctor;
+    public MouseAdapterSearchDoctor(JIFSearchDoctor jifSearchDoctor) {
+        this.jifSearchDoctor = jifSearchDoctor;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jidEditDoctor.addEducation();
+        jifSearchDoctor.searchDoctorInternalPane();
     }
     
     

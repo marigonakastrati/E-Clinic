@@ -13,18 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterDoctorScreenInternalFrame extends MouseAdapter{
+public class MouseAdapterShowCountryAddDoctor extends MouseAdapter {
+
     private JFAdminScreen jfAdminScreen;
 
-    public MouseAdapterDoctorScreenInternalFrame(JFAdminScreen jfAdminScreen) {
+    public MouseAdapterShowCountryAddDoctor(JFAdminScreen jfAdminScreen) {
         this.jfAdminScreen = jfAdminScreen;
     }
 
     @Override
-    public void mouseClicked(MouseEvent arg0) 
-    {
-        jfAdminScreen.showDoctorScreen();
+    public void mouseClicked(MouseEvent arg0) {
+        jfAdminScreen.showAddCountryInternalFrame();
     }
-    
-    
+
 }

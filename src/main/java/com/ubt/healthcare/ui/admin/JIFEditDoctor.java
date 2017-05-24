@@ -52,7 +52,7 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
      * Creates new form JIFDoctor
      *
      */
-    public JIFEditDoctor() {
+    public JIFEditDoctor(JIFAddCity jifAddCity) {
 
         initComponents();
         doctorTableModelEducation = new DoctorTableModelEducation();
@@ -60,7 +60,7 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
         loadTable = new LoadTables();
         inputValidation = new InputValidation();
         personEducationService = new PersonEducationService();
-        jifAddCity = new JIFAddCity();
+        this.jifAddCity = jifAddCity;
         bindTheEducationTableModel();
         fillComboBoxCountry();
         fillComboBoxCity();;

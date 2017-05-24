@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterEditDoctorInternalFrame extends MouseAdapter{
+public class MouseAdapterCloseEditDoctor extends MouseAdapter{
     private JIFDoctor jifDoctorScreen;
 
-    public MouseAdapterEditDoctorInternalFrame(JIFDoctor jifDoctorScreen) {
+    public MouseAdapterCloseEditDoctor(JIFDoctor jifDoctorScreen) {
         this.jifDoctorScreen = jifDoctorScreen;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jifDoctorScreen.editDoctorInternalFrameAddDoctor();
+        jifDoctorScreen.closeEditDoctorInternalFrameAddDoctor();
     }
     
     

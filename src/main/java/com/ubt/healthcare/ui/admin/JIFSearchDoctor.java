@@ -32,6 +32,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
     private DoctorComboBoxModelCity doctorComboboxCity;
     private List<Doctor> doctorList;
+
     /**
      * Creates new form JIFDoctor
      */
@@ -173,11 +174,11 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfSearchByName;
     private javax.swing.JTextField jtfSearchBySurName;
     // End of variables declaration//GEN-END:variables
- 
-     public void addSelectDoctorPanelMouseAdapter(MouseAdapter e) {
+
+    public void addSelectDoctorPanelMouseAdapter(MouseAdapter e) {
         jlSelect.addMouseListener(e);
     }
-    
+
     public void addSearchDoctorPanelMouseAdapter(MouseAdapter e) {
         jbSearchDoctor.addMouseListener(e);
     }
@@ -189,6 +190,7 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
+
     public void setCityService(CityService cityService) {
         this.cityService = cityService;
     }
@@ -208,23 +210,20 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     public List<Doctor> getDoctorList() {
         return doctorList;
     }
-    
-    
-    public void loadDoctorListTable(String name, String surname, String city)
-    {  
-        doctorList = doctorService.findDoctorsByParameters(name,surname, city);                                 
+
+    public void loadDoctorListTable(String name, String surname, String city) {
+        doctorList = doctorService.findDoctorsByParameters(name, surname, city);
         doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(doctorList);
         jtDoctorTable.setModel(doctorTableModelViewDoctor);
         doctorTableModelViewDoctor.fireTableDataChanged();
     }
-    
-    public void loadCityComboBox()
-    {
+
+    public void loadCityComboBox() {
         List<City> city = cityService.findAllCity();
         doctorComboboxCity = new DoctorComboBoxModelCity(city);
         jcbSearchByCity.setModel(doctorComboboxCity);
         jcbSearchByCity.repaint();
-    } 
+    }
 
     public DoctorTableModelViewDoctor getDoctorTableModelViewDoctor() {
         return doctorTableModelViewDoctor;
@@ -233,53 +232,20 @@ public class JIFSearchDoctor extends javax.swing.JInternalFrame {
     public JTable getJtDoctorTable() {
         return jtDoctorTable;
     }
-     
-       // method which searches for Doctor 
-    public void searchDoctorInternalPane()
-    {
+
+    // method which searches for Doctor 
+    public void searchDoctorInternalPane() {
         String nameOfDctor = jtfSearchByName.getText();
         String surnameOfDctor = jtfSearchBySurName.getText();
-        String cityOfDoctor = jcbSearchByCity.getSelectedIndex()<0? "":jcbSearchByCity.getSelectedItem().toString();
-        
-        if(nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() == 0)
-        {
+        String cityOfDoctor = jcbSearchByCity.getSelectedIndex() < 0 ? "" : jcbSearchByCity.getSelectedItem().toString();
+
+        if (nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the Doctor you are looking for");
-        }
-        else
-        {   
+        } else {
 
-            loadDoctorListTable(nameOfDctor,surnameOfDctor,cityOfDoctor);
-           
+            loadDoctorListTable(nameOfDctor, surnameOfDctor, cityOfDoctor);
 
         }
     }
-    
-      static
-    {
-        try 
-         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
-            {
-                if ("Nimbus".equals(info.getName())) 
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    
-                    /*jdpPaneHandler.setUI(new DesktopPaneUI() {
-                        @Override
-                        public void installUI(JComponent ui) {
-                            try {
-                                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel.");
 
-                            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-                            }
-                        }
-                    });*/
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException  |InstantiationException | IllegalAccessException  | UnsupportedLookAndFeelException ex) 
-        {
-            System.out.println("UI Manager not found");
-        }
-    }
 }
