@@ -29,6 +29,7 @@ public class JIFAddCountry extends javax.swing.JInternalFrame {
 
         initComponents();
         countryService = new CountryService();
+        inputValidation = new InputValidation();
     }
 
     /**

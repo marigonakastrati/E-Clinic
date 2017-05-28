@@ -37,7 +37,7 @@ public class InputValidation {
     private static final String BIRTH_DATE_NEWER_THEN_TODAY = "Birth date must be older than today";
     private static final String VALID = "Valid";
     private static final Pattern NOT_NUMBER_PATTERN = Pattern.compile("[0-9]+");
-    private static final Pattern NOT_CHARACTER_PATTERN = Pattern.compile("[A-Za-z]+");
+    private static final Pattern NOT_CHARACTER_PATTERN = Pattern.compile("[A-Za-z\\s]+");
     private static final Pattern NOT_CHARACTER_NOT_NUMBER_PATTERN = Pattern.compile("[A-Za-z0-9\\s]+");
     private static final Pattern NOT_EMAIL_FORMAT_PATTERN = Pattern.compile("([a-z0-9])+@([\\S+\\.])+(com|edu|org|net|co.uk)");
 

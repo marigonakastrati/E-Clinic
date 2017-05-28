@@ -6,8 +6,6 @@
 package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.City;
-import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Religion;
 import java.util.List;
 
@@ -18,7 +16,6 @@ import java.util.List;
 public class ReligionService {
 
     private SQLRepository sqlRepository;
-    private List<City> city; // caching machanisim 
 
     public ReligionService() {
         sqlRepository = new SQLRepository();

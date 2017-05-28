@@ -22,41 +22,12 @@ public class EducationTypeService {
 
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
-    private List<PersonEducation> personEducation;
-    private List<Doctor> doctorRepo;
-    private boolean personEducationChanged;//use it as synchronization mechanizm...
-    private boolean doctorRepoChanged;
 
     public EducationTypeService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
     }
 
-    public List<PersonEducation> findEducation(Doctor doctor) {
-        List<PersonEducation> prsonEduc = new ArrayList<>();
-        if (personEducation == null) {
-            personEducation = (List<PersonEducation>) (Object) sqlRepository.findAll("PersonEducation.findAll");
-        }
-        for (PersonEducation perEducation : personEducation) {
-            if (Objects.equals(perEducation.getPersonId().getPersonId(), doctor.getPersonId().getPersonId())) {
-                prsonEduc.add(perEducation);
-            }
-        }
-        return prsonEduc;
-    }
-
-    private String persistEducation(List<PersonEducation> personEducation) {
-        String personEducationMsg = null;
-
-        for (PersonEducation education : personEducation) {
-            //make the connection between the tables and  save just education pojo
-            sqlRepository.add(education);
-            personEducationMsg = "Education Saved";
-        }
-
-        return personEducationMsg;
-
-    }
 
     public EducationType findTheEducationType(String educationType) {
         EducationType msg = null;

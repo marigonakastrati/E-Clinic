@@ -21,9 +21,6 @@ public class EducationProgramService {
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
-    private List<Doctor> doctorRepo;
-    private boolean personEducationChanged;//use it as synchronization mechanizm...
-    private boolean doctorRepoChanged;
     
     public EducationProgramService() {
         sqlRepository = new SQLRepository();

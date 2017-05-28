@@ -5,7 +5,6 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JFAdmin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,7 +13,7 @@ import java.awt.event.MouseEvent;
  * @author F
  */
 public class MouseAdapterEditProfileScreen extends MouseAdapter{
-    private JFAdmin jfAdmin;
+   /* private JFAdmin jfAdmin;
 
     public MouseAdapterEditProfileScreen(JFAdmin jfAdmin) {
         this.jfAdmin = jfAdmin;
@@ -26,5 +25,5 @@ public class MouseAdapterEditProfileScreen extends MouseAdapter{
         jfAdmin.showUpdateProfileScreen();;
     }
     
-    
+    */
 }

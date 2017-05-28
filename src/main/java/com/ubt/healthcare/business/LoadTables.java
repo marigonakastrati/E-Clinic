@@ -14,46 +14,46 @@ import java.util.List;
  */
 public class LoadTables {
 
-    private SQLRepository userGroupRoleRepo = new SQLRepository();
+    private SQLRepository sqlRepository = new SQLRepository();
 
     public List<Object> fillComboBoxBirthCity() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("City.findAll");;
+        obj = sqlRepository.findAll("City.findAll");;
 
         return obj;
     }
 
     public List<Object> fillComboBoxCountry() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("Country.findAll");;
+        obj = sqlRepository.findAll("Country.findAll");;
 
         return obj;
     }
 
     public List<Object> fillComboBoxSex() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("Gender.findAll");;
+        obj = sqlRepository.findAll("Gender.findAll");;
 
         return obj;
     }
 
     public List<Object> fillComboBoxMartialStatus() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("MartialStatus.findAll");;
+        obj = sqlRepository.findAll("MartialStatus.findAll");;
 
         return obj;
     }
 
     public List<Object> fillComboBoxEducationType() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("EducationType.findAll");;
+        obj = sqlRepository.findAll("EducationType.findAll");;
 
         return obj;
     }
     
     public List<Object> fillComboBoxReligion() {
         List<Object> obj;
-        obj = userGroupRoleRepo.findAll("Religion.findAll");;
+        obj = sqlRepository.findAll("Religion.findAll");;
 
         return obj;
     }

@@ -5,16 +5,14 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JFAdmin;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  *
  * @author F
  */
 public class MouseAdapterPersistAdminClinic extends MouseAdapter{
-    private JFAdmin jfAdmin;
+   /* private JFAdmin jfAdmin;
 
     public MouseAdapterPersistAdminClinic(JFAdmin jfAdmin) {
         this.jfAdmin = jfAdmin;
@@ -26,5 +24,5 @@ public class MouseAdapterPersistAdminClinic extends MouseAdapter{
         jfAdmin.persistAdminClinic();
     }
     
-    
+    */
 }

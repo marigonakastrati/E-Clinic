@@ -18,7 +18,6 @@ import java.util.List;
 public class CountryService {
 
     private SQLRepository sqlRepository;
-    private List<City> city; // caching machanisim 
 
     public CountryService() {
         sqlRepository = new SQLRepository();

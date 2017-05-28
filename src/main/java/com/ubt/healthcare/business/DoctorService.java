@@ -20,10 +20,7 @@ public class DoctorService {
 
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
-    ;
     private List<Doctor> doctorRepo;
-    private boolean personEducationChanged;//use it as synchronization mechanizm...
-    private boolean doctorRepoChanged;
 
     public DoctorService() {
         sqlRepository = new SQLRepository();

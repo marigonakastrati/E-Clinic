@@ -36,6 +36,7 @@ public class Main {
         jpStudentInformation.addLogOutAdapter(new MouseAdapterLogOut(jfMain));*/
 
         jfLogin.setSize(800, 800);
+        jfLogin.setLocationRelativeTo(null);
 
     }
 }
