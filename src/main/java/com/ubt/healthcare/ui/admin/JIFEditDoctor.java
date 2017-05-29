@@ -51,6 +51,7 @@ public class JIFEditDoctor extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDoctor
      *
+     * @param jifAddCity
      */
     public JIFEditDoctor(JIFAddCity jifAddCity) {
 

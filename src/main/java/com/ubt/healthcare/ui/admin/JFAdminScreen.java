@@ -20,6 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class JFAdminScreen extends javax.swing.JFrame {
 
     private JIFDoctor jifDoctor;
+    private JIFDoctorF jifDoctorF;
 
     /**
      * Creates new form JFAdminScreen
@@ -28,8 +29,9 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctor jifDoctor) {
+    public JFAdminScreen(JIFDoctor jifDoctor, JIFDoctorF jifDoctorF) {
         this.jifDoctor = jifDoctor;
+        this.jifDoctorF = jifDoctorF;
 
         //frameStlye();
         initComponents();
@@ -178,9 +180,9 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     public void showDoctorScreen() {
 
-        jdpPaneHandler.remove(jifDoctor);
-        jdpPaneHandler.add(jifDoctor);
-        jifDoctor.show();
+        jdpPaneHandler.remove(jifDoctorF);//withoutF
+        jdpPaneHandler.add(jifDoctorF);
+        jifDoctorF.show();
         /*jspPane.setViewportView(jpAddDoctor);
         jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);*/
 

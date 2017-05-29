@@ -30,7 +30,7 @@ public class LoadTables {
         return obj;
     }
 
-    public List<Object> fillComboBoxSex() {
+    public List<Object> fillComboBoxGender() {
         List<Object> obj;
         obj = sqlRepository.findAll("Gender.findAll");;
 

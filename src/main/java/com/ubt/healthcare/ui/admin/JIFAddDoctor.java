@@ -963,7 +963,7 @@ public class JIFAddDoctor extends javax.swing.JInternalFrame {
     }
 
     public void fillComboBoxSex() {
-        List<Object> obj = loadTable.fillComboBoxSex();
+        List<Object> obj = loadTable.fillComboBoxGender();
         for (Object o : obj) {
             jcbGender.addItem(((Gender) o).getGenderName());
         }

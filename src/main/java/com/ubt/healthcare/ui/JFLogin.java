@@ -16,6 +16,7 @@ import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFAddDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctor;
+import com.ubt.healthcare.ui.admin.JIFDoctorF;
 import com.ubt.healthcare.ui.admin.JIFEditDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationAddDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationEditDoctor;
@@ -33,6 +34,7 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoc
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearch;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctor;
@@ -293,10 +295,11 @@ public class JFLogin extends JFrame {
         JIFSearchDoctor jifSearchDoctor = new JIFSearchDoctor();
         JIFAddDoctor jifAddDoctor = new JIFAddDoctor(jifAddCity);
         JIFEditDoctor jifEditDoctor = new JIFEditDoctor(jifAddCity);
+        JIFDoctorF jifDoctorF = new JIFDoctorF();
 
         JIFDoctor ilfDoctor = new JIFDoctor(jifSearchDoctor, jifAddDoctor, jifEditDoctor, jifAddCity, jifAddCountry);
 
-        jfAdminScreen = new JFAdminScreen(ilfDoctor);
+        jfAdminScreen = new JFAdminScreen(ilfDoctor,jifDoctorF);
 
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
@@ -330,6 +333,8 @@ public class JFLogin extends JFrame {
 
         jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountry(jifAddCity));
         jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountry(jifAddCity));
+        
+        jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
