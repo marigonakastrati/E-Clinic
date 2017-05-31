@@ -9,6 +9,7 @@ import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Person;
+import java.util.List;
 
 /**
  *
@@ -31,9 +32,16 @@ public class ContactService {
     private void persist(String contactValue, Person person, String type) {
         Contact contact = new Contact();
         contact.setValue(contactValue);
-        contact.setType("EMAIL");
+        contact.setType(type);
         contact.setPersonId(person);
         sqlRepository.add(contact);
+
+    }
+
+    public void editContact(String contactValue) {
+        Contact contact = findContact(contactValue);
+        contact.setValue(contactValue);
+        sqlRepository.update(contact);
 
     }
 
@@ -50,5 +58,15 @@ public class ContactService {
             }
         }
 
+    }
+
+    public Contact findContact(String value) {
+        List<Contact> findAll = (List<Contact>) (Object) sqlRepository.findAll("Contact.findAll");
+        for (Contact contact : findAll) {
+            if (contact.getValue().equals(value)) {
+                return contact;
+            }
+        }
+        return null;
     }
 }

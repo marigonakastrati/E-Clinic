@@ -39,7 +39,7 @@ public class InputValidation {
     private static final Pattern NOT_NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final Pattern NOT_CHARACTER_PATTERN = Pattern.compile("[A-Za-z\\s]+");
     private static final Pattern NOT_CHARACTER_NOT_NUMBER_PATTERN = Pattern.compile("[A-Za-z0-9\\s]+");
-    private static final Pattern NOT_EMAIL_FORMAT_PATTERN = Pattern.compile("([a-z0-9])+@([\\S+\\.])+(com|edu|org|net|co.uk)");
+    private static final Pattern NOT_EMAIL_FORMAT_PATTERN = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
     public boolean validateInput(String msg) {
         return !msg.trim().isEmpty();

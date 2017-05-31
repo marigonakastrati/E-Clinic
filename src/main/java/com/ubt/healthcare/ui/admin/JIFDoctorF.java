@@ -5,9 +5,25 @@
  */
 package com.ubt.healthcare.ui.admin;
 
+import com.ubt.healthcare.business.AddressService;
+import com.ubt.healthcare.business.CityService;
+import com.ubt.healthcare.business.ContactService;
+import com.ubt.healthcare.business.CountryService;
 import com.ubt.healthcare.business.DoctorService;
+import com.ubt.healthcare.business.EducationProgramService;
+import com.ubt.healthcare.business.EducationService;
+import com.ubt.healthcare.business.EducationTypeService;
+import com.ubt.healthcare.business.GenderService;
 import com.ubt.healthcare.business.LoadTables;
+import com.ubt.healthcare.business.LoginGroupService;
+import com.ubt.healthcare.business.MartialStatusService;
 import com.ubt.healthcare.business.PasswordHashing;
+import com.ubt.healthcare.business.PersonArchiveService;
+import com.ubt.healthcare.business.PersonEducationService;
+import com.ubt.healthcare.business.PersonService;
+import com.ubt.healthcare.business.ReligionService;
+import com.ubt.healthcare.business.UserGroupService;
+import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
@@ -16,10 +32,13 @@ import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Religion;
+import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.admin.model.DoctorTableModelViewDoctor;
+import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -37,6 +56,23 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
     private LoadTables loadTable;
     private PasswordHashing passwordHashing;
+    private InputValidation inputValidation;
+    private Doctor doctor;
+    private ContactService contactService;
+    private EducationTypeService educationTypeService;
+    private EducationProgramService educationProgramService;
+    private EducationService educationService;
+    private PersonEducationService personEducationService;
+    private GenderService genderService;
+    private MartialStatusService martialStatusService;
+    private CityService cityService;
+    private CountryService countryService;
+    private ReligionService religionService;
+    private AddressService addressService;
+    private PersonService personService;
+    private PersonArchiveService personArchiveService;
+    private UserGroupService userGroupService;
+    private LoginGroupService loginGroupService;
 
     /**
      * Creates new form JIFDoctorF
@@ -46,6 +82,23 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
         doctorService = new DoctorService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
+        inputValidation = new InputValidation();
+        doctorService = new DoctorService();
+        contactService = new ContactService();
+        educationTypeService = new EducationTypeService();
+        educationProgramService = new EducationProgramService();
+        personEducationService = new PersonEducationService();
+        educationService = new EducationService();
+        religionService = new ReligionService();
+        genderService = new GenderService();
+        martialStatusService = new MartialStatusService();
+        cityService = new CityService();
+        countryService = new CountryService();
+        addressService = new AddressService();
+        personService = new PersonService();
+        userGroupService = new UserGroupService();
+        loginGroupService = new LoginGroupService();
+        personArchiveService = new PersonArchiveService();
         fillComboBoxCountry();
         fillComboBoxCity();
         fillComboBoxBirthCity();
@@ -116,7 +169,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
         jtfLastNameSearch = new javax.swing.JTextField();
         jcbCitySearch = new javax.swing.JComboBox<>();
         jbSearchDoctor = new javax.swing.JButton();
-        jbSave = new javax.swing.JButton();
+        jbSaveDoctor = new javax.swing.JButton();
         jbAddNew = new javax.swing.JButton();
         jlFirstNameSearch = new javax.swing.JLabel();
         jlLastNameSearch = new javax.swing.JLabel();
@@ -137,6 +190,11 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable2);
 
         jTextField3.setText("jTextField3");
+
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Doctor Screen");
 
         jlPersonalId.setText("Personal ID");
 
@@ -348,7 +406,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
 
         jbSearchDoctor.setText("Search");
 
-        jbSave.setText("Save");
+        jbSaveDoctor.setText("Save");
 
         jbAddNew.setText("Add New");
         jbAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -397,7 +455,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(94, 94, 94)
-                .addComponent(jbSave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbSaveDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160)
                 .addComponent(jbAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -410,7 +468,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAddNew)
-                    .addComponent(jbSave)
+                    .addComponent(jbSaveDoctor)
                     .addComponent(jbCancel))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -449,7 +507,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAddCity;
     private javax.swing.JButton jbAddNew;
     private javax.swing.JButton jbCancel;
-    private javax.swing.JButton jbSave;
+    private javax.swing.JButton jbSaveDoctor;
     private javax.swing.JButton jbSearchDoctor;
     private javax.swing.JComboBox<String> jcbBirthPlace;
     private javax.swing.JComboBox<String> jcbCity;
@@ -499,6 +557,10 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfWorkPhone;
     private javax.swing.JTabbedPane jtpDoctor;
     // End of variables declaration//GEN-END:variables
+
+    public void addSaveDoctorInternalFrameMouseAdapter(MouseAdapter e) {
+        jbSaveDoctor.addMouseListener(e);
+    }
 
 // Mouse Event listener for Search button
     public void addSearchDoctorPanelMouseAdapter(MouseAdapter e) {
@@ -743,6 +805,229 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
             jtfEmail.setText("");
 
         }
+    }
+
+    public void saveDoctorInternalFrameAddDoctor() {
+
+        int row = jtDoctorListTable.getSelectedRow();
+        //jifAddDoctor.getT
+        // check if all mandatory fields are not empty
+        // if so warn the user don't let move to next step
+        //if user has typed just education and no personal infromation don't let move on next step
+
+        //save doctor on database using doctor service
+        String personId = jtfPersonalId.getText();
+        String firstName = jtfFirstName.getText();
+        String middleName = jtfMiddleName.getText();
+        String lastName = jtfLastName.getText();
+        String sex = jcbGender.getSelectedItem().toString();
+        String martialStatus = jcbMartialStatus.getSelectedItem().toString();
+        String password = jtfPassword.getText();
+        Date dateOfBirth = jdcDateOfBirth.getDate();
+        String birthPlace = jcbBirthPlace.getSelectedItem().toString();
+        String address = jtfAddress.getText();
+        String city = jcbCity.getSelectedItem().toString();
+        String country = jcbCountry.getSelectedItem().toString();
+        String buildingNumber = jtfBulidingNumber.getText();
+        String mobilePhone = jtfMobilePhone.getText();
+        String workPhone = jtfWorkPhone.getText();
+        String homePhone = jtfHomePhone.getText();
+        String email = jtfEmail.getText();
+        String religion = jcbReligion.getSelectedItem().toString();
+
+        //validate all inputs which are not taken from combobox...
+        if (!("Valid".equals(inputValidation.validatePersonID(personId)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonID(personId));
+        } else if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName));
+        } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName));
+        } else if (!("Valid".equals(inputValidation.validatePersonDateOfBirth(dateOfBirth)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonDateOfBirth(dateOfBirth));
+        } else if (!("Valid".equals(inputValidation.validateAddress(address)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateAddress(address));
+        } else if (!("Valid".equals(inputValidation.validateBuildingNumber(buildingNumber)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateBuildingNumber(buildingNumber));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(mobilePhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(mobilePhone));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(workPhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(workPhone));
+        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(homePhone)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(homePhone));
+        } else if (!("Valid".equals(inputValidation.validateEmail(email)))) {
+            JOptionPane.showMessageDialog(rootPane, inputValidation.validateEmail(email));
+        } else {
+
+            // if new Doctor is created
+            if (row == -1) {
+
+                // else we can persist the data....
+                doctor = new Doctor();
+                Person person = new Person();
+
+                doctor.setPersonId(person);
+                person.setDoctor(doctor);
+
+                doctor.getPersonId().setPersonId(Integer.parseInt(personId));
+                doctor.getPersonId().setFirstName(firstName);
+                doctor.getPersonId().setMiddleName(middleName);
+                doctor.getPersonId().setLastName(lastName);
+                doctor.setPassCode(passwordHashing.encodehashPassword(password));
+                doctor.getPersonId().setDateOfBirth(dateOfBirth);
+
+                Gender findTheGender = genderService.findTheGender(sex);
+                MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
+                City birthPlaceObject = cityService.findTheCity(birthPlace);
+                Country findTheCountry = countryService.findTheCountry(country);
+                Religion findTheReligion = religionService.findTheReligion(religion);
+                City findTheCity = cityService.findTheCity(city);
+
+                findTheCity.setCountryId(findTheCountry);
+
+                Address theAddress = new Address();
+
+                theAddress.setStreetName(address);
+                theAddress.setCityId(findTheCity);
+                theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
+
+                theAddress = addressService.findTheAddress(theAddress);
+
+                //set the combobox values to doctor
+                doctor.getPersonId().setGenderId(findTheGender);
+                doctor.getPersonId().setMartialStatusId(findTheMartialStatus);
+                doctor.getPersonId().setAddressId(theAddress);
+                doctor.getPersonId().setBirthCityId(birthPlaceObject);
+                doctor.getPersonId().setReigionId(findTheReligion);
+
+                //before we save the address make sure the user doesn't exist in db. Some users may overload the db with many addresses if we dont check
+                // if use already exists edit the user 
+                String personMsg = personService.checkIfUserExists(doctor.getPersonId());
+
+                if ("Save".equals(personMsg)) {
+
+                    // store address 
+                    String addressMsg = addressService.checkIfAddressExists(theAddress);
+                    if ("Save".equals(addressMsg)) {
+                        addressService.persistAddress(theAddress);
+                    }
+
+                    if ("Save".equals(personMsg)) {
+                        // validate doctor input
+                        String doctorSavedMsg = doctorService.persistDoctor(doctor);
+                        JOptionPane.showMessageDialog(null, doctorSavedMsg);// if doctor is not saved do not save other stuff.
+
+                        // save the education details.
+                        //persistEducation(); next version
+                        // persist UserGroup
+                        String userGroupMsg = userGroupService.checkIfUserGroupExists(doctor);
+                        if ("Save".equals(userGroupMsg)) {
+                            UserGroup userGroup = new UserGroup();
+                            userGroup.setUserId(doctor.getDoctorId());
+                            userGroup.setGroupId(loginGroupService.findTheLoginGroup("Doctor"));
+                            userGroupService.persistUserInUserGroup(userGroup);
+                        }
+
+                        // save the conntact details...
+                        contactService.persistContact(person, "EMAIL", email);
+                        contactService.persistContact(person, "HOME", homePhone);
+                        contactService.persistContact(person, "WORK", workPhone);
+                        contactService.persistContact(person, "MOB", mobilePhone);
+
+                        // clear the Fields 
+                        //clearAddDoctorFields();
+                        // close the add new doctor 
+                        //jifAddDoctor.dispose();
+                        //this.show();
+                        // update the fields on jifDoctor to see the newly added doctor
+                        //updateDoctorFields(doctor);
+                        //loadEducationTable(); next version
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "User exists");
+                }
+            } //edit the Doctor
+            else {
+                doctor = doctorTableModelViewDoctor.getDoctor(row);
+                //update the fields
+
+                Person person = new Person();
+
+                doctor.setPersonId(person);
+                person.setDoctor(doctor);
+
+                doctor.getPersonId().setPersonId(Integer.parseInt(personId));
+                doctor.getPersonId().setFirstName(firstName);
+                doctor.getPersonId().setMiddleName(middleName);
+                doctor.getPersonId().setLastName(lastName);
+                //doctor.setPassCode(passwordHashing.encodehashPassword(password));
+                doctor.getPersonId().setDateOfBirth(dateOfBirth);
+
+                Gender findTheGender = genderService.findTheGender(sex);
+                MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
+                City birthPlaceObject = cityService.findTheCity(birthPlace);
+                Country findTheCountry = countryService.findTheCountry(country);
+                Religion findTheReligion = religionService.findTheReligion(religion);
+                City findTheCity = cityService.findTheCity(city);
+
+                findTheCity.setCountryId(findTheCountry);
+
+                Address theAddress = new Address();
+
+                theAddress.setStreetName(address);
+                theAddress.setCityId(findTheCity);
+                theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
+
+                theAddress = addressService.findTheAddress(theAddress);
+
+                //set the combobox values to doctor
+                doctor.getPersonId().setGenderId(findTheGender);
+                doctor.getPersonId().setMartialStatusId(findTheMartialStatus);
+                doctor.getPersonId().setAddressId(theAddress);
+                doctor.getPersonId().setBirthCityId(birthPlaceObject);
+                doctor.getPersonId().setReigionId(findTheReligion);
+                
+                //edit the doctor
+                String personMsg = personService.checkIfUserExists(doctor.getPersonId());
+                if ("Exist".equals(personMsg)) {
+
+                    // store address 
+                    String addressMsg = addressService.checkIfAddressExists(theAddress);
+                    if ("Save".equals(addressMsg)) {
+                        addressService.persistAddress(theAddress);
+                    }
+
+                    if ("Exist".equals(personMsg)) {
+                        // validate doctor input
+                        doctorService.editDoctor(doctor);
+                        JOptionPane.showMessageDialog(null, "Doctor Edited");// if doctor is not saved do not save other stuff.
+
+                        // save the education details.
+                        //persistEducation(); next version
+         
+                        // save the conntact details...
+                        //editContact(oldValue, newValue)
+                        contactService.editContact(email);
+                        contactService.editContact(homePhone);
+                        contactService.editContact(workPhone);
+                        contactService.editContact(mobilePhone);
+
+                        // clear the Fields 
+                        //clearAddDoctorFields();
+                        // close the add new doctor 
+                        //jifAddDoctor.dispose();
+                        //this.show();
+                        // update the fields on jifDoctor to see the newly added doctor
+                        //updateDoctorFields(doctor);
+                        //loadEducationTable(); next version
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "User exists");
+                }
+            }
+        }
+
     }
 
 }

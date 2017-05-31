@@ -33,6 +33,7 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountry;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearch;
@@ -335,6 +336,7 @@ public class JFLogin extends JFrame {
         jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountry(jifAddCity));
         
         jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
+        jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

@@ -121,12 +121,10 @@ public class DoctorService {
 
         String doctorMsg = null;
 
-        Person person = doctor.getPersonId();
-
         doctorMsg = checkIfDoctorExists(doctor);
 
         if ("Exist".equals(doctorMsg)) {
-            sqlRepository.update(person);
+            sqlRepository.update(doctor);
 
         }
 
