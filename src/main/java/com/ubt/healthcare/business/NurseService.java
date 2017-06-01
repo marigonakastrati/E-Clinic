@@ -8,6 +8,7 @@ package com.ubt.healthcare.business;
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,13 @@ import java.util.List;
  *
  * @author F
  */
-public class DoctorService {
+public class NurseService {
 
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
-    private List<Doctor> doctorRepo;
+    private List<Nurse> nurseRepo;
 
-    public DoctorService() {
+    public NurseService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
     }
@@ -35,14 +36,14 @@ public class DoctorService {
      * @param city
      * @return List
      */
-    public List<Doctor> findDoctorsByParameters(String name, String surname, String city) {
-        doctorRepo = (List<Doctor>) (Object) sqlRepository.findAll("Doctor.findAll");
-        List<Doctor> doctorList = new ArrayList<>();
-        List<Doctor> surNameList = new ArrayList<>();
-        List<Doctor> cityList = new ArrayList<>();
+    public List<Nurse> findDoctorsByParameters(String name, String surname, String city) {
+        nurseRepo = (List<Nurse>) (Object) sqlRepository.findAll("Nurse.findAll");
+        List<Nurse> doctorList = new ArrayList<>();
+        List<Nurse> surNameList = new ArrayList<>();
+        List<Nurse> cityList = new ArrayList<>();
 
         if (inputValidation.validateInput(name)) {
-            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
+            nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
                     .forEachOrdered((doctor) -> {
                         doctorList.add(doctor);
                     });
@@ -73,7 +74,7 @@ public class DoctorService {
             }
             return doctorList;
         } else if (inputValidation.validateInput(surname)) {
-            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
+            nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
                     .forEachOrdered((doctor) -> {
                         doctorList.add(doctor);
                     });
@@ -88,7 +89,7 @@ public class DoctorService {
             return doctorList;
 
         } else {
-            doctorRepo.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+            nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                     .getCityId().getCityName().equals(city)))
                     .forEachOrdered((doctor) -> {
                         doctorList.add(doctor);
@@ -99,13 +100,13 @@ public class DoctorService {
         return doctorList;
     }
 
-    public String persistDoctor(Doctor doctor) {
+    public String persistDoctor(Nurse nurse) {
 
         String doctorMsg = null;
 
-        Person person = doctor.getPersonId();
+        Person person = nurse.getPersonId();
 
-        doctorMsg = checkIfDoctorExists(doctor);
+        doctorMsg = checkIfNurseExists(nurse);
 
         if ("Save".equals(doctorMsg)) {
             sqlRepository.add(person);
@@ -115,25 +116,25 @@ public class DoctorService {
         return doctorMsg;
     }
 
-    public String editDoctor(Doctor doctor) {
+    public String editDoctor(Nurse nurse) {
 
         String doctorMsg = null;
 
-        doctorMsg = checkIfDoctorExists(doctor);
+        doctorMsg = checkIfNurseExists(nurse);
 
         if ("Exist".equals(doctorMsg)) {
-            sqlRepository.update(doctor.getPersonId());
+            sqlRepository.update(nurse.getPersonId());
 
         }
 
         return doctorMsg;
     }
 
-    private String checkIfDoctorExists(Doctor doctor) {
+    private String checkIfNurseExists(Nurse nurse) {
         String msg = "Save";
-        List<Object> docs = (List<Object>) sqlRepository.findAll("Doctor.findAll");
+        List<Object> docs = (List<Object>) sqlRepository.findAll("Nurse.findAll");
         for (Object o : docs) {
-            if (((Doctor) o).getPersonId().getPersonId().equals(doctor.getPersonId().getPersonId())) {
+            if (((Nurse) o).getPersonId().getPersonId().equals(nurse.getPersonId().getPersonId())) {
                 msg = "Exist";
             }
         }

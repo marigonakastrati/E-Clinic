@@ -291,6 +291,21 @@ public class JFLogin extends JFrame {
 
     public void showDoctorFrameScreen(Doctor doctor) {
 
+        JIFDoctorF jifDoctorF = new JIFDoctorF();
+
+        jfAdminScreen = new JFAdminScreen(jifDoctorF);
+
+        jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
+        jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
+        jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
+        jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
+
+        this.setVisible(false);
+        jfAdminScreen.setVisible(true);
+    }
+
+    /*public void showDoctorFrameScreen(Doctor doctor) {
+
         JIFAddCountry jifAddCountry = new JIFAddCountry();
         JIFAddCity jifAddCity = new JIFAddCity(jifAddCountry);
         JIFSearchDoctor jifSearchDoctor = new JIFSearchDoctor();
@@ -340,6 +355,5 @@ public class JFLogin extends JFrame {
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
-    }
-
+    }*/
 }

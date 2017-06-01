@@ -17,6 +17,7 @@ import com.ubt.healthcare.business.GenderService;
 import com.ubt.healthcare.business.LoadTables;
 import com.ubt.healthcare.business.LoginGroupService;
 import com.ubt.healthcare.business.MartialStatusService;
+import com.ubt.healthcare.business.NurseService;
 import com.ubt.healthcare.business.PasswordHashing;
 import com.ubt.healthcare.business.PersonArchiveService;
 import com.ubt.healthcare.business.PersonEducationService;
@@ -30,6 +31,7 @@ import com.ubt.healthcare.dto.Country;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
+import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.UserGroup;
@@ -49,10 +51,10 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author F
  */
-public class JIFDoctorF extends javax.swing.JInternalFrame {
+public class JIFNurse extends javax.swing.JInternalFrame {
 
-    private List<Doctor> doctorList;
-    private DoctorService doctorService;
+    private List<Nurse> nurseList;
+    private NurseService nurseService;
     private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
     private LoadTables loadTable;
     private PasswordHashing passwordHashing;
@@ -77,13 +79,12 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDoctorF
      */
-    public JIFDoctorF() {
+    public JIFNurse() {
         initComponents();
-        doctorService = new DoctorService();
+        nurseService = new NurseService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
-        doctorService = new DoctorService();
         contactService = new ContactService();
         educationTypeService = new EducationTypeService();
         educationProgramService = new EducationProgramService();
@@ -575,8 +576,8 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
 
 // load Doctor Table 
     public void loadDoctorListTable(String name, String surname, String city) {
-        doctorList = doctorService.findDoctorsByParameters(name, surname, city);
-        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(doctorList);
+        nurseList = nurseService.findDoctorsByParameters(name, surname, city);
+        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(nurseList);
         jtDoctorListTable.setModel(doctorTableModelViewDoctor);
         doctorTableModelViewDoctor.fireTableDataChanged();
     }
@@ -940,7 +941,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
 
                         if ("Save".equals(personMsg)) {
                             // validate doctor input
-                            String doctorSavedMsg = doctorService.persistDoctor(doctor);
+                            String doctorSavedMsg = nurseService.persistDoctor(doctor);
                             JOptionPane.showMessageDialog(null, doctorSavedMsg);// if doctor is not saved do not save other stuff.
 
                             // save the education details.
@@ -1024,7 +1025,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
 
                     if ("Exist".equals(personMsg)) {
                         // validate doctor input
-                        doctorService.editDoctor(doctor);
+                        nurseService.editDoctor(doctor);
                         JOptionPane.showMessageDialog(null, "Doctor Edited");// if doctor is not saved do not save other stuff.
 
                         // save the education details.

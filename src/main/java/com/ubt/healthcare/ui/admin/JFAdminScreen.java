@@ -19,7 +19,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class JFAdminScreen extends javax.swing.JFrame {
 
-    private JIFDoctor jifDoctor;
     private JIFDoctorF jifDoctorF;
 
     /**
@@ -29,8 +28,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctor jifDoctor, JIFDoctorF jifDoctorF) {
-        this.jifDoctor = jifDoctor;
+    public JFAdminScreen(JIFDoctorF jifDoctorF) {
         this.jifDoctorF = jifDoctorF;
 
         //frameStlye();
@@ -188,7 +186,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
-    public void showAddDoctorInternalFrame() {
+   /* public void showAddDoctorInternalFrame() {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifAddDoctor());
 
@@ -269,7 +267,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     public JIFDoctor getJifDoctor() {
         return jifDoctor;
-    }
+    }*/
 
     static {
         try {

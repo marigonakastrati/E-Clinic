@@ -12,8 +12,7 @@ import com.ubt.healthcare.ui.eventhandling.MouseAdapterLogin;
 
 /**
  *
- * @author F Starts the main Gui app, and assigns the listeners for each
- * components start the application
+ * @author F 
  */
 public class Main {
 
@@ -22,18 +21,11 @@ public class Main {
         JPMain jpMain = new JPMain();
         JPLoginScreen jpLoginScreen = new JPLoginScreen();
         JFAdminScreen jfAdminScreen = new JFAdminScreen();
-        //JPInformationScreen jpStudentInformation = new JPInformationScreen();
-        //JPProfile jpProfile = new JPProfile();
-        //JPAddDoctor jpAddDoctor = new JPAddDoctor();
-        //JFMain jfMain = new JFMain(jpMain, jpLoginScreen, jpStudentInformation,jpProfile,jpAddDoctor);
         JFLogin jfLogin = new JFLogin(jpMain, jpLoginScreen,jfAdminScreen);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfLogin));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfLogin));
         jpLoginScreen.addLoginEnterKeyListener(new KeyListenerLogin(jfLogin));
-        /*jpStudentInformation.addEditStudentMouseAdapter(new MouseAdapterEditScreen(jfMain));
-        jpStudentInformation.addViewScheduleScreenListener(new MouseAdapterViewSchedule(jfMain));
-        jpStudentInformation.addLogOutAdapter(new MouseAdapterLogOut(jfMain));*/
 
         jfLogin.setSize(800, 800);
         jfLogin.setLocationRelativeTo(null);

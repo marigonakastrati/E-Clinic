@@ -38,8 +38,8 @@ public class ContactService {
 
     }
 
-    public void editContact(String contactValue) {
-        Contact contact = findContact(contactValue);
+    public void editContact(String contactValue, String oldContactValue) {
+        Contact contact = findContact(oldContactValue);
         contact.setValue(contactValue);
         sqlRepository.update(contact);
 
