@@ -23,7 +23,7 @@ public class ContactService {
     private static final String HOME = "HOME";
     private static final String WORK = "WORK";
     private static final String MOB = "MOB";
-
+//TODO fetch  the contact type from DB 
     public ContactService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();

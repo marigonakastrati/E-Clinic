@@ -389,7 +389,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlPassword)
                     .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jspPersonalInformation.setViewportView(jpPersonalInformation);
@@ -408,6 +408,12 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
             }
         ));
         jspDoctorTable.setViewportView(jtDoctorListTable);
+
+        jtfLastNameSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfLastNameSearchActionPerformed(evt);
+            }
+        });
 
         jbSearchDoctor.setText("Search");
 
@@ -432,7 +438,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+                    .addComponent(jtpDoctor)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jspDoctorTable))
@@ -457,21 +463,18 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSearchDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(68, 68, 68))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlCitySearch))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCitySearch))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSaveDoctor)
                     .addComponent(jbCancel))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlFirstNameSearch)
                     .addComponent(jlLastNameSearch)
@@ -483,9 +486,9 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
                     .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSearchDoctor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jtpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtpDoctor)
                 .addContainerGap())
         );
 
@@ -505,6 +508,10 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
         clearTheFields();
         bindTheDoctorSearchTableModel();
     }//GEN-LAST:event_jbCancelActionPerformed
+
+    private void jtfLastNameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLastNameSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfLastNameSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -766,18 +773,12 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
         });
     }
 
-    //reflect the updates to table
-    private void fillTheDoctorSearchTable() {
-        doctorTableModelViewDoctor.fireTableDataChanged();
-
-    }
-
     //create table with empty rows and add the listener in constructor
     private void bindTheDoctorSearchTableModel() {
         doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(new ArrayList<>());
         doctorTableModelViewDoctor.add(new ArrayList<>());
         jtDoctorListTable.setModel(doctorTableModelViewDoctor);
-        fillTheDoctorSearchTable();
+        doctorTableModelViewDoctor.fireTableDataChanged();
         doctorTableRowSelectionListener();
     }
 

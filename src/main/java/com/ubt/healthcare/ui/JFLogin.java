@@ -5,7 +5,6 @@
  */
 package com.ubt.healthcare.ui;
 
-import com.ubt.healthcare.ui.admin.JIFSearchDoctor;
 import com.ubt.healthcare.business.AuthenticateUser;
 import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.AdminClinic;
@@ -13,35 +12,17 @@ import com.ubt.healthcare.dto.Patient;
 import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
-import com.ubt.healthcare.ui.admin.JIFAddDoctor;
-import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JIFDoctorF;
-import com.ubt.healthcare.ui.admin.JIFEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCancleSelectionEducationEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseCountry;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterCloseSaveNewDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDeleteSelectedEducationEditDoctor;
+import com.ubt.healthcare.ui.admin.JIFNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterEditDoctor;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCityAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveCountry;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveEducationEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterNurseScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorF;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSelectDoctorSearch;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCityAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowCountryAddDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowEditDoctor;
-import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterShowSearchDoctor;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -169,6 +150,16 @@ public class JFLogin extends JFrame {
                 // clear the filed from jpLoginscreen...
             }
 
+        } else if ("Nurse".equals(userRole)) {
+            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+            Nurse nurse = (Nurse) authUser.authenticateNurse(user, passcode);
+            if (nurse != null) {
+                showNurseScreen(nurse);
+            } else {
+                JOptionPane.showMessageDialog(null, "Wrong passcode");
+                // clear the filed from jpLoginscreen...
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Credentials wrong");
             // clear the filed from jpLoginscreen...
@@ -273,6 +264,11 @@ public class JFLogin extends JFrame {
         // call the listeners and JPanels
     }
 
+    public void showNurseScreen(Nurse nurse) {
+        //JFPharmacist jfPharmacist = new JFPharmacist();
+        // call the listeners and JPanels
+    }
+
     public void showPharmacyManagerScreen(PharmacyManager pharmacyManager) {
         //JFPharmacyManager jfPharmacyManager = new JFPharmacyManager();
         // call the listeners and JPanels
@@ -292,13 +288,17 @@ public class JFLogin extends JFrame {
     public void showDoctorFrameScreen(Doctor doctor) {
 
         JIFDoctorF jifDoctorF = new JIFDoctorF();
-
-        jfAdminScreen = new JFAdminScreen(jifDoctorF);
+        JIFNurse jifNurse = new JIFNurse();
+        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse);
 
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
+        jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
         jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
         jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
+
+        jifNurse.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewNurse(jifNurse));
+        jifNurse.addSearchNursePanelMouseAdapter(new MouseAdapterSearchNurse(jifNurse));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
@@ -324,10 +324,10 @@ public class JFLogin extends JFrame {
         ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctor(jfAdminScreen));
         ilfDoctor.addEditDoctorInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
 
-        jifSearchDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
+        jifSearchDoctor.addSearchNursePanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
         jifSearchDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearch(ilfDoctor));
 
-        jifAddDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctor(ilfDoctor));
+        jifAddDoctor.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctor(ilfDoctor));
         jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationAddDoctor(jifAddDoctor));
         jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationAddDoctor(jifAddDoctor));
         jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationAddDoctor(jifAddDoctor));
@@ -335,7 +335,7 @@ public class JFLogin extends JFrame {
         jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctor(jfAdminScreen));
 
         //jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
-        jifEditDoctor.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterEditDoctor(ilfDoctor));
+        jifEditDoctor.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterEditDoctor(ilfDoctor));
         jifEditDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseEditDoctor(ilfDoctor));
         jifEditDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationEditDoctor(jifEditDoctor));
         jifEditDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationEditDoctor(jifEditDoctor));
@@ -350,8 +350,8 @@ public class JFLogin extends JFrame {
         jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountry(jifAddCity));
         jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountry(jifAddCity));
         
-        jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
-        jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
+        jifDoctorF.addSearchNursePanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
+        jifDoctorF.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

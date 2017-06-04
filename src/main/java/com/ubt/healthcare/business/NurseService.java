@@ -100,7 +100,7 @@ public class NurseService {
         return doctorList;
     }
 
-    public String persistDoctor(Nurse nurse) {
+    public String persistNurse(Nurse nurse) {
 
         String doctorMsg = null;
 

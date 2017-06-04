@@ -6,8 +6,8 @@
 package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.UserGroup;
 import java.util.List;
 
@@ -18,7 +18,6 @@ import java.util.List;
 public class UserGroupService {
 
     private SQLRepository sqlRepository;
-    private List<City> city; // caching machanisim 
 
     public UserGroupService() {
         sqlRepository = new SQLRepository();
@@ -35,7 +34,17 @@ public class UserGroupService {
 
         return msg;
     }
+public String checkIfUserGroupExists(Nurse p) {
+        String msg = "Save";
+        List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
+        for (Object o : docs) {
+            if (((UserGroup) o).getUserId() == p.getNurseId()) {
+                return "Exist";
+            }
+        }
 
+        return msg;
+    }
     public void persistUserInUserGroup(UserGroup userGroup) {
         sqlRepository.add(userGroup);
     }

@@ -6,11 +6,8 @@
 package com.ubt.healthcare.ui.admin;
 
 import java.awt.event.MouseAdapter;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -20,6 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class JFAdminScreen extends javax.swing.JFrame {
 
     private JIFDoctorF jifDoctorF;
+    private JIFNurse jifNurse;
 
     /**
      * Creates new form JFAdminScreen
@@ -28,14 +26,24 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctorF jifDoctorF) {
+    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse ) {
         this.jifDoctorF = jifDoctorF;
+        this.jifNurse = jifNurse;
 
         //frameStlye();
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        jlAdminClinic.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/adminClinic.png")));
+        jlDoctor.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/doctor.png")));
+        jlLogout.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/logout.png")));
+        jlNurse.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/nurse.png")));
+        jlPharmacist.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/pharmacist.png")));
+        jlPharmacyManager.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/pharmacyManager.png")));
+        jlProfile.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/profile.png")));
+        jlReceptionist.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/receptionist.png")));
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +73,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         );
         jdpPaneHandlerLayout.setVerticalGroup(
             jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         jlProfile.setText("Profile");
@@ -91,36 +99,36 @@ public class JFAdminScreen extends javax.swing.JFrame {
             .addComponent(jdpPaneHandler)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
-                .addComponent(jlDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addComponent(jlReceptionist, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                .addGap(48, 48, 48)
-                .addComponent(jlPharmacist, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                .addGap(46, 46, 46)
-                .addComponent(jlPharmacyManager, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                .addGap(46, 46, 46)
-                .addComponent(jlNurse, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addGap(45, 45, 45)
-                .addComponent(jlAdminClinic, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addGap(44, 44, 44)
-                .addComponent(jlLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
+                .addComponent(jlProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlReceptionist, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlPharmacist, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlPharmacyManager, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlNurse, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jlAdminClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jlLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlReceptionist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlPharmacist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlPharmacyManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlNurse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlAdminClinic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlProfile)
+                    .addComponent(jlDoctor)
+                    .addComponent(jlReceptionist)
+                    .addComponent(jlPharmacist)
+                    .addComponent(jlPharmacyManager)
+                    .addComponent(jlNurse)
+                    .addComponent(jlAdminClinic)
+                    .addComponent(jlLogout))
                 .addGap(18, 18, 18)
                 .addComponent(jdpPaneHandler))
         );
@@ -186,6 +194,16 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
+    
+    public void showNurseScreen() {
+
+        jdpPaneHandler.remove(jifNurse);//withoutF
+        jdpPaneHandler.add(jifNurse);
+        jifNurse.show();
+        /*jspPane.setViewportView(jpAddDoctor);
+        jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);*/
+
+    }
    /* public void showAddDoctorInternalFrame() {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifAddDoctor());

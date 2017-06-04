@@ -9,7 +9,6 @@ import com.ubt.healthcare.business.AddressService;
 import com.ubt.healthcare.business.CityService;
 import com.ubt.healthcare.business.ContactService;
 import com.ubt.healthcare.business.CountryService;
-import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.business.EducationProgramService;
 import com.ubt.healthcare.business.EducationService;
 import com.ubt.healthcare.business.EducationTypeService;
@@ -28,14 +27,13 @@ import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.UserGroup;
-import com.ubt.healthcare.ui.admin.model.DoctorTableModelViewDoctor;
+import com.ubt.healthcare.ui.admin.model.NurseTableModelViewNurses;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
@@ -55,11 +53,11 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
     private List<Nurse> nurseList;
     private NurseService nurseService;
-    private DoctorTableModelViewDoctor doctorTableModelViewDoctor;
+    private NurseTableModelViewNurses nurseTableModelViewNurse;
     private LoadTables loadTable;
     private PasswordHashing passwordHashing;
     private InputValidation inputValidation;
-    private Doctor doctor;
+    private Nurse nurse;
     private ContactService contactService;
     private EducationTypeService educationTypeService;
     private EducationProgramService educationProgramService;
@@ -108,7 +106,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
         fillComboBoxEducationType();
         fillComboBoxReligion();
         fillComboBoxGender();
-        bindTheDoctorSearchTableModel();
+        bindTheNurseSearchTableModel();
 
     }
 
@@ -165,12 +163,12 @@ public class JIFNurse extends javax.swing.JInternalFrame {
         jtfEmail = new javax.swing.JTextField();
         jbAddCity = new javax.swing.JButton();
         jspDoctorTable = new javax.swing.JScrollPane();
-        jtDoctorListTable = new javax.swing.JTable();
+        jtNurseListTable = new javax.swing.JTable();
         jtfFirstNameSearch = new javax.swing.JTextField();
         jtfLastNameSearch = new javax.swing.JTextField();
         jcbCitySearch = new javax.swing.JComboBox<>();
-        jbSearchDoctor = new javax.swing.JButton();
-        jbSaveDoctor = new javax.swing.JButton();
+        jbSearchNurse = new javax.swing.JButton();
+        jbSaveNurse = new javax.swing.JButton();
         jlFirstNameSearch = new javax.swing.JLabel();
         jlLastNameSearch = new javax.swing.JLabel();
         jlCitySearch = new javax.swing.JLabel();
@@ -194,7 +192,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Doctor Screen");
+        setTitle("Nurse Screen");
 
         jlPersonalId.setText("Personal ID");
 
@@ -397,7 +395,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
         jtpDoctor.addTab("Personal Information", jspPersonalInformation);
 
-        jtDoctorListTable.setModel(new javax.swing.table.DefaultTableModel(
+        jtNurseListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -408,11 +406,11 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jspDoctorTable.setViewportView(jtDoctorListTable);
+        jspDoctorTable.setViewportView(jtNurseListTable);
 
-        jbSearchDoctor.setText("Search");
+        jbSearchNurse.setText("Search");
 
-        jbSaveDoctor.setText("Save");
+        jbSaveNurse.setText("Save");
 
         jlFirstNameSearch.setText("First Name");
 
@@ -433,7 +431,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+                    .addComponent(jtpDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jspDoctorTable))
@@ -450,19 +448,16 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                                     .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(203, 203, 203)
-                                .addComponent(jbSaveDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbSaveNurse, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSearchDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbSearchNurse, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(68, 68, 68))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlCitySearch))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCitySearch))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -470,7 +465,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbSaveDoctor)
+                    .addComponent(jbSaveNurse)
                     .addComponent(jbCancel))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -482,7 +477,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                     .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSearchDoctor))
+                    .addComponent(jbSearchNurse))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -504,7 +499,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
     private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
         clearTheFields();
-        bindTheDoctorSearchTableModel();
+        bindTheNurseSearchTableModel();
     }//GEN-LAST:event_jbCancelActionPerformed
 
 
@@ -514,8 +509,8 @@ public class JIFNurse extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbAddCity;
     private javax.swing.JButton jbCancel;
-    private javax.swing.JButton jbSaveDoctor;
-    private javax.swing.JButton jbSearchDoctor;
+    private javax.swing.JButton jbSaveNurse;
+    private javax.swing.JButton jbSearchNurse;
     private javax.swing.JComboBox<String> jcbBirthPlace;
     private javax.swing.JComboBox<String> jcbCity;
     private javax.swing.JComboBox<String> jcbCitySearch;
@@ -548,7 +543,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jpPersonalInformation;
     private javax.swing.JScrollPane jspDoctorTable;
     private javax.swing.JScrollPane jspPersonalInformation;
-    private javax.swing.JTable jtDoctorListTable;
+    private javax.swing.JTable jtNurseListTable;
     private javax.swing.JTextField jtfAddress;
     private javax.swing.JTextField jtfBulidingNumber;
     private javax.swing.JTextField jtfEmail;
@@ -565,34 +560,34 @@ public class JIFNurse extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jtpDoctor;
     // End of variables declaration//GEN-END:variables
 
-    public void addSaveDoctorInternalFrameMouseAdapter(MouseAdapter e) {
-        jbSaveDoctor.addMouseListener(e);
+    public void addSaveNurseInternalFrameMouseAdapter(MouseAdapter e) {
+        jbSaveNurse.addMouseListener(e);
     }
 
 // Mouse Event listener for Search button
-    public void addSearchDoctorPanelMouseAdapter(MouseAdapter e) {
-        jbSearchDoctor.addMouseListener(e);
+    public void addSearchNursePanelMouseAdapter(MouseAdapter e) {
+        jbSearchNurse.addMouseListener(e);
     }
 
 // load Doctor Table 
-    public void loadDoctorListTable(String name, String surname, String city) {
+    public void loadNurseListTable(String name, String surname, String city) {
         nurseList = nurseService.findDoctorsByParameters(name, surname, city);
-        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(nurseList);
-        jtDoctorListTable.setModel(doctorTableModelViewDoctor);
-        doctorTableModelViewDoctor.fireTableDataChanged();
+        nurseTableModelViewNurse = new NurseTableModelViewNurses(nurseList);
+        jtNurseListTable.setModel(nurseTableModelViewNurse);
+        nurseTableModelViewNurse.fireTableDataChanged();
     }
 
     // method which searches for Doctor 
-    public void searchDoctorInternalPane() {
-        String nameOfDctor = jtfFirstNameSearch.getText();
-        String surnameOfDctor = jtfLastNameSearch.getText();
-        String cityOfDoctor = jcbCitySearch.getSelectedIndex() < 0 ? "" : jcbCitySearch.getSelectedItem().toString();
+    public void searchNurseInternalPane() {
+        String nameOfNurse = jtfFirstNameSearch.getText();
+        String surNameOfNurse = jtfLastNameSearch.getText();
+        String cityOFNurse = jcbCitySearch.getSelectedIndex() < 0 ? "" : jcbCitySearch.getSelectedItem().toString();
 
-        if (nameOfDctor.trim().length() == 0 && surnameOfDctor.trim().length() == 0 && cityOfDoctor.trim().length() == 0) {
+        if (nameOfNurse.trim().length() == 0 && surNameOfNurse.trim().length() == 0 && cityOFNurse.trim().length() == 0) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the Doctor you are looking for");
         } else {
 
-            loadDoctorListTable(nameOfDctor, surnameOfDctor, cityOfDoctor);
+            loadNurseListTable(nameOfNurse, surNameOfNurse, cityOFNurse);
 
         }
     }
@@ -747,8 +742,8 @@ public class JIFNurse extends javax.swing.JInternalFrame {
     }
 // doctor view listener
 
-    public void doctorTableRowSelectionListener() {
-        final ListSelectionModel selectedModel = jtDoctorListTable.getSelectionModel();
+    public void nurseTableRowSelectionListener() {
+        final ListSelectionModel selectedModel = jtNurseListTable.getSelectionModel();
         selectedModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -759,7 +754,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                 if (selectedRow > -1) {
                     // get the selected education from jtable which is saved on arrayList
                     //and update the jtfields which they can edit
-                    Person pe = doctorTableModelViewDoctor.getDoctor(selectedRow).getPersonId();
+                    Person pe = nurseTableModelViewNurse.getNurse(selectedRow).getPersonId();
                     updatePersonFields(pe);
 
                 }
@@ -767,19 +762,13 @@ public class JIFNurse extends javax.swing.JInternalFrame {
         });
     }
 
-    //reflect the updates to table
-    private void fillTheDoctorSearchTable() {
-        doctorTableModelViewDoctor.fireTableDataChanged();
-
-    }
-
     //create table with empty rows and add the listener in constructor
-    private void bindTheDoctorSearchTableModel() {
-        doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(new ArrayList<>());
-        doctorTableModelViewDoctor.add(new ArrayList<>());
-        jtDoctorListTable.setModel(doctorTableModelViewDoctor);
-        fillTheDoctorSearchTable();
-        doctorTableRowSelectionListener();
+    private void bindTheNurseSearchTableModel() {
+        nurseTableModelViewNurse = new NurseTableModelViewNurses(new ArrayList<>());
+        nurseTableModelViewNurse.add(new ArrayList<>());
+        jtNurseListTable.setModel(nurseTableModelViewNurse);
+        nurseTableModelViewNurse.fireTableDataChanged();
+        nurseTableRowSelectionListener();
     }
 
     private void updatePersonFields(Person person) {
@@ -832,15 +821,14 @@ public class JIFNurse extends javax.swing.JInternalFrame {
         }
     }
 
-    public void saveDoctorInternalFrameAddDoctor() {
+    public void saveNurseInternalFrame() {
 
-        int row = jtDoctorListTable.getSelectedRow();
-        //jifAddDoctor.getT
+        int row = jtNurseListTable.getSelectedRow();
         // check if all mandatory fields are not empty
-        // if so warn the user don't let move to next step
+        // if so warn the user, don't let move to next step
         //if user has typed just education and no personal infromation don't let move on next step
 
-        //save doctor on database using doctor service
+        //save nurse on database using nurse service
         String personId = jtfPersonalId.getText();
         String firstName = jtfFirstName.getText();
         String middleName = jtfMiddleName.getText();
@@ -890,18 +878,18 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(rootPane, inputValidation.validatePassword(password));
                 } else {
                     // else we can persist the data....
-                    doctor = new Doctor();
+                    nurse = new Nurse();
                     Person person = new Person();
 
-                    doctor.setPersonId(person);
-                    person.setDoctor(doctor);
+                    nurse.setPersonId(person);
+                    person.setNurse(nurse);
 
-                    doctor.getPersonId().setPersonId(Integer.parseInt(personId));
-                    doctor.getPersonId().setFirstName(firstName);
-                    doctor.getPersonId().setMiddleName(middleName);
-                    doctor.getPersonId().setLastName(lastName);
-                    doctor.setPassCode(passwordHashing.encodehashPassword(password));
-                    doctor.getPersonId().setDateOfBirth(dateOfBirth);
+                    nurse.getPersonId().setPersonId(Integer.parseInt(personId));
+                    nurse.getPersonId().setFirstName(firstName);
+                    nurse.getPersonId().setMiddleName(middleName);
+                    nurse.getPersonId().setLastName(lastName);
+                    nurse.setPassCode(passwordHashing.encodehashPassword(password));
+                    nurse.getPersonId().setDateOfBirth(dateOfBirth);
 
                     Gender findTheGender = genderService.findTheGender(sex);
                     MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
@@ -921,15 +909,15 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                     theAddress = addressService.findTheAddress(theAddress);
 
                     //set the combobox values to doctor
-                    doctor.getPersonId().setGenderId(findTheGender);
-                    doctor.getPersonId().setMartialStatusId(findTheMartialStatus);
-                    doctor.getPersonId().setAddressId(theAddress);
-                    doctor.getPersonId().setBirthCityId(birthPlaceObject);
-                    doctor.getPersonId().setReigionId(findTheReligion);
+                    nurse.getPersonId().setGenderId(findTheGender);
+                    nurse.getPersonId().setMartialStatusId(findTheMartialStatus);
+                    nurse.getPersonId().setAddressId(theAddress);
+                    nurse.getPersonId().setBirthCityId(birthPlaceObject);
+                    nurse.getPersonId().setReigionId(findTheReligion);
 
                     //before we save the address make sure the user doesn't exist in db. Some users may overload the db with many addresses if we dont check
                     // if use already exists edit the user 
-                    String personMsg = personService.checkIfUserExists(doctor.getPersonId());
+                    String personMsg = personService.checkIfUserExists(nurse.getPersonId());
 
                     if ("Save".equals(personMsg)) {
 
@@ -941,17 +929,17 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
                         if ("Save".equals(personMsg)) {
                             // validate doctor input
-                            String doctorSavedMsg = nurseService.persistDoctor(doctor);
-                            JOptionPane.showMessageDialog(null, doctorSavedMsg);// if doctor is not saved do not save other stuff.
+                            String nurseSavedMsg = nurseService.persistNurse(nurse);
+                            JOptionPane.showMessageDialog(null, nurseSavedMsg);// if doctor is not saved do not save other stuff.
 
                             // save the education details.
                             //persistEducation(); next version
                             // persist UserGroup
-                            String userGroupMsg = userGroupService.checkIfUserGroupExists(doctor);
+                            String userGroupMsg = userGroupService.checkIfUserGroupExists(nurse);
                             if ("Save".equals(userGroupMsg)) {
                                 UserGroup userGroup = new UserGroup();
-                                userGroup.setUserId(doctor.getDoctorId());
-                                userGroup.setGroupId(loginGroupService.findTheLoginGroup("Doctor"));
+                                userGroup.setUserId(nurse.getNurseId());
+                                userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
                                 userGroupService.persistUserInUserGroup(userGroup);
                             }
 
@@ -977,16 +965,16 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                 }
             } //edit the Doctor
             else {
-                doctor = doctorTableModelViewDoctor.getDoctor(row);
+                nurse = nurseTableModelViewNurse.getNurse(row);
                 //update the fields
 
-                doctor.getPersonId().setPersonId(Integer.parseInt(personId));
-                doctor.getPersonId().setFirstName(firstName);
-                doctor.getPersonId().setMiddleName(middleName);
-                doctor.getPersonId().setLastName(lastName);
-                doctor.getPersonId().setDateOfBirth(dateOfBirth);
+                nurse.getPersonId().setPersonId(Integer.parseInt(personId));
+                nurse.getPersonId().setFirstName(firstName);
+                nurse.getPersonId().setMiddleName(middleName);
+                nurse.getPersonId().setLastName(lastName);
+                nurse.getPersonId().setDateOfBirth(dateOfBirth);
                 if (!(password == null || password.isEmpty())) {
-                    doctor.setPassCode(passwordHashing.encodehashPassword(password));
+                    nurse.setPassCode(passwordHashing.encodehashPassword(password));
                 }
 
                 Gender findTheGender = genderService.findTheGender(sex);
@@ -1007,14 +995,14 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                 theAddress = addressService.findTheAddress(theAddress);
 
                 //set the combobox values to doctor
-                doctor.getPersonId().setGenderId(findTheGender);
-                doctor.getPersonId().setMartialStatusId(findTheMartialStatus);
-                doctor.getPersonId().setAddressId(theAddress);
-                doctor.getPersonId().setBirthCityId(birthPlaceObject);
-                doctor.getPersonId().setReigionId(findTheReligion);
+                nurse.getPersonId().setGenderId(findTheGender);
+                nurse.getPersonId().setMartialStatusId(findTheMartialStatus);
+                nurse.getPersonId().setAddressId(theAddress);
+                nurse.getPersonId().setBirthCityId(birthPlaceObject);
+                nurse.getPersonId().setReigionId(findTheReligion);
 
                 //edit the doctor
-                String personMsg = personService.checkIfUserExists(doctor.getPersonId());
+                String personMsg = personService.checkIfUserExists(nurse.getPersonId());
                 if ("Exist".equals(personMsg)) {
 
                     // store address 
@@ -1025,14 +1013,13 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
                     if ("Exist".equals(personMsg)) {
                         // validate doctor input
-                        nurseService.editDoctor(doctor);
-                        JOptionPane.showMessageDialog(null, "Doctor Edited");// if doctor is not saved do not save other stuff.
+                        nurseService.editDoctor(nurse);
 
                         // save the education details.
                         //persistEducation(); next version
                         // save the conntact details...
                         //editContact(oldValue, newValue)
-                        Collection<Contact> contactCollection = doctor.getPersonId().getContactCollection();
+                        Collection<Contact> contactCollection = nurse.getPersonId().getContactCollection();
                         if (contactCollection != null && contactCollection.size() > 0) {
                             // person might have just one contact details, soo clear the reamaining details of past selected persson
                             for (Contact contact : contactCollection) {
@@ -1054,8 +1041,9 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                                 }
 
                             }
+                            JOptionPane.showMessageDialog(null, "Nurse Edited");// if doctor is not saved do not save other stuff.
                             //loadEducationTable(); next version
-                            bindTheDoctorSearchTableModel();
+                            bindTheNurseSearchTableModel();
                             clearTheFields();
                         }
 
