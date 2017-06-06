@@ -7,9 +7,7 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.MartialStatus;
-import com.ubt.healthcare.dto.PersonEducation;
 import java.util.List;
 
 /**
@@ -26,7 +24,7 @@ public class MartialStatusService {
         inputValidation = new InputValidation();
     }
 
-    public MartialStatus findTheMartialStatus(String martialStatus) {
+    public MartialStatus findTheMartialStatus(String martialStatus)throws Exception {
         MartialStatus msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("MartialStatus.findAll");
         for (Object o : docs) {

@@ -571,10 +571,15 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
 // load Doctor Table 
     public void loadNurseListTable(String name, String surname, String city) {
-        nurseList = nurseService.findDoctorsByParameters(name, surname, city);
-        nurseTableModelViewNurse = new NurseTableModelViewNurses(nurseList);
-        jtNurseListTable.setModel(nurseTableModelViewNurse);
-        nurseTableModelViewNurse.fireTableDataChanged();
+        try {
+            nurseList = nurseService.findDoctorsByParameters(name, surname, city);
+            nurseTableModelViewNurse = new NurseTableModelViewNurses(nurseList);
+            jtNurseListTable.setModel(nurseTableModelViewNurse);
+            nurseTableModelViewNurse.fireTableDataChanged();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
+        }
     }
 
     // method which searches for Doctor 
@@ -593,101 +598,156 @@ public class JIFNurse extends javax.swing.JInternalFrame {
     }
 
     public void fillComboBoxCountry() {
-        List<Object> obj = loadTable.fillComboBoxCountry();
-        jcbCountry.addItem("");
-        for (Object o : obj) {
-            jcbCountry.addItem(((Country) o).getCountryName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxCountry();
+            jcbCountry.addItem("");
+            for (Object o : obj) {
+                jcbCountry.addItem(((Country) o).getCountryName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxGender() {
-        List<Object> obj = loadTable.fillComboBoxGender();
-        jcbGender.addItem("");
-        for (Object o : obj) {
-            jcbGender.addItem(((Gender) o).getGenderName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxGender();
+            jcbGender.addItem("");
+            for (Object o : obj) {
+                jcbGender.addItem(((Gender) o).getGenderName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
         }
+
     }
 
     public void fillComboBoxCity() {
-        List<Object> obj = loadTable.fillComboBoxBirthCity();
-        jcbCity.addItem("");
-        for (Object o : obj) {
-            jcbCity.addItem(((City) o).getCityName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxBirthCity();
+            jcbCity.addItem("");
+            for (Object o : obj) {
+                jcbCity.addItem(((City) o).getCityName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxSearchCity() {
-        List<Object> obj = loadTable.fillComboBoxBirthCity();
-        jcbCitySearch.addItem("");
-        for (Object o : obj) {
-            jcbCitySearch.addItem(((City) o).getCityName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxBirthCity();
+            jcbCitySearch.addItem("");
+            for (Object o : obj) {
+                jcbCitySearch.addItem(((City) o).getCityName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxBirthCity() {
-        List<Object> obj = loadTable.fillComboBoxBirthCity();
-        jcbBirthPlace.addItem("");
-        for (Object o : obj) {
-            jcbBirthPlace.addItem(((City) o).getCityName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxBirthCity();
+            jcbBirthPlace.addItem("");
+            for (Object o : obj) {
+                jcbBirthPlace.addItem(((City) o).getCityName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxCity(String country) {
-        List<Object> obj = loadTable.fillComboBoxBirthCity();
-        jcbCity.removeAllItems();
-        jcbCity.addItem("");
-        for (Object o : obj) {
-            if (((City) o).getCountryId().getCountryName().equals(country)) {
-                jcbCity.addItem(((City) o).getCityName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxBirthCity();
+            jcbCity.removeAllItems();
+            jcbCity.addItem("");
+            for (Object o : obj) {
+                if (((City) o).getCountryId().getCountryName().equals(country)) {
+                    jcbCity.addItem(((City) o).getCityName());
+                }
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxMartialStatus() {
-        List<Object> obj = loadTable.fillComboBoxMartialStatus();
-        jcbMartialStatus.addItem("");
-        obj.forEach((o) -> {
-            jcbMartialStatus.addItem(((MartialStatus) o).getMartialStatusName());
-        });
+        try {
+            List<Object> obj = loadTable.fillComboBoxMartialStatus();
+            jcbMartialStatus.addItem("");
+            obj.forEach((o) -> {
+                jcbMartialStatus.addItem(((MartialStatus) o).getMartialStatusName());
+            });
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
+        }
     }
 
     public void fillComboBoxEducationType() {
-        List<Object> obj = loadTable.fillComboBoxEducationType();
-        for (Object o : obj) {
-            //jcbEducationType.addItem(((EducationType) o).getEducationName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxEducationType();
+            for (Object o : obj) {
+                //jcbEducationType.addItem(((EducationType) o).getEducationName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     public void fillComboBoxReligion() {
-        List<Object> obj = loadTable.fillComboBoxReligion();
-        jcbReligion.addItem("");
-        for (Object o : obj) {
-            jcbReligion.addItem(((Religion) o).getName());
+        try {
+            List<Object> obj = loadTable.fillComboBoxReligion();
+            jcbReligion.addItem("");
+            for (Object o : obj) {
+                jcbReligion.addItem(((Religion) o).getName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
     }
 
     // gets the index of cetain Gender
     public int getSelectedGenderIndex(String genderType) {
-        List<Gender> fillComboBoxEducationType = (List<Gender>) (Object) loadTable.fillComboBoxGender();
-        int i = 0;
-        for (Gender object : fillComboBoxEducationType) {
-            if (object.getGenderName().equals(genderType)) {
-                return i + 1;
+        try {
+            List<Gender> fillComboBoxEducationType = (List<Gender>) (Object) loadTable.fillComboBoxGender();
+            int i = 0;
+            for (Gender object : fillComboBoxEducationType) {
+                if (object.getGenderName().equals(genderType)) {
+                    return i + 1;
+                }
+                i++;
             }
-            i++;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
         return -1;
     }
 
     // gets the index of cetain Martial Status
     public int getSelectedMartialStatusIndex(String martialStatus) {
-        List<MartialStatus> fillComboBoxEducationType = (List<MartialStatus>) (Object) loadTable.fillComboBoxMartialStatus();
-        int i = 0;
-        for (MartialStatus object : fillComboBoxEducationType) {
-            if (object.getMartialStatusName().equals(martialStatus)) {
-                return i + 1;
+        try {
+            List<MartialStatus> fillComboBoxEducationType = (List<MartialStatus>) (Object) loadTable.fillComboBoxMartialStatus();
+            int i = 0;
+            for (MartialStatus object : fillComboBoxEducationType) {
+                if (object.getMartialStatusName().equals(martialStatus)) {
+                    return i + 1;
+                }
+                i++;
             }
-            i++;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
         return -1;
     }
@@ -704,39 +764,54 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 
     // gets the index of cetain City
     public int getSelectedBirthCityIndex(String city) {
-        List<City> fillComboBoxEducationType = (List<City>) (Object) loadTable.fillComboBoxBirthCity();
-        int i = 0;
-        for (City object : fillComboBoxEducationType) {
-            if (object.getCityName().equals(city)) {
-                return i + 1;
+        try {
+            List<City> fillComboBoxEducationType = (List<City>) (Object) loadTable.fillComboBoxBirthCity();
+            int i = 0;
+            for (City object : fillComboBoxEducationType) {
+                if (object.getCityName().equals(city)) {
+                    return i + 1;
+                }
+                i++;
             }
-            i++;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
         return -1;
     }
 
     // gets the index of cetain Country
     public int getSelectedCountryIndex(String country) {
-        List<Country> fillComboBoxEducationType = (List<Country>) (Object) loadTable.fillComboBoxCountry();
-        int i = 0;
-        for (Country object : fillComboBoxEducationType) {
-            if (object.getCountryName().equals(country)) {
-                return i + 1;
+        try {
+            List<Country> fillComboBoxEducationType = (List<Country>) (Object) loadTable.fillComboBoxCountry();
+            int i = 0;
+            for (Country object : fillComboBoxEducationType) {
+                if (object.getCountryName().equals(country)) {
+                    return i + 1;
+                }
+                i++;
             }
-            i++;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
         return -1;
     }
 
     // gets the index of cetain City
     public int getSelectedReligionIndex(String city) {
-        List<Religion> fillComboBoxEducationType = (List<Religion>) (Object) loadTable.fillComboBoxReligion();
-        int i = 0;
-        for (Religion object : fillComboBoxEducationType) {
-            if (object.getName().equals(city)) {
-                return i + 1;
+        try {
+            List<Religion> fillComboBoxEducationType = (List<Religion>) (Object) loadTable.fillComboBoxReligion();
+            int i = 0;
+            for (Religion object : fillComboBoxEducationType) {
+                if (object.getName().equals(city)) {
+                    return i + 1;
+                }
+                i++;
             }
-            i++;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
         return -1;
     }
@@ -877,19 +952,111 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                 if (!("Valid".equals(inputValidation.validatePassword(password)))) {
                     JOptionPane.showMessageDialog(rootPane, inputValidation.validatePassword(password));
                 } else {
-                    // else we can persist the data....
-                    nurse = new Nurse();
-                    Person person = new Person();
+                    try {
+                        // else we can persist the data....
+                        nurse = new Nurse();
+                        Person person = new Person();
 
-                    nurse.setPersonId(person);
-                    person.setNurse(nurse);
+                        nurse.setPersonId(person);
+                        person.setNurse(nurse);
+
+                        nurse.getPersonId().setPersonId(Integer.parseInt(personId));
+                        nurse.getPersonId().setFirstName(firstName);
+                        nurse.getPersonId().setMiddleName(middleName);
+                        nurse.getPersonId().setLastName(lastName);
+                        nurse.setPassCode(passwordHashing.encodehashPassword(password));
+                        nurse.getPersonId().setDateOfBirth(dateOfBirth);
+
+                        Gender findTheGender = genderService.findTheGender(sex);
+                        MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
+                        City birthPlaceObject = cityService.findTheCity(birthPlace);
+                        Country findTheCountry = countryService.findTheCountry(country);
+                        Religion findTheReligion = religionService.findTheReligion(religion);
+                        City findTheCity = cityService.findTheCity(city);
+
+                        findTheCity.setCountryId(findTheCountry);
+
+                        Address theAddress = new Address();
+
+                        theAddress.setStreetName(address);
+                        theAddress.setCityId(findTheCity);
+                        theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
+
+                        theAddress = addressService.findTheAddress(theAddress);
+
+                        //set the combobox values to doctor
+                        nurse.getPersonId().setGenderId(findTheGender);
+                        nurse.getPersonId().setMartialStatusId(findTheMartialStatus);
+                        nurse.getPersonId().setAddressId(theAddress);
+                        nurse.getPersonId().setBirthCityId(birthPlaceObject);
+                        nurse.getPersonId().setReigionId(findTheReligion);
+
+                        //before we save the address make sure the user doesn't exist in db. Some users may overload the db with many addresses if we dont check
+                        // if use already exists edit the user 
+                        String personMsg = personService.checkIfUserExists(nurse.getPersonId());
+
+                        if ("Save".equals(personMsg)) {
+
+                            // store address 
+                            String addressMsg = addressService.checkIfAddressExists(theAddress);
+                            if ("Save".equals(addressMsg)) {
+                                addressService.persistAddress(theAddress);
+                            }
+
+                            if ("Save".equals(personMsg)) {
+                                // validate doctor input
+                                String nurseSavedMsg = nurseService.persistNurse(nurse);
+                                JOptionPane.showMessageDialog(null, nurseSavedMsg);// if doctor is not saved do not save other stuff.
+
+                                // save the education details.
+                                //persistEducation(); next version
+                                // persist UserGroup
+                                String userGroupMsg = userGroupService.checkIfUserGroupExists(nurse);
+                                if ("Save".equals(userGroupMsg)) {
+                                    UserGroup userGroup = new UserGroup();
+                                    userGroup.setUserId(nurse.getNurseId());
+                                    userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
+                                    userGroupService.persistUserInUserGroup(userGroup);
+                                }
+
+                                // save the conntact details...
+                                contactService.persistContact(person, "EMAIL", email);
+                                contactService.persistContact(person, "HOME", homePhone);
+                                contactService.persistContact(person, "WORK", workPhone);
+                                contactService.persistContact(person, "MOB", mobilePhone);
+
+                                // clear the Fields 
+                                //clearAddDoctorFields();
+                                // close the add new doctor 
+                                //jifAddDoctor.dispose();
+                                //this.show();
+                                // update the fields on jifDoctor to see the newly added doctor
+                                //updateDoctorFields(doctor);
+                                //loadEducationTable(); next version
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "User exists");
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
+
+                    }
+                }
+            } //edit the Doctor
+            else {
+                try {
+                    nurse = nurseTableModelViewNurse.getNurse(row);
+                    //update the fields
 
                     nurse.getPersonId().setPersonId(Integer.parseInt(personId));
                     nurse.getPersonId().setFirstName(firstName);
                     nurse.getPersonId().setMiddleName(middleName);
                     nurse.getPersonId().setLastName(lastName);
-                    nurse.setPassCode(passwordHashing.encodehashPassword(password));
                     nurse.getPersonId().setDateOfBirth(dateOfBirth);
+                    if (!(password == null || password.isEmpty())) {
+                        nurse.setPassCode(passwordHashing.encodehashPassword(password));
+                    }
 
                     Gender findTheGender = genderService.findTheGender(sex);
                     MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
@@ -915,11 +1082,9 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                     nurse.getPersonId().setBirthCityId(birthPlaceObject);
                     nurse.getPersonId().setReigionId(findTheReligion);
 
-                    //before we save the address make sure the user doesn't exist in db. Some users may overload the db with many addresses if we dont check
-                    // if use already exists edit the user 
+                    //edit the doctor
                     String personMsg = personService.checkIfUserExists(nurse.getPersonId());
-
-                    if ("Save".equals(personMsg)) {
+                    if ("Exist".equals(personMsg)) {
 
                         // store address 
                         String addressMsg = addressService.checkIfAddressExists(theAddress);
@@ -927,129 +1092,49 @@ public class JIFNurse extends javax.swing.JInternalFrame {
                             addressService.persistAddress(theAddress);
                         }
 
-                        if ("Save".equals(personMsg)) {
+                        if ("Exist".equals(personMsg)) {
                             // validate doctor input
-                            String nurseSavedMsg = nurseService.persistNurse(nurse);
-                            JOptionPane.showMessageDialog(null, nurseSavedMsg);// if doctor is not saved do not save other stuff.
+                            nurseService.editDoctor(nurse);
 
                             // save the education details.
                             //persistEducation(); next version
-                            // persist UserGroup
-                            String userGroupMsg = userGroupService.checkIfUserGroupExists(nurse);
-                            if ("Save".equals(userGroupMsg)) {
-                                UserGroup userGroup = new UserGroup();
-                                userGroup.setUserId(nurse.getNurseId());
-                                userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
-                                userGroupService.persistUserInUserGroup(userGroup);
-                            }
-
                             // save the conntact details...
-                            contactService.persistContact(person, "EMAIL", email);
-                            contactService.persistContact(person, "HOME", homePhone);
-                            contactService.persistContact(person, "WORK", workPhone);
-                            contactService.persistContact(person, "MOB", mobilePhone);
+                            //editContact(oldValue, newValue)
+                            Collection<Contact> contactCollection = nurse.getPersonId().getContactCollection();
+                            if (contactCollection != null && contactCollection.size() > 0) {
+                                // person might have just one contact details, soo clear the reamaining details of past selected persson
+                                for (Contact contact : contactCollection) {
+                                    switch (contact.getType().trim()) {
+                                        case "HOME":
+                                            contactService.editContact(homePhone, contact.getValue());
+                                            break;
+                                        case "WORK":
+                                            contactService.editContact(workPhone, contact.getValue());
+                                            break;
+                                        case "MOB":
+                                            contactService.editContact(mobilePhone, contact.getValue());
+                                            break;
+                                        case "EMAIL":
+                                            contactService.editContact(email, contact.getValue());
+                                            break;
+                                        default:
+                                            break;
+                                    }
 
-                            // clear the Fields 
-                            //clearAddDoctorFields();
-                            // close the add new doctor 
-                            //jifAddDoctor.dispose();
-                            //this.show();
-                            // update the fields on jifDoctor to see the newly added doctor
-                            //updateDoctorFields(doctor);
-                            //loadEducationTable(); next version
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "User exists");
-                    }
-                }
-            } //edit the Doctor
-            else {
-                nurse = nurseTableModelViewNurse.getNurse(row);
-                //update the fields
-
-                nurse.getPersonId().setPersonId(Integer.parseInt(personId));
-                nurse.getPersonId().setFirstName(firstName);
-                nurse.getPersonId().setMiddleName(middleName);
-                nurse.getPersonId().setLastName(lastName);
-                nurse.getPersonId().setDateOfBirth(dateOfBirth);
-                if (!(password == null || password.isEmpty())) {
-                    nurse.setPassCode(passwordHashing.encodehashPassword(password));
-                }
-
-                Gender findTheGender = genderService.findTheGender(sex);
-                MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
-                City birthPlaceObject = cityService.findTheCity(birthPlace);
-                Country findTheCountry = countryService.findTheCountry(country);
-                Religion findTheReligion = religionService.findTheReligion(religion);
-                City findTheCity = cityService.findTheCity(city);
-
-                findTheCity.setCountryId(findTheCountry);
-
-                Address theAddress = new Address();
-
-                theAddress.setStreetName(address);
-                theAddress.setCityId(findTheCity);
-                theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
-
-                theAddress = addressService.findTheAddress(theAddress);
-
-                //set the combobox values to doctor
-                nurse.getPersonId().setGenderId(findTheGender);
-                nurse.getPersonId().setMartialStatusId(findTheMartialStatus);
-                nurse.getPersonId().setAddressId(theAddress);
-                nurse.getPersonId().setBirthCityId(birthPlaceObject);
-                nurse.getPersonId().setReigionId(findTheReligion);
-
-                //edit the doctor
-                String personMsg = personService.checkIfUserExists(nurse.getPersonId());
-                if ("Exist".equals(personMsg)) {
-
-                    // store address 
-                    String addressMsg = addressService.checkIfAddressExists(theAddress);
-                    if ("Save".equals(addressMsg)) {
-                        addressService.persistAddress(theAddress);
-                    }
-
-                    if ("Exist".equals(personMsg)) {
-                        // validate doctor input
-                        nurseService.editDoctor(nurse);
-
-                        // save the education details.
-                        //persistEducation(); next version
-                        // save the conntact details...
-                        //editContact(oldValue, newValue)
-                        Collection<Contact> contactCollection = nurse.getPersonId().getContactCollection();
-                        if (contactCollection != null && contactCollection.size() > 0) {
-                            // person might have just one contact details, soo clear the reamaining details of past selected persson
-                            for (Contact contact : contactCollection) {
-                                switch (contact.getType().trim()) {
-                                    case "HOME":
-                                        contactService.editContact(homePhone, contact.getValue());
-                                        break;
-                                    case "WORK":
-                                        contactService.editContact(workPhone, contact.getValue());
-                                        break;
-                                    case "MOB":
-                                        contactService.editContact(mobilePhone, contact.getValue());
-                                        break;
-                                    case "EMAIL":
-                                        contactService.editContact(email, contact.getValue());
-                                        break;
-                                    default:
-                                        break;
                                 }
-
+                                JOptionPane.showMessageDialog(null, "Nurse Edited");// if doctor is not saved do not save other stuff.
+                                //loadEducationTable(); next version
+                                bindTheNurseSearchTableModel();
+                                clearTheFields();
                             }
-                            JOptionPane.showMessageDialog(null, "Nurse Edited");// if doctor is not saved do not save other stuff.
-                            //loadEducationTable(); next version
-                            bindTheNurseSearchTableModel();
-                            clearTheFields();
-                        }
 
-                    } else {
-                        JOptionPane.showMessageDialog(null, "User exists");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "User exists");
+                        }
                     }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
+
                 }
             }
 

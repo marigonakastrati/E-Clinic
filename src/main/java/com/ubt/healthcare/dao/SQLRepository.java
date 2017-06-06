@@ -8,6 +8,7 @@ package com.ubt.healthcare.dao;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -16,52 +17,97 @@ import org.hibernate.Session;
 public class SQLRepository implements PersistenceInterface {
 
     @Override
-    public void add(Object entity) {
+    public void add(Object entity) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(entity);
-        session.getTransaction().commit();
-        session.close();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(entity);
+            tx.commit();
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+                throw ex;
+            }
+        } finally {
+            session.close();
+        }
+
     }
 
     @Override
-    public void update(Object entity ){
+    public void update(Object entity) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.merge(entity);
-        session.getTransaction().commit();
-        session.close();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.merge(entity);
+            tx.commit();
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+                throw ex;
+            }
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public void remove(Object entity) {
+    public void remove(Object entity) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(entity);
-        session.getTransaction().commit();
-        session.close();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(entity);
+            tx.commit();
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+                throw ex;
+            }
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public List<Object> findAll(String entity) {
+    public List<Object> findAll(String entity) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        //Query query = session.createQuery("From Patient"); HQL
-        Query query = session.getNamedQuery(entity);// NamedQuery
-        List<Object> list = query.list();
-        session.getTransaction().commit();
+        Transaction tx = null;
+        List<Object> list = null;
+        try {
+            tx = session.beginTransaction();
+            //Query query = session.createQuery("From Patient"); HQL
+            Query query = session.getNamedQuery(entity);
+            list = query.list();
+            tx.commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            session.close();
+        }
         return list;
     }
 
     @Override
-    public Object findById(int id, String entity, String atribute) {
+    public Object findById(int id, String entity, String attribute) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.getNamedQuery(entity);
-        query.setParameter(atribute, id);
-        List<Object> student = query.list();
-        session.close();
-        return student.get(0);
+        Transaction tx = null;
+        List<Object> student = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery(entity);
+            query.setParameter(attribute, id);
+            student = query.list();
+            tx.commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            session.close();
+        }
+
+        return student != null ? student.get(0) : null;
     }
-    
+
 }

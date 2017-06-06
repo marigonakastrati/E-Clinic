@@ -23,7 +23,7 @@ public class LoginGroupService {
         sqlRepository = new SQLRepository();
     }
 
-    public LoginGroup findTheLoginGroup(String groupName) {
+    public LoginGroup findTheLoginGroup(String groupName) throws Exception{
         LoginGroup msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("LoginGroup.findAll");
         for (Object o : docs) {

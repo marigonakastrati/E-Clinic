@@ -24,7 +24,7 @@ public class EducationService {
         inputValidation = new InputValidation();
     }
 
-    public Education findTheEducation(String institutionName, String programName, String educationType) {
+    public Education findTheEducation(String institutionName, String programName, String educationType)throws Exception {
         List<Object> docs = (List<Object>) sqlRepository.findAll("Education.findAll");
         for (Object o : docs) {
             if (((Education) o).getInstitutionName().equals(institutionName) && ((Education) o).getEducationProgramId().getProgramName().equals(programName)
@@ -36,7 +36,7 @@ public class EducationService {
         return null;
     }
 
-    public void persistEducation(Education education) {
+    public void persistEducation(Education education)throws Exception {
         sqlRepository.add(education);
     }
 }

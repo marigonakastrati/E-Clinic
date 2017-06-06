@@ -25,7 +25,7 @@ public class GenderService {
     }
 
   
-    public Gender findTheGender(String gender) {
+    public Gender findTheGender(String gender)throws Exception {
         Gender msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("Gender.findAll");
         for (Object o : docs) {

@@ -10,32 +10,25 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
+
 /**
  *
  * @author F
  */
 public class PasswordHashing {
-    
-    
-    public String encodehashPassword(String password)
-    {
-        try 
-        {
+
+    public String encodehashPassword(String password) {
+        try {
             MessageDigest md = MessageDigest.getInstance("MD5");// SHA-512m SHA-256
-            byte [] message = password.getBytes();
+            byte[] message = password.getBytes();
             md.update(message);
             byte[] digestbyte = md.digest();
             password = DatatypeConverter.printHexBinary(digestbyte).toLowerCase();
-            
-        } catch (NoSuchAlgorithmException ex) 
-        {
+
+        } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(PasswordHashing.class.getName()).log(Level.SEVERE, null, ex);
         }
         return password;
     }
-    
-    public String decodehashPassword(String password) 
-    {
-        return password;
-    }
+
 }

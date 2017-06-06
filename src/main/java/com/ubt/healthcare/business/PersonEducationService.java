@@ -31,7 +31,7 @@ public class PersonEducationService {
         inputValidation = new InputValidation();
     }
 
-    public void persistPersonEducation(PersonEducation personEducation) {
+    public void persistPersonEducation(PersonEducation personEducation)throws Exception {
 
         //make the connection between the tables and  save just education pojo
         sqlRepository.add(personEducation);
@@ -39,7 +39,7 @@ public class PersonEducationService {
         // return "Education Saved";
     }
 
-    public void editPersonEducation(PersonEducation personEducation) {
+    public void editPersonEducation(PersonEducation personEducation) throws Exception{
 
         //make the connection between the tables and  save just education pojo
         sqlRepository.update(personEducation);
@@ -47,7 +47,7 @@ public class PersonEducationService {
         // return "Education Saved";
     }
 
-    public List<PersonEducation> findEducation(Doctor doctor) {
+    public List<PersonEducation> findEducation(Doctor doctor)throws Exception {
         List<PersonEducation> prsonEduc = new ArrayList<>();
         if (personEducation == null) {
             personEducation = (List<PersonEducation>) (Object) sqlRepository.findAll("PersonEducation.findAll");

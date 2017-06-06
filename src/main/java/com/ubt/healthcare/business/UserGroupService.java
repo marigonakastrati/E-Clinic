@@ -23,7 +23,7 @@ public class UserGroupService {
         sqlRepository = new SQLRepository();
     }
 
-    public String checkIfUserGroupExists(Doctor p) {
+    public String checkIfUserGroupExists(Doctor p) throws Exception{
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
@@ -31,10 +31,9 @@ public class UserGroupService {
                 return "Exist";
             }
         }
-
         return msg;
     }
-public String checkIfUserGroupExists(Nurse p) {
+public String checkIfUserGroupExists(Nurse p) throws Exception{
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
@@ -45,12 +44,12 @@ public String checkIfUserGroupExists(Nurse p) {
 
         return msg;
     }
-    public void persistUserInUserGroup(UserGroup userGroup) {
+    public void persistUserInUserGroup(UserGroup userGroup)throws Exception {
         sqlRepository.add(userGroup);
     }
 
     // if user i found the the UserGroupRole table
-    public String authorization(String user) {
+    public String authorization(String user) throws Exception{
         final String entiy = "UserGroup.findByUserId";
         final String attribute = "userId";
         UserGroup userGroup = (UserGroup) sqlRepository.findById(Integer.parseInt(user), entiy, attribute);
@@ -58,7 +57,7 @@ public String checkIfUserGroupExists(Nurse p) {
         return userGroup.getGroupId().getGroupName();
     }
 
-    public String checkIfUserxists(String user) {
+    public String checkIfUserxists(String user)throws Exception {
         String msg = "Wrong";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {

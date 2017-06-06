@@ -23,14 +23,14 @@ public class AuthenticateUser {
     private SQLRepository sqlRepository = new SQLRepository();
     private PasswordHashing hashing = new PasswordHashing();
 
-    private Object authenticate(String user, String entity, String attribute) 
+    private Object authenticate(String user, String entity, String attribute) throws Exception
     {
         Object ob = sqlRepository.findById(Integer.parseInt(user), entity, attribute);
 
         return ob != null ? ob : null;
     }
 
-    public AdminClinic authenticateAdminClinic(String user, String password) 
+    public AdminClinic authenticateAdminClinic(String user, String password) throws Exception
     {
         final String AdminClinicFindById = "AdminClinic.findByAdminClinicId";
         final String adminClinicid = "adminClinicId";
@@ -43,7 +43,7 @@ public class AuthenticateUser {
         return null;
     }
 
-    public Doctor authenticateDoctor(String user, String password) 
+    public Doctor authenticateDoctor(String user, String password) throws Exception
     {
         final String DoctorFindById = "Doctor.findByDoctorId";
         final String doctorID = "doctorId";
@@ -56,7 +56,7 @@ public class AuthenticateUser {
         return null;
     }
 
-    public Patient authenticatePatient(String user, String password) 
+    public Patient authenticatePatient(String user, String password) throws Exception
     {
         final String PatientFindById = "Patient.findByPatientId";
         final String patientId = "patientId";
@@ -69,7 +69,7 @@ public class AuthenticateUser {
         return null;
     }
 
-    public Pharmacist authenticatePharmacist(String user, String password) 
+    public Pharmacist authenticatePharmacist(String user, String password) throws Exception
     {
         final String PharmacistFindById = "Pharmacist.findByPharmacistId";
         final String pharmacistId = "pharmacistId";
@@ -82,7 +82,7 @@ public class AuthenticateUser {
         return null;
     }
 
-    public PharmacyManager authenticatePharmacyManager(String user, String password) 
+    public PharmacyManager authenticatePharmacyManager(String user, String password) throws Exception
     {
         final String PharmacyManagerFindById = "PharmacyManager.findByPharmacyManagerId";
         final String pharmacyManagerId = "pharmacyManagerId";
@@ -95,7 +95,7 @@ public class AuthenticateUser {
         return null;
     }
     
-    public Nurse authenticateNurse(String user, String password) 
+    public Nurse authenticateNurse(String user, String password) throws Exception
     {
         final String NurseFindById = "Nurse.findByNurseId";
         final String nurseId = "nurseId";

@@ -17,17 +17,17 @@ import java.util.List;
  * @author F
  */
 public class EducationProgramService {
-    
+
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
-    
+
     public EducationProgramService() {
         sqlRepository = new SQLRepository();
         inputValidation = new InputValidation();
     }
-    
-    public EducationProgram findTheEducationProgram(String educationProgram) {
+
+    public EducationProgram findTheEducationProgram(String educationProgram) throws Exception {
         EducationProgram msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("EducationProgram.findAll");
         for (Object o : docs) {
@@ -35,12 +35,12 @@ public class EducationProgramService {
                 msg = (EducationProgram) o;
             }
         }
-        
+
         return msg;
     }
-    
-    public void persistEducationProgram(EducationProgram educationProgram) {
+
+    public void persistEducationProgram(EducationProgram educationProgram) throws Exception {
         sqlRepository.add(educationProgram);
     }
-    
+
 }

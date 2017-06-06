@@ -80,89 +80,100 @@ public class JFLogin extends JFrame {
         //check if user is empty
         String msgUser = inputValidation.validateUserName(user);
         String msgPassword = inputValidation.validatePassword(password);
-        if ("Valid".equals(msgUser) && "Valid".equals(msgPassword)) {
-            String userMsg = userGroupService.checkIfUserxists(user);
-            if ("Valid".equals(userMsg)) {
-                String userRole = userGroupService.authorization(user);// role validation
-                swithToRole(userRole, user);
-            } else if ("Wrong".equals(userMsg)) {
-                JOptionPane.showMessageDialog(null, "User Name is " + userMsg);
+        try {
+            if ("Valid".equals(msgUser) && "Valid".equals(msgPassword)) {
+                String userMsg = userGroupService.checkIfUserxists(user);
+                if ("Valid".equals(userMsg)) {
+                    String userRole = userGroupService.authorization(user);// role validation
+                    swithToRole(userRole, user);
+                } else if ("Wrong".equals(userMsg)) {
+                    JOptionPane.showMessageDialog(null, "User Name is " + userMsg);
+
+                }
+            } else if ("Type user name".equals(msgUser)) {
+                JOptionPane.showMessageDialog(null, "User Name is Empty");
+            } else if ("You shoud type only numbers".equals(msgUser)) {
+                JOptionPane.showMessageDialog(null, msgUser);
+            } else {
+                JOptionPane.showMessageDialog(null, "Type the correct login information");
 
             }
-        } else if ("Type user name".equals(msgUser)) {
-            JOptionPane.showMessageDialog(null, "User Name is Empty");
-        } else if ("You shoud type only numbers".equals(msgUser)) {
-            JOptionPane.showMessageDialog(null, msgUser);
-        } else {
-            JOptionPane.showMessageDialog(null, "Type the correct login information");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
         }
 
     }
 
     private void swithToRole(String userRole, String user) {
-        if ("AdminClinic".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            AdminClinic admin = (AdminClinic) authUser.authenticateAdminClinic(user, passcode);
-            if (admin != null) {
-                showAdminScreen(admin);
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
-                // clear the filed from jpLoginscreen...
-            }
-        } else if ("Doctor".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Doctor doctor = (Doctor) authUser.authenticateDoctor(user, passcode);
-            if (doctor != null) {
-                //showDoctorScreen(doctor); old version with jpane
-                showDoctorFrameScreen(doctor); // new version with jinternalpane
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
-                // clear the filed from jpLoginscreen...
-            }
+        try {
+            if ("AdminClinic".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                AdminClinic admin = (AdminClinic) authUser.authenticateAdminClinic(user, passcode);
+                if (admin != null) {
+                    showAdminScreen(admin);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+            } else if ("Doctor".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                Doctor doctor = (Doctor) authUser.authenticateDoctor(user, passcode);
+                if (doctor != null) {
+                    //showDoctorScreen(doctor); old version with jpane
+                    showDoctorFrameScreen(doctor); // new version with jinternalpane
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
 
-        } else if ("Patient".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Patient patient = (Patient) authUser.authenticatePatient(user, passcode);
-            if (patient != null) {
-                showPatientScreen(patient);
+            } else if ("Patient".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                Patient patient = (Patient) authUser.authenticatePatient(user, passcode);
+                if (patient != null) {
+                    showPatientScreen(patient);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+
+            } else if ("Pharmacist".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                Pharmacist pharmacist = (Pharmacist) authUser.authenticatePharmacist(user, passcode);
+                if (pharmacist != null) {
+                    showPharmacistScreen(pharmacist);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+
+            } else if ("PharmacyManager".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                PharmacyManager pharmacyManager = (PharmacyManager) authUser.authenticatePharmacyManager(user, passcode);
+                if (pharmacyManager != null) {
+                    showPharmacyManagerScreen(pharmacyManager);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+
+            } else if ("Nurse".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                Nurse nurse = (Nurse) authUser.authenticateNurse(user, passcode);
+                if (nurse != null) {
+                    showNurseScreen(nurse);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+
             } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
+                JOptionPane.showMessageDialog(null, "Credentials wrong");
                 // clear the filed from jpLoginscreen...
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
 
-        } else if ("Pharmacist".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Pharmacist pharmacist = (Pharmacist) authUser.authenticatePharmacist(user, passcode);
-            if (pharmacist != null) {
-                showPharmacistScreen(pharmacist);
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
-                // clear the filed from jpLoginscreen...
-            }
-
-        } else if ("PharmacyManager".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            PharmacyManager pharmacyManager = (PharmacyManager) authUser.authenticatePharmacyManager(user, passcode);
-            if (pharmacyManager != null) {
-                showPharmacyManagerScreen(pharmacyManager);
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
-                // clear the filed from jpLoginscreen...
-            }
-
-        } else if ("Nurse".equals(userRole)) {
-            String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-            Nurse nurse = (Nurse) authUser.authenticateNurse(user, passcode);
-            if (nurse != null) {
-                showNurseScreen(nurse);
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong passcode");
-                // clear the filed from jpLoginscreen...
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Credentials wrong");
-            // clear the filed from jpLoginscreen...
         }
     }
 

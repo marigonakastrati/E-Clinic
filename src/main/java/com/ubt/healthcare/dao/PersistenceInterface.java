@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface PersistenceInterface {
     
-    public void add(Object student);
-    public void update(Object student);
-    public void remove(Object student);
-    public List<Object> findAll(String entity);
-    public Object findById(int id, String entity, String atribute);
+    public void add(Object student)throws Exception;
+    public void update(Object student)throws Exception;
+    public void remove(Object student)throws Exception;
+    public List<Object> findAll(String entity)throws Exception;
+    public Object findById(int id, String entity, String atribute)throws Exception;
 }

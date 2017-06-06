@@ -26,7 +26,7 @@ public class PersonService {
         inputValidation = new InputValidation();
     }
 
-    public String checkIfUserExists(Person p) {
+    public String checkIfUserExists(Person p) throws Exception{
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("Person.findAll");
         for (Object o : docs) {

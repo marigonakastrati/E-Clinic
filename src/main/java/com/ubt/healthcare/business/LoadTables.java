@@ -16,42 +16,42 @@ public class LoadTables {
 
     private SQLRepository sqlRepository = new SQLRepository();
 
-    public List<Object> fillComboBoxBirthCity() {
+    public List<Object> fillComboBoxBirthCity()throws Exception {
         List<Object> obj;
         obj = sqlRepository.findAll("City.findAll");;
 
         return obj;
     }
 
-    public List<Object> fillComboBoxCountry() {
+    public List<Object> fillComboBoxCountry()throws Exception {
         List<Object> obj;
         obj = sqlRepository.findAll("Country.findAll");;
 
         return obj;
     }
 
-    public List<Object> fillComboBoxGender() {
+    public List<Object> fillComboBoxGender() throws Exception{
         List<Object> obj;
         obj = sqlRepository.findAll("Gender.findAll");;
 
         return obj;
     }
 
-    public List<Object> fillComboBoxMartialStatus() {
+    public List<Object> fillComboBoxMartialStatus() throws Exception{
         List<Object> obj;
         obj = sqlRepository.findAll("MartialStatus.findAll");;
 
         return obj;
     }
 
-    public List<Object> fillComboBoxEducationType() {
+    public List<Object> fillComboBoxEducationType()throws Exception {
         List<Object> obj;
         obj = sqlRepository.findAll("EducationType.findAll");;
 
         return obj;
     }
     
-    public List<Object> fillComboBoxReligion() {
+    public List<Object> fillComboBoxReligion()throws Exception {
         List<Object> obj;
         obj = sqlRepository.findAll("Religion.findAll");;
 

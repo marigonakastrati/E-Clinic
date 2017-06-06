@@ -29,7 +29,7 @@ public class ContactService {
         inputValidation = new InputValidation();
     }
 
-    private void persist(String contactValue, Person person, String type) {
+    private void persist(String contactValue, Person person, String type)throws Exception {
         Contact contact = new Contact();
         contact.setValue(contactValue);
         contact.setType(type);
@@ -38,14 +38,14 @@ public class ContactService {
 
     }
 
-    public void editContact(String contactValue, String oldContactValue) {
+    public void editContact(String contactValue, String oldContactValue)throws Exception {
         Contact contact = findContact(oldContactValue);
         contact.setValue(contactValue);
         sqlRepository.update(contact);
 
     }
 
-    public void persistContact(Person person, String contactType, String value) {
+    public void persistContact(Person person, String contactType, String value)throws Exception {
         if (!(value == null || value.trim().isEmpty())) {
             if (contactType.equals(EMAIL)) {
                 persist(value, person, EMAIL);
@@ -60,7 +60,7 @@ public class ContactService {
 
     }
 
-    public Contact findContact(String value) {
+    public Contact findContact(String value)throws Exception {
         List<Contact> findAll = (List<Contact>) (Object) sqlRepository.findAll("Contact.findAll");
         for (Contact contact : findAll) {
             if (contact.getValue().equals(value)) {

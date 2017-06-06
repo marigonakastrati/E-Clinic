@@ -22,12 +22,12 @@ public class CityService {
         sqlRepository = new SQLRepository();
     }
 
-    public List<City> findAllCity() {
+    public List<City> findAllCity()throws Exception {
 
         return city == null ? (List<City>) (Object) sqlRepository.findAll("City.findAll") : city;
     }
 
-    public City findTheCity(String city) {
+    public City findTheCity(String city)throws Exception {
         City msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("City.findAll");
         for (Object o : docs) {
@@ -39,7 +39,7 @@ public class CityService {
         return msg;
     }
     
-    public String checkIfCityExists(String cityName) {
+    public String checkIfCityExists(String cityName)throws Exception {
         String msg = "Save";
         List<Object> cityList = (List<Object>) sqlRepository.findAll("City.findAll");
         for (Object o : cityList) {
@@ -51,7 +51,7 @@ public class CityService {
         return msg;
     }
 
-    public void persistCity(City city) {
+    public void persistCity(City city) throws Exception{
         sqlRepository.add(city);
     }
 

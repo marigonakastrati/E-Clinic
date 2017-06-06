@@ -181,10 +181,16 @@ public class DoctorTest {
      */
     @Test
     public void testToString() {
+        try
+        {
        
         SQLRepository repo = new SQLRepository();
         Doctor doc = (Doctor)repo.findById(1234569788, "Doctor.findByPersonId", "personId");
         System.out.println(doc.getDoctorId());
+        }catch(Exception ex)
+        {
+            
+        }
     }
     
 }

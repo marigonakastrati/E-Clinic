@@ -23,7 +23,7 @@ public class CountryService {
         sqlRepository = new SQLRepository();
     }
 
-    public Country findTheCountry(String country) {
+    public Country findTheCountry(String country) throws Exception{
         Country msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("Country.findAll");
         for (Object o : docs) {
@@ -35,7 +35,7 @@ public class CountryService {
         return msg;
     }
 
-    public String checkIfCountryExists(String country) {
+    public String checkIfCountryExists(String country)throws Exception {
         String msg = "Save";
         List<Object> countryList = (List<Object>) sqlRepository.findAll("Country.findAll");
         for (Object o : countryList) {
@@ -47,7 +47,7 @@ public class CountryService {
         return msg;
     }
 
-    public void persistCountry(Country country) {
+    public void persistCountry(Country country)throws Exception {
         sqlRepository.add(country);
     }
 }

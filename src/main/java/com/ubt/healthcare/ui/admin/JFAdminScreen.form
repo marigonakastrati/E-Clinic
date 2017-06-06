@@ -38,10 +38,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jlNurse" min="-2" pref="99" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jlAdminClinic" min="-2" pref="105" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="jlAdminClinic" min="-2" pref="88" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jlLogout" min="-2" pref="95" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,7 +59,7 @@
                   <Component id="jlAdminClinic" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jlLogout" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="jdpPaneHandler" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -76,7 +76,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="427" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="432" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

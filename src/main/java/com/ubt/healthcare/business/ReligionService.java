@@ -22,7 +22,7 @@ public class ReligionService {
     }
 
 
-    public Religion findTheReligion(String religion) {
+    public Religion findTheReligion(String religion)throws Exception {
         Religion msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("Religion.findAll");
         for (Object o : docs) {

@@ -29,7 +29,7 @@ public class EducationTypeService {
     }
 
 
-    public EducationType findTheEducationType(String educationType) {
+    public EducationType findTheEducationType(String educationType)throws Exception {
         EducationType msg = null;
         List<Object> docs = (List<Object>) sqlRepository.findAll("EducationType.findAll");
         for (Object o : docs) {

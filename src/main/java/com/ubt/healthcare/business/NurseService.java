@@ -36,7 +36,7 @@ public class NurseService {
      * @param city
      * @return List
      */
-    public List<Nurse> findDoctorsByParameters(String name, String surname, String city) {
+    public List<Nurse> findDoctorsByParameters(String name, String surname, String city)throws Exception {
         nurseRepo = (List<Nurse>) (Object) sqlRepository.findAll("Nurse.findAll");
         List<Nurse> doctorList = new ArrayList<>();
         List<Nurse> surNameList = new ArrayList<>();
@@ -100,7 +100,7 @@ public class NurseService {
         return doctorList;
     }
 
-    public String persistNurse(Nurse nurse) {
+    public String persistNurse(Nurse nurse)throws Exception {
 
         String doctorMsg = null;
 
@@ -116,7 +116,7 @@ public class NurseService {
         return doctorMsg;
     }
 
-    public String editDoctor(Nurse nurse) {
+    public String editDoctor(Nurse nurse) throws Exception{
 
         String doctorMsg = null;
 
@@ -130,7 +130,7 @@ public class NurseService {
         return doctorMsg;
     }
 
-    private String checkIfNurseExists(Nurse nurse) {
+    private String checkIfNurseExists(Nurse nurse)throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("Nurse.findAll");
         for (Object o : docs) {

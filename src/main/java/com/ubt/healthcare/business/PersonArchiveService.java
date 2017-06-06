@@ -21,7 +21,7 @@ public class PersonArchiveService {
         sqlRepository = new SQLRepository();
     }
 
-    public void persistPersonArchive(PersonArchive personArchive) {
+    public void persistPersonArchive(PersonArchive personArchive) throws Exception{
 
         sqlRepository.add(personArchive);
 

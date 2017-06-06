@@ -17,13 +17,12 @@ import java.util.List;
 public class AddressService {
 
     private SQLRepository sqlRepository;
-    private List<City> city; // caching machanisim 
 
     public AddressService() {
         sqlRepository = new SQLRepository();
     }
 
-    public Address findTheAddress(Address addressTo) {
+    public Address findTheAddress(Address addressTo)throws Exception {
         List<Object> docs = (List<Object>) sqlRepository.findAll("Address.findAll");
         for (Object o : docs) {
             if (((Address) o).getCityId().getCityId().intValue() == addressTo.getCityId().getCityId().intValue()
@@ -36,7 +35,7 @@ public class AddressService {
         return addressTo;
     }
 
-    public String checkIfAddressExists(Address addressToMatch) {
+    public String checkIfAddressExists(Address addressToMatch)throws Exception {
         String msg = "Save";
         List<Object> address = (List<Object>) sqlRepository.findAll("Address.findAll");
         for (Object o : address) {
@@ -50,11 +49,11 @@ public class AddressService {
         return msg;
     }
     
-    public void persistAddress(Address address) {
+    public void persistAddress(Address address)throws Exception {
         sqlRepository.add(address);
     }
     
-       public void editAddress(Address address) {
+       public void editAddress(Address address)throws Exception {
         sqlRepository.update(address);
     }
 }

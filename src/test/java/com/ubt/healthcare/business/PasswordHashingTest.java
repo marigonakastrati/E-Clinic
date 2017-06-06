@@ -63,7 +63,7 @@ public class PasswordHashingTest {
         String password = "";
         PasswordHashing instance = new PasswordHashing();
         String expResult = "";
-        String result = instance.decodehashPassword(password);
+        String result = instance.encodehashPassword(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
