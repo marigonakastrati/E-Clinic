@@ -62,6 +62,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlNurse = new javax.swing.JLabel();
         jlAdminClinic = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,7 +77,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         );
         jdpPaneHandlerLayout.setVerticalGroup(
             jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
 
         jlProfile.setText("Profile");
@@ -91,6 +95,18 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlAdminClinic.setText("Admin");
 
         jlLogout.setText("Logout");
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,6 +157,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpPaneHandler;
     private javax.swing.JLabel jlAdminClinic;
     private javax.swing.JLabel jlDoctor;

@@ -21,57 +21,73 @@ import javax.swing.JTextField;
  */
 public class JPLoginScreen extends JPanel {
 
-    private JPasswordField jtfpassCode = new JPasswordField(10);
+    private JPasswordField jpfpassCode = new JPasswordField(10);
     private JTextField jtfpersonId = new JTextField(10);
-    private JLabel jlpassCode = new JLabel("");// Enter your pass code
-    private JLabel jlpersonId = new JLabel("");// Student ID
-    private JLabel jllogin = new JLabel("");//login JLabel
-    private JLabel jlcloseWindows = new JLabel(""); // close windows main screen
+    private JLabel jlpassCode = new JLabel("");
+    private JLabel jlpersonId = new JLabel("");
+    private JLabel jllogin = new JLabel("");
+    private JLabel jlcloseWindows = new JLabel(""); 
     private JLabel jlBackground = new JLabel("");
+    private JLabel jlpassCodePad = new JLabel("");
+    private JLabel jlpersonIdPad = new JLabel("");
 
     public JPLoginScreen() {
         this.setLayout(null);
-        //this.setBackground(Color.GRAY);
 
-        jtfpassCode.setBorder(null);
-        jtfpassCode.setHorizontalAlignment(0);
-        jtfpassCode.setForeground(Color.GRAY);
-        jtfpassCode.setFont(new Font("Tahoma", 1, 16));
-        jtfpassCode.setBounds(83, 178, 136, 20);// studentId.setBounds(83, 178, 136, 20);
+        jpfpassCode.setBorder(null);
+        jpfpassCode.setHorizontalAlignment(0);
+        jpfpassCode.setForeground(Color.GRAY);
+        jpfpassCode.setFont(new Font("Tahoma", 1, 16));
+        jpfpassCode.setBounds(305, 178, 136, 20);
 
         jtfpersonId.setBorder(null);
         jtfpersonId.setHorizontalAlignment(0);
         jtfpersonId.setForeground(Color.GRAY);
         jtfpersonId.setFont(new Font("Tahoma", 1, 16));
-        jtfpersonId.setBounds(83, 139, 136, 20);
+        jtfpersonId.setBounds(305, 139, 136, 20);
+
+        jlpassCodePad.setBorder(null);
+        jlpassCodePad.setHorizontalAlignment(0);
+        jlpassCodePad.setForeground(Color.GRAY);
+        jlpassCodePad.setFont(new Font("Tahoma", 1, 16));
+        jlpassCodePad.setBounds(280, 178, 20, 20);
+        jlpassCodePad.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/passwordPad.png")));
+
+        jlpersonIdPad.setBorder(null);
+        jlpersonIdPad.setHorizontalAlignment(0);
+        jlpersonIdPad.setForeground(Color.GRAY);
+        jlpersonIdPad.setFont(new Font("Tahoma", 1, 16));
+        jlpersonIdPad.setBounds(280, 139, 20, 20);
+        jlpersonIdPad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/userNamePad.png")));
 
         jlpassCode.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/textField.png")));
-        jlpassCode.setBounds(78, 133, 145, 30);// 78,133
+        jlpassCode.setBounds(300, 133, 145, 30);// 78,133
 
         jlpersonId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/textField.png")));
-        jlpersonId.setBounds(78, 173, 145, 30);//78,173
+        jlpersonId.setBounds(300, 173, 145, 30);//78,173
 
         jllogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/sign.png")));
-        jllogin.setBounds(78, 219, 140, 38);
+        jllogin.setBounds(300, 219, 140, 38);
 
         jlcloseWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/close.png")));
         jlcloseWindows.setBounds(760, 1, 25, 25);
 
         jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/login-background.png")));
         jlBackground.setBounds(0, 0, 800, 800);
+
         this.add(jlpersonId);
         this.add(jtfpersonId);
-        this.add(jlpassCode);// disable passcodeLabel if there is no RFID Input
-        this.add(jtfpassCode);// disable passcode if there is no RFID Input
-        this.add(jllogin);// disable login if there is no RFID Input
+        this.add(jlpassCode);
+        this.add(jpfpassCode);
+        this.add(jllogin);
         this.add(jlcloseWindows);
+        this.add(jlpersonIdPad);
+        this.add(jlpassCodePad);
         this.add(jlBackground);
-        jtfpersonId.requestFocusInWindow();
-
     }
 
     public JPasswordField getJtfpassCode() {
-        return jtfpassCode;
+        return jpfpassCode;
     }
 
     public JTextField getJtfUserId() {
@@ -103,6 +119,6 @@ public class JPLoginScreen extends JPanel {
     }
 
     public void addLoginEnterKeyListener(KeyListener e) {
-        jtfpassCode.addKeyListener(e);
+        jpfpassCode.addKeyListener(e);
     }
 }
