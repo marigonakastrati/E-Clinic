@@ -105,7 +105,7 @@ public class Person implements Serializable {
     private Patient patient;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Doctor doctor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId",fetch=FetchType.EAGER)
     private Collection<Contact> contactCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Pharmacist pharmacist;
