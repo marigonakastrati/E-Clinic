@@ -18,7 +18,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="text" type="java.lang.String" value="Location"/>
           </Properties>
         </Menu>
       </SubComponents>
@@ -64,8 +64,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jlAdminClinic" min="-2" pref="88" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jlHRManager" min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="jlLogout" min="-2" pref="95" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,6 +84,7 @@
                   <Component id="jlNurse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jlAdminClinic" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jlLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlHRManager" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="jdpPaneHandler" max="32767" attributes="0"/>
@@ -142,7 +145,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jlLogout">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Logout"/>
+        <Property name="text" type="java.lang.String" value="Log Out"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlHRManager">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="HRManager"/>
       </Properties>
     </Component>
   </SubComponents>

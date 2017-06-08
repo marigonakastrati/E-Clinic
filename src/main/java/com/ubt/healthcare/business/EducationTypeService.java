@@ -7,12 +7,8 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.EducationType;
-import com.ubt.healthcare.dto.PersonEducation;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *

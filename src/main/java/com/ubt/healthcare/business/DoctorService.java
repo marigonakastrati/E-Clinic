@@ -34,6 +34,7 @@ public class DoctorService {
      * @param surname
      * @param city
      * @return List
+     * @throws java.lang.Exception
      */
     public List<Doctor> findDoctorsByParameters(String name, String surname, String city)throws Exception {
         doctorRepo = (List<Doctor>) (Object) sqlRepository.findAll("Doctor.findAll");

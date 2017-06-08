@@ -35,6 +35,7 @@ public class ReceptionistService {
      * @param surname
      * @param city
      * @return List
+     * @throws java.lang.Exception
      */
     public List<Receptionist> findDoctorsByParameters(String name, String surname, String city)throws Exception {
         receptionistList = (List<Receptionist>) (Object) sqlRepository.findAll("Receptionist.findAll");
@@ -102,39 +103,39 @@ public class ReceptionistService {
 
     public String persistReceptionist(Receptionist receptionist)throws Exception {
 
-        String doctorMsg = null;
+        String receptionistMsg = null;
 
         Person person = receptionist.getPersonId();
 
-        doctorMsg = checkIfReceptionistExists(receptionist);
+        receptionistMsg = checkIfReceptionistExists(receptionist);
 
-        if ("Save".equals(doctorMsg)) {
+        if ("Save".equals(receptionistMsg)) {
             sqlRepository.add(person);
 
         }
 
-        return doctorMsg;
+        return receptionistMsg;
     }
 
     public String editReceptionist(Receptionist receptionist) throws Exception{
 
-        String doctorMsg = null;
+        String receptionistMsg = null;
 
-        doctorMsg = checkIfReceptionistExists(receptionist);
+        receptionistMsg = checkIfReceptionistExists(receptionist);
 
-        if ("Exist".equals(doctorMsg)) {
+        if ("Exist".equals(receptionistMsg)) {
             sqlRepository.update(receptionist.getPersonId());
 
         }
 
-        return doctorMsg;
+        return receptionistMsg;
     }
 
        private String checkIfReceptionistExists(Receptionist receptionist)throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("Receptionist.findAll");
         for (Object o : docs) {
-            if (((Nurse) o).getPersonId().getPersonId().equals(receptionist.getPersonId().getPersonId())) {
+            if (((Receptionist) o).getPersonId().getPersonId().equals(receptionist.getPersonId().getPersonId())) {
                 msg = "Exist";
             }
         }

@@ -64,6 +64,7 @@
     <class>com.ubt.healthcare.dto.PatientRelative</class>
     <class>com.ubt.healthcare.dto.PatientSurgicalHX</class>
     <class>com.ubt.healthcare.dto.RelativeType</class>
+    <class>com.ubt.healthcare.dto.ScheduleStatus</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Clinic"/>
       <property name="javax.persistence.jdbc.user" value="Clinic"/>

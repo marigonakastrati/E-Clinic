@@ -24,7 +24,7 @@ public class UserGroupService {
         sqlRepository = new SQLRepository();
     }
 
-    public String checkIfUserGroupExists(Doctor p) throws Exception{
+    public String checkIfUserGroupExists(Doctor p) throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
@@ -34,7 +34,8 @@ public class UserGroupService {
         }
         return msg;
     }
-public String checkIfUserGroupExists(Nurse p) throws Exception{
+
+    public String checkIfUserGroupExists(Nurse p) throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
@@ -45,21 +46,18 @@ public String checkIfUserGroupExists(Nurse p) throws Exception{
 
         return msg;
     }
-    public void persistUserInUserGroup(UserGroup userGroup)throws Exception {
+
+    public void persistUserInUserGroup(UserGroup userGroup) throws Exception {
         sqlRepository.add(userGroup);
     }
 
     // if user i found the the UserGroupRole table
-    public String authorization(String user) throws Exception{
-        final String entiy = "UserGroup.findByUserId";
-        final String attribute = "userId";
-        UserGroup userGroup = (UserGroup) sqlRepository.findById(Integer.parseInt(user), entiy, attribute);
-
+    public String authorization(String user) throws Exception {
+        UserGroup userGroup = (UserGroup) sqlRepository.findById(Integer.parseInt(user), "UserGroup.findByUserId", "userId");
         return userGroup.getGroupId().getGroupName();
     }
 
-    
-    public String checkIfUserGroupExists(Receptionist p) throws Exception{
+    public String checkIfUserGroupExists(Receptionist p) throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {
@@ -69,7 +67,8 @@ public String checkIfUserGroupExists(Nurse p) throws Exception{
         }
         return msg;
     }
-    public String checkIfUserxists(String user)throws Exception {
+
+    public String checkIfUserxists(String user) throws Exception {
         String msg = "Wrong";
         List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
         for (Object o : docs) {

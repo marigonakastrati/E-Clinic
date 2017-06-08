@@ -33,7 +33,7 @@
     <Property name="closable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Nurse Screen"/>
+    <Property name="title" type="java.lang.String" value="Receptionist Screen"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -76,7 +76,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                              <Component id="jbSaveNurse" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="jbSaveReceptionist" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -84,7 +84,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jcbCitySearch" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jbSearchNurse" min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="jbSearchReceptionist" min="-2" pref="104" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jbCancel" min="-2" pref="100" max="-2" attributes="0"/>
@@ -101,7 +101,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbSaveNurse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbSaveReceptionist" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbCancel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
                   <Component id="jtfFirstNameSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfLastNameSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbCitySearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbSearchNurse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbSearchReceptionist" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jspDoctorTable" min="-2" pref="104" max="-2" attributes="0"/>
@@ -558,12 +558,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jbSearchNurse">
+    <Component class="javax.swing.JButton" name="jbSearchReceptionist">
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbSaveNurse">
+    <Component class="javax.swing.JButton" name="jbSaveReceptionist">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>

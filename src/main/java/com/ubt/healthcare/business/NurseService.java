@@ -7,7 +7,6 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import java.util.ArrayList;
@@ -35,27 +34,28 @@ public class NurseService {
      * @param surname
      * @param city
      * @return List
+     * @throws java.lang.Exception
      */
     public List<Nurse> findDoctorsByParameters(String name, String surname, String city)throws Exception {
         nurseRepo = (List<Nurse>) (Object) sqlRepository.findAll("Nurse.findAll");
-        List<Nurse> doctorList = new ArrayList<>();
+        List<Nurse> nurseList = new ArrayList<>();
         List<Nurse> surNameList = new ArrayList<>();
         List<Nurse> cityList = new ArrayList<>();
 
         if (inputValidation.validateInput(name)) {
             nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getFirstName().equals(name)))
                     .forEachOrdered((doctor) -> {
-                        doctorList.add(doctor);
+                        nurseList.add(doctor);
                     });
             if (inputValidation.validateInput(surname)) {
 
-                doctorList.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
+                nurseList.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
                         .forEachOrdered((doctor) -> {
                             surNameList.add(doctor);
                         });
 
                 if (inputValidation.validateInput(city)) {
-                    doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                    nurseList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                             .getCityId().getCityName().equals(city)))
                             .forEachOrdered((doctor) -> {
                                 cityList.add(doctor);
@@ -65,69 +65,69 @@ public class NurseService {
                 return surNameList;
             } else if (inputValidation.validateInput(city)) {
 
-                doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                nurseList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                         .getCityId().getCityName().equals(city)))
                         .forEachOrdered((doctor) -> {
                             cityList.add(doctor);
                         });
                 return cityList;
             }
-            return doctorList;
+            return nurseList;
         } else if (inputValidation.validateInput(surname)) {
             nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getLastName().equals(surname)))
                     .forEachOrdered((doctor) -> {
-                        doctorList.add(doctor);
+                        nurseList.add(doctor);
                     });
             if (inputValidation.validateInput(city)) {
-                doctorList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
+                nurseList.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                         .getCityId().getCityName().equals(city)))
                         .forEachOrdered((doctor) -> {
                             cityList.add(doctor);
                         });
                 return cityList;
             }
-            return doctorList;
+            return nurseList;
 
         } else {
             nurseRepo.stream().filter((doctor) -> (doctor.getPersonId().getAddressId()
                     .getCityId().getCityName().equals(city)))
                     .forEachOrdered((doctor) -> {
-                        doctorList.add(doctor);
+                        nurseList.add(doctor);
                     });
 
         }
 
-        return doctorList;
+        return nurseList;
     }
 
     public String persistNurse(Nurse nurse)throws Exception {
 
-        String doctorMsg = null;
+        String nurseMsg = null;
 
         Person person = nurse.getPersonId();
 
-        doctorMsg = checkIfNurseExists(nurse);
+        nurseMsg = checkIfNurseExists(nurse);
 
-        if ("Save".equals(doctorMsg)) {
+        if ("Save".equals(nurseMsg)) {
             sqlRepository.add(person);
 
         }
 
-        return doctorMsg;
+        return nurseMsg;
     }
 
     public String editDoctor(Nurse nurse) throws Exception{
 
-        String doctorMsg = null;
+        String nurseMsg = null;
 
-        doctorMsg = checkIfNurseExists(nurse);
+        nurseMsg = checkIfNurseExists(nurse);
 
-        if ("Exist".equals(doctorMsg)) {
+        if ("Exist".equals(nurseMsg)) {
             sqlRepository.update(nurse.getPersonId());
 
         }
 
-        return doctorMsg;
+        return nurseMsg;
     }
 
     private String checkIfNurseExists(Nurse nurse)throws Exception {

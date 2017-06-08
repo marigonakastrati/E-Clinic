@@ -18,6 +18,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     private JIFDoctorF jifDoctorF;
     private JIFNurse jifNurse;
+    private JIFReceptionist jifReceptionist;
 
     /**
      * Creates new form JFAdminScreen
@@ -26,9 +27,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse ) {
+    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse, JIFReceptionist jifReceptionist) {
         this.jifDoctorF = jifDoctorF;
         this.jifNurse = jifNurse;
+        this.jifReceptionist = jifReceptionist;
 
         //frameStlye();
         initComponents();
@@ -43,7 +45,6 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlReceptionist.setIcon(new ImageIcon(getClass().getResource("/com/ubt/healthcare/ui/images/receptionist.png")));
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +63,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlNurse = new javax.swing.JLabel();
         jlAdminClinic = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
+        jlHRManager = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -94,7 +96,9 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
         jlAdminClinic.setText("Admin");
 
-        jlLogout.setText("Logout");
+        jlLogout.setText("Log Out");
+
+        jlHRManager.setText("HRManager");
 
         jMenu1.setText("File");
 
@@ -103,7 +107,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Location");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -129,8 +133,10 @@ public class JFAdminScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jlAdminClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jlHRManager, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jlLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +150,8 @@ public class JFAdminScreen extends javax.swing.JFrame {
                     .addComponent(jlPharmacyManager)
                     .addComponent(jlNurse)
                     .addComponent(jlAdminClinic)
-                    .addComponent(jlLogout))
+                    .addComponent(jlLogout)
+                    .addComponent(jlHRManager))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jdpPaneHandler))
         );
@@ -164,6 +171,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jdpPaneHandler;
     private javax.swing.JLabel jlAdminClinic;
     private javax.swing.JLabel jlDoctor;
+    private javax.swing.JLabel jlHRManager;
     private javax.swing.JLabel jlLogout;
     private javax.swing.JLabel jlNurse;
     private javax.swing.JLabel jlPharmacist;
@@ -214,7 +222,13 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
-    
+    public void showReceptionistScreen() {
+
+        jdpPaneHandler.remove(jifReceptionist);
+        jdpPaneHandler.add(jifReceptionist);
+        jifReceptionist.show();
+    }
+
     public void showNurseScreen() {
 
         jdpPaneHandler.remove(jifNurse);//withoutF
@@ -224,7 +238,8 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);*/
 
     }
-   /* public void showAddDoctorInternalFrame() {
+
+    /* public void showAddDoctorInternalFrame() {
         // remove internalframe from desktop pane
         jdpPaneHandler.remove(jifDoctor.getJifAddDoctor());
 
@@ -306,7 +321,6 @@ public class JFAdminScreen extends javax.swing.JFrame {
     public JIFDoctor getJifDoctor() {
         return jifDoctor;
     }*/
-
     static {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.business;
 
+import com.ubt.healthcare.ui.util.PasswordHashing;
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.AdminClinic;
 import com.ubt.healthcare.dto.Doctor;
@@ -19,7 +20,6 @@ import com.ubt.healthcare.dto.PharmacyManager;
  */
 public class AuthenticateUser {
 
-    //Inject
     private SQLRepository sqlRepository = new SQLRepository();
     private PasswordHashing hashing = new PasswordHashing();
 
@@ -32,9 +32,7 @@ public class AuthenticateUser {
 
     public AdminClinic authenticateAdminClinic(String user, String password) throws Exception
     {
-        final String AdminClinicFindById = "AdminClinic.findByAdminClinicId";
-        final String adminClinicid = "adminClinicId";
-        AdminClinic adminClinic = (AdminClinic) authenticate(user, AdminClinicFindById, adminClinicid);
+        AdminClinic adminClinic = (AdminClinic) authenticate(user, "AdminClinic.findByAdminClinicId", "adminClinicId");
         if (adminClinic.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return adminClinic;
@@ -45,9 +43,7 @@ public class AuthenticateUser {
 
     public Doctor authenticateDoctor(String user, String password) throws Exception
     {
-        final String DoctorFindById = "Doctor.findByDoctorId";
-        final String doctorID = "doctorId";
-        Doctor doctor = (Doctor) authenticate(user, DoctorFindById, doctorID);
+        Doctor doctor = (Doctor) authenticate(user, "Doctor.findByDoctorId", "doctorId");
         if (doctor.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return doctor;
@@ -58,9 +54,7 @@ public class AuthenticateUser {
 
     public Patient authenticatePatient(String user, String password) throws Exception
     {
-        final String PatientFindById = "Patient.findByPatientId";
-        final String patientId = "patientId";
-        Patient patient = (Patient) authenticate(user, PatientFindById, patientId);
+        Patient patient = (Patient) authenticate(user, "Patient.findByPatientId", "patientId");
         if (patient.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return patient;
@@ -71,9 +65,7 @@ public class AuthenticateUser {
 
     public Pharmacist authenticatePharmacist(String user, String password) throws Exception
     {
-        final String PharmacistFindById = "Pharmacist.findByPharmacistId";
-        final String pharmacistId = "pharmacistId";
-        Pharmacist pharmacist = (Pharmacist) authenticate(user, PharmacistFindById, pharmacistId);
+        Pharmacist pharmacist = (Pharmacist) authenticate(user, "Pharmacist.findByPharmacistId", "pharmacistId");
         if (pharmacist.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return pharmacist;
@@ -84,9 +76,7 @@ public class AuthenticateUser {
 
     public PharmacyManager authenticatePharmacyManager(String user, String password) throws Exception
     {
-        final String PharmacyManagerFindById = "PharmacyManager.findByPharmacyManagerId";
-        final String pharmacyManagerId = "pharmacyManagerId";
-        PharmacyManager pharmacyManager = (PharmacyManager) authenticate(user, PharmacyManagerFindById, pharmacyManagerId);
+        PharmacyManager pharmacyManager = (PharmacyManager) authenticate(user, "PharmacyManager.findByPharmacyManagerId", "pharmacyManagerId");
         if (pharmacyManager.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return pharmacyManager;
@@ -97,9 +87,7 @@ public class AuthenticateUser {
     
     public Nurse authenticateNurse(String user, String password) throws Exception
     {
-        final String NurseFindById = "Nurse.findByNurseId";
-        final String nurseId = "nurseId";
-        Nurse nurse = (Nurse) authenticate(user, NurseFindById, nurseId);
+        Nurse nurse = (Nurse) authenticate(user, "Nurse.findByNurseId", "nurseId");
         if (nurse.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return nurse;

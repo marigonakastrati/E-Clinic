@@ -5,6 +5,7 @@
  */
 package com.ubt.healthcare.business;
 
+import com.ubt.healthcare.ui.util.PasswordHashing;
 import java.net.URL;
 import org.junit.After;
 import org.junit.AfterClass;

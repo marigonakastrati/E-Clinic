@@ -16,13 +16,17 @@ import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFDoctorF;
 import com.ubt.healthcare.ui.admin.JIFNurse;
+import com.ubt.healthcare.ui.admin.JIFReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterNurseScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewNurse;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -300,16 +304,22 @@ public class JFLogin extends JFrame {
 
         JIFDoctorF jifDoctorF = new JIFDoctorF();
         JIFNurse jifNurse = new JIFNurse();
-        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse);
+        JIFReceptionist jifReceptionist = new JIFReceptionist();
+        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse, jifReceptionist);
 
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
         jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
+        jfAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterReceptionistScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
-        jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
+        
         jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
+        jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
 
         jifNurse.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewNurse(jifNurse));
         jifNurse.addSearchNursePanelMouseAdapter(new MouseAdapterSearchNurse(jifNurse));
+       
+        jifReceptionist.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewReceptionist(jifReceptionist));
+        jifReceptionist.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchReceptionist(jifReceptionist));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);
@@ -335,10 +345,10 @@ public class JFLogin extends JFrame {
         ilfDoctor.addOpenAddDoctorInternalFrameMouseAdapter(new MouseAdapterShowAddDoctor(jfAdminScreen));
         ilfDoctor.addEditDoctorInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
 
-        jifSearchDoctor.addSearchNursePanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
+        jifSearchDoctor.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
         jifSearchDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctorSearch(ilfDoctor));
 
-        jifAddDoctor.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctor(ilfDoctor));
+        jifAddDoctor.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctor(ilfDoctor));
         jifAddDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationAddDoctor(jifAddDoctor));
         jifAddDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationAddDoctor(jifAddDoctor));
         jifAddDoctor.addDeleteEducationDoctorInternalFrameMouseAdapter(new MouseAdapterDeleteSelectedEducationAddDoctor(jifAddDoctor));
@@ -346,7 +356,7 @@ public class JFLogin extends JFrame {
         jifAddDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowCityAddDoctor(jfAdminScreen));
 
         //jifEditDoctor.addAddNewCityInternalFrameMouseAdapter(new MouseAdapterShowEditDoctor(jfAdminScreen));
-        jifEditDoctor.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterEditDoctor(ilfDoctor));
+        jifEditDoctor.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterEditDoctor(ilfDoctor));
         jifEditDoctor.addCloseAddDoctorInternalFrameMouseAdapter(new MouseAdapterCloseEditDoctor(ilfDoctor));
         jifEditDoctor.addSaveEducationDoctorInternalFrameMouseAdapter(new MouseAdapterSaveEducationEditDoctor(jifEditDoctor));
         jifEditDoctor.addCancleFieldSelectionEducationDoctorInternalFrameMouseAdapter(new MouseAdapterCancleSelectionEducationEditDoctor(jifEditDoctor));
@@ -361,8 +371,8 @@ public class JFLogin extends JFrame {
         jifAddCountry.addSaveCountryInternalFrameMouseAdapter(new MouseAdapterSaveCountry(jifAddCity));
         jifAddCountry.addCloseCountryInternalFrameMouseAdapter(new MouseAdapterCloseCountry(jifAddCity));
         
-        jifDoctorF.addSearchNursePanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
-        jifDoctorF.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
+        jifDoctorF.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
+        jifDoctorF.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

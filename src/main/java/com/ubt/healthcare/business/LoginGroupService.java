@@ -6,7 +6,6 @@
 package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.LoginGroup;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.List;
 public class LoginGroupService {
 
     private SQLRepository sqlRepository;
-    private List<City> city; // caching machanisim 
 
     public LoginGroupService() {
         sqlRepository = new SQLRepository();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.business;
+package com.ubt.healthcare.ui.util;
 
 import com.ubt.healthcare.dao.SQLRepository;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author F
  */
+@Deprecated
 public class LoadTables {
 
     private SQLRepository sqlRepository = new SQLRepository();

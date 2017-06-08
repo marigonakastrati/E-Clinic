@@ -22,9 +22,6 @@ public class PersonEducationService {
     private SQLRepository sqlRepository;
     private InputValidation inputValidation;
     private List<PersonEducation> personEducation;
-    private List<Doctor> doctorRepo;
-    private boolean personEducationChanged;//use it as synchronization mechanizm...
-    private boolean doctorRepoChanged;
 
     public PersonEducationService() {
         sqlRepository = new SQLRepository();
@@ -33,18 +30,12 @@ public class PersonEducationService {
 
     public void persistPersonEducation(PersonEducation personEducation)throws Exception {
 
-        //make the connection between the tables and  save just education pojo
         sqlRepository.add(personEducation);
-
-        // return "Education Saved";
     }
 
     public void editPersonEducation(PersonEducation personEducation) throws Exception{
 
-        //make the connection between the tables and  save just education pojo
         sqlRepository.update(personEducation);
-
-        // return "Education Saved";
     }
 
     public List<PersonEducation> findEducation(Doctor doctor)throws Exception {
