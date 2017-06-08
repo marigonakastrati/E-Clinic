@@ -81,7 +81,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
      */
     public JIFAddShift() {
         initComponents();
-        doctorService = new ReceptionistService();
+        doctorService = new DoctorService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
