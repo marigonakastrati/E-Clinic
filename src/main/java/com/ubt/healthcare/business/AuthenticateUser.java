@@ -100,7 +100,7 @@ public class AuthenticateUser {
     
     public HRManager authenticateHRManager(String user, String password) throws Exception
     {
-        HRManager hrManager = (HRManager) authenticate(user, "HRManager.findByManagerId", "findByManagerId");
+        HRManager hrManager = (HRManager) authenticate(user, "HRManager.findByManagerId", "managerId");
         if (hrManager.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return hrManager;

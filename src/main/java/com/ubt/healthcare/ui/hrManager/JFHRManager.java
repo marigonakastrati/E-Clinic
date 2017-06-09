@@ -51,6 +51,7 @@ public class JFHRManager extends javax.swing.JFrame {
         jlReports = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("HR Manager");
 
         javax.swing.GroupLayout jdpPaneHandlerLayout = new javax.swing.GroupLayout(jdpPaneHandler);
         jdpPaneHandler.setLayout(jdpPaneHandlerLayout);
