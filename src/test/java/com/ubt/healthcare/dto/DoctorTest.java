@@ -7,6 +7,7 @@ package com.ubt.healthcare.dto;
 
 import com.ubt.healthcare.dao.SQLRepository;
 import java.util.Collection;
+import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -140,7 +141,7 @@ public class DoctorTest {
     @Test
     public void testSetScheduleCollection() {
         System.out.println("setScheduleCollection");
-        Collection<Schedule> scheduleCollection = null;
+        Set<Schedule> scheduleCollection = null;
         Doctor instance = new Doctor();
         instance.setScheduleCollection(scheduleCollection);
         // TODO review the generated test code and remove the default call to fail.

@@ -7,11 +7,11 @@ package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.dao.SQLRepository;
-import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  *
@@ -37,7 +37,8 @@ public class ReceptionistService {
      * @return List
      * @throws java.lang.Exception
      */
-    public List<Receptionist> findDoctorsByParameters(String name, String surname, String city)throws Exception {
+    @Deprecated
+    public List<Receptionist> findDoctorsByParameters(String name, String surname, String city) throws Exception {
         receptionistList = (List<Receptionist>) (Object) sqlRepository.findAll("Receptionist.findAll");
         List<Receptionist> recptionistList = new ArrayList<>();
         List<Receptionist> surNameList = new ArrayList<>();
@@ -101,7 +102,7 @@ public class ReceptionistService {
         return recptionistList;
     }
 
-    public String persistReceptionist(Receptionist receptionist)throws Exception {
+    public String persistReceptionist(Receptionist receptionist) throws Exception {
 
         String receptionistMsg = null;
 
@@ -117,7 +118,7 @@ public class ReceptionistService {
         return receptionistMsg;
     }
 
-    public String editReceptionist(Receptionist receptionist) throws Exception{
+    public String editReceptionist(Receptionist receptionist) throws Exception {
 
         String receptionistMsg = null;
 
@@ -131,7 +132,7 @@ public class ReceptionistService {
         return receptionistMsg;
     }
 
-       private String checkIfReceptionistExists(Receptionist receptionist)throws Exception {
+    private String checkIfReceptionistExists(Receptionist receptionist) throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("Receptionist.findAll");
         for (Object o : docs) {
@@ -141,5 +142,25 @@ public class ReceptionistService {
         }
 
         return msg;
+    }
+
+    public List<Receptionist> findReceptionistByParametersLambda(String name, String surname, String city) throws Exception {
+        receptionistList = (List<Receptionist>) (Object) sqlRepository.findAll("Receptionist.findAll");
+        Predicate<Receptionist> doctorFirstNamePredicate = (Receptionist d) -> d.getPersonId().getFirstName().equals(name);
+        Predicate<Receptionist> doctorLastNamePredicate = (Receptionist d) -> d.getPersonId().getLastName().equals(surname);
+        Predicate<Receptionist> doctorCityPredicate = (Receptionist d) -> d.getPersonId().getAddressId().getCityId().getCityName().equals(city);
+
+        List<Receptionist> a = inputValidation.validateInput(name) == true ? filter(receptionistList, doctorFirstNamePredicate) : receptionistList;
+        List<Receptionist> b = inputValidation.validateInput(surname) == true ? filter(a, doctorLastNamePredicate) : a;
+        List<Receptionist> c = inputValidation.validateInput(city) == true ? filter(b, doctorCityPredicate) : b;
+        return c;
+    }
+
+    private static <T> List<T> filter(List<T> list, Predicate<T> p) {
+        List<T> result = new ArrayList<>();
+        list.stream().filter((s) -> (p.test(s))).forEachOrdered((s) -> {
+            result.add(s);
+        });
+        return result;
     }
 }

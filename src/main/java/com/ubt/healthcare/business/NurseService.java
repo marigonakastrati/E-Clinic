@@ -11,6 +11,7 @@ import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Person;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  *
@@ -36,7 +37,8 @@ public class NurseService {
      * @return List
      * @throws java.lang.Exception
      */
-    public List<Nurse> findDoctorsByParameters(String name, String surname, String city)throws Exception {
+    @Deprecated
+    public List<Nurse> findDoctorsByParameters(String name, String surname, String city) throws Exception {
         nurseRepo = (List<Nurse>) (Object) sqlRepository.findAll("Nurse.findAll");
         List<Nurse> nurseList = new ArrayList<>();
         List<Nurse> surNameList = new ArrayList<>();
@@ -100,7 +102,7 @@ public class NurseService {
         return nurseList;
     }
 
-    public String persistNurse(Nurse nurse)throws Exception {
+    public String persistNurse(Nurse nurse) throws Exception {
 
         String nurseMsg = null;
 
@@ -116,7 +118,7 @@ public class NurseService {
         return nurseMsg;
     }
 
-    public String editDoctor(Nurse nurse) throws Exception{
+    public String editDoctor(Nurse nurse) throws Exception {
 
         String nurseMsg = null;
 
@@ -130,7 +132,7 @@ public class NurseService {
         return nurseMsg;
     }
 
-    private String checkIfNurseExists(Nurse nurse)throws Exception {
+    private String checkIfNurseExists(Nurse nurse) throws Exception {
         String msg = "Save";
         List<Object> docs = (List<Object>) sqlRepository.findAll("Nurse.findAll");
         for (Object o : docs) {
@@ -141,4 +143,26 @@ public class NurseService {
 
         return msg;
     }
+
+    public List<Nurse> findNurseByParametersLambda(String name, String surname, String city) throws Exception {
+        nurseRepo = (List<Nurse>) (Object) sqlRepository.findAll("Nurse.findAll");
+
+        Predicate<Nurse> doctorFirstNamePredicate = (Nurse d) -> d.getPersonId().getFirstName().equals(name);
+        Predicate<Nurse> doctorLastNamePredicate = (Nurse d) -> d.getPersonId().getLastName().equals(surname);
+        Predicate<Nurse> doctorCityPredicate = (Nurse d) -> d.getPersonId().getAddressId().getCityId().getCityName().equals(city);
+
+        List<Nurse> a = inputValidation.validateInput(name) == true ? filter(nurseRepo, doctorFirstNamePredicate) : nurseRepo;
+        List<Nurse> b = inputValidation.validateInput(surname) == true ? filter(a, doctorLastNamePredicate) : a;
+        List<Nurse> c = inputValidation.validateInput(city) == true ? filter(b, doctorCityPredicate) : b;
+        return c;
+    }
+
+    private static <T> List<T> filter(List<T> list, Predicate<T> p) {
+        List<T> result = new ArrayList<>();
+        list.stream().filter((s) -> (p.test(s))).forEachOrdered((s) -> {
+            result.add(s);
+        });
+        return result;
+    }
+
 }

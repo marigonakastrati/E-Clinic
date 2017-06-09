@@ -390,9 +390,9 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         jbSearchShift.addMouseListener(e);
     }
 
-    public void loadShiftListTable(String name, String surname, String city) {
+    public void loadShiftListTable(String name, String surname, String statusOfShift, Date dateOfShift) {
         try {
-            doctorList = doctorService.findDoctorsByParameters(name, surname, city);
+            doctorList = doctorService.findDoctorShift(name, surname, statusOfShift,dateOfShift);
             scheduleTableModelViewNurse = new ScheduleTableModel(doctorList);
             jtDoctorListTable.setModel(scheduleTableModelViewNurse);
             scheduleTableModelViewNurse.fireTableDataChanged();
@@ -403,15 +403,17 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     }
 
     public void searchShiftInternalPane() {
-        String nameOfNurse = jtfFirstNameSearch.getText();
-        String surNameOfNurse = jtfLastNameSearch.getText();
+        String firstName = jtfFirstNameSearch.getText();
+        String lastName = jtfLastNameSearch.getText();
         String statusOfShift = jcbStatusSearch.getSelectedIndex() < 0 ? "" : jcbStatusSearch.getSelectedItem().toString();
+        Date dateOfShift = jdcDateOfShiftSearch.getDate();
 
-        if (nameOfNurse.trim().length() == 0 && surNameOfNurse.trim().length() == 0 && statusOfShift.trim().length() == 0) {
+        if (firstName.trim().length() == 0 && lastName.trim().length() == 0 && statusOfShift.trim().length() == 0
+                            && dateOfShift!= null) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the shift you are looking for");
         } else {
 
-            loadShiftListTable(nameOfNurse, surNameOfNurse, statusOfShift);
+            loadShiftListTable(firstName, lastName, statusOfShift, dateOfShift);
 
         }
     }

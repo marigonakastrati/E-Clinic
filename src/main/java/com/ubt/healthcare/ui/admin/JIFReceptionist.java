@@ -570,7 +570,7 @@ public class JIFReceptionist extends javax.swing.JInternalFrame {
 
     public void loadNurseListTable(String name, String surname, String city) {
         try {
-            receptionistList = receptionistService.findDoctorsByParameters(name, surname, city);
+            receptionistList = receptionistService.findReceptionistByParametersLambda(name, surname, city);
             receptionistTableModelViewNurse = new ReceptionistTableModelViewReceptionist(receptionistList);
             jtReceptionistListTable.setModel(receptionistTableModelViewNurse);
             receptionistTableModelViewNurse.fireTableDataChanged();

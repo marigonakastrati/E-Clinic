@@ -572,7 +572,7 @@ public class JIFNurse extends javax.swing.JInternalFrame {
 // load Doctor Table 
     public void loadNurseListTable(String name, String surname, String city) {
         try {
-            nurseList = nurseService.findDoctorsByParameters(name, surname, city);
+            nurseList = nurseService.findNurseByParametersLambda(name, surname, city);
             nurseTableModelViewNurse = new NurseTableModelViewNurses(nurseList);
             jtNurseListTable.setModel(nurseTableModelViewNurse);
             nurseTableModelViewNurse.fireTableDataChanged();

@@ -583,7 +583,7 @@ public class JIFDoctorF extends javax.swing.JInternalFrame {
 // load Doctor Table 
     public void loadDoctorListTable(String name, String surname, String city) {
         try {
-            doctorList = doctorService.findDoctorsByParameters(name, surname, city);
+            doctorList = doctorService.findDoctorByParametersLambda(name, surname, city);
             doctorTableModelViewDoctor = new DoctorTableModelViewDoctor(doctorList);
             jtDoctorListTable.setModel(doctorTableModelViewDoctor);
             doctorTableModelViewDoctor.fireTableDataChanged();
