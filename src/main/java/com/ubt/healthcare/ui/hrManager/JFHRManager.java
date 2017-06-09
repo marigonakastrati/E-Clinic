@@ -5,17 +5,34 @@
  */
 package com.ubt.healthcare.ui.hrManager;
 
+import java.awt.HeadlessException;
+import javax.swing.JFrame;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author F
  */
 public class JFHRManager extends javax.swing.JFrame {
 
+    private JIFAddShift jifAddShift;
+    private JIFReports jifReports;
+
     /**
      * Creates new form JFHRManager
+     *
+     * @param jifAddShift
+     * @param jifReports
      */
-    public JFHRManager() {
+    public JFHRManager(JIFAddShift jifAddShift, JIFReports jifReports) {
+        this.jifAddShift = jifAddShift;
+        this.jifReports = jifReports;
+
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    public JFHRManager() {
     }
 
     /**
@@ -27,37 +44,22 @@ public class JFHRManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
+        jdpPaneHandler = new javax.swing.JDesktopPane();
         jlProfile = new javax.swing.JLabel();
         jlShiftManagement = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
         jlReports = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jLabel1.setText("jLabel1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
-        jDesktopPane2.setLayout(jDesktopPane2Layout);
-        jDesktopPane2Layout.setHorizontalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jdpPaneHandlerLayout = new javax.swing.GroupLayout(jdpPaneHandler);
+        jdpPaneHandler.setLayout(jdpPaneHandlerLayout);
+        jdpPaneHandlerLayout.setHorizontalGroup(
+            jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jDesktopPane2Layout.setVerticalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jdpPaneHandlerLayout.setVerticalGroup(
+            jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 384, Short.MAX_VALUE)
         );
 
@@ -73,7 +75,7 @@ public class JFHRManager extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jdpPaneHandler, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlProfile)
@@ -95,54 +97,56 @@ public class JFHRManager extends javax.swing.JFrame {
                     .addComponent(jlLogout)
                     .addComponent(jlReports))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jdpPaneHandler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFHRManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFHRManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFHRManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFHRManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFHRManager().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JDesktopPane jDesktopPane2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane jdpPaneHandler;
     private javax.swing.JLabel jlLogout;
     private javax.swing.JLabel jlProfile;
     private javax.swing.JLabel jlReports;
     private javax.swing.JLabel jlShiftManagement;
     // End of variables declaration//GEN-END:variables
+
+    public void showAddShiftScreen() {
+
+        jdpPaneHandler.remove(jifAddShift);
+        jdpPaneHandler.add(jifAddShift);
+        jifAddShift.show();
+    }
+
+    public void showReportsScreen() {
+
+        jdpPaneHandler.remove(jifReports);
+        jdpPaneHandler.add(jifReports);
+        jifReports.show();
+    }
+
+    static {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+
+                    /*jdpPaneHandler.setUI(new DesktopPaneUI() {
+                        @Override
+                        public void installUI(JComponent ui) {
+                            try {
+                                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel.");
+
+                            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+                            }
+                        }
+                    });*/
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("UI Manager not found");
+        }
+    }
 }

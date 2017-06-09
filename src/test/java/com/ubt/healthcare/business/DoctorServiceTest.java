@@ -6,6 +6,7 @@
 package com.ubt.healthcare.business;
 
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.Schedule;
 import java.util.Date;
 import java.util.List;
 import org.junit.After;
@@ -72,15 +73,5 @@ public class DoctorServiceTest {
         assertNotNull(doctorList);
     }
 
-    @Test
-    public void testFindDoctorSchedule() {
-        DoctorService doctorService = new DoctorService();
-        List<Doctor> doctorList = null;
-        try {
-            doctorList = doctorService.findDoctorShift("1212", "", "2",null);
-        } catch (Exception ex) {
-        }
-        assertNotNull(doctorList);
-    }
 
 }

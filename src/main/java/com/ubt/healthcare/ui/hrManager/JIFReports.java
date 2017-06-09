@@ -9,7 +9,6 @@ import com.ubt.healthcare.business.AddressService;
 import com.ubt.healthcare.business.CityService;
 import com.ubt.healthcare.business.ContactService;
 import com.ubt.healthcare.business.CountryService;
-import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.business.EducationProgramService;
 import com.ubt.healthcare.business.EducationService;
 import com.ubt.healthcare.business.EducationTypeService;
@@ -20,17 +19,18 @@ import com.ubt.healthcare.business.PersonArchiveService;
 import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.business.PersonService;
 import com.ubt.healthcare.business.ReligionService;
+import com.ubt.healthcare.business.ScheduleService;
 import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
 import com.ubt.healthcare.dto.Religion;
+import com.ubt.healthcare.dto.Schedule;
 import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.hrManager.model.ScheduleTableModel;
 import com.ubt.healthcare.ui.util.InputValidation;
@@ -52,8 +52,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class JIFReports extends javax.swing.JInternalFrame {
 
-    private List<Doctor> doctorList;
-    private DoctorService doctorService;
+    private List<Schedule> scheduleList;
+    private ScheduleService scheduleService;
     private ScheduleTableModel scheduleTableModelViewNurse;
     private LoadTables loadTable;
     private PasswordHashing passwordHashing;
@@ -80,7 +80,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
      */
     public JIFReports() {
         initComponents();
-        doctorService = new DoctorService();
+        scheduleService = new ScheduleService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
@@ -389,10 +389,10 @@ public class JIFReports extends javax.swing.JInternalFrame {
         jbSearchShift.addMouseListener(e);
     }
 
-    public void loadShiftListTable(String name, String surname, String city) {
+    public void loadShiftListTable(String name, String surname, String statusOfShift, Date dateOfShift) {
         try {
-            doctorList = doctorService.findDoctorsByParameters(name, surname, city);
-            scheduleTableModelViewNurse = new ScheduleTableModel(doctorList);
+            scheduleList = scheduleService.findDoctorShift(name, surname, statusOfShift, dateOfShift);
+            scheduleTableModelViewNurse = new ScheduleTableModel(scheduleList);
             jtDoctorListTable.setModel(scheduleTableModelViewNurse);
             scheduleTableModelViewNurse.fireTableDataChanged();
         } catch (Exception ex) {
@@ -405,12 +405,14 @@ public class JIFReports extends javax.swing.JInternalFrame {
         String nameOfNurse = jtfFirstNameSearch.getText();
         String surNameOfNurse = jtfLastNameSearch.getText();
         String statusOfShift = jcbStatusSearch.getSelectedIndex() < 0 ? "" : jcbStatusSearch.getSelectedItem().toString();
+        Date dateOfShift = jdcDateOfShiftSearch.getDate();
 
-        if (nameOfNurse.trim().length() == 0 && surNameOfNurse.trim().length() == 0 && statusOfShift.trim().length() == 0) {
+        if (nameOfNurse.trim().length() == 0 && surNameOfNurse.trim().length() == 0 && statusOfShift.trim().length() == 0
+                && dateOfShift != null) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the shift you are looking for");
         } else {
 
-            loadShiftListTable(nameOfNurse, surNameOfNurse, statusOfShift);
+            loadShiftListTable(nameOfNurse, surNameOfNurse, statusOfShift, dateOfShift);
 
         }
     }
@@ -480,7 +482,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
                 }
                 int selectedRow = selectedModel.getAnchorSelectionIndex();
                 if (selectedRow > -1) {
-                    Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getPersonId();
+                    Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getDoctorId().getPersonId();
                     updatePersonFields(pe);
 
                 }
@@ -513,7 +515,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
         jtfBulidingNumber.setText(String.valueOf(person.getAddressId().getBuildingNumber()));*/
         Collection<Contact> contactCollection = person.getContactCollection();
         if (contactCollection != null && contactCollection.size() > 0) {
-           /* jtfHomePhone.setText("");
+            /* jtfHomePhone.setText("");
             jtfWorkPhone.setText("");
             jtfMobilePhone.setText("");
             jtfEmail.setText("");

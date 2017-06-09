@@ -18,16 +18,16 @@ public class ScheduleTableModel extends AbstractTableModel {
 
     private final String[] columnNames = {"FirstName", "LastName", "Date", "Time", "Status"};
 
-    private List<Doctor> data;
+    private List<Schedule> data;
 
-    public ScheduleTableModel(List<Doctor> data) {
+    public ScheduleTableModel(List<Schedule> data) {
         this.data = data;
     }
 
     public ScheduleTableModel() {
     }
 
-    public void add(List<Doctor> data) {
+    public void add(List<Schedule> data) {
         this.data = data;
     }
 
@@ -55,42 +55,32 @@ public class ScheduleTableModel extends AbstractTableModel {
         data.removeAll(data);
     }
 
-    public Doctor getSchedule(int index) {
+    public Schedule getSchedule(int index) {
         return data.get(index);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Doctor s = (Doctor) data.get(rowIndex);
+        Schedule s = (Schedule) data.get(rowIndex);
         switch (columnIndex) {
 
             case 0:
-                return s.getPersonId().getFirstName();
+                return s.getDoctorId().getPersonId().getFirstName();
             case 1:
-                return s.getPersonId().getLastName();
+                return s.getDoctorId().getPersonId().getLastName();
             case 2:
-                for (Schedule c : s.getPersonId().getDoctor().getScheduleCollection()) {
-                    return c.getDateStart();
-                }
-                return "";
+                s.getDateStart();
             case 3:
-                for (Schedule c : s.getPersonId().getDoctor().getScheduleCollection()) {
-                    return c.getTimeStart();
-                }
-                return "";
+                s.getTimeStart();
             case 4: {
-
-                for (Schedule c : s.getPersonId().getDoctor().getScheduleCollection()) {
-                    return c.getStatus().getStatusName();
-                }
-                return "";
+                s.getStatus().getStatusName();
             }
             default:
                 return null;
         }
     }
 
-    public List<Doctor> getSchedulestList() {
+    public List<Schedule> getSchedulestList() {
         return data;
     }
 }

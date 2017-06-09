@@ -12,6 +12,7 @@ import com.ubt.healthcare.dto.Patient;
 import com.ubt.healthcare.dto.Pharmacist;
 import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.HRManager;
 import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFDoctorF;
@@ -27,6 +28,9 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewReceptionist
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
+import com.ubt.healthcare.ui.hrManager.JFHRManager;
+import com.ubt.healthcare.ui.hrManager.JIFAddShift;
+import com.ubt.healthcare.ui.hrManager.JIFReports;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -43,14 +47,16 @@ public class JFLogin extends JFrame {
     private JPMain jpMain;
     private CardLayout clCardlayout;
     private JFAdminScreen jfAdminScreen;
+    private JFHRManager jfHRManager;
     private UserGroupService userGroupService;
     private AuthenticateUser authUser;
     private InputValidation inputValidation;
 
-    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen, JFAdminScreen jfAdminScreen) {
+    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen, JFAdminScreen jfAdminScreen,JFHRManager jfHRManager) {
         this.jpLoginScreen = jpLoginScreen;
         this.jpMain = jpMain;
         this.jfAdminScreen = jfAdminScreen;
+        this.jfHRManager = jfHRManager;
         this.authUser = new AuthenticateUser();
         userGroupService = new UserGroupService();
         inputValidation = new InputValidation();
@@ -171,6 +177,16 @@ public class JFLogin extends JFrame {
                     // clear the filed from jpLoginscreen...
                 }
 
+            } else if ("HRManager".equals(userRole)) {
+                String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
+                HRManager hrManager = (HRManager) authUser.authenticateHRManager(user, passcode);
+                if (hrManager != null) {
+                    showHRManagerScreen(hrManager);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong passcode");
+                    // clear the filed from jpLoginscreen...
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Credentials wrong");
                 // clear the filed from jpLoginscreen...
@@ -284,6 +300,16 @@ public class JFLogin extends JFrame {
         // call the listeners and JPanels
     }
 
+    public void showHRManagerScreen(HRManager hrManager) {
+
+        JIFAddShift jifAddShift = new JIFAddShift();
+        JIFReports jifReports = new JIFReports();
+        jfHRManager = new JFHRManager(jifAddShift,jifReports);
+
+        this.setVisible(false);
+        jfHRManager.setVisible(true);
+    }
+
     public void showPharmacyManagerScreen(PharmacyManager pharmacyManager) {
         //JFPharmacyManager jfPharmacyManager = new JFPharmacyManager();
         // call the listeners and JPanels
@@ -311,13 +337,13 @@ public class JFLogin extends JFrame {
         jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
         jfAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterReceptionistScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
-        
+
         jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
         jifDoctorF.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctorF(jifDoctorF));
 
         jifNurse.addSaveNurseInternalFrameMouseAdapter(new MouseAdapterSaveNewNurse(jifNurse));
         jifNurse.addSearchNursePanelMouseAdapter(new MouseAdapterSearchNurse(jifNurse));
-       
+
         jifReceptionist.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewReceptionist(jifReceptionist));
         jifReceptionist.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchReceptionist(jifReceptionist));
 

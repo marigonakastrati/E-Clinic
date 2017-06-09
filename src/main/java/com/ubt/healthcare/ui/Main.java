@@ -9,6 +9,7 @@ import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.eventhandling.KeyListenerLogin;
 import com.ubt.healthcare.ui.eventhandling.MouseAdapterCloseWindows;
 import com.ubt.healthcare.ui.eventhandling.MouseAdapterLogin;
+import com.ubt.healthcare.ui.hrManager.JFHRManager;
 
 /**
  *
@@ -21,7 +22,8 @@ public class Main {
         JPMain jpMain = new JPMain();
         JPLoginScreen jpLoginScreen = new JPLoginScreen();
         JFAdminScreen jfAdminScreen = new JFAdminScreen();
-        JFLogin jfLogin = new JFLogin(jpMain, jpLoginScreen,jfAdminScreen);
+        JFHRManager jfHRManagerScreen = new JFHRManager();
+        JFLogin jfLogin = new JFLogin(jpMain, jpLoginScreen,jfAdminScreen,jfHRManagerScreen);
         
         jpLoginScreen.addCloseMainWindowsMouseAdapter(new MouseAdapterCloseWindows(jfLogin));
         jpLoginScreen.addLoginMouseAdapter(new MouseAdapterLogin(jfLogin));

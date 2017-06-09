@@ -19,19 +19,19 @@ import com.ubt.healthcare.business.MartialStatusService;
 import com.ubt.healthcare.business.PersonArchiveService;
 import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.business.PersonService;
-import com.ubt.healthcare.business.ReceptionistService;
 import com.ubt.healthcare.business.ReligionService;
+import com.ubt.healthcare.business.ScheduleService;
 import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.Address;
 import com.ubt.healthcare.dto.City;
 import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Country;
-import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Gender;
 import com.ubt.healthcare.dto.MartialStatus;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
 import com.ubt.healthcare.dto.Religion;
+import com.ubt.healthcare.dto.Schedule;
 import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.hrManager.model.ScheduleTableModel;
 import com.ubt.healthcare.ui.util.InputValidation;
@@ -53,8 +53,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class JIFAddShift extends javax.swing.JInternalFrame {
 
-    private List<Doctor> doctorList;
-    private DoctorService doctorService;
+    private List<Schedule> scheduleList;
+    private ScheduleService scheduleService;
     private ScheduleTableModel scheduleTableModelViewNurse;
     private LoadTables loadTable;
     private PasswordHashing passwordHashing;
@@ -81,7 +81,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
      */
     public JIFAddShift() {
         initComponents();
-        doctorService = new DoctorService();
+        scheduleService = new ScheduleService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
@@ -392,8 +392,8 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
 
     public void loadShiftListTable(String name, String surname, String statusOfShift, Date dateOfShift) {
         try {
-            doctorList = doctorService.findDoctorShift(name, surname, statusOfShift,dateOfShift);
-            scheduleTableModelViewNurse = new ScheduleTableModel(doctorList);
+            scheduleList = scheduleService.findDoctorShift(name, surname, statusOfShift,dateOfShift);
+            scheduleTableModelViewNurse = new ScheduleTableModel(scheduleList);
             jtDoctorListTable.setModel(scheduleTableModelViewNurse);
             scheduleTableModelViewNurse.fireTableDataChanged();
         } catch (Exception ex) {
@@ -483,7 +483,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
                 }
                 int selectedRow = selectedModel.getAnchorSelectionIndex();
                 if (selectedRow > -1) {
-                    Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getPersonId();
+                    Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getDoctorId().getPersonId();
                     updatePersonFields(pe);
 
                 }

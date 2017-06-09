@@ -9,6 +9,7 @@ import com.ubt.healthcare.ui.util.PasswordHashing;
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.AdminClinic;
 import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.HRManager;
 import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.dto.Patient;
 import com.ubt.healthcare.dto.Pharmacist;
@@ -91,6 +92,18 @@ public class AuthenticateUser {
         if (nurse.getPassCode().equals(hashing.encodehashPassword(password))) 
         {
             return nurse;
+        }
+
+        return null;
+    }
+    
+    
+    public HRManager authenticateHRManager(String user, String password) throws Exception
+    {
+        HRManager hrManager = (HRManager) authenticate(user, "HRManager.findByManagerId", "findByManagerId");
+        if (hrManager.getPassCode().equals(hashing.encodehashPassword(password))) 
+        {
+            return hrManager;
         }
 
         return null;

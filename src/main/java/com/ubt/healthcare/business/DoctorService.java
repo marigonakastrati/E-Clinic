@@ -160,36 +160,6 @@ public class DoctorService {
         return c;
     }
 
-    public List<Doctor> findDoctorShift(String name, String surname, String statusOfShift, Date dateOfShift) throws Exception {
-        
-        doctorRepo = (List<Doctor>) (Object) sqlRepository.findAll("Doctor.findAll");
-
-        Predicate<Doctor> doctorFirstNamePredicate = (Doctor d) -> d.getPersonId().getFirstName().equals(name);
-        Predicate<Doctor> doctorLastNamePredicate = (Doctor d) -> d.getPersonId().getLastName().equals(surname);
-
-        List<Doctor> a = inputValidation.validateInput(name) == true ? filter(doctorRepo, doctorFirstNamePredicate) : doctorRepo;
-        List<Doctor> b = inputValidation.validateInput(surname) == true ? filter(a, doctorLastNamePredicate) : a;
-        List<Doctor> c = new ArrayList<>();
-
-        if (inputValidation.validateInput(statusOfShift) || dateOfShift != null) {
-            for (Doctor doctor : b) {
-                for (Schedule schedule : doctor.getScheduleCollection()) {
-                    if (statusOfShift != null && (schedule.getStatus().getStatusName().equals(statusOfShift)) || (dateOfShift != null && schedule.getDateStart().compareTo(dateOfShift) == 0)) {
-                        c.add(doctor);
-                    }
-                }
-            }
-        }
-        /*List<Schedule> a = new ArrayList<>();
-        Collection<Schedule> scheduleCollection = doctorRepo.getScheduleCollection();
-        scheduleCollection.stream().filter(e -> e.getDateStart().equals(e)).forEach(e -> a.add(e));
-        for (Schedule schedule : scheduleCollection) {
-            schedule.getDateStart().compareTo(dateOfShift);
-            schedule.getStatus().getStatusName().equals(statusOfShift);
-        }*/
-        return inputValidation.validateInput(statusOfShift) && dateOfShift != null ? c : b;
-    }
-
     private static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<T> result = new ArrayList<>();
         list.stream().filter((s) -> (p.test(s))).forEachOrdered((s) -> {
