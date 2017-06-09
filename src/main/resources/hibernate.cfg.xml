@@ -30,7 +30,6 @@
         <mapping class="com.ubt.healthcare.dto.Prescription"/>
         <mapping class="com.ubt.healthcare.dto.PrescriptionMedicines"/>
         <mapping class="com.ubt.healthcare.dto.Receptionist"/>
-        <mapping class="com.ubt.healthcare.dto.Schedule"/>
         <mapping class="com.ubt.healthcare.dto.Visit"/>
         <mapping class="com.ubt.healthcare.dto.Vitals"/>
         <mapping class="com.ubt.healthcare.dto.EducationProgram"/>
@@ -70,6 +69,9 @@
         <mapping class="com.ubt.healthcare.dto.PatientSurgicalHX"/>
         <mapping class="com.ubt.healthcare.dto.RelativeType"/>
         <mapping class="com.ubt.healthcare.dto.Surgical"/>
+        <mapping class="com.ubt.healthcare.dto.ScheduleStatus"/>
+        <mapping class="com.ubt.healthcare.dto.Schedule"/>
+
         
       
     </session-factory>

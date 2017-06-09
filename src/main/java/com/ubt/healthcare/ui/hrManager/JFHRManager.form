@@ -51,9 +51,11 @@
               <Component id="jlProfile" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Component id="jlShiftManagement" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Component id="jlReports" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Component id="jlLogout" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="501" max="32767" attributes="0"/>
+              <EmptySpace pref="389" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,6 +67,7 @@
                   <Component id="jlProfile" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jlShiftManagement" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jlLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlReports" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jDesktopPane2" min="-2" max="-2" attributes="0"/>
@@ -101,6 +104,11 @@
     <Component class="javax.swing.JLabel" name="jlLogout">
       <Properties>
         <Property name="text" type="java.lang.String" value="Log Out"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlReports">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reports"/>
       </Properties>
     </Component>
   </SubComponents>

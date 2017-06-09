@@ -33,6 +33,7 @@ public class JFHRManager extends javax.swing.JFrame {
         jlProfile = new javax.swing.JLabel();
         jlShiftManagement = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
+        jlReports = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -66,6 +67,8 @@ public class JFHRManager extends javax.swing.JFrame {
 
         jlLogout.setText("Log Out");
 
+        jlReports.setText("Reports");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,9 +79,11 @@ public class JFHRManager extends javax.swing.JFrame {
                 .addComponent(jlProfile)
                 .addGap(66, 66, 66)
                 .addComponent(jlShiftManagement)
-                .addGap(62, 62, 62)
+                .addGap(60, 60, 60)
+                .addComponent(jlReports)
+                .addGap(70, 70, 70)
                 .addComponent(jlLogout)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(389, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +92,8 @@ public class JFHRManager extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlProfile)
                     .addComponent(jlShiftManagement)
-                    .addComponent(jlLogout))
+                    .addComponent(jlLogout)
+                    .addComponent(jlReports))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -136,6 +142,7 @@ public class JFHRManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jlLogout;
     private javax.swing.JLabel jlProfile;
+    private javax.swing.JLabel jlReports;
     private javax.swing.JLabel jlShiftManagement;
     // End of variables declaration//GEN-END:variables
 }

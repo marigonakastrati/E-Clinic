@@ -10,11 +10,13 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,8 +63,16 @@ public class Schedule implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ScheduleId")
+    @Column(name = "Schedule") 
+    @GeneratedValue(generator = "InvSeq")
+    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer scheduleId;
+    @JoinColumn(name = "DoctorId", referencedColumnName = "DoctorId")
+    @ManyToOne(optional = false)
+    private Doctor doctorId;
+    @JoinColumn(name = "ManagerId", referencedColumnName = "ManagerId")
+    @ManyToOne(optional = false)
+    private HRManager managerId;
     @JoinColumn(name = "status", referencedColumnName = "ScheduleStatusId")
     @ManyToOne(optional = false)
     private ScheduleStatus status;
@@ -120,6 +130,22 @@ public class Schedule implements Serializable {
 
     public void setScheduleId(Integer scheduleId) {
         this.scheduleId = scheduleId;
+    }
+
+    public Doctor getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Doctor doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public HRManager getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(HRManager managerId) {
+        this.managerId = managerId;
     }
 
     public ScheduleStatus getStatus() {

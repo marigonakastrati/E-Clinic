@@ -19,7 +19,6 @@ import com.ubt.healthcare.business.MartialStatusService;
 import com.ubt.healthcare.business.PersonArchiveService;
 import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.business.PersonService;
-import com.ubt.healthcare.business.ReceptionistService;
 import com.ubt.healthcare.business.ReligionService;
 import com.ubt.healthcare.business.UserGroupService;
 import com.ubt.healthcare.dto.Address;
@@ -51,7 +50,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author F
  */
-public class JIFAddShift extends javax.swing.JInternalFrame {
+public class JIFReports extends javax.swing.JInternalFrame {
 
     private List<Doctor> doctorList;
     private DoctorService doctorService;
@@ -79,7 +78,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFHRManager
      */
-    public JIFAddShift() {
+    public JIFReports() {
         initComponents();
         doctorService = new DoctorService();
         loadTable = new LoadTables();
@@ -145,7 +144,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Shift Management");
+        setTitle("Reports");
         setToolTipText("");
 
         jtDoctorListTable.setModel(new javax.swing.table.DefaultTableModel(
