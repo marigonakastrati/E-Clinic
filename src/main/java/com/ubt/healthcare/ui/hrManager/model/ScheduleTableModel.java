@@ -69,11 +69,11 @@ public class ScheduleTableModel extends AbstractTableModel {
             case 1:
                 return s.getDoctorId().getPersonId().getLastName();
             case 2:
-                s.getDateStart();
+                return s.getDateStart().toString();
             case 3:
-                s.getTimeStart();
+                return s.getTimeStart().toString();
             case 4: {
-                s.getStatus().getStatusName();
+                return s.getStatus().getStatusName();
             }
             default:
                 return null;

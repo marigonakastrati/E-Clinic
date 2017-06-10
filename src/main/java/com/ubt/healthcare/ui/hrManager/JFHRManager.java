@@ -6,6 +6,7 @@
 package com.ubt.healthcare.ui.hrManager;
 
 import java.awt.HeadlessException;
+import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -57,7 +58,7 @@ public class JFHRManager extends javax.swing.JFrame {
         jdpPaneHandler.setLayout(jdpPaneHandlerLayout);
         jdpPaneHandlerLayout.setHorizontalGroup(
             jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 825, Short.MAX_VALUE)
         );
         jdpPaneHandlerLayout.setVerticalGroup(
             jdpPaneHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,19 +87,19 @@ public class JFHRManager extends javax.swing.JFrame {
                 .addComponent(jlReports)
                 .addGap(70, 70, 70)
                 .addComponent(jlLogout)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 13, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlProfile)
                     .addComponent(jlShiftManagement)
                     .addComponent(jlLogout)
                     .addComponent(jlReports))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdpPaneHandler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jdpPaneHandler))
         );
 
         pack();
@@ -113,6 +114,19 @@ public class JFHRManager extends javax.swing.JFrame {
     private javax.swing.JLabel jlShiftManagement;
     // End of variables declaration//GEN-END:variables
 
+    
+    public void addLogOutMouseAdapter(MouseAdapter e) {
+        jlLogout.addMouseListener(e);
+    }
+
+    public void addAddShiftScreenMouseAdapter(MouseAdapter e) {
+        jlShiftManagement.addMouseListener(e);
+    }
+
+    public void addReportsMouseAdapter(MouseAdapter e) {
+        jlReports.addMouseListener(e);
+    }
+    
     public void showAddShiftScreen() {
 
         jdpPaneHandler.remove(jifAddShift);

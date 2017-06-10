@@ -32,6 +32,7 @@ import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.Schedule;
+import com.ubt.healthcare.dto.ScheduleStatus;
 import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.hrManager.model.ScheduleTableModel;
 import com.ubt.healthcare.ui.util.InputValidation;
@@ -100,7 +101,8 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         userGroupService = new UserGroupService();
         loginGroupService = new LoginGroupService();
         personArchiveService = new PersonArchiveService();
-        fillComboBoxBirthCity();
+        fillComboBoxScheduleStatusSearch();
+        fillComboBoxScheduleStatus();
         bindTheShiftSearchTableModel();
     }
 
@@ -114,7 +116,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jspDoctorTable = new javax.swing.JScrollPane();
-        jtDoctorListTable = new javax.swing.JTable();
+        jtScheduleList = new javax.swing.JTable();
         jtfFirstNameSearch = new javax.swing.JTextField();
         jtfLastNameSearch = new javax.swing.JTextField();
         jcbStatusSearch = new javax.swing.JComboBox<>();
@@ -148,18 +150,18 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         setTitle("Shift Management");
         setToolTipText("");
 
-        jtDoctorListTable.setModel(new javax.swing.table.DefaultTableModel(
+        jtScheduleList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jspDoctorTable.setViewportView(jtDoctorListTable);
+        jspDoctorTable.setViewportView(jtScheduleList);
 
         jtfLastNameSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,7 +375,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTimeEnd;
     private javax.swing.JLabel jlTimeStart;
     private javax.swing.JScrollPane jspDoctorTable;
-    private javax.swing.JTable jtDoctorListTable;
+    private javax.swing.JTable jtScheduleList;
     private javax.swing.JTextField jtfFirstName;
     private javax.swing.JTextField jtfFirstNameSearch;
     private javax.swing.JTextField jtfLastName;
@@ -382,19 +384,19 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfTimeStart;
     // End of variables declaration//GEN-END:variables
 
-    public void addSaveReceptionistInternalFrameMouseAdapter(MouseAdapter e) {
+    public void addSaveShiftInternalFrameMouseAdapter(MouseAdapter e) {
         jbSaveShift.addMouseListener(e);
     }
 
-    public void addSearchReceptionistPanelMouseAdapter(MouseAdapter e) {
+    public void addSearchShiftPanelMouseAdapter(MouseAdapter e) {
         jbSearchShift.addMouseListener(e);
     }
 
     public void loadShiftListTable(String name, String surname, String statusOfShift, Date dateOfShift) {
         try {
-            scheduleList = scheduleService.findDoctorShift(name, surname, statusOfShift,dateOfShift);
+            scheduleList = scheduleService.findDoctorShift(name, surname, statusOfShift, dateOfShift);
             scheduleTableModelViewNurse = new ScheduleTableModel(scheduleList);
-            jtDoctorListTable.setModel(scheduleTableModelViewNurse);
+            jtScheduleList.setModel(scheduleTableModelViewNurse);
             scheduleTableModelViewNurse.fireTableDataChanged();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
@@ -409,7 +411,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         Date dateOfShift = jdcDateOfShiftSearch.getDate();
 
         if (firstName.trim().length() == 0 && lastName.trim().length() == 0 && statusOfShift.trim().length() == 0
-                            && dateOfShift!= null) {
+                && dateOfShift == null) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the shift you are looking for");
         } else {
 
@@ -418,50 +420,40 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         }
     }
 
-    public void fillComboBoxBirthCity() {
-        /*try {
-            List<Object> obj = loadTable.fillComboBoxBirthCity();
-            jcbBirthPlace.addItem("");
-            for (Object o : obj) {
-                jcbBirthPlace.addItem(((City) o).getCityName());
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
-
-        }*/
-    }
-
-    public void fillComboBoxCity(String country) {
-        /*try {
-            List<Object> obj = loadTable.fillComboBoxBirthCity();
-            jcbCity.removeAllItems();
-            jcbCity.addItem("");
-            for (Object o : obj) {
-                if (((City) o).getCountryId().getCountryName().equals(country)) {
-                    jcbCity.addItem(((City) o).getCityName());
-                }
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
-
-        }*/
-    }
-
-    public int getSelectedCityIndex(String city) {
-        /*for (int index = 0; index < jcbCity.getItemCount(); index++) {
-            if (jcbCity.getItemAt(index).equals(city)) {
-                return index;
-            }
-        }*/
-        return -1;
-    }
-
-    public int getSelectedBirthCityIndex(String city) {
+    public void fillComboBoxScheduleStatusSearch() {
         try {
-            List<City> fillComboBoxEducationType = (List<City>) (Object) loadTable.fillComboBoxBirthCity();
+            List<Object> obj = loadTable.fillComboBoxScheduleStatus();
+            jcbStatusSearch.removeAllItems();
+            jcbStatusSearch.addItem("");
+            for (Object o : obj) {
+                jcbStatusSearch.addItem(((ScheduleStatus) o).getStatusName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
+        }
+    }
+
+    public void fillComboBoxScheduleStatus() {
+        try {
+            List<Object> obj = loadTable.fillComboBoxScheduleStatus();
+            jcbStatus.removeAllItems();
+            jcbStatus.addItem("");
+            for (Object o : obj) {
+                jcbStatus.addItem(((ScheduleStatus) o).getStatusName());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
+
+        }
+    }
+
+    public int getSelectedScheduleStatusIndex(String scheduleStatus) {
+        try {
+            List<ScheduleStatus> fillComboBoxscheduleStatus = (List<ScheduleStatus>) (Object) loadTable.fillComboBoxScheduleStatus();
             int i = 0;
-            for (City object : fillComboBoxEducationType) {
-                if (object.getCityName().equals(city)) {
+            for (ScheduleStatus object : fillComboBoxscheduleStatus) {
+                if (object.getStatusName().equals(scheduleStatus)) {
                     return i + 1;
                 }
                 i++;
@@ -474,7 +466,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     }
 
     public void shiftTableRowSelectionListener() {
-        final ListSelectionModel selectedModel = jtDoctorListTable.getSelectionModel();
+        final ListSelectionModel selectedModel = jtScheduleList.getSelectionModel();
         selectedModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -483,8 +475,8 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
                 }
                 int selectedRow = selectedModel.getAnchorSelectionIndex();
                 if (selectedRow > -1) {
-                    Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getDoctorId().getPersonId();
-                    updatePersonFields(pe);
+                    Schedule schedule = scheduleTableModelViewNurse.getSchedule(selectedRow);
+                    updateScheduleFields(schedule);
 
                 }
             }
@@ -494,63 +486,25 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private void bindTheShiftSearchTableModel() {
         scheduleTableModelViewNurse = new ScheduleTableModel(new ArrayList<>());
         scheduleTableModelViewNurse.add(new ArrayList<>());
-        jtDoctorListTable.setModel(scheduleTableModelViewNurse);
+        jtScheduleList.setModel(scheduleTableModelViewNurse);
         scheduleTableModelViewNurse.fireTableDataChanged();
         shiftTableRowSelectionListener();
     }
 
-    private void updatePersonFields(Person person) {
-        /*jtfPersonalId.setText(String.valueOf(person.getPersonId()));
-        jtfFirstName.setText(person.getFirstName());
-        jtfMiddleName.setText(person.getMiddleName());
-        jtfLastName.setText(person.getLastName());
-        jcbGender.setSelectedIndex(getSelectedGenderIndex(person.getGenderId().getGenderName()));
-        jcbMartialStatus.setSelectedIndex(getSelectedMartialStatusIndex(person.getMartialStatusId().getMartialStatusName()));
-        jcbBirthPlace.setSelectedIndex(getSelectedBirthCityIndex(person.getBirthCityId().getCityName()));
-        jcbReligion.setSelectedIndex(getSelectedReligionIndex(person.getReigionId().getName()));
-        jdcDateOfBirth.setDate(person.getDateOfBirth());
-        jtfPassword.setText("");
-        jtfAddress.setText(person.getAddressId().getStreetName());
-        jcbCountry.setSelectedIndex(getSelectedCountryIndex(person.getAddressId().getCityId().getCountryId().getCountryName()));
-        jcbCity.setSelectedIndex(getSelectedCityIndex(person.getAddressId().getCityId().getCityName()));
-        jtfBulidingNumber.setText(String.valueOf(person.getAddressId().getBuildingNumber()));*/
-        Collection<Contact> contactCollection = person.getContactCollection();
-        if (contactCollection != null && contactCollection.size() > 0) {
-           /* jtfHomePhone.setText("");
-            jtfWorkPhone.setText("");
-            jtfMobilePhone.setText("");
-            jtfEmail.setText("");
-            for (Contact contact : contactCollection) {
-                switch (contact.getType().trim()) {
-                    case "HOME":
-                        jtfHomePhone.setText(contact.getValue());
-                        break;
-                    case "WORK":
-                        jtfWorkPhone.setText(contact.getValue());
-                        break;
-                    case "MOB":
-                        jtfMobilePhone.setText(contact.getValue());
-                        break;
-                    case "EMAIL":
-                        jtfEmail.setText(contact.getValue());
-                        break;
-                    default:
-                        break;
-                }
+    private void updateScheduleFields(Schedule schedule) {
 
-            }*/
-        } else {
-            /*jtfHomePhone.setText("");
-            jtfWorkPhone.setText("");
-            jtfMobilePhone.setText("");
-            jtfEmail.setText("");*/
-
-        }
+        jtfFirstName.setText(schedule.getDoctorId().getPersonId().getFirstName());
+        jtfLastName.setText(schedule.getDoctorId().getPersonId().getLastName());
+        jcbStatus.setSelectedIndex(getSelectedScheduleStatusIndex(schedule.getStatus().getStatusName()));
+        jdcDateStart.setDate(schedule.getDateStart());
+        jdcDateEnd.setDate(schedule.getDateEnd());
+        jtfTimeStart.setText(schedule.getTimeStart().toString());
+        jtfTimeEnd.setText(schedule.getTimeEnd().toString());
     }
 
     public void saveShiftInternalFrame() {
 
-        int row = jtDoctorListTable.getSelectedRow();
+        int row = jtScheduleList.getSelectedRow();
 
         String personId = jtfFirstName.getText();
         String firstName = jtfFirstName.getText();
@@ -765,5 +719,9 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         jdcDateEnd.setDate(null);
         jtfTimeStart.setText("");
         jtfTimeEnd.setText("");
+        jtfFirstNameSearch.setText("");
+        jtfLastNameSearch.setText("");
+        jcbStatusSearch.setSelectedIndex(0);
+        jdcDateOfShiftSearch.setDate(null);
     }
 }

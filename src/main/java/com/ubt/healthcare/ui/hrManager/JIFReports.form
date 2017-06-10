@@ -64,56 +64,15 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-              <Component id="jbSaveShift" pref="102" max="32767" attributes="0"/>
+              <Component id="jbViewReports" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="391" max="-2" attributes="0"/>
-              <Component id="jbCancel" pref="111" max="32767" attributes="0"/>
+              <Component id="jbCancel" pref="110" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jspDoctorTable" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlLastName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlDateStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jlDateEnd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jtfFirstName" pref="150" max="32767" attributes="0"/>
-                          <Component id="jtfLastName" alignment="0" pref="150" max="32767" attributes="0"/>
-                          <Component id="jdcDateStart" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jdcDateEnd" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlTimeEnd" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlTimeStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jtfTimeEnd" pref="150" max="32767" attributes="0"/>
-                          <Component id="jtfTimeStart" pref="150" max="32767" attributes="0"/>
-                          <Component id="jcbStatus" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,7 +83,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbSaveShift" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbViewReports" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -150,44 +109,9 @@
                   </Group>
                   <Component id="jdcDateOfShiftSearch" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="jspDoctorTable" min="-2" pref="112" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jtfLastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlLastName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlDateStart" min="-2" max="-2" attributes="0"/>
-                  <Component id="jdcDateStart" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jlDateEnd" min="-2" max="-2" attributes="0"/>
-                  <Component id="jdcDateEnd" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlTimeStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfTimeStart" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlTimeEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfTimeEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jspDoctorTable" min="-2" pref="355" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -236,9 +160,9 @@
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jbSaveShift">
+    <Component class="javax.swing.JButton" name="jbViewReports">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" value="View Report"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlFirstNameSearch">
@@ -270,66 +194,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Date"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlFirstName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="First Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfFirstName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfFirstNameActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlLastName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfLastName">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlDateStart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Date Start"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlDateEnd">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Date End"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlTimeStart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Time Start"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfTimeStart">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlTimeEnd">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Time End"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jtfTimeEnd">
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jdcDateStart">
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jdcDateEnd">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jcbStatus">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

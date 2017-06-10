@@ -31,6 +31,12 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
 import com.ubt.healthcare.ui.hrManager.JFHRManager;
 import com.ubt.healthcare.ui.hrManager.JIFAddShift;
 import com.ubt.healthcare.ui.hrManager.JIFReports;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterAddShiftScreen;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterReportScreen;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSaveSchedule;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSearchSchedule;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSearchScheduleReports;
+import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterViewReports;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -306,6 +312,18 @@ public class JFLogin extends JFrame {
         JIFReports jifReports = new JIFReports();
         jfHRManager = new JFHRManager(jifAddShift,jifReports);
 
+        
+        jfHRManager.addReportsMouseAdapter(new MouseAdapterReportScreen(jfHRManager));
+        jfHRManager.addAddShiftScreenMouseAdapter(new MouseAdapterAddShiftScreen(jfHRManager));
+        jfHRManager.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
+        
+        jifAddShift.addSearchShiftPanelMouseAdapter(new MouseAdapterSearchSchedule(jifAddShift));
+        jifAddShift.addSaveShiftInternalFrameMouseAdapter(new MouseAdapterSaveSchedule(jifAddShift));
+        
+        jifReports.addViewReportInternalFrameMouseAdapter(new MouseAdapterViewReports(jifReports));
+        jifReports.addSearchShiftPanelMouseAdapter(new MouseAdapterSearchScheduleReports(jifReports));
+        
+        
         this.setVisible(false);
         jfHRManager.setVisible(true);
     }
@@ -323,6 +341,8 @@ public class JFLogin extends JFrame {
         jpLoginScreen.setVisible(true);
         jfAdminScreen.dispose();
         jfAdminScreen.setVisible(false);
+        jfHRManager.dispose();
+        jfHRManager.setVisible(false);
 
     }
 

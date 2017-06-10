@@ -59,4 +59,10 @@ public class LoadTables {
         return obj;
     }
 
+    public List<Object> fillComboBoxScheduleStatus()throws Exception {
+        List<Object> obj;
+        obj = sqlRepository.findAll("ScheduleStatus.findAll");;
+
+        return obj;
+    }
 }

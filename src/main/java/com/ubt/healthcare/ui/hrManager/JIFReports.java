@@ -31,6 +31,7 @@ import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
 import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.Schedule;
+import com.ubt.healthcare.dto.ScheduleStatus;
 import com.ubt.healthcare.dto.UserGroup;
 import com.ubt.healthcare.ui.hrManager.model.ScheduleTableModel;
 import com.ubt.healthcare.ui.util.InputValidation;
@@ -40,11 +41,21 @@ import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -99,7 +110,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
         userGroupService = new UserGroupService();
         loginGroupService = new LoginGroupService();
         personArchiveService = new PersonArchiveService();
-        fillComboBoxBirthCity();
+        fillComboBoxScheduleStatusSearch();
         bindTheShiftSearchTableModel();
     }
 
@@ -118,27 +129,13 @@ public class JIFReports extends javax.swing.JInternalFrame {
         jtfLastNameSearch = new javax.swing.JTextField();
         jcbStatusSearch = new javax.swing.JComboBox<>();
         jbSearchShift = new javax.swing.JButton();
-        jbSaveShift = new javax.swing.JButton();
+        jbViewReports = new javax.swing.JButton();
         jlFirstNameSearch = new javax.swing.JLabel();
         jlLastNameSearch = new javax.swing.JLabel();
         jlStatusSearch = new javax.swing.JLabel();
         jbCancel = new javax.swing.JButton();
         jdcDateOfShiftSearch = new com.toedter.calendar.JDateChooser();
         jlDateSearch = new javax.swing.JLabel();
-        jlFirstName = new javax.swing.JLabel();
-        jtfFirstName = new javax.swing.JTextField();
-        jlLastName = new javax.swing.JLabel();
-        jtfLastName = new javax.swing.JTextField();
-        jlDateStart = new javax.swing.JLabel();
-        jlDateEnd = new javax.swing.JLabel();
-        jlTimeStart = new javax.swing.JLabel();
-        jtfTimeStart = new javax.swing.JTextField();
-        jlTimeEnd = new javax.swing.JLabel();
-        jtfTimeEnd = new javax.swing.JTextField();
-        jdcDateStart = new com.toedter.calendar.JDateChooser();
-        jdcDateEnd = new com.toedter.calendar.JDateChooser();
-        jlStatus = new javax.swing.JLabel();
-        jcbStatus = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -168,7 +165,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
 
         jbSearchShift.setText("Search");
 
-        jbSaveShift.setText("Save");
+        jbViewReports.setText("View Report");
 
         jlFirstNameSearch.setText("First Name");
 
@@ -184,26 +181,6 @@ public class JIFReports extends javax.swing.JInternalFrame {
         });
 
         jlDateSearch.setText("Date");
-
-        jlFirstName.setText("First Name");
-
-        jtfFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfFirstNameActionPerformed(evt);
-            }
-        });
-
-        jlLastName.setText("Last Name");
-
-        jlDateStart.setText("Date Start");
-
-        jlDateEnd.setText("Date End");
-
-        jlTimeStart.setText("Time Start");
-
-        jlTimeEnd.setText("Time End");
-
-        jlStatus.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,44 +214,14 @@ public class JIFReports extends javax.swing.JInternalFrame {
                         .addGap(21, 21, 21))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(203, 203, 203)
-                .addComponent(jbSaveShift, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(jbViewReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(391, 391, 391)
-                .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                 .addGap(246, 246, 246))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jspDoctorTable)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlFirstName)
-                                    .addComponent(jlLastName)
-                                    .addComponent(jlDateStart))
-                                .addGap(50, 50, 50))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlDateEnd)
-                                .addGap(61, 61, 61)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jdcDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdcDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTimeEnd)
-                            .addComponent(jlTimeStart)
-                            .addComponent(jlStatus))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfTimeEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfTimeStart, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jcbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +230,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbSaveShift)
+                            .addComponent(jbViewReports)
                             .addComponent(jbCancel))
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -302,36 +249,8 @@ public class JIFReports extends javax.swing.JInternalFrame {
                                 .addComponent(jcbStatusSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jdcDateOfShiftSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlFirstName)
-                    .addComponent(jtfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlLastName))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlDateStart)
-                    .addComponent(jdcDateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlDateEnd)
-                    .addComponent(jdcDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTimeStart)
-                    .addComponent(jtfTimeStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTimeEnd)
-                    .addComponent(jtfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlStatus)
-                    .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179))
+                .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -346,46 +265,28 @@ public class JIFReports extends javax.swing.JInternalFrame {
         bindTheShiftSearchTableModel();
     }//GEN-LAST:event_jbCancelActionPerformed
 
-    private void jtfFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFirstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfFirstNameActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
-    private javax.swing.JButton jbSaveShift;
     private javax.swing.JButton jbSearchShift;
-    private javax.swing.JComboBox<String> jcbStatus;
+    private javax.swing.JButton jbViewReports;
     private javax.swing.JComboBox<String> jcbStatusSearch;
-    private com.toedter.calendar.JDateChooser jdcDateEnd;
     private com.toedter.calendar.JDateChooser jdcDateOfShiftSearch;
-    private com.toedter.calendar.JDateChooser jdcDateStart;
-    private javax.swing.JLabel jlDateEnd;
     private javax.swing.JLabel jlDateSearch;
-    private javax.swing.JLabel jlDateStart;
-    private javax.swing.JLabel jlFirstName;
     private javax.swing.JLabel jlFirstNameSearch;
-    private javax.swing.JLabel jlLastName;
     private javax.swing.JLabel jlLastNameSearch;
-    private javax.swing.JLabel jlStatus;
     private javax.swing.JLabel jlStatusSearch;
-    private javax.swing.JLabel jlTimeEnd;
-    private javax.swing.JLabel jlTimeStart;
     private javax.swing.JScrollPane jspDoctorTable;
     private javax.swing.JTable jtDoctorListTable;
-    private javax.swing.JTextField jtfFirstName;
     private javax.swing.JTextField jtfFirstNameSearch;
-    private javax.swing.JTextField jtfLastName;
     private javax.swing.JTextField jtfLastNameSearch;
-    private javax.swing.JTextField jtfTimeEnd;
-    private javax.swing.JTextField jtfTimeStart;
     // End of variables declaration//GEN-END:variables
 
-    public void addSaveReceptionistInternalFrameMouseAdapter(MouseAdapter e) {
-        jbSaveShift.addMouseListener(e);
+    public void addViewReportInternalFrameMouseAdapter(MouseAdapter e) {
+        jbViewReports.addMouseListener(e);
     }
 
-    public void addSearchReceptionistPanelMouseAdapter(MouseAdapter e) {
+    public void addSearchShiftPanelMouseAdapter(MouseAdapter e) {
         jbSearchShift.addMouseListener(e);
     }
 
@@ -408,7 +309,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
         Date dateOfShift = jdcDateOfShiftSearch.getDate();
 
         if (nameOfNurse.trim().length() == 0 && surNameOfNurse.trim().length() == 0 && statusOfShift.trim().length() == 0
-                && dateOfShift != null) {
+                && dateOfShift == null) {
             JOptionPane.showMessageDialog(rootPane, "Please fill the fields to find the shift you are looking for");
         } else {
 
@@ -417,42 +318,44 @@ public class JIFReports extends javax.swing.JInternalFrame {
         }
     }
 
-    public void fillComboBoxBirthCity() {
-        /*try {
-            List<Object> obj = loadTable.fillComboBoxBirthCity();
-            jcbBirthPlace.addItem("");
-            for (Object o : obj) {
-                jcbBirthPlace.addItem(((City) o).getCityName());
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
-
-        }*/
-    }
-
-    public void fillComboBoxCity(String country) {
-        /*try {
-            List<Object> obj = loadTable.fillComboBoxBirthCity();
-            jcbCity.removeAllItems();
-            jcbCity.addItem("");
-            for (Object o : obj) {
-                if (((City) o).getCountryId().getCountryName().equals(country)) {
-                    jcbCity.addItem(((City) o).getCityName());
+    public void viewReports() {
+        List<Map<String, Object>> dataSource = new ArrayList<Map<String, Object>>();
+        if (scheduleList == null || scheduleList.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Query the data before generating reports");
+        } else {
+            try {
+                for (Schedule schedule : scheduleList) {
+                    Map<String, Object> row = new HashMap<>();
+                    row.put("FirstName", schedule.getDoctorId().getPersonId().getFirstName());
+                    row.put("LastName", schedule.getDoctorId().getPersonId().getLastName());
+                    row.put("Date", schedule.getDateStart().toString());
+                    row.put("Time", schedule.getTimeStart().toString());
+                    row.put("Status", schedule.getStatus().getStatusName());
+                    dataSource.add(row);
                 }
+                JRDataSource jRDataSource = new JRBeanCollectionDataSource(dataSource);
+                JasperReport jasperReport = JasperCompileManager.compileReport("src\\reports\\DoctorReport.jrxml");
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+                jasperViewer.setVisible(true);
+
+            } catch (JRException ex) {
+                //Logger.getLogger(FW.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void fillComboBoxScheduleStatusSearch() {
+        try {
+            List<Object> obj = loadTable.fillComboBoxScheduleStatus();
+            jcbStatusSearch.addItem("");
+            for (Object o : obj) {
+                jcbStatusSearch.addItem(((ScheduleStatus) o).getStatusName());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
 
-        }*/
-    }
-
-    public int getSelectedCityIndex(String city) {
-        /*for (int index = 0; index < jcbCity.getItemCount(); index++) {
-            if (jcbCity.getItemAt(index).equals(city)) {
-                return index;
-            }
-        }*/
-        return -1;
+        }
     }
 
     public int getSelectedBirthCityIndex(String city) {
@@ -483,8 +386,6 @@ public class JIFReports extends javax.swing.JInternalFrame {
                 int selectedRow = selectedModel.getAnchorSelectionIndex();
                 if (selectedRow > -1) {
                     Person pe = scheduleTableModelViewNurse.getSchedule(selectedRow).getDoctorId().getPersonId();
-                    updatePersonFields(pe);
-
                 }
             }
         });
@@ -498,271 +399,10 @@ public class JIFReports extends javax.swing.JInternalFrame {
         shiftTableRowSelectionListener();
     }
 
-    private void updatePersonFields(Person person) {
-        /*jtfPersonalId.setText(String.valueOf(person.getPersonId()));
-        jtfFirstName.setText(person.getFirstName());
-        jtfMiddleName.setText(person.getMiddleName());
-        jtfLastName.setText(person.getLastName());
-        jcbGender.setSelectedIndex(getSelectedGenderIndex(person.getGenderId().getGenderName()));
-        jcbMartialStatus.setSelectedIndex(getSelectedMartialStatusIndex(person.getMartialStatusId().getMartialStatusName()));
-        jcbBirthPlace.setSelectedIndex(getSelectedBirthCityIndex(person.getBirthCityId().getCityName()));
-        jcbReligion.setSelectedIndex(getSelectedReligionIndex(person.getReigionId().getName()));
-        jdcDateOfBirth.setDate(person.getDateOfBirth());
-        jtfPassword.setText("");
-        jtfAddress.setText(person.getAddressId().getStreetName());
-        jcbCountry.setSelectedIndex(getSelectedCountryIndex(person.getAddressId().getCityId().getCountryId().getCountryName()));
-        jcbCity.setSelectedIndex(getSelectedCityIndex(person.getAddressId().getCityId().getCityName()));
-        jtfBulidingNumber.setText(String.valueOf(person.getAddressId().getBuildingNumber()));*/
-        Collection<Contact> contactCollection = person.getContactCollection();
-        if (contactCollection != null && contactCollection.size() > 0) {
-            /* jtfHomePhone.setText("");
-            jtfWorkPhone.setText("");
-            jtfMobilePhone.setText("");
-            jtfEmail.setText("");
-            for (Contact contact : contactCollection) {
-                switch (contact.getType().trim()) {
-                    case "HOME":
-                        jtfHomePhone.setText(contact.getValue());
-                        break;
-                    case "WORK":
-                        jtfWorkPhone.setText(contact.getValue());
-                        break;
-                    case "MOB":
-                        jtfMobilePhone.setText(contact.getValue());
-                        break;
-                    case "EMAIL":
-                        jtfEmail.setText(contact.getValue());
-                        break;
-                    default:
-                        break;
-                }
-
-            }*/
-        } else {
-            /*jtfHomePhone.setText("");
-            jtfWorkPhone.setText("");
-            jtfMobilePhone.setText("");
-            jtfEmail.setText("");*/
-
-        }
-    }
-
-    public void saveShiftInternalFrame() {
-
-        int row = jtDoctorListTable.getSelectedRow();
-
-        String personId = jtfFirstName.getText();
-        String firstName = jtfFirstName.getText();
-        String middleName = jtfFirstName.getText();
-        String lastName = jtfLastName.getText();
-        String sex = jtfFirstName.getText();
-        String martialStatus = jtfFirstName.getText();
-        String password = jtfFirstName.getText();
-        Date dateOfBirth = new Date();
-        String birthPlace = jtfFirstName.getText();
-        String address = jtfFirstName.getText();
-        String city = jtfFirstName.getText();;
-        String country = jtfFirstName.getText();
-        String buildingNumber = jtfFirstName.getText();
-        String mobilePhone = jtfFirstName.getText();
-        String workPhone = jtfFirstName.getText();
-        String homePhone = jtfFirstName.getText();
-        String email = jtfFirstName.getText();
-        String religion = jtfFirstName.getText();
-
-        if (!("Valid".equals(inputValidation.validatePersonID(personId)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonID(personId));
-        } else if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName));
-        } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName));
-        } else if (!("Valid".equals(inputValidation.validatePersonDateOfBirth(dateOfBirth)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonDateOfBirth(dateOfBirth));
-        } else if (!("Valid".equals(inputValidation.validateAddress(address)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateAddress(address));
-        } else if (!("Valid".equals(inputValidation.validateBuildingNumber(buildingNumber)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateBuildingNumber(buildingNumber));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(mobilePhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(mobilePhone));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(workPhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(workPhone));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(homePhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(homePhone));
-        } else if (!("Valid".equals(inputValidation.validateEmail(email)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateEmail(email));
-        } else {
-
-            if (row == -1) {
-
-                if (!("Valid".equals(inputValidation.validatePassword(password)))) {
-                    JOptionPane.showMessageDialog(rootPane, inputValidation.validatePassword(password));
-                } else {
-                    try {
-                        receptionist = new Receptionist();
-                        Person person = new Person();
-
-                        receptionist.setPersonId(person);
-                        person.setReceptionist(receptionist);
-
-                        receptionist.getPersonId().setPersonId(Integer.parseInt(personId));
-                        receptionist.getPersonId().setFirstName(firstName);
-                        receptionist.getPersonId().setMiddleName(middleName);
-                        receptionist.getPersonId().setLastName(lastName);
-                        receptionist.setPassCode(passwordHashing.encodehashPassword(password));
-                        receptionist.getPersonId().setDateOfBirth(dateOfBirth);
-
-                        Gender findTheGender = genderService.findTheGender(sex);
-                        MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
-                        City birthPlaceObject = cityService.findTheCity(birthPlace);
-                        Country findTheCountry = countryService.findTheCountry(country);
-                        Religion findTheReligion = religionService.findTheReligion(religion);
-                        City findTheCity = cityService.findTheCity(city);
-
-                        findTheCity.setCountryId(findTheCountry);
-
-                        Address theAddress = new Address();
-
-                        theAddress.setStreetName(address);
-                        theAddress.setCityId(findTheCity);
-                        theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
-
-                        theAddress = addressService.findTheAddress(theAddress);
-
-                        receptionist.getPersonId().setGenderId(findTheGender);
-                        receptionist.getPersonId().setMartialStatusId(findTheMartialStatus);
-                        receptionist.getPersonId().setAddressId(theAddress);
-                        receptionist.getPersonId().setBirthCityId(birthPlaceObject);
-                        receptionist.getPersonId().setReigionId(findTheReligion);
-
-                        String personMsg = personService.checkIfUserExists(receptionist.getPersonId());
-
-                        if ("Save".equals(personMsg)) {
-
-                            String addressMsg = addressService.checkIfAddressExists(theAddress);
-                            if ("Save".equals(addressMsg)) {
-                                addressService.persistAddress(theAddress);
-                            }
-
-                            if ("Save".equals(personMsg)) {
-                                //String nurseSavedMsg = doctorService.persistDoctor(receptionist);
-                                //JOptionPane.showMessageDialog(null, nurseSavedMsg);
-
-                                String userGroupMsg = userGroupService.checkIfUserGroupExists(receptionist);
-                                if ("Save".equals(userGroupMsg)) {
-                                    UserGroup userGroup = new UserGroup();
-                                    userGroup.setUserId(receptionist.getReceptionistId());
-                                    userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
-                                    userGroupService.persistUserInUserGroup(userGroup);
-                                }
-                                contactService.persistContact(person, "EMAIL", email);
-                                contactService.persistContact(person, "HOME", homePhone);
-                                contactService.persistContact(person, "WORK", workPhone);
-                                contactService.persistContact(person, "MOB", mobilePhone);
-
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "User exists");
-                        }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
-
-                    }
-                }
-            } else {
-                try {
-                    //receptionist = scheduleTableModelViewNurse.getReceptionist(row);
-
-                    receptionist.getPersonId().setPersonId(Integer.parseInt(personId));
-                    receptionist.getPersonId().setFirstName(firstName);
-                    receptionist.getPersonId().setMiddleName(middleName);
-                    receptionist.getPersonId().setLastName(lastName);
-                    receptionist.getPersonId().setDateOfBirth(dateOfBirth);
-                    if (!(password == null || password.isEmpty())) {
-                        receptionist.setPassCode(passwordHashing.encodehashPassword(password));
-                    }
-
-                    Gender findTheGender = genderService.findTheGender(sex);
-                    MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
-                    City birthPlaceObject = cityService.findTheCity(birthPlace);
-                    Country findTheCountry = countryService.findTheCountry(country);
-                    Religion findTheReligion = religionService.findTheReligion(religion);
-                    City findTheCity = cityService.findTheCity(city);
-
-                    findTheCity.setCountryId(findTheCountry);
-
-                    Address theAddress = new Address();
-
-                    theAddress.setStreetName(address);
-                    theAddress.setCityId(findTheCity);
-                    theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
-
-                    theAddress = addressService.findTheAddress(theAddress);
-
-                    receptionist.getPersonId().setGenderId(findTheGender);
-                    receptionist.getPersonId().setMartialStatusId(findTheMartialStatus);
-                    receptionist.getPersonId().setAddressId(theAddress);
-                    receptionist.getPersonId().setBirthCityId(birthPlaceObject);
-                    receptionist.getPersonId().setReigionId(findTheReligion);
-
-                    String personMsg = personService.checkIfUserExists(receptionist.getPersonId());
-                    if ("Exist".equals(personMsg)) {
-
-                        String addressMsg = addressService.checkIfAddressExists(theAddress);
-                        if ("Save".equals(addressMsg)) {
-                            addressService.persistAddress(theAddress);
-                        }
-
-                        if ("Exist".equals(personMsg)) {
-                            //doctorService.editReceptionist(receptionist);
-
-                            Collection<Contact> contactCollection = receptionist.getPersonId().getContactCollection();
-                            if (contactCollection != null && contactCollection.size() > 0) {
-                                for (Contact contact : contactCollection) {
-                                    switch (contact.getType().trim()) {
-                                        case "HOME":
-                                            contactService.editContact(homePhone, contact.getValue());
-                                            break;
-                                        case "WORK":
-                                            contactService.editContact(workPhone, contact.getValue());
-                                            break;
-                                        case "MOB":
-                                            contactService.editContact(mobilePhone, contact.getValue());
-                                            break;
-                                        case "EMAIL":
-                                            contactService.editContact(email, contact.getValue());
-                                            break;
-                                        default:
-                                            break;
-                                    }
-
-                                }
-                                JOptionPane.showMessageDialog(null, "Nurse Edited");
-                                bindTheShiftSearchTableModel();
-                                clearTheFields();
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "User exists");
-                        }
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
-
-                }
-            }
-
-        }
-
-    }
-
     private void clearTheFields() {
-        jtfFirstName.setText("");
-        jtfLastName.setText("");
-        jcbStatus.setSelectedIndex(0);
-        jdcDateStart.setDate(null);
-        jdcDateEnd.setDate(null);
-        jtfTimeStart.setText("");
-        jtfTimeEnd.setText("");
+        jtfFirstNameSearch.setText("");
+        jtfLastNameSearch.setText("");
+        jcbStatusSearch.setSelectedIndex(0);
+        jdcDateOfShiftSearch.setDate(null);
     }
 }
