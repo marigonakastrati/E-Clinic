@@ -153,6 +153,14 @@
             </resource>
             <resource>
                 <filtering>false</filtering><!-- if it is neccessary -->
+                <directory>${project.basedir}\src\main\java\com\ubt\healthcare\ui\hrManager\report\</directory><!-- from -->
+                <targetPath>${project.build.directory}\classes\com\ubt\healthcare\ui\hrManager\report\</targetPath><!-- to -->
+                <includes><!-- what, you can specify the type of the file (using regex) or the file itself -->
+                    <include>*</include>
+                </includes>
+            </resource>
+            <resource>
+                <filtering>false</filtering><!-- if it is neccessary -->
                 <directory>${project.basedir}\src\main\resources\</directory><!-- from -->
                 <targetPath>${project.build.directory}\classes\</targetPath><!-- to -->
                 <includes><!-- what, you can specify the type of the file (using regex) or the file itself -->

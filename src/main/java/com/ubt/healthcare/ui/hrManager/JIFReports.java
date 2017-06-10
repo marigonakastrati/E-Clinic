@@ -326,15 +326,16 @@ public class JIFReports extends javax.swing.JInternalFrame {
             try {
                 for (Schedule schedule : scheduleList) {
                     Map<String, Object> row = new HashMap<>();
-                    row.put("FirstName", schedule.getDoctorId().getPersonId().getFirstName());
-                    row.put("LastName", schedule.getDoctorId().getPersonId().getLastName());
+                    row.put("First Name", schedule.getDoctorId().getPersonId().getFirstName());
+                    row.put("Last Name", schedule.getDoctorId().getPersonId().getLastName());
                     row.put("Date", schedule.getDateStart().toString());
                     row.put("Time", schedule.getTimeStart().toString());
                     row.put("Status", schedule.getStatus().getStatusName());
                     dataSource.add(row);
                 }
                 JRDataSource jRDataSource = new JRBeanCollectionDataSource(dataSource);
-                JasperReport jasperReport = JasperCompileManager.compileReport("src\\reports\\DoctorReport.jrxml");
+                JasperReport jasperReport = JasperCompileManager.compileReport(this.getClass().getResourceAsStream("/com/ubt/healthcare/ui/hrManager/report/ReportShift.jrxml"));
+                this.getClass().getResourceAsStream(title);
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
                 JasperViewer jasperViewer = new JasperViewer(jasperPrint);
                 jasperViewer.setVisible(true);
