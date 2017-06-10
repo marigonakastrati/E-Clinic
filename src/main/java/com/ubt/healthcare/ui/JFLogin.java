@@ -17,16 +17,21 @@ import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
 import com.ubt.healthcare.ui.admin.JIFDoctorF;
 import com.ubt.healthcare.ui.admin.JIFNurse;
+import com.ubt.healthcare.ui.admin.JIFPharmacist;
+import com.ubt.healthcare.ui.admin.JIFPharmacyManager;
 import com.ubt.healthcare.ui.admin.JIFReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterNurseScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPharmacistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewNurse;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
 import com.ubt.healthcare.ui.hrManager.JFHRManager;
 import com.ubt.healthcare.ui.hrManager.JIFAddShift;
@@ -351,11 +356,14 @@ public class JFLogin extends JFrame {
         JIFDoctorF jifDoctorF = new JIFDoctorF();
         JIFNurse jifNurse = new JIFNurse();
         JIFReceptionist jifReceptionist = new JIFReceptionist();
-        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse, jifReceptionist);
+        JIFPharmacist jifPharmacist = new JIFPharmacist();
+        JIFPharmacyManager jifPharmacyManager = new JIFPharmacyManager();
+        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse, jifReceptionist,jifPharmacist, jifPharmacyManager);
 
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
         jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
         jfAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterReceptionistScreen(jfAdminScreen));
+        jfAdminScreen.addPharmacistScreenMouseAdapter(new MouseAdapterPharmacistScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
 
         jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
@@ -366,6 +374,10 @@ public class JFLogin extends JFrame {
 
         jifReceptionist.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewReceptionist(jifReceptionist));
         jifReceptionist.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchReceptionist(jifReceptionist));
+        
+        
+        jifPharmacist.addSavePharmacistInternalFrameMouseAdapter(new MouseAdapterSaveNewPharmacist(jifPharmacist));
+        jifPharmacist.addSearchPharmacistPanelMouseAdapter(new MouseAdapterSearchPharmacist(jifPharmacist));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

@@ -609,10 +609,6 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
                                     userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
                                     userGroupService.persistUserInUserGroup(userGroup);
                                 }
-                                contactService.persistContact(person, "EMAIL", email);
-                                contactService.persistContact(person, "HOME", homePhone);
-                                contactService.persistContact(person, "WORK", workPhone);
-                                contactService.persistContact(person, "MOB", mobilePhone);
 
                             }
 

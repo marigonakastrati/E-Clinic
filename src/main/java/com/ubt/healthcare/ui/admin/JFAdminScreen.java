@@ -19,6 +19,8 @@ public class JFAdminScreen extends javax.swing.JFrame {
     private JIFDoctorF jifDoctorF;
     private JIFNurse jifNurse;
     private JIFReceptionist jifReceptionist;
+    private JIFPharmacist jifPharmacist;
+    private JIFPharmacyManager jifPharmacyManager;
 
     /**
      * Creates new form JFAdminScreen
@@ -27,10 +29,12 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse, JIFReceptionist jifReceptionist) {
+    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse, JIFReceptionist jifReceptionist, JIFPharmacist jifPharmacist, JIFPharmacyManager jifPharmacyManager) {
         this.jifDoctorF = jifDoctorF;
         this.jifNurse = jifNurse;
         this.jifReceptionist = jifReceptionist;
+        this.jifPharmacist = jifPharmacist;
+        this.jifPharmacyManager = jifPharmacyManager;
 
         //frameStlye();
         initComponents();
@@ -211,6 +215,20 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
     }
 
+    public void showPharmacistScreen() {
+        jdpPaneHandler.remove(jifPharmacist);
+        jdpPaneHandler.add(jifPharmacist);
+        jifPharmacist.show();
+        /*jspPane.setViewportView(jpAddDoctor);
+        jspPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);*/
+
+    }
+
+    public void showPharmacyManagerScreen(){
+        jdpPaneHandler.remove(jifPharmacyManager);
+        jdpPaneHandler.add(jifPharmacyManager);
+        jifPharmacyManager.show();
+    }  
     public void showReceptionistScreen() {
 
         jdpPaneHandler.remove(jifReceptionist);

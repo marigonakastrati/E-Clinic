@@ -8,6 +8,8 @@ package com.ubt.healthcare.business;
 import com.ubt.healthcare.dao.SQLRepository;
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Nurse;
+import com.ubt.healthcare.dto.Pharmacist;
+import com.ubt.healthcare.dto.PharmacyManager;
 import com.ubt.healthcare.dto.Receptionist;
 import com.ubt.healthcare.dto.UserGroup;
 import java.util.List;
@@ -74,6 +76,30 @@ public class UserGroupService {
         for (Object o : docs) {
             if (((UserGroup) o).getUserId() == Integer.parseInt(user)) {
                 return "Valid";
+            }
+        }
+
+        return msg;
+    }
+
+    public String checkIfUserGroupExists(Pharmacist p) throws Exception {
+        String msg = "Save";
+        List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
+        for (Object o : docs) {
+            if (((UserGroup) o).getUserId() == p.getPharmacistId()) {
+                return "Exist";
+            }
+        }
+
+        return msg;
+    }
+
+    public String checkIfUserGroupExists(PharmacyManager p) throws Exception {
+        String msg = "Save";
+        List<Object> docs = (List<Object>) sqlRepository.findAll("UserGroup.findAll");
+        for (Object o : docs) {
+            if (((UserGroup) o).getUserId() == p.getPharmacyManagerId()) {
+                return "Exist";
             }
         }
 

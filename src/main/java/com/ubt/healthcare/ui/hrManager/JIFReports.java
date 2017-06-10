@@ -337,7 +337,7 @@ public class JIFReports extends javax.swing.JInternalFrame {
                 JasperReport jasperReport = JasperCompileManager.compileReport(this.getClass().getResourceAsStream("/com/ubt/healthcare/ui/hrManager/report/ReportShift.jrxml"));
                 this.getClass().getResourceAsStream(title);
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
-                JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
                 jasperViewer.setVisible(true);
 
             } catch (JRException ex) {
@@ -405,5 +405,6 @@ public class JIFReports extends javax.swing.JInternalFrame {
         jtfLastNameSearch.setText("");
         jcbStatusSearch.setSelectedIndex(0);
         jdcDateOfShiftSearch.setDate(null);
+        scheduleList.clear();
     }
 }
