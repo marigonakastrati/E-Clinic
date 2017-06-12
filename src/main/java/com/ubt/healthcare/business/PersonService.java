@@ -35,4 +35,18 @@ public class PersonService {
 
         return msg;
     }
+    
+    
+    public Person checkIfPersonExists(String firstName, String lastName) throws Exception{
+        List<Object> docs = (List<Object>) sqlRepository.findAll("Person.findAll");
+        for (Object o : docs) {
+            if (((Person) o).getFirstName().equals(firstName) && ((Person) o).getLastName().equals(lastName)) {
+               return (Person)o;
+            }
+        }
+
+       return null;
+    }
+    
+    
 }

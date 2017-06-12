@@ -57,4 +57,9 @@ public class ScheduleService {
         });
         return result;
     }
+
+    public void persistSchedule(Schedule schedule) throws Exception {
+
+        sqlRepository.add(schedule);
+    }
 }

@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.admin.model;
+package com.ubt.healthcare.ui.clinicManager.model;
 
-import com.ubt.healthcare.dto.Contact;
 import com.ubt.healthcare.dto.Doctor;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -14,17 +13,17 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author F
  */
-public class DoctorTableModelViewDoctor extends AbstractTableModel {
+public class DoctorTableModelSelectDoctor extends AbstractTableModel {
 
-    private final String[] columnNames = {"First Name", "Last Name", "City", "Phone Number"};
+    private final String[] columnNames = {"First Name", "Last Name", "City"};
 
     private List<Doctor> data;
 
-    public DoctorTableModelViewDoctor(List<Doctor> data) {
+    public DoctorTableModelSelectDoctor(List<Doctor> data) {
         this.data = data;
     }
 
-    public DoctorTableModelViewDoctor() {
+    public DoctorTableModelSelectDoctor() {
     }
 
     public void add(List<Doctor> data) {
@@ -69,17 +68,6 @@ public class DoctorTableModelViewDoctor extends AbstractTableModel {
                 return s.getPersonId().getLastName();
             case 2:
                 return s.getPersonId().getAddressId().getCityId().getCityName(); 
-            case 3: 
-             {
-                 for(Contact c : s.getPersonId().getContactCollection())
-                 {
-                    if(c.getType().trim().equals("MOB"))
-                    {
-                        return c.getValue();
-                    }
-                 }
-                  return "";
-             }
             default:
                 return null;
         }

@@ -5,6 +5,8 @@
  */
 package com.ubt.healthcare.ui.util;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ public class InputValidation {
 
     private static final String TYPE_YOUR_ID = "Type your Personal ID";
     private static final String TYPE_YOUR_ADDRESS = "Type your Address";
+    private static final String TYPE_YOUR_SCHEDULE_STATUS = "Type your schedule status";
     private static final String TYPE_YOUR_BUILDING_NUMBER = "Type your Building Number";
     private static final String TYPE_YOUR_PHONE_NUMBER = "Type your Phone Number";
     private static final String TYPE_YOUR_BIRTH_DAY = "Type your BirthDay";
@@ -33,8 +36,12 @@ public class InputValidation {
     private static final String TYPE_ONLY_NUMBERS_CHARACTERS = "You shoud type only characters or numbers";
     private static final String TYPE_ONLY_CHARACTERS = "You shoud type only characters";
     private static final String END_DATE_BEFORE_START_DATE = "End date must not be before the start date";
+    private static final String START_DATE_OLDER_THAN_TODAY = "Start date must not be older than today";
+    private static final String END_TIME_BEFORE_START_TIME = "End time must not be before the start time";
     private static final String END_DATE_SAME_WITH_START_DATE = "End date must not be same with the start date";
     private static final String BIRTH_DATE_NEWER_THEN_TODAY = "Birth date must be older than today";
+    private static final String TYPE_SCHEDULE_DATE = "You should type the schedule date";
+    private static final String TYPE_SCHEDULE_TIME = "You should type the schedule time";
     private static final String VALID = "Valid";
     private static final Pattern NOT_NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final Pattern NOT_CHARACTER_PATTERN = Pattern.compile("[A-Za-z\\s]+");
@@ -194,6 +201,39 @@ public class InputValidation {
             return TYPE_PASSWORD;
         }
 
+        return VALID;
+    }
+
+    public String validateScheduleDate(Date dateStart, Date dateEnd) {
+
+        if (dateStart == null || dateEnd == null) {
+            return TYPE_SCHEDULE_DATE;
+        }
+        if (dateStart.compareTo(dateEnd) == 1) {
+            return END_DATE_BEFORE_START_DATE;
+        }
+        if(dateStart.compareTo(new Date())==-1)
+        {
+            return START_DATE_OLDER_THAN_TODAY;
+        }
+        return VALID;
+    }
+
+    public String validateScheduleTime(LocalTime timeStart, LocalTime timeEnd) {
+
+        if (timeStart == null || timeEnd == null) {
+            return TYPE_SCHEDULE_TIME;
+        }
+        if (timeStart.isAfter(timeEnd) || timeStart.until(timeEnd, ChronoUnit.MINUTES) < 15) {
+            return END_TIME_BEFORE_START_TIME;
+        }
+        return VALID;
+    }
+
+    public String validateScheduleStatus(String scheduleStatus) {
+        if (scheduleStatus == null || scheduleStatus.trim().isEmpty()) {
+            return TYPE_YOUR_SCHEDULE_STATUS;
+        }
         return VALID;
     }
 }

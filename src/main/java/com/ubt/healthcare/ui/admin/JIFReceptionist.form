@@ -233,11 +233,9 @@
                                           <Component id="jtfEmail" min="-2" pref="120" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jbAddCity" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="124" max="32767" attributes="0"/>
+                          <EmptySpace pref="221" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -275,7 +273,6 @@
                                   <Component id="jlMiddleName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jtfMiddleName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jcbCity" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbAddCity" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jlCity" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -511,11 +508,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEmail">
-                </Component>
-                <Component class="javax.swing.JButton" name="jbAddCity">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Add City"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

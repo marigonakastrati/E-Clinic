@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class NurseTableModelViewNurses extends AbstractTableModel {
 
-    private final String[] columnNames = {"FirstName", "LastName", "City", "Phone Number"};
+    private final String[] columnNames = {"First Name", "Last Name", "City", "Phone Number"};
 
     private List<Nurse> data;
 

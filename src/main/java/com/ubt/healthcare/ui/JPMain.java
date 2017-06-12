@@ -17,11 +17,7 @@ public class JPMain extends JPanel{
 
     private JLabel jlBackground = new JLabel("");// Enter your pass code
     public JPMain() {
-        this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        
-        /*jlBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/ubt/kiosk/view/images/backgroundubt.jpg")));
-        jlBackground.setBounds(78, 133, 145, 30);*/
-        
+        this.setBorder(new EmptyBorder(5, 5, 5, 5)); 
         this.add(jlBackground);
     }
     

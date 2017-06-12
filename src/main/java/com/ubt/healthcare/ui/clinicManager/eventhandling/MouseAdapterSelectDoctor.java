@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.admin.eventhandling;
+package com.ubt.healthcare.ui.clinicManager.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JIFDoctor;
+import com.ubt.healthcare.ui.clinicManager.JIFAddShift;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterSaveNewDoctorF extends MouseAdapter{
-    private JIFDoctor jifDoctor;
+public class MouseAdapterSelectDoctor extends MouseAdapter{
+    private JIFAddShift jifAddShift;
 
-    public MouseAdapterSaveNewDoctorF(JIFDoctor jifDoctor) {
-        this.jifDoctor = jifDoctor;
+    public MouseAdapterSelectDoctor(JIFAddShift jifAddShift) {
+        this.jifAddShift = jifAddShift;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jifDoctor.saveDoctorInternalFrameAddDoctor();
+        jifAddShift.updateDoctorFields();
     }
     
     

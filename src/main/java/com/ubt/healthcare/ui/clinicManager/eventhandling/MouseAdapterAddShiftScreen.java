@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager.eventhandling;
+package com.ubt.healthcare.ui.clinicManager.eventhandling;
 
-import com.ubt.healthcare.ui.hrManager.JFHRManager;
+import com.ubt.healthcare.ui.clinicManager.JFClinicManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
  * @author F
  */
 public class MouseAdapterAddShiftScreen extends MouseAdapter{
-    private JFHRManager jfHRManager;
+    private JFClinicManager jfHRManager;
 
-    public MouseAdapterAddShiftScreen(JFHRManager jfHRManager) {
+    public MouseAdapterAddShiftScreen(JFClinicManager jfHRManager) {
         this.jfHRManager = jfHRManager;
     }
 

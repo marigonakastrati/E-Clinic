@@ -94,12 +94,12 @@ public class SQLRepository implements PersistenceInterface {
     public Object findById(int id, String entity, String attribute) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
-        List<Object> student = null;
+        List<Object> object = null;
         try {
             tx = session.beginTransaction();
             Query query = session.getNamedQuery(entity);
             query.setParameter(attribute, id);
-            student = query.list();
+            object = query.list();
             tx.commit();
         } catch (Exception ex) {
             throw ex;
@@ -107,7 +107,7 @@ public class SQLRepository implements PersistenceInterface {
             session.close();
         }
 
-        return student != null ? student.get(0) : null;
+        return object != null ? object.get(0) : null;
     }
 
 }

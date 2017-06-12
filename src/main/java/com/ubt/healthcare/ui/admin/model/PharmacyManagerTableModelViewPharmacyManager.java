@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PharmacyManagerTableModelViewPharmacyManager extends AbstractTableModel {
 
-    private final String[] columnNames = {"FirstName", "LastName", "City", "Phone Number"};
+    private final String[] columnNames = {"Firs tName", "Last Name", "City", "Phone Number"};
 
     private List<PharmacyManager> data;
 

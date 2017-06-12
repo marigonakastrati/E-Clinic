@@ -162,7 +162,6 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
         jtfHomePhone = new javax.swing.JTextField();
         jlEmail = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
-        jbAddCity = new javax.swing.JButton();
         jspPharmacistTable = new javax.swing.JScrollPane();
         jtPharmacistListTable = new javax.swing.JTable();
         jtfFirstNameSearch = new javax.swing.JTextField();
@@ -243,8 +242,6 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
 
         jlEmail.setText("Email");
 
-        jbAddCity.setText("Add City");
-
         javax.swing.GroupLayout jpPersonalInformationLayout = new javax.swing.GroupLayout(jpPersonalInformation);
         jpPersonalInformation.setLayout(jpPersonalInformationLayout);
         jpPersonalInformationLayout.setHorizontalGroup(
@@ -316,10 +313,8 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
                             .addGroup(jpPersonalInformationLayout.createSequentialGroup()
                                 .addComponent(jlEmail)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jbAddCity)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                                .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jpPersonalInformationLayout.setVerticalGroup(
             jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,8 +342,7 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
                     .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlMiddleName)
                         .addComponent(jtfMiddleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcbCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbAddCity))
+                        .addComponent(jcbCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jlCity))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -389,7 +383,7 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
                 .addGroup(jpPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlPassword)
                     .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jspPersonalInformation.setViewportView(jpPersonalInformation);
@@ -497,8 +491,6 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        getAccessibleContext().setAccessibleName("Pharmacist Screen");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -529,7 +521,6 @@ public class JIFPharmacist extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JButton jbAddCity;
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbSavePharmacist;
     private javax.swing.JButton jbSearchPharmacist;

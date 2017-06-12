@@ -28,51 +28,60 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlFirstNameSearch" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfFirstNameSearch" min="-2" pref="121" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlLastNameSearch" min="-2" pref="69" max="-2" attributes="0"/>
-                  <Component id="jtfLastNameSearch" min="-2" pref="121" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jspDoctorTable" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jlStatusSearch" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlFirstNameSearch" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfFirstNameSearch" min="-2" pref="121" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlLastNameSearch" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="jtfLastNameSearch" min="-2" pref="121" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jcbStatusSearch" min="-2" pref="128" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                      <Component id="jbViewReports" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jlDateSearch" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
+                      <Component id="jlStatusSearch" pref="120" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jdcDateOfShiftSearch" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                      <Component id="jbSearchShift" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jcbStatusSearch" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jbCancel" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-              <Component id="jbViewReports" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="391" max="-2" attributes="0"/>
-              <Component id="jbCancel" pref="110" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jspDoctorTable" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jlDateSearch" pref="33" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jbSearchShift" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jdcDateOfShiftSearch" min="-2" pref="137" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,6 +94,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbViewReports" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbSearchShift" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -95,17 +105,12 @@
                   </Group>
                   <Component id="jlDateSearch" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jbSearchShift" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfFirstNameSearch" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfLastNameSearch" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcbStatusSearch" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="jtfFirstNameSearch" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfLastNameSearch" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbStatusSearch" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jdcDateOfShiftSearch" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>

@@ -5,7 +5,7 @@
  */
 package com.ubt.healthcare.ui.admin.eventhandling;
 
-import com.ubt.healthcare.ui.admin.JIFDoctorF;
+import com.ubt.healthcare.ui.admin.JIFDoctor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +14,9 @@ import java.awt.event.MouseEvent;
  * @author F
  */
 public class MouseAdapterSearchDoctorF extends MouseAdapter{
-    private JIFDoctorF jifDoctor;
+    private JIFDoctor jifDoctor;
 
-    public MouseAdapterSearchDoctorF(JIFDoctorF jifDoctor) {
+    public MouseAdapterSearchDoctorF(JIFDoctor jifDoctor) {
         this.jifDoctor = jifDoctor;
     }
 

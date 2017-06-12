@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager;
+package com.ubt.healthcare.ui.clinicManager;
 
-import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -14,26 +13,29 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author F
  */
-public class JFHRManager extends javax.swing.JFrame {
+public class JFClinicManager extends javax.swing.JFrame {
 
     private JIFAddShift jifAddShift;
     private JIFReports jifReports;
+    private JIFSearchDoctor jifSearchDoctor;
 
     /**
      * Creates new form JFHRManager
      *
      * @param jifAddShift
      * @param jifReports
+     * @param jifSearchDoctor
      */
-    public JFHRManager(JIFAddShift jifAddShift, JIFReports jifReports) {
+    public JFClinicManager(JIFAddShift jifAddShift, JIFReports jifReports,JIFSearchDoctor jifSearchDoctor) {
         this.jifAddShift = jifAddShift;
         this.jifReports = jifReports;
+        this.jifSearchDoctor = jifSearchDoctor;
 
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    public JFHRManager() {
+    public JFClinicManager() {
     }
 
     /**
@@ -52,7 +54,7 @@ public class JFHRManager extends javax.swing.JFrame {
         jlReports = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("HR Manager");
+        setTitle("Clinic Manager");
 
         javax.swing.GroupLayout jdpPaneHandlerLayout = new javax.swing.GroupLayout(jdpPaneHandler);
         jdpPaneHandler.setLayout(jdpPaneHandlerLayout);
@@ -141,6 +143,13 @@ public class JFHRManager extends javax.swing.JFrame {
         jifReports.show();
     }
 
+    
+    public void showSearchDoctorScreen() {
+
+        jdpPaneHandler.remove(jifSearchDoctor);
+        jdpPaneHandler.add(jifSearchDoctor);
+        jifSearchDoctor.show();
+    }
     static {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

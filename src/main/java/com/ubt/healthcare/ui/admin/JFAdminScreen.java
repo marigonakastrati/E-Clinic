@@ -16,7 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class JFAdminScreen extends javax.swing.JFrame {
 
-    private JIFDoctorF jifDoctorF;
+    private JIFDoctor jifDoctorF;
     private JIFNurse jifNurse;
     private JIFReceptionist jifReceptionist;
     private JIFPharmacist jifPharmacist;
@@ -29,7 +29,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JFAdminScreen(JIFDoctorF jifDoctorF, JIFNurse jifNurse, JIFReceptionist jifReceptionist, JIFPharmacist jifPharmacist, JIFPharmacyManager jifPharmacyManager) {
+    public JFAdminScreen(JIFDoctor jifDoctorF, JIFNurse jifNurse, JIFReceptionist jifReceptionist, JIFPharmacist jifPharmacist, JIFPharmacyManager jifPharmacyManager) {
         this.jifDoctorF = jifDoctorF;
         this.jifNurse = jifNurse;
         this.jifReceptionist = jifReceptionist;
@@ -58,6 +58,9 @@ public class JFAdminScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jdpPaneHandler = new javax.swing.JDesktopPane();
         jlProfile = new javax.swing.JLabel();
         jlDoctor = new javax.swing.JLabel();
@@ -67,9 +70,19 @@ public class JFAdminScreen extends javax.swing.JFrame {
         jlNurse = new javax.swing.JLabel();
         jlAdminClinic = new javax.swing.JLabel();
         jlLogout = new javax.swing.JLabel();
-        jlHRManager = new javax.swing.JLabel();
+        jlClinicManager = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,10 +113,24 @@ public class JFAdminScreen extends javax.swing.JFrame {
 
         jlLogout.setText("Log Out");
 
-        jlHRManager.setText("HRManager");
+        jlClinicManager.setText("Clinic Manager");
 
         jMenu2.setText("Location");
+
+        jMenuItem1.setText("Add City");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Add Country");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setText("Role");
+
+        jMenuItem3.setText("Add Role");
+        jMenu4.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -128,7 +155,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jlAdminClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jlHRManager, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlClinicManager, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jlLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -146,7 +173,7 @@ public class JFAdminScreen extends javax.swing.JFrame {
                     .addComponent(jlNurse)
                     .addComponent(jlAdminClinic)
                     .addComponent(jlLogout)
-                    .addComponent(jlHRManager))
+                    .addComponent(jlClinicManager))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jdpPaneHandler))
         );
@@ -159,12 +186,19 @@ public class JFAdminScreen extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpPaneHandler;
     private javax.swing.JLabel jlAdminClinic;
+    private javax.swing.JLabel jlClinicManager;
     private javax.swing.JLabel jlDoctor;
-    private javax.swing.JLabel jlHRManager;
     private javax.swing.JLabel jlLogout;
     private javax.swing.JLabel jlNurse;
     private javax.swing.JLabel jlPharmacist;

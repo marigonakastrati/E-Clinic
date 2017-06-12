@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager.model;
+package com.ubt.healthcare.ui.clinicManager.model;
 
 import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.Schedule;
@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ScheduleTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = {"FirstName", "LastName", "Date", "Time", "Status"};
+    private final String[] columnNames = {"First Name", "Last Name", "Date", "Time", "Status"};
 
     private List<Schedule> data;
 

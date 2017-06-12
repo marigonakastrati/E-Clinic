@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager;
+package com.ubt.healthcare.ui.clinicManager;
 
 import com.ubt.healthcare.business.AddressService;
 import com.ubt.healthcare.business.CityService;
 import com.ubt.healthcare.business.ContactService;
 import com.ubt.healthcare.business.CountryService;
-import com.ubt.healthcare.business.DoctorService;
 import com.ubt.healthcare.business.EducationProgramService;
 import com.ubt.healthcare.business.EducationService;
 import com.ubt.healthcare.business.EducationTypeService;
@@ -21,32 +20,32 @@ import com.ubt.healthcare.business.PersonEducationService;
 import com.ubt.healthcare.business.PersonService;
 import com.ubt.healthcare.business.ReligionService;
 import com.ubt.healthcare.business.ScheduleService;
+import com.ubt.healthcare.business.ScheduleStatusService;
 import com.ubt.healthcare.business.UserGroupService;
-import com.ubt.healthcare.dto.Address;
-import com.ubt.healthcare.dto.City;
-import com.ubt.healthcare.dto.Contact;
-import com.ubt.healthcare.dto.Country;
-import com.ubt.healthcare.dto.Gender;
-import com.ubt.healthcare.dto.MartialStatus;
+import com.ubt.healthcare.dto.Doctor;
+import com.ubt.healthcare.dto.HRManager;
 import com.ubt.healthcare.dto.Person;
 import com.ubt.healthcare.dto.Receptionist;
-import com.ubt.healthcare.dto.Religion;
 import com.ubt.healthcare.dto.Schedule;
 import com.ubt.healthcare.dto.ScheduleStatus;
-import com.ubt.healthcare.dto.UserGroup;
-import com.ubt.healthcare.ui.hrManager.model.ScheduleTableModel;
+import com.ubt.healthcare.ui.clinicManager.model.DoctorTableModelSelectDoctor;
+import com.ubt.healthcare.ui.clinicManager.model.ScheduleTableModel;
 import com.ubt.healthcare.ui.util.InputValidation;
 import com.ubt.healthcare.ui.util.LoadTables;
 import com.ubt.healthcare.ui.util.PasswordHashing;
 import java.awt.event.MouseAdapter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -76,13 +75,20 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private PersonArchiveService personArchiveService;
     private UserGroupService userGroupService;
     private LoginGroupService loginGroupService;
+    private HRManager hrManager;
+    private Schedule schedule;
+    private ScheduleStatusService scheduleStatusService;
+    private JIFSearchDoctor jifSearchDoctor;
 
     /**
      * Creates new form JIFHRManager
+     *
+     * @param jifSearchDoctor
      */
-    public JIFAddShift() {
+    public JIFAddShift(JIFSearchDoctor jifSearchDoctor) {
         initComponents();
         scheduleService = new ScheduleService();
+        scheduleStatusService = new ScheduleStatusService();
         loadTable = new LoadTables();
         passwordHashing = new PasswordHashing();
         inputValidation = new InputValidation();
@@ -101,6 +107,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         userGroupService = new UserGroupService();
         loginGroupService = new LoginGroupService();
         personArchiveService = new PersonArchiveService();
+        this.jifSearchDoctor = jifSearchDoctor;
         fillComboBoxScheduleStatusSearch();
         fillComboBoxScheduleStatus();
         bindTheShiftSearchTableModel();
@@ -142,6 +149,9 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         jdcDateEnd = new com.toedter.calendar.JDateChooser();
         jlStatus = new javax.swing.JLabel();
         jcbStatus = new javax.swing.JComboBox<>();
+        jbSelectDoctor = new javax.swing.JButton();
+        jlDoctorId = new javax.swing.JLabel();
+        jtfDoctorId = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -170,6 +180,11 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         });
 
         jbSearchShift.setText("Search");
+        jbSearchShift.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSearchShiftActionPerformed(evt);
+            }
+        });
 
         jbSaveShift.setText("Save");
 
@@ -208,105 +223,134 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
 
         jlStatus.setText("Status");
 
+        jbSelectDoctor.setText("Select Doctor");
+
+        jlDoctorId.setText("Id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlFirstNameSearch)
-                    .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlStatusSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(126, 126, 126))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbStatusSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlDateSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(305, 305, 305))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jdcDateOfShiftSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(122, 122, 122)
-                        .addComponent(jbSearchShift, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(21, 21, 21))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(jbSaveShift, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                .addGap(391, 391, 391)
-                .addComponent(jbCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                .addGap(246, 246, 246))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jspDoctorTable)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlFirstName)
-                                    .addComponent(jlLastName)
-                                    .addComponent(jlDateStart))
-                                .addGap(50, 50, 50))
+                            .addComponent(jlFirstNameSearch)
+                            .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbSaveShift, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jcbStatusSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlStatusSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlDateEnd)
-                                .addGap(61, 61, 61)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jdcDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdcDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jlDateSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(305, 305, 305))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jdcDateOfShiftSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jbSearchShift, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jspDoctorTable)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTimeEnd)
-                            .addComponent(jlTimeStart)
-                            .addComponent(jlStatus))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfTimeEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfTimeStart, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jcbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlTimeEnd)
+                                    .addComponent(jlTimeStart)
+                                    .addComponent(jlStatus))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfTimeEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(jtfTimeStart, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(jcbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jlFirstName)
+                                                .addComponent(jlLastName)
+                                                .addComponent(jlDateStart))
+                                            .addGap(50, 50, 50))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlDateEnd)
+                                            .addGap(61, 61, 61)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlDoctorId)
+                                        .addGap(71, 71, 71)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(jtfLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(jdcDateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jdcDateEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfDoctorId))
+                                .addGap(13, 13, 13)
+                                .addComponent(jbSelectDoctor)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jlDateSearch))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbSaveShift)
-                            .addComponent(jbCancel))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlFirstNameSearch)
-                            .addComponent(jlLastNameSearch)
-                            .addComponent(jlStatusSearch)))
-                    .addComponent(jlDateSearch, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jbCancel)
+                                .addComponent(jbSearchShift))
+                            .addComponent(jbSaveShift, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlFirstNameSearch)
+                                    .addComponent(jlLastNameSearch)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlStatusSearch)
+                                .addGap(4, 4, 4)))))
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jbSearchShift, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jcbStatusSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbStatusSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jdcDateOfShiftSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSelectDoctor)
+                    .addComponent(jlDoctorId)
+                    .addComponent(jtfDoctorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlFirstName)
                     .addComponent(jtfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,7 +378,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlStatus)
                     .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179))
+                .addGap(50, 50, 50))
         );
 
         pack();
@@ -353,11 +397,16 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfFirstNameActionPerformed
 
+    private void jbSearchShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSearchShiftActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSearchShiftActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancel;
     private javax.swing.JButton jbSaveShift;
     private javax.swing.JButton jbSearchShift;
+    private javax.swing.JButton jbSelectDoctor;
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JComboBox<String> jcbStatusSearch;
     private com.toedter.calendar.JDateChooser jdcDateEnd;
@@ -366,6 +415,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlDateEnd;
     private javax.swing.JLabel jlDateSearch;
     private javax.swing.JLabel jlDateStart;
+    private javax.swing.JLabel jlDoctorId;
     private javax.swing.JLabel jlFirstName;
     private javax.swing.JLabel jlFirstNameSearch;
     private javax.swing.JLabel jlLastName;
@@ -376,6 +426,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTimeStart;
     private javax.swing.JScrollPane jspDoctorTable;
     private javax.swing.JTable jtScheduleList;
+    private javax.swing.JTextField jtfDoctorId;
     private javax.swing.JTextField jtfFirstName;
     private javax.swing.JTextField jtfFirstNameSearch;
     private javax.swing.JTextField jtfLastName;
@@ -392,12 +443,20 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         jbSearchShift.addMouseListener(e);
     }
 
+    public void addSelectDoctorPanelMouseAdapter(MouseAdapter e) {
+        jbSelectDoctor.addMouseListener(e);
+    }
+
     public void loadShiftListTable(String name, String surname, String statusOfShift, Date dateOfShift) {
         try {
             scheduleList = scheduleService.findDoctorShift(name, surname, statusOfShift, dateOfShift);
-            scheduleTableModelViewNurse = new ScheduleTableModel(scheduleList);
-            jtScheduleList.setModel(scheduleTableModelViewNurse);
-            scheduleTableModelViewNurse.fireTableDataChanged();
+            if (scheduleList.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "No shift found");
+            } else {
+                scheduleTableModelViewNurse = new ScheduleTableModel(scheduleList);
+                jtScheduleList.setModel(scheduleTableModelViewNurse);
+                scheduleTableModelViewNurse.fireTableDataChanged();
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error detected while connecting on database");
 
@@ -493,6 +552,7 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
 
     private void updateScheduleFields(Schedule schedule) {
 
+        jtfDoctorId.setText(String.valueOf(schedule.getDoctorId().getDoctorId()));
         jtfFirstName.setText(schedule.getDoctorId().getPersonId().getFirstName());
         jtfLastName.setText(schedule.getDoctorId().getPersonId().getLastName());
         jcbStatus.setSelectedIndex(getSelectedScheduleStatusIndex(schedule.getStatus().getStatusName()));
@@ -506,208 +566,68 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
 
         int row = jtScheduleList.getSelectedRow();
 
-        String personId = jtfFirstName.getText();
         String firstName = jtfFirstName.getText();
-        String middleName = jtfFirstName.getText();
         String lastName = jtfLastName.getText();
-        String sex = jtfFirstName.getText();
-        String martialStatus = jtfFirstName.getText();
-        String password = jtfFirstName.getText();
-        Date dateOfBirth = new Date();
-        String birthPlace = jtfFirstName.getText();
-        String address = jtfFirstName.getText();
-        String city = jtfFirstName.getText();;
-        String country = jtfFirstName.getText();
-        String buildingNumber = jtfFirstName.getText();
-        String mobilePhone = jtfFirstName.getText();
-        String workPhone = jtfFirstName.getText();
-        String homePhone = jtfFirstName.getText();
-        String email = jtfFirstName.getText();
-        String religion = jtfFirstName.getText();
+        Date dateStart = jdcDateStart.getDate();
+        Date dateEnd = jdcDateEnd.getDate();
+        String status = jcbStatus.getSelectedItem().toString();
+        try {
+            LocalTime timeStart = LocalTime.parse(jtfTimeStart.getText());
+            LocalTime timeEnd = LocalTime.parse(jtfTimeEnd.getText());
 
-        if (!("Valid".equals(inputValidation.validatePersonID(personId)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonID(personId));
-        } else if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName));
-        } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName));
-        } else if (!("Valid".equals(inputValidation.validatePersonDateOfBirth(dateOfBirth)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonDateOfBirth(dateOfBirth));
-        } else if (!("Valid".equals(inputValidation.validateAddress(address)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateAddress(address));
-        } else if (!("Valid".equals(inputValidation.validateBuildingNumber(buildingNumber)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateBuildingNumber(buildingNumber));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(mobilePhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(mobilePhone));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(workPhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(workPhone));
-        } else if (!("Valid".equals(inputValidation.validatePhoneNumber(homePhone)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validatePhoneNumber(homePhone));
-        } else if (!("Valid".equals(inputValidation.validateEmail(email)))) {
-            JOptionPane.showMessageDialog(rootPane, inputValidation.validateEmail(email));
-        } else {
-
-            if (row == -1) {
-
-                if (!("Valid".equals(inputValidation.validatePassword(password)))) {
-                    JOptionPane.showMessageDialog(rootPane, inputValidation.validatePassword(password));
-                } else {
-                    try {
-                        receptionist = new Receptionist();
-                        Person person = new Person();
-
-                        receptionist.setPersonId(person);
-                        person.setReceptionist(receptionist);
-
-                        receptionist.getPersonId().setPersonId(Integer.parseInt(personId));
-                        receptionist.getPersonId().setFirstName(firstName);
-                        receptionist.getPersonId().setMiddleName(middleName);
-                        receptionist.getPersonId().setLastName(lastName);
-                        receptionist.setPassCode(passwordHashing.encodehashPassword(password));
-                        receptionist.getPersonId().setDateOfBirth(dateOfBirth);
-
-                        Gender findTheGender = genderService.findTheGender(sex);
-                        MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
-                        City birthPlaceObject = cityService.findTheCity(birthPlace);
-                        Country findTheCountry = countryService.findTheCountry(country);
-                        Religion findTheReligion = religionService.findTheReligion(religion);
-                        City findTheCity = cityService.findTheCity(city);
-
-                        findTheCity.setCountryId(findTheCountry);
-
-                        Address theAddress = new Address();
-
-                        theAddress.setStreetName(address);
-                        theAddress.setCityId(findTheCity);
-                        theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
-
-                        theAddress = addressService.findTheAddress(theAddress);
-
-                        receptionist.getPersonId().setGenderId(findTheGender);
-                        receptionist.getPersonId().setMartialStatusId(findTheMartialStatus);
-                        receptionist.getPersonId().setAddressId(theAddress);
-                        receptionist.getPersonId().setBirthCityId(birthPlaceObject);
-                        receptionist.getPersonId().setReigionId(findTheReligion);
-
-                        String personMsg = personService.checkIfUserExists(receptionist.getPersonId());
-
-                        if ("Save".equals(personMsg)) {
-
-                            String addressMsg = addressService.checkIfAddressExists(theAddress);
-                            if ("Save".equals(addressMsg)) {
-                                addressService.persistAddress(theAddress);
-                            }
-
-                            if ("Save".equals(personMsg)) {
-                                //String nurseSavedMsg = doctorService.persistDoctor(receptionist);
-                                //JOptionPane.showMessageDialog(null, nurseSavedMsg);
-
-                                String userGroupMsg = userGroupService.checkIfUserGroupExists(receptionist);
-                                if ("Save".equals(userGroupMsg)) {
-                                    UserGroup userGroup = new UserGroup();
-                                    userGroup.setUserId(receptionist.getReceptionistId());
-                                    userGroup.setGroupId(loginGroupService.findTheLoginGroup("Nurse"));
-                                    userGroupService.persistUserInUserGroup(userGroup);
-                                }
-
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "User exists");
-                        }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
-
-                    }
-                }
+            if (!("Valid".equals(inputValidation.validatePersonFirstName(firstName)))) {
+                JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonFirstName(firstName));
+            } else if (!("Valid".equals(inputValidation.validatePersonLastName(lastName)))) {
+                JOptionPane.showMessageDialog(rootPane, inputValidation.validatePersonLastName(lastName));
+            } else if (!("Valid".equals(inputValidation.validateScheduleDate(dateStart, dateEnd)))) {
+                JOptionPane.showMessageDialog(rootPane, inputValidation.validateScheduleDate(dateStart, dateEnd));
+            } else if (!("Valid".equals(inputValidation.validateScheduleTime(timeStart, timeEnd)))) {
+                JOptionPane.showMessageDialog(rootPane, inputValidation.validateScheduleTime(timeStart, timeEnd));
+            } else if (!("Valid".equals(inputValidation.validateScheduleStatus(status)))) {
+                JOptionPane.showMessageDialog(rootPane, inputValidation.validateScheduleStatus(status));
             } else {
-                try {
-                    //receptionist = scheduleTableModelViewNurse.getReceptionist(row);
 
-                    receptionist.getPersonId().setPersonId(Integer.parseInt(personId));
-                    receptionist.getPersonId().setFirstName(firstName);
-                    receptionist.getPersonId().setMiddleName(middleName);
-                    receptionist.getPersonId().setLastName(lastName);
-                    receptionist.getPersonId().setDateOfBirth(dateOfBirth);
-                    if (!(password == null || password.isEmpty())) {
-                        receptionist.setPassCode(passwordHashing.encodehashPassword(password));
-                    }
+                if (row == -1) {
 
-                    Gender findTheGender = genderService.findTheGender(sex);
-                    MartialStatus findTheMartialStatus = martialStatusService.findTheMartialStatus(martialStatus);
-                    City birthPlaceObject = cityService.findTheCity(birthPlace);
-                    Country findTheCountry = countryService.findTheCountry(country);
-                    Religion findTheReligion = religionService.findTheReligion(religion);
-                    City findTheCity = cityService.findTheCity(city);
-
-                    findTheCity.setCountryId(findTheCountry);
-
-                    Address theAddress = new Address();
-
-                    theAddress.setStreetName(address);
-                    theAddress.setCityId(findTheCity);
-                    theAddress.setBuildingNumber(Integer.parseInt(buildingNumber));
-
-                    theAddress = addressService.findTheAddress(theAddress);
-
-                    receptionist.getPersonId().setGenderId(findTheGender);
-                    receptionist.getPersonId().setMartialStatusId(findTheMartialStatus);
-                    receptionist.getPersonId().setAddressId(theAddress);
-                    receptionist.getPersonId().setBirthCityId(birthPlaceObject);
-                    receptionist.getPersonId().setReigionId(findTheReligion);
-
-                    String personMsg = personService.checkIfUserExists(receptionist.getPersonId());
-                    if ("Exist".equals(personMsg)) {
-
-                        String addressMsg = addressService.checkIfAddressExists(theAddress);
-                        if ("Save".equals(addressMsg)) {
-                            addressService.persistAddress(theAddress);
-                        }
-
-                        if ("Exist".equals(personMsg)) {
-                            //doctorService.editReceptionist(receptionist);
-
-                            Collection<Contact> contactCollection = receptionist.getPersonId().getContactCollection();
-                            if (contactCollection != null && contactCollection.size() > 0) {
-                                for (Contact contact : contactCollection) {
-                                    switch (contact.getType().trim()) {
-                                        case "HOME":
-                                            contactService.editContact(homePhone, contact.getValue());
-                                            break;
-                                        case "WORK":
-                                            contactService.editContact(workPhone, contact.getValue());
-                                            break;
-                                        case "MOB":
-                                            contactService.editContact(mobilePhone, contact.getValue());
-                                            break;
-                                        case "EMAIL":
-                                            contactService.editContact(email, contact.getValue());
-                                            break;
-                                        default:
-                                            break;
-                                    }
-
-                                }
-                                JOptionPane.showMessageDialog(null, "Nurse Edited");
-                                bindTheShiftSearchTableModel();
-                                clearTheFields();
-                            }
-
+                    try {
+                        schedule = new Schedule();
+                        Person person = personService.checkIfPersonExists(firstName, lastName);
+                        ScheduleStatus scheduleStus = scheduleStatusService.findTheScheduleStatus(status);
+                        if (person == null) {
+                            JOptionPane.showMessageDialog(rootPane, "Doctor not found");
                         } else {
-                            JOptionPane.showMessageDialog(null, "User exists");
+                            schedule.setManagerId(hrManager);
+                            schedule.setDateEnd(dateEnd);
+                            schedule.setDateStart(dateStart);
+                            schedule.setTimeStart(Date.from(timeStart.atDate(LocalDate.of(2017, 2, 1)).atZone(ZoneId.systemDefault()).toInstant()));
+                            schedule.setTimeEnd(Date.from(timeEnd.atDate(LocalDate.of(2017, 2, 1)).atZone(ZoneId.systemDefault()).toInstant()));
+                            schedule.setDoctorId(person.getDoctor());
+                            schedule.setStatus(scheduleStus);
+                            scheduleService.persistSchedule(schedule);
+                            JOptionPane.showMessageDialog(rootPane, "Shift saved successfully ");
                         }
+                    } catch (ConstraintViolationException ex) {
+                        if (ex.getErrorCode() == 2627) {
+                            JOptionPane.showMessageDialog(rootPane, "Error detected: Shift already exists");
+
+                        }
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(rootPane, "Error detected: " + ex.getMessage());
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error detected whiile connecting on database");
 
                 }
             }
-
+        } catch (Exception ex) {
+            if (ex instanceof DateTimeParseException) {
+                JOptionPane.showMessageDialog(rootPane, "The time must be on proper format");
+            }
         }
 
     }
 
     private void clearTheFields() {
+        jtfDoctorId.setText("");
         jtfFirstName.setText("");
         jtfLastName.setText("");
         jcbStatus.setSelectedIndex(0);
@@ -719,5 +639,26 @@ public class JIFAddShift extends javax.swing.JInternalFrame {
         jtfLastNameSearch.setText("");
         jcbStatusSearch.setSelectedIndex(0);
         jdcDateOfShiftSearch.setDate(null);
+    }
+
+    public void setHrManager(HRManager hrManager) {
+        this.hrManager = hrManager;
+    }
+
+    public void updateDoctorFields() {
+        DoctorTableModelSelectDoctor model = (DoctorTableModelSelectDoctor) jifSearchDoctor.getJtDoctorListTable().getModel();
+        int row = jifSearchDoctor.getJtDoctorListTable().getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(rootPane, "No Doctor Selected");
+        } else {
+            Doctor doctor = model.getDoctor(row);
+            jtfFirstName.setText(doctor.getPersonId().getFirstName());
+            jtfLastName.setText(doctor.getPersonId().getLastName());
+            jtfDoctorId.setText(String.valueOf(doctor.getDoctorId()));
+            jifSearchDoctor.bindTheDoctorSearchTableModel();
+            jifSearchDoctor.clearTheFields();
+            jifSearchDoctor.dispose();
+        }
     }
 }

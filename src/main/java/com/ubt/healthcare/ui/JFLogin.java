@@ -15,7 +15,7 @@ import com.ubt.healthcare.dto.Doctor;
 import com.ubt.healthcare.dto.HRManager;
 import com.ubt.healthcare.dto.Nurse;
 import com.ubt.healthcare.ui.admin.JFAdminScreen;
-import com.ubt.healthcare.ui.admin.JIFDoctorF;
+import com.ubt.healthcare.ui.admin.JIFDoctor;
 import com.ubt.healthcare.ui.admin.JIFNurse;
 import com.ubt.healthcare.ui.admin.JIFPharmacist;
 import com.ubt.healthcare.ui.admin.JIFPharmacyManager;
@@ -33,15 +33,19 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchPharmacist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
-import com.ubt.healthcare.ui.hrManager.JFHRManager;
-import com.ubt.healthcare.ui.hrManager.JIFAddShift;
-import com.ubt.healthcare.ui.hrManager.JIFReports;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterAddShiftScreen;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterReportScreen;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSaveSchedule;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSearchSchedule;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterSearchScheduleReports;
-import com.ubt.healthcare.ui.hrManager.eventhandling.MouseAdapterViewReports;
+import com.ubt.healthcare.ui.clinicManager.JFClinicManager;
+import com.ubt.healthcare.ui.clinicManager.JIFAddShift;
+import com.ubt.healthcare.ui.clinicManager.JIFReports;
+import com.ubt.healthcare.ui.clinicManager.JIFSearchDoctor;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterAddShiftScreen;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterReportScreen;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterSaveSchedule;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterSearchDoctor;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterSearchSchedule;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterSearchScheduleReports;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterSelectDoctor;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterViewReports;
+import com.ubt.healthcare.ui.clinicManager.eventhandling.MouseAdapterViewSearchDoctor;
 import com.ubt.healthcare.ui.util.InputValidation;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -58,12 +62,12 @@ public class JFLogin extends JFrame {
     private JPMain jpMain;
     private CardLayout clCardlayout;
     private JFAdminScreen jfAdminScreen;
-    private JFHRManager jfHRManager;
+    private JFClinicManager jfHRManager;
     private UserGroupService userGroupService;
     private AuthenticateUser authUser;
     private InputValidation inputValidation;
 
-    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen, JFAdminScreen jfAdminScreen,JFHRManager jfHRManager) {
+    public JFLogin(JPMain jpMain, JPLoginScreen jpLoginScreen, JFAdminScreen jfAdminScreen, JFClinicManager jfHRManager) {
         this.jpLoginScreen = jpLoginScreen;
         this.jpMain = jpMain;
         this.jfAdminScreen = jfAdminScreen;
@@ -188,11 +192,11 @@ public class JFLogin extends JFrame {
                     // clear the filed from jpLoginscreen...
                 }
 
-            } else if ("HRManager".equals(userRole)) {
+            } else if ("HRManager".equals(userRole)) {// clinic manager
                 String passcode = new String(jpLoginScreen.getJtfpassCode().getPassword());
-                HRManager hrManager = (HRManager) authUser.authenticateHRManager(user, passcode);
-                if (hrManager != null) {
-                    showHRManagerScreen(hrManager);
+                HRManager clinicManager = (HRManager) authUser.authenticateClinicManager(user, passcode);
+                if (clinicManager != null) {
+                    showClinicManagerScreen(clinicManager);
                 } else {
                     JOptionPane.showMessageDialog(null, "Wrong passcode");
                     // clear the filed from jpLoginscreen...
@@ -311,24 +315,28 @@ public class JFLogin extends JFrame {
         // call the listeners and JPanels
     }
 
-    public void showHRManagerScreen(HRManager hrManager) {
+    public void showClinicManagerScreen(HRManager clinicManager) {
 
-        JIFAddShift jifAddShift = new JIFAddShift();
+        JIFSearchDoctor jifSearchDoctor = new JIFSearchDoctor();
+        JIFAddShift jifAddShift = new JIFAddShift(jifSearchDoctor);
         JIFReports jifReports = new JIFReports();
-        jfHRManager = new JFHRManager(jifAddShift,jifReports);
+        jfHRManager = new JFClinicManager(jifAddShift, jifReports, jifSearchDoctor);
 
-        
         jfHRManager.addReportsMouseAdapter(new MouseAdapterReportScreen(jfHRManager));
         jfHRManager.addAddShiftScreenMouseAdapter(new MouseAdapterAddShiftScreen(jfHRManager));
         jfHRManager.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
-        
+
         jifAddShift.addSearchShiftPanelMouseAdapter(new MouseAdapterSearchSchedule(jifAddShift));
         jifAddShift.addSaveShiftInternalFrameMouseAdapter(new MouseAdapterSaveSchedule(jifAddShift));
-        
+        jifAddShift.addSelectDoctorPanelMouseAdapter(new MouseAdapterViewSearchDoctor(jfHRManager));
+        jifAddShift.setHrManager(clinicManager);
+
         jifReports.addViewReportInternalFrameMouseAdapter(new MouseAdapterViewReports(jifReports));
         jifReports.addSearchShiftPanelMouseAdapter(new MouseAdapterSearchScheduleReports(jifReports));
-        
-        
+
+        jifSearchDoctor.addSearchDoctorPanelMouseAdapter(new MouseAdapterSearchDoctor(jifSearchDoctor));
+        jifSearchDoctor.addSelectDoctorPanelMouseAdapter(new MouseAdapterSelectDoctor(jifAddShift));
+
         this.setVisible(false);
         jfHRManager.setVisible(true);
     }
@@ -353,12 +361,12 @@ public class JFLogin extends JFrame {
 
     public void showDoctorFrameScreen(Doctor doctor) {
 
-        JIFDoctorF jifDoctorF = new JIFDoctorF();
+        JIFDoctor jifDoctorF = new JIFDoctor();
         JIFNurse jifNurse = new JIFNurse();
         JIFReceptionist jifReceptionist = new JIFReceptionist();
         JIFPharmacist jifPharmacist = new JIFPharmacist();
         JIFPharmacyManager jifPharmacyManager = new JIFPharmacyManager();
-        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse, jifReceptionist,jifPharmacist, jifPharmacyManager);
+        jfAdminScreen = new JFAdminScreen(jifDoctorF, jifNurse, jifReceptionist, jifPharmacist, jifPharmacyManager);
 
         jfAdminScreen.addDoctorScreenMouseAdapter(new MouseAdapterDoctorScreen(jfAdminScreen));
         jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
@@ -374,8 +382,7 @@ public class JFLogin extends JFrame {
 
         jifReceptionist.addSaveReceptionistInternalFrameMouseAdapter(new MouseAdapterSaveNewReceptionist(jifReceptionist));
         jifReceptionist.addSearchReceptionistPanelMouseAdapter(new MouseAdapterSearchReceptionist(jifReceptionist));
-        
-        
+
         jifPharmacist.addSavePharmacistInternalFrameMouseAdapter(new MouseAdapterSaveNewPharmacist(jifPharmacist));
         jifPharmacist.addSearchPharmacistPanelMouseAdapter(new MouseAdapterSearchPharmacist(jifPharmacist));
 
@@ -390,7 +397,7 @@ public class JFLogin extends JFrame {
         JIFSearchDoctor jifSearchDoctor = new JIFSearchDoctor();
         JIFAddDoctor jifAddDoctor = new JIFAddDoctor(jifAddCity);
         JIFEditDoctor jifEditDoctor = new JIFEditDoctor(jifAddCity);
-        JIFDoctorF jifDoctorF = new JIFDoctorF();
+        JIFDoctor jifDoctorF = new JIFDoctor();
 
         JIFDoctor ilfDoctor = new JIFDoctor(jifSearchDoctor, jifAddDoctor, jifEditDoctor, jifAddCity, jifAddCountry);
 

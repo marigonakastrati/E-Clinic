@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager.eventhandling;
+package com.ubt.healthcare.ui.clinicManager.eventhandling;
 
-import com.ubt.healthcare.ui.hrManager.JFHRManager;
+import com.ubt.healthcare.ui.clinicManager.JIFReports;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author F
  */
-public class MouseAdapterReportScreen extends MouseAdapter{
-    private JFHRManager jfHRManager;
+public class MouseAdapterViewReports extends MouseAdapter{
+    private JIFReports jifReports;
 
-    public MouseAdapterReportScreen(JFHRManager jfHRManager) {
-        this.jfHRManager = jfHRManager;
+    public MouseAdapterViewReports(JIFReports jifReports) {
+        this.jifReports = jifReports;
     }
 
     @Override
     public void mouseClicked(MouseEvent arg0) 
     {
-        jfHRManager.showReportsScreen();
+        jifReports.viewReports();
     }
     
     

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.ui.hrManager.eventhandling;
+package com.ubt.healthcare.ui.clinicManager.eventhandling;
 
-import com.ubt.healthcare.ui.hrManager.JIFAddShift;
+import com.ubt.healthcare.ui.clinicManager.JIFAddShift;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
