@@ -341,14 +341,13 @@ public class JIFReports extends javax.swing.JInternalFrame {
                     dataSource.add(row);
                 }
                 JRDataSource jRDataSource = new JRBeanCollectionDataSource(dataSource);
-                JasperReport jasperReport = JasperCompileManager.compileReport(this.getClass().getResourceAsStream("/com/ubt/healthcare/ui/hrManager/report/ReportShift.jrxml"));
-                this.getClass().getResourceAsStream(title);
+                JasperReport jasperReport = JasperCompileManager.compileReport(this.getClass().getResourceAsStream("/com/ubt/healthcare/ui/clinicManager/report/ReportShift.jrxml"));
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
                 JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
                 jasperViewer.setVisible(true);
 
             } catch (JRException ex) {
-                //Logger.getLogger(FW.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, "Could not generate reports");
             }
         }
     }

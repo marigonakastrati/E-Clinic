@@ -5,7 +5,9 @@
  */
 package com.ubt.healthcare.ui.util;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -39,7 +41,7 @@ public class InputValidation {
     private static final String START_DATE_OLDER_THAN_TODAY = "Start date must not be older than today";
     private static final String END_TIME_BEFORE_START_TIME = "End time must not be before the start time";
     private static final String END_DATE_SAME_WITH_START_DATE = "End date must not be same with the start date";
-    private static final String BIRTH_DATE_NEWER_THEN_TODAY = "Birth date must be older than today";
+    private static final String BIRTH_DATE_NEWER_THEN_TODAY = "Birth date doesn't comply with regulation";
     private static final String TYPE_SCHEDULE_DATE = "You should type the schedule date";
     private static final String TYPE_SCHEDULE_TIME = "You should type the schedule time";
     private static final String VALID = "Valid";
@@ -87,7 +89,9 @@ public class InputValidation {
             return TYPE_YOUR_BIRTH_DAY;
         };
         Date todayDate = new Date();
-        if (dateOfBirth.compareTo(todayDate) == 1) {
+        LocalDate beforeDateConstraint = dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate todayDateConstraint = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (dateOfBirth.compareTo(todayDate) == 1 || beforeDateConstraint.until(todayDateConstraint, ChronoUnit.YEARS) < 20) {
             return BIRTH_DATE_NEWER_THEN_TODAY;
         }
         return VALID;
@@ -212,8 +216,7 @@ public class InputValidation {
         if (dateStart.compareTo(dateEnd) == 1) {
             return END_DATE_BEFORE_START_DATE;
         }
-        if(dateStart.compareTo(new Date())==-1)
-        {
+        if (dateStart.compareTo(new Date()) == -1) {
             return START_DATE_OLDER_THAN_TODAY;
         }
         return VALID;
