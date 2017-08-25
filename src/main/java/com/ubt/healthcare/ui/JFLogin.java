@@ -24,14 +24,17 @@ import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterDoctorScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterLogOut;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterNurseScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPharmacistScreen;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterPharmacyManagerScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterReceptionistScreen;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewPharmacist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewPharmacyManager;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSaveNewReceptionist;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchDoctorF;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchNurse;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchPharmacist;
+import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchPharmacyManager;
 import com.ubt.healthcare.ui.admin.eventhandling.MouseAdapterSearchReceptionist;
 import com.ubt.healthcare.ui.clinicManager.JFClinicManager;
 import com.ubt.healthcare.ui.clinicManager.JIFAddShift;
@@ -372,6 +375,7 @@ public class JFLogin extends JFrame {
         jfAdminScreen.addNurseScreenMouseAdapter(new MouseAdapterNurseScreen(jfAdminScreen));
         jfAdminScreen.addAddReceptionistMouseAdapter(new MouseAdapterReceptionistScreen(jfAdminScreen));
         jfAdminScreen.addPharmacistScreenMouseAdapter(new MouseAdapterPharmacistScreen(jfAdminScreen));
+        jfAdminScreen.addPharmacyManagerScreenMouseAdapter(new MouseAdapterPharmacyManagerScreen(jfAdminScreen));
         jfAdminScreen.addLogOutMouseAdapter(new MouseAdapterLogOut(this));
 
         jifDoctorF.addSaveDoctorInternalFrameMouseAdapter(new MouseAdapterSaveNewDoctorF(jifDoctorF));
@@ -385,6 +389,9 @@ public class JFLogin extends JFrame {
 
         jifPharmacist.addSavePharmacistInternalFrameMouseAdapter(new MouseAdapterSaveNewPharmacist(jifPharmacist));
         jifPharmacist.addSearchPharmacistPanelMouseAdapter(new MouseAdapterSearchPharmacist(jifPharmacist));
+
+        jifPharmacyManager.addSavePharmacyManagerInternalFrameMouseAdapter(new MouseAdapterSaveNewPharmacyManager(jifPharmacyManager));
+        jifPharmacyManager.addSearchPharmacyManagerPanelMouseAdapter(new MouseAdapterSearchPharmacyManager(jifPharmacyManager));
 
         this.setVisible(false);
         jfAdminScreen.setVisible(true);

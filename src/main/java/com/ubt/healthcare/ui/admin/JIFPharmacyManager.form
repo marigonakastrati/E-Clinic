@@ -73,10 +73,10 @@
                               </Group>
                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfLastNameSearch" min="-2" pref="132" max="-2" attributes="0"/>
                                   <Component id="jlLastNameSearch" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfLastNameSearch" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jlCitySearch" min="-2" max="-2" attributes="0"/>
                                   <Component id="jcbCitySearch" min="-2" pref="123" max="-2" attributes="0"/>
@@ -117,13 +117,13 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jtfFirstNameSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtfLastNameSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbCitySearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfLastNameSearch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jspDoctorTable" min="-2" pref="115" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtpPharmacyManager" max="32767" attributes="0"/>
+              <Component id="jtpPharmacyManager" pref="480" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -541,11 +541,6 @@
     </Container>
     <Component class="javax.swing.JTextField" name="jtfFirstNameSearch">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfLastNameSearch">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfLastNameSearchActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JComboBox" name="jcbCitySearch">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -565,6 +560,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSavePharmacyManagerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlFirstNameSearch">
       <Properties>
@@ -587,6 +585,11 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtfLastNameSearch">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfLastNameSearchActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

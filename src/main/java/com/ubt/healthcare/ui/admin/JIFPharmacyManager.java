@@ -165,7 +165,6 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
         jspDoctorTable = new javax.swing.JScrollPane();
         jtPharmacyManagerListTable = new javax.swing.JTable();
         jtfFirstNameSearch = new javax.swing.JTextField();
-        jtfLastNameSearch = new javax.swing.JTextField();
         jcbCitySearch = new javax.swing.JComboBox<>();
         jbSearchPharmacyManager = new javax.swing.JButton();
         jbSavePharmacyManager = new javax.swing.JButton();
@@ -173,6 +172,7 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
         jlLastNameSearch = new javax.swing.JLabel();
         jlCitySearch = new javax.swing.JLabel();
         jbCancel = new javax.swing.JButton();
+        jtfLastNameSearch = new javax.swing.JTextField();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -403,15 +403,14 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
         ));
         jspDoctorTable.setViewportView(jtPharmacyManagerListTable);
 
-        jtfLastNameSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfLastNameSearchActionPerformed(evt);
-            }
-        });
-
         jbSearchPharmacyManager.setText("Search");
 
         jbSavePharmacyManager.setText("Save");
+        jbSavePharmacyManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSavePharmacyManagerActionPerformed(evt);
+            }
+        });
 
         jlFirstNameSearch.setText("First Name");
 
@@ -423,6 +422,12 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
         jbCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCancelActionPerformed(evt);
+            }
+        });
+
+        jtfLastNameSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfLastNameSearchActionPerformed(evt);
             }
         });
 
@@ -445,9 +450,9 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
                                     .addComponent(jlFirstNameSearch))
                                 .addGap(88, 88, 88)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlLastNameSearch))
-                                .addGap(125, 125, 125)
+                                    .addComponent(jlLastNameSearch)
+                                    .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(135, 135, 135)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlCitySearch)
                                     .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -478,12 +483,12 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfFirstNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCitySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfLastNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jspDoctorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtpPharmacyManager)
+                .addComponent(jtpPharmacyManager, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -509,6 +514,10 @@ public class JIFPharmacyManager extends javax.swing.JInternalFrame {
     private void jtfLastNameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLastNameSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfLastNameSearchActionPerformed
+
+    private void jbSavePharmacyManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSavePharmacyManagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSavePharmacyManagerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

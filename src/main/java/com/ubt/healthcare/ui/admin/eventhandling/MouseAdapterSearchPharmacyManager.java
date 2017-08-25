@@ -13,17 +13,17 @@ import java.awt.event.MouseEvent;
  *
  * @author Marigona
  */
-public class MouseAdapterSearchPharmacyManager {
-    
-        private JIFPharmacyManager jifPharmacyManager;
+public class MouseAdapterSearchPharmacyManager extends MouseAdapter {
+
+    private JIFPharmacyManager jifPharmacyManager;
 
     public MouseAdapterSearchPharmacyManager(JIFPharmacyManager jifPharmacyManager) {
         this.jifPharmacyManager = jifPharmacyManager;
     }
 
-    public void mouseClicked(MouseEvent arg0) 
-    {
+    @Override
+    public void mouseClicked(MouseEvent arg0) {
         jifPharmacyManager.searchPharmacyManagerInternalPane();
     }
-    
+
 }

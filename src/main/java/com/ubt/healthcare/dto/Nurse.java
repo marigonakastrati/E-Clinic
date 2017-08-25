@@ -54,7 +54,7 @@ public class Nurse implements Serializable {
     public Nurse() {
     }
 
-    public Nurse(Integer nurseId) {
+    public Nurse(Integer nurseId) { 
         this.nurseId = nurseId;
     }
 

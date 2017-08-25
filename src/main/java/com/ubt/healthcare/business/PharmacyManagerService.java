@@ -34,6 +34,7 @@ public class PharmacyManagerService {
      * @param surname
      * @param city
      * @return List
+     * @throws java.lang.Exception
      */
     public List<PharmacyManager> findPharmacyManagersByParameters(String name, String surname, String city)throws Exception {
         pharmacyManagerRepo = (List<PharmacyManager>) (Object) sqlRepository.findAll("PharmacyManager.findAll");

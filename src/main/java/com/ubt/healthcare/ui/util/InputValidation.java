@@ -87,7 +87,7 @@ public class InputValidation {
     public String validatePersonDateOfBirth(Date dateOfBirth) {
         if (dateOfBirth == null) {
             return TYPE_YOUR_BIRTH_DAY;
-        };
+        }
         Date todayDate = new Date();
         LocalDate beforeDateConstraint = dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate todayDateConstraint = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
