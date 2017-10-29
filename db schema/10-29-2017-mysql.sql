@@ -1505,3 +1505,292 @@ ALTER TABLE `Visit`ADD  CONSTRAINT `FK_BookAppointment_Visit` FOREIGN KEY(`BookI
 REFERENCES `BookAppointment`(`book_id`); 
 ALTER TABLE `Visit`ADD  CONSTRAINT `FK_Prescription_Visit` FOREIGN KEY(`PrescriptionID`)
 REFERENCES `Prescription`(`prescription_id`); 
+
+INSERT `Gender`(`gender_id`, `gender_name`) SELECT 1, N'MALE   ';
+INSERT `Gender`(`gender_id`, `gender_name`) SELECT 2, N'FEMALE ';
+INSERT `EducationType`(`EducationName`, `EducationTypeId`) SELECT N'BACHELOR', 1;
+INSERT `EducationType`(`EducationName`, `EducationTypeId`) SELECT N'MASTER', 2;
+INSERT `EducationType`(`EducationName`, `EducationTypeId`) SELECT N'PHD', 3;
+INSERT `EducationType`(`EducationName`, `EducationTypeId`) SELECT N'HIGH SCHOOL', 4;
+INSERT `EducationType`(`EducationName`, `EducationTypeId`) SELECT N'CERTIFICATE', 5;
+INSERT `EducationProgram`(`ProgramName`, `EducationProgramId`) SELECT N'Computer Engineering', 5;
+INSERT `EducationProgram`(`ProgramName`, `EducationProgramId`) SELECT N'Computer Science', 1;
+INSERT `EducationProgram`(`ProgramName`, `EducationProgramId`) SELECT N'Mathematics', 3;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UBT', 1, 1, 1;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UP', 1, 1, 4;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UBT', 1, 3, 10;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UBT', 1, 5, 7;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UBT', 2, 1, 8;
+INSERT `Education`(`InstitutionName`, `EucationTypeId`, `EducationProgramId`, `EducationId`) SELECT N'UBT', 3, 5, 9;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'Australia', 4;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'Belgium', 6;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'Kosovo', 1;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'Netherland', 5;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'Spain', 3;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'United Kingdom', 7;
+INSERT `Country`(`country_name`, `country_id`) SELECT N'USA', 2;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Prishtina', 1, 1, NULL;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Mitrovica', 2, 1, NULL;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'New York', 3, 2, NULL;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Peja', 4, 1, 10001;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Prizreni', 5, 1, 1001;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Barcelona', 6, 3, 10001;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Melbourne', 7, 4, 1000110;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Amsterdam', 8, 5, 101001;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'Brussels', 9, 6, 1001;
+INSERT `City`(`city_name`, `city_id`, `country_id`, `zip_code`) SELECT N'London', 10, 7, 1001;
+INSERT `MartialStatus`(`MartialStatusId`, `MartialStatusName`) SELECT 1, N'Married';
+INSERT `MartialStatus`(`MartialStatusId`, `MartialStatusName`) SELECT 2, N'Single';
+INSERT `MartialStatus`(`MartialStatusId`, `MartialStatusName`) SELECT 3, N'Divorced';
+INSERT `MartialStatus`(`MartialStatusId`, `MartialStatusName`) SELECT 4, N'Widowed';
+INSERT `Religion`(`name`, `religion_id`) SELECT N'Muslim', 2;
+INSERT `Religion`(`name`, `religion_id`) SELECT N'Christian', 3;
+INSERT `Religion`(`name`, `religion_id`) SELECT N'Other', 4;
+INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1, N'sd', 1017
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 3, N'Dardani', 3029
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 7, N'Dardani', 3040
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'adress', 3036
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'as', 1016
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'Dardani', 2025
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'Dragodan', 3028
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'dsd', 1013
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'fdsf', 1019
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'Mitrovica Street', 2023
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'sad', 1014
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'sd', 1020
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12, N'street', 3034
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 13, N'Dardani', 2027
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 13, N'Emshir', 3038
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 13, N'Emshire', 3037
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 15, N'Dardani', 2026
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 21, N'Dardani', 3030
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 21, N'Vranjevc', 2024
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 23, N'df', 1015
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 27, N'King Street', 3032
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 32, N'Dardani', 9
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 32, N'erewr', 1022
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 78, N'dsd', 1010
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 78, N'sd', 1012
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 78, N'sdsd', 1011
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 213, N'Street Name', 5
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 231, N'123123', 2028
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 457, N'sdsd', 1009
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 654, N'new street', 6
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 654, N'not known street', 2022
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1001, N'Arber', 2
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1001, N'Mbretresha Teuta', 1
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1001, N'Street', 3
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1212, N'1212', 4
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 1212, N'asas', 8
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 1, 12212, N'dfds', 1008
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 3, 7, N'Dardani', 3039
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 3, 12, N'Dardani', 3031
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 3, 654, N'not known street', 3033
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 3, 32101, N'King Street', 7
+;INSERT `Address`(`city_id`, `building_number`, `street_name`, `address_id`) SELECT 7, 21, N'Dardani', 3035
+INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 1111, N'sds', N'sds', N'sd', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1019
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 1212, N'1212', N'121', N'1212', CAST(N'2015-05-02' AS Date), 2, 2, 2, 1, 4
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 3324, N'sdsd', N'sd', N'sdd', CAST(N'2017-05-06' AS Date), 2, 1, 1, 1, 1015
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 12222, N'as', N'as', N'as', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1020
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 121212, N'asasa', N'asas', N'asas', CAST(N'2014-05-03' AS Date), 2, 2, 2, 1, 8
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 213213, N'2131', N'', N'123213', CAST(N'2017-05-04' AS Date), 2, 1, 1, 1, 2028
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 321123, N'James', N'j', N'212', CAST(N'2013-05-02' AS Date), 2, 2, 2, 1, 5
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 654321, N'james', N'dsd', N'4545', CAST(N'2013-05-03' AS Date), 2, 2, 2, 1, 6
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 777777, N'as', N'as', N'as', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1016
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999990, N'Ramiz', N'Ramiz', N'Hoxha', CAST(N'2015-05-02' AS Date), 4, 1, 2, 1, 3038
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999991, N'Albnora', N'', N'Hoti', CAST(N'2015-05-02' AS Date), 2, 2, 2, 1, 2026
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999992, N'Ema', N'ema', N'Kepuska', NULL, 2, 2, 2, 1, 3031
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', CAST(N'2017-05-05' AS Date), 2, 1, 2, 1, 2025
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999994, N'Lavdim', N'lavdim', N'Menxhiqi', CAST(N'2015-05-02' AS Date), 2, 1, 1, 1, 3035
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999995, N'Fisnik', N'', N'Prekazi', CAST(N'2015-05-02' AS Date), 2, 1, 1, 2, 2023
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999996, N'Albiona', N'bona', N'Hyseni', CAST(N'2015-05-02' AS Date), 4, 2, 2, 1, 2022
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999997, N'Erza', N'', N'Dinarama', CAST(N'2016-05-07' AS Date), 2, 2, 2, 1, 2022
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999998, N'Marigona', N'', N'Kastrati', CAST(N'2015-05-02' AS Date), 2, 2, 2, 1, 2022
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999999, N'dsfsdf', N'fsfdsf', N'dfsdf', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1022
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 3216321, N'Fatlonder', N'lon', N'Cakolli', CAST(N'2008-05-03' AS Date), 2, 1, 2, 3, 7
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 4556456, N'testName', N'testmName', N'testLastName', CAST(N'2013-05-04' AS Date), 2, 2, 2, 1, 1009
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 11114111, N'Albiona', N'Bona', N'Hyseni', CAST(N'1997-05-09' AS Date), 2, 2, 2, 1, 9
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 12111119, N'as', N'as', N'as', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1020
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 12121212, N'Test', N'', N'surnam', CAST(N'2017-05-05' AS Date), 2, 1, 2, 1, 3036
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 22222222, N'sd', N'sd', N'sd', CAST(N'2017-05-05' AS Date), 2, 1, 1, 1, 1017
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 78787575, N'dda', N'dsfdsf', N'dsfdfds', CAST(N'2013-05-04' AS Date), 2, 2, 2, 1, 1008
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 99999902, N'Ylli', N'Ylli', N'Petrovci', CAST(N'2014-05-03' AS Date), 4, 1, 2, 3, 3040
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999999975, N'Fatos', N'', N'Maxhuni', CAST(N'2009-06-06' AS Date), 4, 1, 1, 1, 3031
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 999999976, N'Besart', N'Besart', N'Pllana', CAST(N'1990-06-05' AS Date), 2, 1, 1, 1, 2025
+;INSERT `Person`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `DateOfBirth`, `ReigionId`, `GenderId`, `MartialStatusId`, `BirthCityId`, `AddressId`) SELECT 1234569788, N'Fatlonder', N'lon', N'Cakolli', CAST(N'2000-02-02' AS Date), 4, 1, 2, 1, 3032;
+INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 1234569788, N'MOB       ', N'049-123-456', 1
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 1234569788, N'MOB       ', N'049-321-564', 2
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999997, N'EMAIL     ', N'ed654@ubt-uni.net', 3
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999997, N'HOME      ', N'6454', 4
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999997, N'WORK      ', N'76544645', 5
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999997, N'MOB       ', N'787878', 6
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999996, N'EMAIL     ', N'ah654@ubt-uni.net', 7
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999996, N'HOME      ', N'879789', 8
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999996, N'WORK      ', N'789879', 9
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999996, N'MOB       ', N'787978', 10
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999994, N'EMAIL     ', N'lavdim.m@ubt-uni.net', 11
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999994, N'HOME      ', N'213123', 12
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999994, N'WORK      ', N'213123213', 13
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999994, N'MOB       ', N'232313', 14
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999993, N'EMAIL     ', N'blerim.z@ubt-uni.net', 15
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999993, N'HOME      ', N'23434', 16
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999993, N'WORK      ', N'234324', 17
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999993, N'MOB       ', N'3434', 18
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999990, N'EMAIL     ', N'ramiz.h@ubt-uni.net', 20
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999990, N'HOME      ', N'213123', 21
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999990, N'WORK      ', N'123123', 22
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999990, N'MOB       ', N'787878', 23
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 213213, N'EMAIL     ', N'email@gmail.com', 24
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 213213, N'HOME      ', N'7878787', 25
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 213213, N'WORK      ', N'787878', 26
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 213213, N'MOB       ', N'237878', 27
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 99999902, N'EMAIL     ', N'yll@ubt-uni.net', 1024
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 99999902, N'HOME      ', N'12121212', 1025
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 99999902, N'WORK      ', N'1212129', 1026
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 12121212, N'EMAIL     ', N'test@ubt-uni.net', 1028
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 12121212, N'HOME      ', N'575757575', 1029
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 12121212, N'WORK      ', N'7575757575', 1030
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 12121212, N'MOB       ', N'8557575', 1031
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999999975, N'EMAIL     ', N'fatos@ubt-uni.net', 1033
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999999975, N'HOME      ', N'12121212', 1034
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999999975, N'WORK      ', N'1212121', 1035
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999999976, N'EMAIL     ', N'besart.pllana@ubt-uni.net', 1037
+;INSERT `Contact`(`PersonId`, `Type`, `Value`, `ContactId`) SELECT 999999976, N'HOME      ', N'1212121212', 1038
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999994, N'Lavdim', N'', N'Menxhiqi', 2, 1, 1, 2024, 11, CAST(N'2017-05-23T00:05:01.257' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999992, N'Ema', N'', N'Kepuska', 2, 2, 2, 2025, 12, CAST(N'2017-05-23T00:07:59.673' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 1234569788, N'Fatlonder', NULL, N'Cakolli', 3, 1, 2, 2, 13, CAST(N'2017-05-23T00:19:49.153' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 14, CAST(N'2017-05-23T01:59:59.270' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 15, CAST(N'2017-05-23T02:01:33.663' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 16, CAST(N'2017-05-23T02:02:48.960' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 17, CAST(N'2017-05-23T02:04:54.377' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 18, CAST(N'2017-05-23T02:07:13.117' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 19, CAST(N'2017-05-23T02:09:16.880' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 20, CAST(N'2017-05-23T02:26:43.027' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999993, N'Blerim', N'Blerim', N'Zylfiu', 2, 1, 2, 2025, 21, CAST(N'2017-05-23T02:31:15.317' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999996, N'Albiona', N'', N'Hyseni', 2, 2, 2, 2022, 22, CAST(N'2017-05-23T02:32:08.507' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999996, N'Albiona', N'bona', N'Hyseni', 2, 2, 2, 2022, 23, CAST(N'2017-05-23T02:32:19.940' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999996, N'Albiona', N'bona', N'Hyseni', 4, 2, 2, 2022, 24, CAST(N'2017-05-23T02:33:03.757' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999996, N'Albiona', N'bona', N'Hyseni', 4, 2, 2, 3033, 25, CAST(N'2017-05-23T02:33:15.650' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 99999902, N'Ylli', N'', N'Petrovci', 2, 1, 1, 3034, 26, CAST(N'2017-05-23T04:41:04.437' AS DateTime(3))
+;INSERT `PersonArchive`(`PersonId`, `FirstName`, `MiddleName`, `LastName`, `ReligionId`, `GenderId`, `MartialStatusId`, `AddressId`, `PersonArchiveId`, `DateChanged`) SELECT 999994, N'Lavdim', N'lavdim', N'Menxhiqi', 2, 1, 1, 3030, 27, CAST(N'2017-05-25T10:03:41.367' AS DateTime(3));
+INSERT `AdminClinic`(`person_id`, `pass_code`, `admin_clinic_id`) SELECT 1234569788, N'e10adc3949ba59abbe56e057f20f883e', 50500000;
+INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 1234569788, N'e10adc3949ba59abbe56e057f20f883e', 50000000
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 1212, N'1212', 50000001
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 321123, N'12121212', 50000003
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 654321, N'4545454', 50000005
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 3216321, N'123456', 50000006
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 121212, N'asas', 50000007
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 11114111, N'123456', 50000008
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 78787575, N'dfsdf', 50001007
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 4556456, N'12331', 50001008
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 777777, N'e10adc3949ba59abbe56e057f20f883e', 50001009
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 22222222, N'e10adc3949ba59abbe56e057f20f883e', 50001010
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 1111, N'e10adc3949ba59abbe56e057f20f883e', 50001011
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 12222, N'e10adc3949ba59abbe56e057f20f883e', 50001012
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 12111119, N'e10adc3949ba59abbe56e057f20f883e', 50001013
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999999, N'e10adc3949ba59abbe56e057f20f883e', 50001014
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999998, N'e10adc3949ba59abbe56e057f20f883e', 50002014
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999997, N'e10adc3949ba59abbe56e057f20f883e', 50002015
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999996, N'e10adc3949ba59abbe56e057f20f883e', 50002016
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999995, N'e10adc3949ba59abbe56e057f20f883e', 50002017
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999994, N'e10adc3949ba59abbe56e057f20f883e', 50002018
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999993, N'e10adc3949ba59abbe56e057f20f883e', 50002019
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999992, N'e10adc3949ba59abbe56e057f20f883e', 50002020
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999991, N'e10adc3949ba59abbe56e057f20f883e', 50002021
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999990, N'e10adc3949ba59abbe56e057f20f883e', 50002022
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 213213, N'ae6e334f62fb5d989398deed87568c94', 50002023
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 99999902, N'25f9e794323b453885f5181f1b624d0b', 50003023
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 12121212, N'e10adc3949ba59abbe56e057f20f883e', 50003024
+;INSERT `Doctor`(`PersonId`, `PassCode`, `DoctorId`) SELECT 999999975, N'e10adc3949ba59abbe56e057f20f883e', 50003027;
+INSERT `HRManager`(`PersonId`, `PassCode`, `ManagerId`) SELECT 1234569788, N'e10adc3949ba59abbe56e057f20f883e', 50700000;
+INSERT `Pharmacist`(`PersonId`, `PassCode`, `PharmacistId`) SELECT 1234569788, N'123', 50200000;
+;INSERT `Pharmacy_Manager`(`person_id`, `pass_code`, `pharmacy_manager_id`) SELECT 1234569788, N'123', 50300000;
+;INSERT `Receptionist`(`PersonId`, `pass_code`, `receptionist_id`) SELECT 1234569788, N'123', 50400000;
+INSERT `Nurse`(`PersonId`, `PassCode`, `NurseId`) SELECT 1234569788, N'123', 50100000;
+;INSERT `Nurse`(`PersonId`, `PassCode`, `NurseId`) SELECT 999999976, N'e10adc3949ba59abbe56e057f20f883e', 50100001;
+INSERT `Occupation`(`occupation_id`, `occupation_name`) SELECT 1, N'Student'
+;INSERT `Occupation`(`occupation_id`, `occupation_name`) SELECT 2, N'Employee'
+;INSERT `Occupation`(`occupation_id`, `occupation_name`) SELECT 3, N'Unemployed';
+INSERT `Patient`(`person_id`, `pass_code`, `patient_id`, `occupation_id`) SELECT 1234569788, N'123', 1, 1;
+
+INSERT `InventoryType`(`inventory_type`, `inventory_type_id`) SELECT N'Store', 7;
+INSERT `InventoryType`(`inventory_type`, `inventory_type_id`) SELECT N'WareHouse', 4;
+INSERT `DrugManufacturer`(`name`, `drug_manufacturer_id`, `address_id`) SELECT N'PhRMA', 4, 7;
+INSERT `PackageType`(`name`, `package_type_id`) SELECT N'Tablets', 1;
+INSERT `Medicine`(`medicine_name`, `package_type`, `weight`, `price`, `medicine_id`, `manufacturer_id`) SELECT N'Acetaminophen', 1, 200, CAST(5.00 AS Decimal(7, 2)), 4, 4
+;INSERT `Medicine`(`medicine_name`, `package_type`, `weight`, `price`, `medicine_id`, `manufacturer_id`) SELECT N'Acetaminophen', 1, 800, CAST(10.00 AS Decimal(7, 2)), 7, 4
+;INSERT `Medicine`(`medicine_name`, `package_type`, `weight`, `price`, `medicine_id`, `manufacturer_id`) SELECT N'Acetaminophen', 1, 1200, CAST(10.00 AS Decimal(7, 2)), 9, 4
+;INSERT `Inventory`(`medicine_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `inventory_id`) SELECT 4, 100, 7, 7, CAST(N'2017-01-05T12:00:00.0000000' AS DATETIME(6)), 50300000, 2
+;INSERT `Inventory`(`medicine_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `inventory_id`) SELECT 4, 50, 7, 4, CAST(N'2017-01-05T12:00:00.0000000' AS DATETIME(6)), 50300000, 5
+;INSERT `Inventory`(`medicine_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `inventory_id`) SELECT 4, 50, 9, 4, CAST(N'2017-01-05T12:00:00.0000000' AS DATETIME(6)), 50300000, 7
+;INSERT `InventoryArchive`(`inventory_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `comment`, `inventory_archive_id`) SELECT 2, 50, 7, 7, CAST(N'2017-01-05T15:00:00.0000000' AS DATETIME(6)), 50300000, N'Moved to warehouse', 9
+;INSERT `InventoryArchive`(`inventory_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `comment`, `inventory_archive_id`) SELECT 2, 50, 7, 7, CAST(N'2017-01-05T17:00:00.0000000' AS DATETIME(6)), 50300000, N'Moved to warehouse', 10
+;INSERT `InventoryArchive`(`inventory_id`, `quantity`, `location_id`, `inventory_type_id`, `date_updated`, `updated_by`, `comment`, `inventory_archive_id`) SELECT 5, 50, 7, 7, CAST(N'2017-01-05T17:00:00.0000000' AS DATETIME(6)), 50300000, N'Moved to warehouse', 11
+INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 1234569788, 1, CAST(N'2015-01-10' AS Date), CAST(N'2018-01-06' AS Date), 1
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 1234569788, 4, CAST(N'2015-01-10' AS Date), CAST(N'2018-01-06' AS Date), 4
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 12111119, 1, CAST(N'2017-05-20' AS Date), CAST(N'2017-05-26' AS Date), 6
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999999, 1, CAST(N'2017-05-06' AS Date), CAST(N'2017-05-10' AS Date), 7
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999998, 1, CAST(N'2017-05-06' AS Date), CAST(N'2017-05-05' AS Date), 1007
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999997, 1, CAST(N'2015-05-01' AS Date), CAST(N'2015-05-01' AS Date), 1008
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999996, 1, CAST(N'2014-05-01' AS Date), CAST(N'2015-05-02' AS Date), 1009
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999994, 1, CAST(N'2015-05-02' AS Date), CAST(N'2015-05-16' AS Date), 1010
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999993, 8, CAST(N'2015-05-01' AS Date), CAST(N'2015-05-30' AS Date), 1011
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999993, 9, CAST(N'2015-05-02' AS Date), CAST(N'2015-05-30' AS Date), 1012
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999991, 7, CAST(N'2017-05-06' AS Date), CAST(N'2017-05-27' AS Date), 1013
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999990, 7, CAST(N'2017-05-06' AS Date), CAST(N'2017-05-27' AS Date), 1014
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 999993, 10, CAST(N'2017-05-02' AS Date), CAST(N'2017-05-26' AS Date), 1015
+;INSERT `PersonEducation`(`PersonId`, `EducationId`, `DateStart`, `DateEnd`, `PersonEducationId`) SELECT 99999902, 7, CAST(N'2017-05-04' AS Date), CAST(N'2017-05-20' AS Date), 1016
+;INSERT `ScheduleStatus`(`ScheduleStatusId`, `StatusName`) SELECT 4, N'Canceled'
+;INSERT `ScheduleStatus`(`ScheduleStatusId`, `StatusName`) SELECT 2, N'Planned';
+INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000001, 2, CAST(N'2017-05-05' AS Date), CAST(N'2017-05-05' AS Date), CAST(N'17:10:00' AS Time(6)), CAST(N'19:10:00' AS Time(6)), 50700000, 1005
+;INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000000, 4, CAST(N'2017-05-06' AS Date), CAST(N'2017-05-06' AS Date), CAST(N'17:10:00' AS Time(6)), CAST(N'19:10:00' AS Time(6)), 50700000, 1008
+;INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000001, 4, CAST(N'2017-05-05' AS Date), CAST(N'2017-05-05' AS Date), CAST(N'08:00:00' AS Time(6)), CAST(N'10:00:00' AS Time(6)), 50700000, 1
+;INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000001, 4, CAST(N'2017-05-05' AS Date), CAST(N'2017-05-05' AS Date), CAST(N'10:10:00' AS Time(6)), CAST(N'11:10:00' AS Time(6)), 50700000, 2
+;INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000001, 4, CAST(N'2017-05-05' AS Date), CAST(N'2017-05-05' AS Date), CAST(N'12:10:00' AS Time(6)), CAST(N'13:10:00' AS Time(6)), 50700000, 1002
+;INSERT `Schedule`(`DoctorId`, `status`, `DateStart`, `DateEnd`, `TimeStart`, `TimeEnd`, `ManagerId`, `Schedule`) SELECT 50000001, 4, CAST(N'2017-05-05' AS Date), CAST(N'2017-05-05' AS Date), CAST(N'17:10:00' AS Time(6)), CAST(N'19:10:00' AS Time(6)), 50700000, 1003
+INSERT `Prescription`(`comment/desc`, `prescription_id`) SELECT N'Soft Flue', 1
+;INSERT `Prescription`(`comment/desc`, `prescription_id`) SELECT N'Throat Infection', 2;
+INSERT `PrescriptionMedicines`(`PrescriptionId`, `MedicineId`, `DaysToUse`, `times_per_day`, `comment`, `prescribed_medicine_id`) SELECT 1, 7, 3, 2, N'Use after meal', 1
+;INSERT `PrescriptionMedicines`(`PrescriptionId`, `MedicineId`, `DaysToUse`, `times_per_day`, `comment`, `prescribed_medicine_id`) SELECT 1, 4, 3, 1, N'Use after meal', 4
+;INSERT `PrescriptionMedicines`(`PrescriptionId`, `MedicineId`, `DaysToUse`, `times_per_day`, `comment`, `prescribed_medicine_id`) SELECT 1, 9, 3, 1, N'Use after meal', 5;
+INSERT `ApplicationRole`(`role_code`, `role_name`, `role_id`) SELECT N'edit_patient', N'Edit', 6
+;INSERT `ApplicationRole`(`role_code`, `role_name`, `role_id`) SELECT N'insert_patient', N'Insert', 5;
+INSERT `LoginGroup`(`group_name`, `description`, `group_id`) SELECT N'AdminClinic', N'Administrator of Clinic', 1
+;INSERT `LoginGroup`(`group_name`, `description`, `group_id`) SELECT N'Doctor', N'Doctor of Clinic', 2
+;INSERT `LoginGroup`(`group_name`, `description`, `group_id`) SELECT N'HRManager', N'Shift Manager of Clinic', 6
+;INSERT `LoginGroup`(`group_name`, `description`, `group_id`) SELECT N'Nurse', N'Nurse of Clinic', 5;
+INSERT `GroupRole`(`group_id`, `role_id`, `usr_group_role`) SELECT 1, 6, 6;
+INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50000000, 2, 13
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50001014, 2, 15
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002014, 2, 1015
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002015, 2, 1016
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002016, 2, 1017
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002018, 2, 1018
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002019, 2, 1019
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002021, 2, 1020
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002022, 2, 1021
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50002023, 2, 1022
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50003023, 2, 2022
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50003024, 2, 2023
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50003027, 2, 2024
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50100001, 5, 2025
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50500000, 1, 11
+;INSERT `UserGroup`(`user_id`, `group_id`, `usr_group_id`) SELECT 50700000, 6, 2026;
+INSERT `Bill`(`Amount`, `payment_type`, `BillId`) SELECT CAST(5.00 AS Decimal(10, 2)), N'Cash', 4
+;INSERT `Bill`(`Amount`, `payment_type`, `BillId`) SELECT CAST(5.00 AS Decimal(10, 2)), N'Debit Card', 5
+;INSERT `Bill`(`Amount`, `payment_type`, `BillId`) SELECT CAST(100.00 AS Decimal(10, 2)), N'Cash', 1
+;INSERT `Bill`(`Amount`, `payment_type`, `BillId`) SELECT CAST(100.00 AS Decimal(10, 2)), N'Debit Card', 2;
+INSERT `Order`(`patient_id`, `pharmacist_id`, `prescription_id`, `date_ordered`, `order_id`) SELECT 1, 50200000, 1, CAST(N'2017-01-05T21:00:00.0000000' AS DATETIME(6)), 1
+;INSERT `OrderItem`(`medicine_id`, `order_id`, `order_item_id`, `item_quantity`) SELECT 7, 1, 1, 2
+;INSERT `OrderItem`(`medicine_id`, `order_id`, `order_item_id`, `item_quantity`) SELECT 5, 1, 7, 2
+;INSERT `OrderItem`(`medicine_id`, `order_id`, `order_item_id`, `item_quantity`) SELECT 2, 1, 9, 2;
+INSERT `BookAppointment`(`ScheduleId`, `PatientId`, `DateBooked`, `TimeBooked`, `status`, `book_id`) SELECT 2, 1, CAST(N'2017-05-05' AS Date), CAST(N'12:20:00' AS Time(6)), N'Booked', 7
+;INSERT `BookAppointment`(`ScheduleId`, `PatientId`, `DateBooked`, `TimeBooked`, `status`, `book_id`) SELECT 2, 1, CAST(N'2017-05-05' AS Date), CAST(N'12:20:00' AS Time(6)), N'Canceled', 10
+;INSERT `BookAppointment`(`ScheduleId`, `PatientId`, `DateBooked`, `TimeBooked`, `status`, `book_id`) SELECT 1002, 1, CAST(N'2017-05-05' AS Date), CAST(N'12:20:00' AS Time(6)), N'Booked', 11
+;INSERT `BookAppointment`(`ScheduleId`, `PatientId`, `DateBooked`, `TimeBooked`, `status`, `book_id`) SELECT 1003, 1, CAST(N'2017-05-05' AS Date), CAST(N'12:20:00' AS Time(6)), N'Booked', 12
+;INSERT `BookAppointment`(`ScheduleId`, `PatientId`, `DateBooked`, `TimeBooked`, `status`, `book_id`) SELECT 1003, 1, CAST(N'2017-05-05' AS Date), CAST(N'13:20:00' AS Time(6)), N'Canceled', 14;
+INSERT `Visit`(`BookId`, `PrescriptionID`, `DateTimeStart`, `DateTimeEnd`, `status`, `VisitId`) SELECT 7, 1, CAST(N'2017-12-05T12:20:00.0000000' AS DATETIME(6)), CAST(N'2017-12-05T13:00:00.0000000' AS DATETIME(6)), N'Visited', 4
+;INSERT `Visit`(`BookId`, `PrescriptionID`, `DateTimeStart`, `DateTimeEnd`, `status`, `VisitId`) SELECT 7, 1, CAST(N'2017-12-05T12:20:00.0000000' AS DATETIME(6)), CAST(N'2017-12-05T13:00:00.0000000' AS DATETIME(6)), N'Canceled', 7;
+INSERT `BillPayment`(`BillId`, `ReceptionistID`, `PatientId`, `VisitId`, `DateOfPayment`, `Billed`, `BillPaymentId`) SELECT 2, 50400000, 1, 4, CAST(N'2017-12-05T00:00:00.0000000' AS DATETIME(6)), 1, 1
+;INSERT `BillPayment`(`BillId`, `ReceptionistID`, `PatientId`, `VisitId`, `DateOfPayment`, `Billed`, `BillPaymentId`) SELECT 2, 50400000, 1, 7, CAST(N'2017-12-05T00:00:00.0000000' AS DATETIME(6)), 1, 3
+	
