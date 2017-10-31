@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ubt.healthcare.business;
+
+import com.ubt.healthcare.ui.util.InputValidation;
+import com.ubt.healthcare.dao.SQLRepository;
+import com.ubt.healthcare.dto.EducationProgram;
+import java.util.List;
+
+/**
+ *
+ * @author F
+ */
+public class EducationProgramService {
+
+    private SQLRepository sqlRepository;
+    private InputValidation inputValidation;
+
+    public EducationProgramService() {
+        sqlRepository = new SQLRepository();
+        inputValidation = new InputValidation();
+    }
+
+    public EducationProgram findTheEducationProgram(String educationProgram) throws Exception {
+        EducationProgram msg = null;
+        List<Object> docs = (List<Object>) sqlRepository.findAll("EducationProgram.findAll");
+        for (Object o : docs) {
+            if (((EducationProgram) o).getProgramName().equals(educationProgram)) {
+                msg = (EducationProgram) o;
+            }
+        }
+
+        return msg;
+    }
+
+    public void persistEducationProgram(EducationProgram educationProgram) throws Exception {
+        sqlRepository.add(educationProgram);
+    }
+
+}
