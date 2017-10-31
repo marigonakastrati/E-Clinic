@@ -3,12 +3,19 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clinic?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456</property>
+        <property name ="show_sql">true</property>
+        <!--
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
         <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=Clinic</property>
         <property name="hibernate.connection.username">Clinic</property>
         <property name="hibernate.connection.password">123</property>
-        <property name ="show_sql">true</property>
+        <property name ="show_sql">true</property>-->
          <mapping class="com.ubt.healthcare.entity.AdminClinic"/>
       
     </session-factory>

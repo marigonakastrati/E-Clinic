@@ -66,10 +66,10 @@
     <class>com.ubt.healthcare.dto.RelativeType</class>
     <class>com.ubt.healthcare.dto.ScheduleStatus</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Clinic"/>
-      <property name="javax.persistence.jdbc.user" value="Clinic"/>
-      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clinic?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
     </properties>
   </persistence-unit>
 </persistence>
