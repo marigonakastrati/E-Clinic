@@ -5,7 +5,7 @@
  */
 package com.jfc.eclinic.dao.impl;
 
-import com.jfc.bookingengine.dao.exception.RepositoryException;
+import com.jfc.eclinic.dao.exception.RepositoryException;
 import com.jfc.eclinic.dao.AddressRepository;
 import com.jfc.eclinic.dto.Address;
 import java.util.List;

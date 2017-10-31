@@ -5,7 +5,7 @@
  */
 package com.jfc.eclinic.dao;
 
-import com.jfc.bookingengine.dao.exception.RepositoryException;
+import com.jfc.eclinic.dao.exception.RepositoryException;
 import com.jfc.eclinic.dto.Address;
 import java.util.List;
 
@@ -16,31 +16,26 @@ import java.util.List;
 public interface AddressRepository  {
     
     /**
-     * @param <T>
      * @param t
-     * @throws com.jfc.bookingengine.dao.impl.RepositoryException
+     * @throws com.jfc.eclinic.dao.exception.RepositoryException
      */
     public void add(Address t) throws RepositoryException;
     /**
-     * @param <T>
      * @return
-     * @throws com.jfc.bookingengine.dao.impl.RepositoryException */
+     * @throws com.jfc.eclinic.dao.exception.RepositoryException */
     public List<Address> findAll() throws RepositoryException;
     /**
-     * @param <T>
      * @param t*
-     * @throws com.jfc.bookingengine.dao.impl.RepositoryException*/
+     * @throws com.jfc.eclinic.dao.exception.RepositoryException*/
     public void update(Address t) throws RepositoryException;
     /**
-     * @param <T>
      * @param t
-     * @throws com.jfc.bookingengine.dao.impl.RepositoryException*/
+     * @throws com.jfc.eclinic.dao.exception.RepositoryException*/
     public void remove(int t) throws RepositoryException;
     /**
-     * @param <T>
      * @param t
      * @return
-     * @throws com.jfc.bookingengine.dao.impl.RepositoryException*/
+     * @throws com.jfc.eclinic.dao.exception.RepositoryException*/
     public Address findById(int t) throws RepositoryException;
 
 }
