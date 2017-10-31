@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Order")
+@Table(name = "order")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
@@ -45,8 +47,8 @@ public class Order1 implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOrdered;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "order_id")
     private Integer orderId;
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_id")
@@ -59,7 +61,7 @@ public class Order1 implements Serializable {
     @ManyToOne(optional = false)
     private Prescription prescriptionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-    private Collection<OrderItem> orderItemCollection;
+    private Collection<Orderitem> orderitemCollection;
 
     public Order1() {
     }
@@ -114,12 +116,12 @@ public class Order1 implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrderItem> getOrderItemCollection() {
-        return orderItemCollection;
+    public Collection<Orderitem> getOrderitemCollection() {
+        return orderitemCollection;
     }
 
-    public void setOrderItemCollection(Collection<OrderItem> orderItemCollection) {
-        this.orderItemCollection = orderItemCollection;
+    public void setOrderitemCollection(Collection<Orderitem> orderitemCollection) {
+        this.orderitemCollection = orderitemCollection;
     }
 
     @Override
@@ -144,7 +146,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Order1[ orderId=" + orderId + " ]";
+        return "com.jfc.eclinic.dto.Order1[ orderId=" + orderId + " ]";
     }
     
 }

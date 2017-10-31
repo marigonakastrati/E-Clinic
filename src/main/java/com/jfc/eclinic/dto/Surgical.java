@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,7 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Surgical")
+@Table(name = "surgical")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Surgical.findAll", query = "SELECT s FROM Surgical s")
@@ -37,8 +38,8 @@ public class Surgical implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "surgical_id")
     private Integer surgicalId;
     @Basic(optional = false)
@@ -46,8 +47,8 @@ public class Surgical implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "surgicalId", fetch = FetchType.EAGER)
-    private Collection<PatientSurgicalHX> patientSurgicalHXCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "surgicalId")
+    private Collection<Patientsurgicalhx> patientsurgicalhxCollection;
 
     public Surgical() {
     }
@@ -78,12 +79,12 @@ public class Surgical implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PatientSurgicalHX> getPatientSurgicalHXCollection() {
-        return patientSurgicalHXCollection;
+    public Collection<Patientsurgicalhx> getPatientsurgicalhxCollection() {
+        return patientsurgicalhxCollection;
     }
 
-    public void setPatientSurgicalHXCollection(Collection<PatientSurgicalHX> patientSurgicalHXCollection) {
-        this.patientSurgicalHXCollection = patientSurgicalHXCollection;
+    public void setPatientsurgicalhxCollection(Collection<Patientsurgicalhx> patientsurgicalhxCollection) {
+        this.patientsurgicalhxCollection = patientsurgicalhxCollection;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class Surgical implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Surgical[ surgicalId=" + surgicalId + " ]";
+        return "com.jfc.eclinic.dto.Surgical[ surgicalId=" + surgicalId + " ]";
     }
     
 }

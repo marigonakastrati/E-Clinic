@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Prescription")
+@Table(name = "prescription")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prescription.findAll", query = "SELECT p FROM Prescription p")
@@ -41,14 +43,14 @@ public class Prescription implements Serializable {
     @Column(name = "desc")
     private String desc;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "prescription_id")
     private Integer prescriptionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
-    private Collection<Order1> order1Collection;
+    private Collection<Prescriptionmedicines> prescriptionmedicinesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionId")
-    private Collection<PrescriptionMedicines> prescriptionMedicinesCollection;
+    private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptionID")
     private Collection<Visit> visitCollection;
 
@@ -81,21 +83,21 @@ public class Prescription implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Prescriptionmedicines> getPrescriptionmedicinesCollection() {
+        return prescriptionmedicinesCollection;
+    }
+
+    public void setPrescriptionmedicinesCollection(Collection<Prescriptionmedicines> prescriptionmedicinesCollection) {
+        this.prescriptionmedicinesCollection = prescriptionmedicinesCollection;
+    }
+
+    @XmlTransient
     public Collection<Order1> getOrder1Collection() {
         return order1Collection;
     }
 
     public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
-    }
-
-    @XmlTransient
-    public Collection<PrescriptionMedicines> getPrescriptionMedicinesCollection() {
-        return prescriptionMedicinesCollection;
-    }
-
-    public void setPrescriptionMedicinesCollection(Collection<PrescriptionMedicines> prescriptionMedicinesCollection) {
-        this.prescriptionMedicinesCollection = prescriptionMedicinesCollection;
     }
 
     @XmlTransient
@@ -129,7 +131,7 @@ public class Prescription implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Prescription[ prescriptionId=" + prescriptionId + " ]";
+        return "com.jfc.eclinic.dto.Prescription[ prescriptionId=" + prescriptionId + " ]";
     }
     
 }

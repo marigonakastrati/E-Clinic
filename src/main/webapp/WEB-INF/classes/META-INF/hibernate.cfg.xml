@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+Copyright (c) 2008, 2016 Oracle and/or its affiliates. All rights reserved.
+
+Oracle and Java are registered trademarks of Oracle and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+The contents of this file are subject to the terms of either the GNU
+General Public License Version 2 only ("GPL") or the Common
+Development and Distribution License("CDDL") (collectively, the
+"License"). You may not use this file except in compliance with the
+License. You can obtain a copy of the License at
+http://www.netbeans.org/cddl-gplv2.html
+or nbbuild/licenses/CDDL-GPL-2-CP. See the License for the
+specific language governing permissions and limitations under the
+License.  When distributing the software, include this License Header
+Notice in each file and include the License file at
+nbbuild/licenses/CDDL-GPL-2-CP.  Oracle designates this
+particular file as subject to the "Classpath" exception as provided
+by Oracle in the GPL Version 2 section of the License file that
+accompanied this code. If applicable, add the following below the
+License Header, with the fields enclosed by brackets [] replaced by
+your own identifying information:
+"Portions Copyrighted [year] [name of copyright owner]"
+
+If you wish your version of this file to be governed by only the CDDL
+or only the GPL Version 2, indicate your decision by adding
+"[Contributor] elects to include this software in this distribution
+under the [CDDL or GPL Version 2] license." If you do not indicate a
+single choice of license, a recipient has the option to distribute
+your version of this file under either the CDDL, the GPL Version 2 or
+to extend the choice of license to its licensees as provided above.
+However, if you add GPL Version 2 code and therefore, elected the GPL
+Version 2 license, then the option applies only if the new code is
+made subject to such option by the copyright holder.
+
+Contributor(s):
+-->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/clinic?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456</property>
+        <property name ="show_sql">true</property>
+        <mapping class="com.ubt.healthcare.dto.AdminClinic"/>
+        <mapping class="com.ubt.healthcare.dto.Person"/>
+        <mapping class="com.ubt.healthcare.dto.Gender"/>
+        <mapping class="com.ubt.healthcare.dto.Religion"/>
+        <mapping class="com.ubt.healthcare.dto.Doctor"/>
+        <mapping class="com.ubt.healthcare.dto.Contact"/>
+        <mapping class="com.ubt.healthcare.dto.Bill"/>
+        <mapping class="com.ubt.healthcare.dto.BookAppointment"/>
+        <mapping class="com.ubt.healthcare.dto.Education"/>
+        <mapping class="com.ubt.healthcare.dto.EmergencyInformation"/>
+        <mapping class="com.ubt.healthcare.dto.Guardian"/>
+        <mapping class="com.ubt.healthcare.dto.HRManager"/>
+        <mapping class="com.ubt.healthcare.dto.Medicine"/>
+        <mapping class="com.ubt.healthcare.dto.Nurse"/>
+        <mapping class="com.ubt.healthcare.dto.Order1"/>
+        <mapping class="com.ubt.healthcare.dto.Patient"/>
+        <mapping class="com.ubt.healthcare.dto.Pharmacist"/>
+        <mapping class="com.ubt.healthcare.dto.PharmacyManager"/>
+        <mapping class="com.ubt.healthcare.dto.Prescription"/>
+        <mapping class="com.ubt.healthcare.dto.PrescriptionMedicines"/>
+        <mapping class="com.ubt.healthcare.dto.Receptionist"/>
+        <mapping class="com.ubt.healthcare.dto.Visit"/>
+        <mapping class="com.ubt.healthcare.dto.Vitals"/>
+        <mapping class="com.ubt.healthcare.dto.EducationProgram"/>
+        <mapping class="com.ubt.healthcare.dto.EducationType"/>
+        <mapping class="com.ubt.healthcare.dto.PersonEducation"/>
+        <mapping class="com.ubt.healthcare.dto.BillPayment"/>
+        <mapping class="com.ubt.healthcare.dto.OrderItem"/>
+        <mapping class="com.ubt.healthcare.dto.Address"/>
+        <mapping class="com.ubt.healthcare.dto.City"/>
+        <mapping class="com.ubt.healthcare.dto.Country"/>
+        <mapping class="com.ubt.healthcare.dto.ApplicationRole"/>
+        <mapping class="com.ubt.healthcare.dto.LoginGroup"/>
+        <mapping class="com.ubt.healthcare.dto.GroupRole"/>
+        <mapping class="com.ubt.healthcare.dto.MartialStatus"/>
+        <mapping class="com.ubt.healthcare.dto.Occupation"/>
+        <mapping class="com.ubt.healthcare.dto.PersonArchive"/>
+        <mapping class="com.ubt.healthcare.dto.UserGroup"/>
+        <mapping class="com.ubt.healthcare.dto.DrugManufacturer"/>
+        <mapping class="com.ubt.healthcare.dto.PackageType"/>
+        <mapping class="com.ubt.healthcare.dto.Inventory"/>
+        <mapping class="com.ubt.healthcare.dto.InventoryType"/>
+        <mapping class="com.ubt.healthcare.dto.PatientInfectiousDiseaseHX"/>
+        <mapping class="com.ubt.healthcare.dto.InfectiousDisease"/>
+        <mapping class="com.ubt.healthcare.dto.PatientMentalHealthHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientSkinHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientVaccineHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientVitalHX"/>
+        <mapping class="com.ubt.healthcare.dto.MentalHealth"/>
+        <mapping class="com.ubt.healthcare.dto.Skin"/>
+        <mapping class="com.ubt.healthcare.dto.Vaccine"/>
+        <mapping class="com.ubt.healthcare.dto.InventoryArchive"/>
+        <mapping class="com.ubt.healthcare.dto.Food"/>
+        <mapping class="com.ubt.healthcare.dto.PackageType"/>
+        <mapping class="com.ubt.healthcare.dto.PatientFoodAllergylHX"/>
+        <mapping class="com.ubt.healthcare.dto.PatientMedicineAllergy"/>
+        <mapping class="com.ubt.healthcare.dto.PatientRelative"/>
+        <mapping class="com.ubt.healthcare.dto.PatientSurgicalHX"/>
+        <mapping class="com.ubt.healthcare.dto.RelativeType"/>
+        <mapping class="com.ubt.healthcare.dto.Surgical"/>
+        <mapping class="com.ubt.healthcare.dto.ScheduleStatus"/>
+        <mapping class="com.ubt.healthcare.dto.Schedule"/>
+    </session-factory>
+</hibernate-configuration>

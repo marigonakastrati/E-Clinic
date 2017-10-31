@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,10 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Visit")
+@Table(name = "visit")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Visit.findAll", query = "SELECT v FROM Visit v")
@@ -56,15 +58,15 @@ public class Visit implements Serializable {
     @Column(name = "status")
     private String status;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "VisitId")
     private Integer visitId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "visitId")
-    private BillPayment billPayment;
+    private Billpayment billpayment;
     @JoinColumn(name = "BookId", referencedColumnName = "book_id")
     @ManyToOne(optional = false)
-    private BookAppointment bookId;
+    private Bookappointment bookId;
     @JoinColumn(name = "PrescriptionID", referencedColumnName = "prescription_id")
     @ManyToOne(optional = false)
     private Prescription prescriptionID;
@@ -115,19 +117,19 @@ public class Visit implements Serializable {
         this.visitId = visitId;
     }
 
-    public BillPayment getBillPayment() {
-        return billPayment;
+    public Billpayment getBillpayment() {
+        return billpayment;
     }
 
-    public void setBillPayment(BillPayment billPayment) {
-        this.billPayment = billPayment;
+    public void setBillpayment(Billpayment billpayment) {
+        this.billpayment = billpayment;
     }
 
-    public BookAppointment getBookId() {
+    public Bookappointment getBookId() {
         return bookId;
     }
 
-    public void setBookId(BookAppointment bookId) {
+    public void setBookId(Bookappointment bookId) {
         this.bookId = bookId;
     }
 
@@ -161,7 +163,7 @@ public class Visit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Visit[ visitId=" + visitId + " ]";
+        return "com.jfc.eclinic.dto.Visit[ visitId=" + visitId + " ]";
     }
     
 }

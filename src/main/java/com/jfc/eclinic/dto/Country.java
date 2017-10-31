@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,11 +12,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Country")
+@Table(name = "country")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
@@ -43,11 +43,9 @@ public class Country implements Serializable {
     @Column(name = "country_name")
     private String countryName;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "country_id")
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer countryId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "countryId")
     private Collection<City> cityCollection;
@@ -111,7 +109,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Country[ countryId=" + countryId + " ]";
+        return "com.jfc.eclinic.dto.Country[ countryId=" + countryId + " ]";
     }
     
 }

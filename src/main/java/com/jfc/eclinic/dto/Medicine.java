@@ -3,29 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Medicine")
+@Table(name = "medicine")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Medicine.findAll", query = "SELECT m FROM Medicine m")
@@ -51,16 +57,22 @@ public class Medicine implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "medicine_id")
     private Integer medicineId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
+    private Collection<Prescriptionmedicines> prescriptionmedicinesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
+    private Collection<Patientmedicineallergy> patientmedicineallergyCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
+    private Collection<Inventory> inventoryCollection;
     @JoinColumn(name = "manufacturer_id", referencedColumnName = "drug_manufacturer_id")
     @ManyToOne(optional = false)
-    private DrugManufacturer manufacturerId;
+    private Drugmanufacturer manufacturerId;
     @JoinColumn(name = "package_type", referencedColumnName = "package_type_id")
     @ManyToOne(optional = false)
-    private PackageType packageType;
+    private Packagetype packageType;
 
     public Medicine() {
     }
@@ -108,19 +120,46 @@ public class Medicine implements Serializable {
         this.medicineId = medicineId;
     }
 
-    public DrugManufacturer getManufacturerId() {
+    @XmlTransient
+    public Collection<Prescriptionmedicines> getPrescriptionmedicinesCollection() {
+        return prescriptionmedicinesCollection;
+    }
+
+    public void setPrescriptionmedicinesCollection(Collection<Prescriptionmedicines> prescriptionmedicinesCollection) {
+        this.prescriptionmedicinesCollection = prescriptionmedicinesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Patientmedicineallergy> getPatientmedicineallergyCollection() {
+        return patientmedicineallergyCollection;
+    }
+
+    public void setPatientmedicineallergyCollection(Collection<Patientmedicineallergy> patientmedicineallergyCollection) {
+        this.patientmedicineallergyCollection = patientmedicineallergyCollection;
+    }
+
+    @XmlTransient
+    public Collection<Inventory> getInventoryCollection() {
+        return inventoryCollection;
+    }
+
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
+        this.inventoryCollection = inventoryCollection;
+    }
+
+    public Drugmanufacturer getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(DrugManufacturer manufacturerId) {
+    public void setManufacturerId(Drugmanufacturer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
-    public PackageType getPackageType() {
+    public Packagetype getPackageType() {
         return packageType;
     }
 
-    public void setPackageType(PackageType packageType) {
+    public void setPackageType(Packagetype packageType) {
         this.packageType = packageType;
     }
 
@@ -146,7 +185,7 @@ public class Medicine implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Medicine[ medicineId=" + medicineId + " ]";
+        return "com.jfc.eclinic.dto.Medicine[ medicineId=" + medicineId + " ]";
     }
     
 }

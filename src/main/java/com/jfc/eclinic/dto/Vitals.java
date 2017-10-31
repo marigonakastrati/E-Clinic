@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Vitals")
+@Table(name = "vitals")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vitals.findAll", query = "SELECT v FROM Vitals v")
@@ -71,7 +71,7 @@ public class Vitals implements Serializable {
     @Column(name = "vital_id")
     private Integer vitalId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vitalId")
-    private Collection<PatientVitalHX> patientVitalHXCollection;
+    private Collection<Patientvitalhx> patientvitalhxCollection;
 
     public Vitals() {
     }
@@ -147,12 +147,12 @@ public class Vitals implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PatientVitalHX> getPatientVitalHXCollection() {
-        return patientVitalHXCollection;
+    public Collection<Patientvitalhx> getPatientvitalhxCollection() {
+        return patientvitalhxCollection;
     }
 
-    public void setPatientVitalHXCollection(Collection<PatientVitalHX> patientVitalHXCollection) {
-        this.patientVitalHXCollection = patientVitalHXCollection;
+    public void setPatientvitalhxCollection(Collection<Patientvitalhx> patientvitalhxCollection) {
+        this.patientvitalhxCollection = patientvitalhxCollection;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class Vitals implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Vitals[ vitalId=" + vitalId + " ]";
+        return "com.jfc.eclinic.dto.Vitals[ vitalId=" + vitalId + " ]";
     }
     
 }

@@ -41,8 +41,6 @@
     <class>com.ubt.healthcare.dto.BillPayment</class>
     <class>com.ubt.healthcare.dto.Contact</class>
     <class>com.ubt.healthcare.dto.PrescriptionMedicines</class>
-    <class>com.ubt.healthcare.dto.PersonEducation</class>
-    <class>com.ubt.healthcare.dto.LoginGroup</class>
     <class>com.ubt.healthcare.dto.MentalHealth</class>
     <class>com.ubt.healthcare.dto.PatientSkinHX</class>
     <class>com.ubt.healthcare.dto.Inventory</class>
@@ -65,6 +63,8 @@
     <class>com.ubt.healthcare.dto.PatientSurgicalHX</class>
     <class>com.ubt.healthcare.dto.RelativeType</class>
     <class>com.ubt.healthcare.dto.ScheduleStatus</class>
+    <class>com.jfc.eclinic.dto.PersonEducation</class>
+    <class>com.jfc.eclinic.dto.LoginGroup</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clinic?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

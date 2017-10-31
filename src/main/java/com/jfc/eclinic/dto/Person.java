@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,8 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
@@ -68,16 +65,14 @@ public class Person implements Serializable {
     @Column(name = "DateOfBirth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Pharmacist> pharmacistCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Contact> contactCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<PharmacyManager> pharmacyManagerCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private PharmacyManager pharmacyManager;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "childId")
-    private Collection<Guardian> guardianCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentID")
-    private Collection<Guardian> guardianCollection1;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Receptionist receptionist;
-    @OneToOne(mappedBy = "personId")
-    private HRManager hRManager;
+    private Adminclinic adminclinic;
     @JoinColumn(name = "AddressId", referencedColumnName = "address_id")
     @ManyToOne(optional = false)
     private Address addressId;
@@ -89,28 +84,30 @@ public class Person implements Serializable {
     private Gender genderId;
     @JoinColumn(name = "MartialStatusId", referencedColumnName = "MartialStatusId")
     @ManyToOne(optional = false)
-    private MartialStatus martialStatusId;
+    private Martialstatus martialStatusId;
     @JoinColumn(name = "ReigionId", referencedColumnName = "religion_id")
     @ManyToOne(optional = false)
     private Religion reigionId;
+    @OneToOne(mappedBy = "personId")
+    private Hrmanager hrmanager;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Collection<PersonEducation> personEducationCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private AdminClinic adminClinic;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Collection<PersonArchive> personArchiveCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Collection<EmergencyInformation> emergencyInformationCollection;
+    private Collection<Receptionist> receptionistCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Patient patient;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Doctor doctor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId",fetch=FetchType.EAGER)
-    private Collection<Contact> contactCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
-    private Pharmacist pharmacist;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
     private Nurse nurse;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Personarchive> personarchiveCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentID")
+    private Collection<Guardian> guardianCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "childId")
+    private Collection<Guardian> guardianCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<EmergencyInformation> emergencyInformationCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Doctor doctor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Personeducation> personeducationCollection;
 
     public Person() {
     }
@@ -165,46 +162,39 @@ public class Person implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public PharmacyManager getPharmacyManager() {
-        return pharmacyManager;
+    @XmlTransient
+    public Collection<Pharmacist> getPharmacistCollection() {
+        return pharmacistCollection;
     }
 
-    public void setPharmacyManager(PharmacyManager pharmacyManager) {
-        this.pharmacyManager = pharmacyManager;
+    public void setPharmacistCollection(Collection<Pharmacist> pharmacistCollection) {
+        this.pharmacistCollection = pharmacistCollection;
     }
 
     @XmlTransient
-    public Collection<Guardian> getGuardianCollection() {
-        return guardianCollection;
+    public Collection<Contact> getContactCollection() {
+        return contactCollection;
     }
 
-    public void setGuardianCollection(Collection<Guardian> guardianCollection) {
-        this.guardianCollection = guardianCollection;
+    public void setContactCollection(Collection<Contact> contactCollection) {
+        this.contactCollection = contactCollection;
     }
 
     @XmlTransient
-    public Collection<Guardian> getGuardianCollection1() {
-        return guardianCollection1;
+    public Collection<PharmacyManager> getPharmacyManagerCollection() {
+        return pharmacyManagerCollection;
     }
 
-    public void setGuardianCollection1(Collection<Guardian> guardianCollection1) {
-        this.guardianCollection1 = guardianCollection1;
+    public void setPharmacyManagerCollection(Collection<PharmacyManager> pharmacyManagerCollection) {
+        this.pharmacyManagerCollection = pharmacyManagerCollection;
     }
 
-    public Receptionist getReceptionist() {
-        return receptionist;
+    public Adminclinic getAdminclinic() {
+        return adminclinic;
     }
 
-    public void setReceptionist(Receptionist receptionist) {
-        this.receptionist = receptionist;
-    }
-
-    public HRManager getHRManager() {
-        return hRManager;
-    }
-
-    public void setHRManager(HRManager hRManager) {
-        this.hRManager = hRManager;
+    public void setAdminclinic(Adminclinic adminclinic) {
+        this.adminclinic = adminclinic;
     }
 
     public Address getAddressId() {
@@ -231,11 +221,11 @@ public class Person implements Serializable {
         this.genderId = genderId;
     }
 
-    public MartialStatus getMartialStatusId() {
+    public Martialstatus getMartialStatusId() {
         return martialStatusId;
     }
 
-    public void setMartialStatusId(MartialStatus martialStatusId) {
+    public void setMartialStatusId(Martialstatus martialStatusId) {
         this.martialStatusId = martialStatusId;
     }
 
@@ -247,30 +237,64 @@ public class Person implements Serializable {
         this.reigionId = reigionId;
     }
 
-    @XmlTransient
-    public Collection<PersonEducation> getPersonEducationCollection() {
-        return personEducationCollection;
+    public Hrmanager getHrmanager() {
+        return hrmanager;
     }
 
-    public void setPersonEducationCollection(Collection<PersonEducation> personEducationCollection) {
-        this.personEducationCollection = personEducationCollection;
-    }
-
-    public AdminClinic getAdminClinic() {
-        return adminClinic;
-    }
-
-    public void setAdminClinic(AdminClinic adminClinic) {
-        this.adminClinic = adminClinic;
+    public void setHrmanager(Hrmanager hrmanager) {
+        this.hrmanager = hrmanager;
     }
 
     @XmlTransient
-    public Collection<PersonArchive> getPersonArchiveCollection() {
-        return personArchiveCollection;
+    public Collection<Receptionist> getReceptionistCollection() {
+        return receptionistCollection;
     }
 
-    public void setPersonArchiveCollection(Collection<PersonArchive> personArchiveCollection) {
-        this.personArchiveCollection = personArchiveCollection;
+    public void setReceptionistCollection(Collection<Receptionist> receptionistCollection) {
+        this.receptionistCollection = receptionistCollection;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Nurse getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(Nurse nurse) {
+        this.nurse = nurse;
+    }
+
+    @XmlTransient
+    public Collection<Personarchive> getPersonarchiveCollection() {
+        return personarchiveCollection;
+    }
+
+    public void setPersonarchiveCollection(Collection<Personarchive> personarchiveCollection) {
+        this.personarchiveCollection = personarchiveCollection;
+    }
+
+    @XmlTransient
+    public Collection<Guardian> getGuardianCollection() {
+        return guardianCollection;
+    }
+
+    public void setGuardianCollection(Collection<Guardian> guardianCollection) {
+        this.guardianCollection = guardianCollection;
+    }
+
+    @XmlTransient
+    public Collection<Guardian> getGuardianCollection1() {
+        return guardianCollection1;
+    }
+
+    public void setGuardianCollection1(Collection<Guardian> guardianCollection1) {
+        this.guardianCollection1 = guardianCollection1;
     }
 
     @XmlTransient
@@ -282,14 +306,6 @@ public class Person implements Serializable {
         this.emergencyInformationCollection = emergencyInformationCollection;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
     public Doctor getDoctor() {
         return doctor;
     }
@@ -299,28 +315,12 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Contact> getContactCollection() {
-        return contactCollection;
+    public Collection<Personeducation> getPersoneducationCollection() {
+        return personeducationCollection;
     }
 
-    public void setContactCollection(Collection<Contact> contactCollection) {
-        this.contactCollection = contactCollection;
-    }
-
-    public Pharmacist getPharmacist() {
-        return pharmacist;
-    }
-
-    public void setPharmacist(Pharmacist pharmacist) {
-        this.pharmacist = pharmacist;
-    }
-
-    public Nurse getNurse() {
-        return nurse;
-    }
-
-    public void setNurse(Nurse nurse) {
-        this.nurse = nurse;
+    public void setPersoneducationCollection(Collection<Personeducation> personeducationCollection) {
+        this.personeducationCollection = personeducationCollection;
     }
 
     @Override
@@ -345,7 +345,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Person[ personId=" + personId + " ]";
+        return "com.jfc.eclinic.dto.Person[ personId=" + personId + " ]";
     }
     
 }

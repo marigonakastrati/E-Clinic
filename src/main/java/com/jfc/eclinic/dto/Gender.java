@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Gender")
+@Table(name = "gender")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gender.findAll", query = "SELECT g FROM Gender g")
@@ -107,7 +107,7 @@ public class Gender implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Gender[ genderId=" + genderId + " ]";
+        return "com.jfc.eclinic.dto.Gender[ genderId=" + genderId + " ]";
     }
     
 }

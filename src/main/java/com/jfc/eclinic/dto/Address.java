@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,13 +12,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Address")
+@Table(name = "address")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
@@ -38,9 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Address.findByStreetName", query = "SELECT a FROM Address a WHERE a.streetName = :streetName")
     , @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId")})
 public class Address implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
-    private Collection<Person> personCollection;
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -53,12 +50,18 @@ public class Address implements Serializable {
     @Column(name = "street_name")
     private String streetName;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "address_id")
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer addressId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
+    private Collection<Drugmanufacturer> drugmanufacturerCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
+    private Collection<Person> personCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
+    private Collection<Inventoryarchive> inventoryarchiveCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locationId")
+    private Collection<Inventory> inventoryCollection;
     @JoinColumn(name = "city_id", referencedColumnName = "city_id")
     @ManyToOne(optional = false)
     private City cityId;
@@ -100,6 +103,42 @@ public class Address implements Serializable {
         this.addressId = addressId;
     }
 
+    @XmlTransient
+    public Collection<Drugmanufacturer> getDrugmanufacturerCollection() {
+        return drugmanufacturerCollection;
+    }
+
+    public void setDrugmanufacturerCollection(Collection<Drugmanufacturer> drugmanufacturerCollection) {
+        this.drugmanufacturerCollection = drugmanufacturerCollection;
+    }
+
+    @XmlTransient
+    public Collection<Person> getPersonCollection() {
+        return personCollection;
+    }
+
+    public void setPersonCollection(Collection<Person> personCollection) {
+        this.personCollection = personCollection;
+    }
+
+    @XmlTransient
+    public Collection<Inventoryarchive> getInventoryarchiveCollection() {
+        return inventoryarchiveCollection;
+    }
+
+    public void setInventoryarchiveCollection(Collection<Inventoryarchive> inventoryarchiveCollection) {
+        this.inventoryarchiveCollection = inventoryarchiveCollection;
+    }
+
+    @XmlTransient
+    public Collection<Inventory> getInventoryCollection() {
+        return inventoryCollection;
+    }
+
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
+        this.inventoryCollection = inventoryCollection;
+    }
+
     public City getCityId() {
         return cityId;
     }
@@ -130,16 +169,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Address[ addressId=" + addressId + " ]";
+        return "com.jfc.eclinic.dto.Address[ addressId=" + addressId + " ]";
     }
-
-    @XmlTransient
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
-    }
-
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
-    }
-
+    
 }

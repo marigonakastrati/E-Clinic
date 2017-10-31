@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,12 +11,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Pharmacist")
+@Table(name = "pharmacist")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pharmacist.findAll", query = "SELECT p FROM Pharmacist p")
@@ -43,15 +45,15 @@ public class Pharmacist implements Serializable {
     @Column(name = "PassCode")
     private String passCode;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "PharmacistId")
     private Integer pharmacistId;
+    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
+    @ManyToOne(optional = false)
+    private Person personId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacistId")
     private Collection<Order1> order1Collection;
-    @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
-    @OneToOne(optional = false)
-    private Person personId;
 
     public Pharmacist() {
     }
@@ -81,6 +83,14 @@ public class Pharmacist implements Serializable {
         this.pharmacistId = pharmacistId;
     }
 
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
+    }
+
     @XmlTransient
     public Collection<Order1> getOrder1Collection() {
         return order1Collection;
@@ -88,14 +98,6 @@ public class Pharmacist implements Serializable {
 
     public void setOrder1Collection(Collection<Order1> order1Collection) {
         this.order1Collection = order1Collection;
-    }
-
-    public Person getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Person personId) {
-        this.personId = personId;
     }
 
     @Override
@@ -120,7 +122,7 @@ public class Pharmacist implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Pharmacist[ pharmacistId=" + pharmacistId + " ]";
+        return "com.jfc.eclinic.dto.Pharmacist[ pharmacistId=" + pharmacistId + " ]";
     }
     
 }

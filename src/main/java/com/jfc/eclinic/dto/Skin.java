@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Skin")
+@Table(name = "skin")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Skin.findAll", query = "SELECT s FROM Skin s")
@@ -36,8 +38,8 @@ public class Skin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "skin_id")
     private Integer skinId;
     @Basic(optional = false)
@@ -46,7 +48,7 @@ public class Skin implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "skinId")
-    private Collection<PatientSkinHX> patientSkinHXCollection;
+    private Collection<Patientskinhx> patientskinhxCollection;
 
     public Skin() {
     }
@@ -77,12 +79,12 @@ public class Skin implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PatientSkinHX> getPatientSkinHXCollection() {
-        return patientSkinHXCollection;
+    public Collection<Patientskinhx> getPatientskinhxCollection() {
+        return patientskinhxCollection;
     }
 
-    public void setPatientSkinHXCollection(Collection<PatientSkinHX> patientSkinHXCollection) {
-        this.patientSkinHXCollection = patientSkinHXCollection;
+    public void setPatientskinhxCollection(Collection<Patientskinhx> patientskinhxCollection) {
+        this.patientskinhxCollection = patientskinhxCollection;
     }
 
     @Override
@@ -107,7 +109,7 @@ public class Skin implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Skin[ skinId=" + skinId + " ]";
+        return "com.jfc.eclinic.dto.Skin[ skinId=" + skinId + " ]";
     }
     
 }

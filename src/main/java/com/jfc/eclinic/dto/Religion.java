@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Religion")
+@Table(name = "religion")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Religion.findAll", query = "SELECT r FROM Religion r")
@@ -41,8 +43,8 @@ public class Religion implements Serializable {
     @Column(name = "name")
     private String name;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "religion_id")
     private Integer religionId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reigionId")
@@ -107,7 +109,7 @@ public class Religion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Religion[ religionId=" + religionId + " ]";
+        return "com.jfc.eclinic.dto.Religion[ religionId=" + religionId + " ]";
     }
     
 }

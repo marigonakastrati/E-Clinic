@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,32 +23,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Contact")
+@Table(name = "contact")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
-    , @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")
     , @NamedQuery(name = "Contact.findByType", query = "SELECT c FROM Contact c WHERE c.type = :type")
-    , @NamedQuery(name = "Contact.findByValue", query = "SELECT c FROM Contact c WHERE c.value = :value")})
+    , @NamedQuery(name = "Contact.findByValue", query = "SELECT c FROM Contact c WHERE c.value = :value")
+    , @NamedQuery(name = "Contact.findByContactId", query = "SELECT c FROM Contact c WHERE c.contactId = :contactId")})
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ContactId")
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
-    private Integer contactId;
-    @Size(max = 10)
+    @Size(min = 1, max = 10)
     @Column(name = "Type")
     private String type;
-    @Size(max = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 256)
     @Column(name = "Value")
     private String value;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ContactId")
+    private Integer contactId;
     @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person personId;
@@ -60,12 +62,10 @@ public class Contact implements Serializable {
         this.contactId = contactId;
     }
 
-    public Integer getContactId() {
-        return contactId;
-    }
-
-    public void setContactId(Integer contactId) {
+    public Contact(Integer contactId, String type, String value) {
         this.contactId = contactId;
+        this.type = type;
+        this.value = value;
     }
 
     public String getType() {
@@ -82,6 +82,14 @@ public class Contact implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Integer getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Integer contactId) {
+        this.contactId = contactId;
     }
 
     public Person getPersonId() {
@@ -114,7 +122,7 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return value;
+        return "com.jfc.eclinic.dto.Contact[ contactId=" + contactId + " ]";
     }
-
+    
 }

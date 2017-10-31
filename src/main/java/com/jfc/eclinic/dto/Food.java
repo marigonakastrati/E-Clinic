@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,7 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Food")
+@Table(name = "food")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Food.findAll", query = "SELECT f FROM Food f")
@@ -37,8 +38,8 @@ public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "food_id")
     private Integer foodId;
     @Basic(optional = false)
@@ -46,8 +47,8 @@ public class Food implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId", fetch = FetchType.EAGER)
-    private Collection<PatientFoodAllergylHX> patientFoodAllergylHXCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId")
+    private Collection<Patientfoodallergylhx> patientfoodallergylhxCollection;
 
     public Food() {
     }
@@ -78,12 +79,12 @@ public class Food implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PatientFoodAllergylHX> getPatientFoodAllergylHXCollection() {
-        return patientFoodAllergylHXCollection;
+    public Collection<Patientfoodallergylhx> getPatientfoodallergylhxCollection() {
+        return patientfoodallergylhxCollection;
     }
 
-    public void setPatientFoodAllergylHXCollection(Collection<PatientFoodAllergylHX> patientFoodAllergylHXCollection) {
-        this.patientFoodAllergylHXCollection = patientFoodAllergylHXCollection;
+    public void setPatientfoodallergylhxCollection(Collection<Patientfoodallergylhx> patientfoodallergylhxCollection) {
+        this.patientfoodallergylhxCollection = patientfoodallergylhxCollection;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class Food implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Food[ foodId=" + foodId + " ]";
+        return "com.jfc.eclinic.dto.Food[ foodId=" + foodId + " ]";
     }
     
 }

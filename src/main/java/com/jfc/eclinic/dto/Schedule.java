@@ -3,32 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Schedule")
+@Table(name = "schedule")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Schedule.findAll", query = "SELECT s FROM Schedule s")
@@ -36,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Schedule.findByDateEnd", query = "SELECT s FROM Schedule s WHERE s.dateEnd = :dateEnd")
     , @NamedQuery(name = "Schedule.findByTimeStart", query = "SELECT s FROM Schedule s WHERE s.timeStart = :timeStart")
     , @NamedQuery(name = "Schedule.findByTimeEnd", query = "SELECT s FROM Schedule s WHERE s.timeEnd = :timeEnd")
-    , @NamedQuery(name = "Schedule.findByScheduleId", query = "SELECT s FROM Schedule s WHERE s.scheduleId = :scheduleId")})
+    , @NamedQuery(name = "Schedule.findBySchedule", query = "SELECT s FROM Schedule s WHERE s.schedule = :schedule")})
 public class Schedule implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,31 +65,31 @@ public class Schedule implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date timeEnd;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "Schedule") 
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
-    private Integer scheduleId;
+    @Column(name = "Schedule")
+    private Integer schedule;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scheduleId")
+    private Collection<Bookappointment> bookappointmentCollection;
     @JoinColumn(name = "DoctorId", referencedColumnName = "DoctorId")
     @ManyToOne(optional = false)
     private Doctor doctorId;
     @JoinColumn(name = "ManagerId", referencedColumnName = "ManagerId")
     @ManyToOne(optional = false)
-    private HRManager managerId;
+    private Hrmanager managerId;
     @JoinColumn(name = "status", referencedColumnName = "ScheduleStatusId")
     @ManyToOne(optional = false)
-    private ScheduleStatus status;
+    private Schedulestatus status;
 
     public Schedule() {
     }
 
-    public Schedule(Integer scheduleId) {
-        this.scheduleId = scheduleId;
+    public Schedule(Integer schedule) {
+        this.schedule = schedule;
     }
 
-    public Schedule(Integer scheduleId, Date dateStart, Date dateEnd, Date timeStart, Date timeEnd) {
-        this.scheduleId = scheduleId;
+    public Schedule(Integer schedule, Date dateStart, Date dateEnd, Date timeStart, Date timeEnd) {
+        this.schedule = schedule;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.timeStart = timeStart;
@@ -124,12 +128,21 @@ public class Schedule implements Serializable {
         this.timeEnd = timeEnd;
     }
 
-    public Integer getScheduleId() {
-        return scheduleId;
+    public Integer getSchedule() {
+        return schedule;
     }
 
-    public void setScheduleId(Integer scheduleId) {
-        this.scheduleId = scheduleId;
+    public void setSchedule(Integer schedule) {
+        this.schedule = schedule;
+    }
+
+    @XmlTransient
+    public Collection<Bookappointment> getBookappointmentCollection() {
+        return bookappointmentCollection;
+    }
+
+    public void setBookappointmentCollection(Collection<Bookappointment> bookappointmentCollection) {
+        this.bookappointmentCollection = bookappointmentCollection;
     }
 
     public Doctor getDoctorId() {
@@ -140,26 +153,26 @@ public class Schedule implements Serializable {
         this.doctorId = doctorId;
     }
 
-    public HRManager getManagerId() {
+    public Hrmanager getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(HRManager managerId) {
+    public void setManagerId(Hrmanager managerId) {
         this.managerId = managerId;
     }
 
-    public ScheduleStatus getStatus() {
+    public Schedulestatus getStatus() {
         return status;
     }
 
-    public void setStatus(ScheduleStatus status) {
+    public void setStatus(Schedulestatus status) {
         this.status = status;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (scheduleId != null ? scheduleId.hashCode() : 0);
+        hash += (schedule != null ? schedule.hashCode() : 0);
         return hash;
     }
 
@@ -170,7 +183,7 @@ public class Schedule implements Serializable {
             return false;
         }
         Schedule other = (Schedule) object;
-        if ((this.scheduleId == null && other.scheduleId != null) || (this.scheduleId != null && !this.scheduleId.equals(other.scheduleId))) {
+        if ((this.schedule == null && other.schedule != null) || (this.schedule != null && !this.schedule.equals(other.schedule))) {
             return false;
         }
         return true;
@@ -178,7 +191,7 @@ public class Schedule implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Schedule[ scheduleId=" + scheduleId + " ]";
+        return "com.jfc.eclinic.dto.Schedule[ schedule=" + schedule + " ]";
     }
     
 }

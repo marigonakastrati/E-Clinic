@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Emergency_Information")
+@Table(name = "emergency_information")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EmergencyInformation.findAll", query = "SELECT e FROM EmergencyInformation e")
@@ -96,7 +96,7 @@ public class EmergencyInformation implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.EmergencyInformation[ emergencyInfoId=" + emergencyInfoId + " ]";
+        return "com.jfc.eclinic.dto.EmergencyInformation[ emergencyInfoId=" + emergencyInfoId + " ]";
     }
     
 }

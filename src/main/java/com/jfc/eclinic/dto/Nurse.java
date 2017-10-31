@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Nurse")
+@Table(name = "nurse")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nurse.findAll", query = "SELECT n FROM Nurse n")
@@ -41,11 +41,9 @@ public class Nurse implements Serializable {
     @Column(name = "PassCode")
     private String passCode;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "NurseId")
-    @GeneratedValue(generator = "InvSeq")
-    @SequenceGenerator(name = "InvSeq", sequenceName = "INV_SEQ", allocationSize = 1)
     private Integer nurseId;
     @JoinColumn(name = "PersonId", referencedColumnName = "PersonId")
     @OneToOne(optional = false)
@@ -54,7 +52,7 @@ public class Nurse implements Serializable {
     public Nurse() {
     }
 
-    public Nurse(Integer nurseId) { 
+    public Nurse(Integer nurseId) {
         this.nurseId = nurseId;
     }
 
@@ -109,7 +107,7 @@ public class Nurse implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Nurse[ nurseId=" + nurseId + " ]";
+        return "com.jfc.eclinic.dto.Nurse[ nurseId=" + nurseId + " ]";
     }
-
+    
 }

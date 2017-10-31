@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,12 +11,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Pharmacy_Manager")
+@Table(name = "pharmacy_manager")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PharmacyManager.findAll", query = "SELECT p FROM PharmacyManager p")
@@ -43,17 +45,17 @@ public class PharmacyManager implements Serializable {
     @Column(name = "pass_code")
     private String passCode;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "pharmacy_manager_id")
     private Integer pharmacyManagerId;
     @JoinColumn(name = "person_id", referencedColumnName = "PersonId")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Person personId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "updatedBy")
-    private Collection<Inventory> inventoryCollection;
+    private Collection<Inventoryarchive> inventoryarchiveCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "updatedBy")
-    private Collection<InventoryArchive> inventoryArchiveCollection;
+    private Collection<Inventory> inventoryCollection;
 
     public PharmacyManager() {
     }
@@ -92,21 +94,21 @@ public class PharmacyManager implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Inventoryarchive> getInventoryarchiveCollection() {
+        return inventoryarchiveCollection;
+    }
+
+    public void setInventoryarchiveCollection(Collection<Inventoryarchive> inventoryarchiveCollection) {
+        this.inventoryarchiveCollection = inventoryarchiveCollection;
+    }
+
+    @XmlTransient
     public Collection<Inventory> getInventoryCollection() {
         return inventoryCollection;
     }
 
     public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
         this.inventoryCollection = inventoryCollection;
-    }
-
-    @XmlTransient
-    public Collection<InventoryArchive> getInventoryArchiveCollection() {
-        return inventoryArchiveCollection;
-    }
-
-    public void setInventoryArchiveCollection(Collection<InventoryArchive> inventoryArchiveCollection) {
-        this.inventoryArchiveCollection = inventoryArchiveCollection;
     }
 
     @Override
@@ -131,7 +133,7 @@ public class PharmacyManager implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.PharmacyManager[ pharmacyManagerId=" + pharmacyManagerId + " ]";
+        return "com.jfc.eclinic.dto.PharmacyManager[ pharmacyManagerId=" + pharmacyManagerId + " ]";
     }
     
 }

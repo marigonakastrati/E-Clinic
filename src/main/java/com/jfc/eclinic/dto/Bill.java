@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,22 +12,23 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Bill")
+@Table(name = "bill")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Bill.findAll", query = "SELECT b FROM Bill b")
@@ -44,12 +45,12 @@ public class Bill implements Serializable {
     @Column(name = "payment_type")
     private String paymentType;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "BillId")
     private Integer billId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "billId")
-    private Collection<BillPayment> billPaymentCollection;
+    private Collection<Billpayment> billpaymentCollection;
 
     public Bill() {
     }
@@ -83,12 +84,12 @@ public class Bill implements Serializable {
     }
 
     @XmlTransient
-    public Collection<BillPayment> getBillPaymentCollection() {
-        return billPaymentCollection;
+    public Collection<Billpayment> getBillpaymentCollection() {
+        return billpaymentCollection;
     }
 
-    public void setBillPaymentCollection(Collection<BillPayment> billPaymentCollection) {
-        this.billPaymentCollection = billPaymentCollection;
+    public void setBillpaymentCollection(Collection<Billpayment> billpaymentCollection) {
+        this.billpaymentCollection = billpaymentCollection;
     }
 
     @Override
@@ -113,7 +114,7 @@ public class Bill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Bill[ billId=" + billId + " ]";
+        return "com.jfc.eclinic.dto.Bill[ billId=" + billId + " ]";
     }
     
 }

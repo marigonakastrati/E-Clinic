@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Guardian")
+@Table(name = "guardian")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Guardian.findAll", query = "SELECT g FROM Guardian g")
@@ -36,12 +36,12 @@ public class Guardian implements Serializable {
     @NotNull
     @Column(name = "GuardianId")
     private Integer guardianId;
-    @JoinColumn(name = "ChildId", referencedColumnName = "PersonId")
-    @ManyToOne(optional = false)
-    private Person childId;
     @JoinColumn(name = "ParentID", referencedColumnName = "PersonId")
     @ManyToOne(optional = false)
     private Person parentID;
+    @JoinColumn(name = "ChildId", referencedColumnName = "PersonId")
+    @ManyToOne(optional = false)
+    private Person childId;
 
     public Guardian() {
     }
@@ -58,20 +58,20 @@ public class Guardian implements Serializable {
         this.guardianId = guardianId;
     }
 
-    public Person getChildId() {
-        return childId;
-    }
-
-    public void setChildId(Person childId) {
-        this.childId = childId;
-    }
-
     public Person getParentID() {
         return parentID;
     }
 
     public void setParentID(Person parentID) {
         this.parentID = parentID;
+    }
+
+    public Person getChildId() {
+        return childId;
+    }
+
+    public void setChildId(Person childId) {
+        this.childId = childId;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Guardian implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Guardian[ guardianId=" + guardianId + " ]";
+        return "com.jfc.eclinic.dto.Guardian[ guardianId=" + guardianId + " ]";
     }
     
 }

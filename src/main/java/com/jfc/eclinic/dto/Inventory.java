@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Inventory")
+@Table(name = "inventory")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Inventory.findAll", query = "SELECT i FROM Inventory i")
@@ -50,26 +52,26 @@ public class Inventory implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "inventory_id")
     private Integer inventoryId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryId")
+    private Collection<Inventoryarchive> inventoryarchiveCollection;
+    @JoinColumn(name = "inventory_type_id", referencedColumnName = "inventory_type_id")
+    @ManyToOne(optional = false)
+    private Inventorytype inventoryTypeId;
     @JoinColumn(name = "location_id", referencedColumnName = "address_id")
     @ManyToOne(optional = false)
     private Address locationId;
-    @JoinColumn(name = "inventory_type_id", referencedColumnName = "inventory_type_id")
-    @ManyToOne(optional = false)
-    private InventoryType inventoryTypeId;
     @JoinColumn(name = "medicine_id", referencedColumnName = "medicine_id")
     @ManyToOne(optional = false)
     private Medicine medicineId;
     @JoinColumn(name = "updated_by", referencedColumnName = "pharmacy_manager_id")
     @ManyToOne(optional = false)
     private PharmacyManager updatedBy;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryId")
-    private Collection<InventoryArchive> inventoryArchiveCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
-    private Collection<OrderItem> orderItemCollection;
+    private Collection<Orderitem> orderitemCollection;
 
     public Inventory() {
     }
@@ -108,20 +110,29 @@ public class Inventory implements Serializable {
         this.inventoryId = inventoryId;
     }
 
+    @XmlTransient
+    public Collection<Inventoryarchive> getInventoryarchiveCollection() {
+        return inventoryarchiveCollection;
+    }
+
+    public void setInventoryarchiveCollection(Collection<Inventoryarchive> inventoryarchiveCollection) {
+        this.inventoryarchiveCollection = inventoryarchiveCollection;
+    }
+
+    public Inventorytype getInventoryTypeId() {
+        return inventoryTypeId;
+    }
+
+    public void setInventoryTypeId(Inventorytype inventoryTypeId) {
+        this.inventoryTypeId = inventoryTypeId;
+    }
+
     public Address getLocationId() {
         return locationId;
     }
 
     public void setLocationId(Address locationId) {
         this.locationId = locationId;
-    }
-
-    public InventoryType getInventoryTypeId() {
-        return inventoryTypeId;
-    }
-
-    public void setInventoryTypeId(InventoryType inventoryTypeId) {
-        this.inventoryTypeId = inventoryTypeId;
     }
 
     public Medicine getMedicineId() {
@@ -141,21 +152,12 @@ public class Inventory implements Serializable {
     }
 
     @XmlTransient
-    public Collection<InventoryArchive> getInventoryArchiveCollection() {
-        return inventoryArchiveCollection;
+    public Collection<Orderitem> getOrderitemCollection() {
+        return orderitemCollection;
     }
 
-    public void setInventoryArchiveCollection(Collection<InventoryArchive> inventoryArchiveCollection) {
-        this.inventoryArchiveCollection = inventoryArchiveCollection;
-    }
-
-    @XmlTransient
-    public Collection<OrderItem> getOrderItemCollection() {
-        return orderItemCollection;
-    }
-
-    public void setOrderItemCollection(Collection<OrderItem> orderItemCollection) {
-        this.orderItemCollection = orderItemCollection;
+    public void setOrderitemCollection(Collection<Orderitem> orderitemCollection) {
+        this.orderitemCollection = orderitemCollection;
     }
 
     @Override
@@ -180,7 +182,7 @@ public class Inventory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Inventory[ inventoryId=" + inventoryId + " ]";
+        return "com.jfc.eclinic.dto.Inventory[ inventoryId=" + inventoryId + " ]";
     }
     
 }

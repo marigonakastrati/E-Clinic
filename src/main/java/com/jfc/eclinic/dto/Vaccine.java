@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ubt.healthcare.dto;
+package com.jfc.eclinic.dto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author F
+ * @author jfc
  */
 @Entity
-@Table(name = "Vaccine")
+@Table(name = "vaccine")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vaccine.findAll", query = "SELECT v FROM Vaccine v")
@@ -36,8 +38,8 @@ public class Vaccine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "vaccine_id")
     private Integer vaccineId;
     @Basic(optional = false)
@@ -46,7 +48,7 @@ public class Vaccine implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vaccineId")
-    private Collection<PatientVaccineHX> patientVaccineHXCollection;
+    private Collection<Patientvaccinehx> patientvaccinehxCollection;
 
     public Vaccine() {
     }
@@ -77,12 +79,12 @@ public class Vaccine implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PatientVaccineHX> getPatientVaccineHXCollection() {
-        return patientVaccineHXCollection;
+    public Collection<Patientvaccinehx> getPatientvaccinehxCollection() {
+        return patientvaccinehxCollection;
     }
 
-    public void setPatientVaccineHXCollection(Collection<PatientVaccineHX> patientVaccineHXCollection) {
-        this.patientVaccineHXCollection = patientVaccineHXCollection;
+    public void setPatientvaccinehxCollection(Collection<Patientvaccinehx> patientvaccinehxCollection) {
+        this.patientvaccinehxCollection = patientvaccinehxCollection;
     }
 
     @Override
@@ -107,7 +109,7 @@ public class Vaccine implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ubt.healthcare.dto.Vaccine[ vaccineId=" + vaccineId + " ]";
+        return "com.jfc.eclinic.dto.Vaccine[ vaccineId=" + vaccineId + " ]";
     }
     
 }
