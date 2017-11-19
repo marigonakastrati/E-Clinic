@@ -15,6 +15,10 @@ import javax.ws.rs.Path;
 import javax.validation.constraints.Size;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -34,14 +38,31 @@ public class Address {
     
     @GET
     @Path("addressList")
-    public JsonArray getAddress() throws Exception
+    public Response getAddress() throws Exception
     {
-        return addressService.get().stream().map(h -> Json.createObjectBuilder()
-                .add("Address Id", h.getAddressId())
-                .add("Address Name", h.getStreetName())
+        JsonArray build = addressService.get().stream().map(h -> Json.createObjectBuilder()
+                .add("id", h.getAddressId())
+                .add("name", h.getStreetName())
                 .build())
                 .collect(Json::createArrayBuilder, JsonArrayBuilder::add, JsonArrayBuilder::add)
                 .build();
-
+        return Response.ok()
+            .status(200).entity(build).build();
+    }
+    
+    @POST
+    @Path("edit")
+    public Response editAddress(com.jfc.eclinic.dto.Address get) throws Exception
+    {
+        addressService.update(get);
+        return Response.ok().build();
+    }
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("type/{id}")
+    public Response post(@PathParam("id")String id)
+    {
+        System.out.println(id);
+        return Response.ok().entity("type POST"+ id).build();
     }
 }
