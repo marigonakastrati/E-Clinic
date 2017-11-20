@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jfc.eclinic.REST;
+package com.jfc.eclinic.rest;
 
-import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -13,7 +12,7 @@ import javax.ws.rs.core.Application;
  *
  * @author jfc
  */
-@ApplicationPath("resource")
+@ApplicationPath("api")
 public class JAXRSConfiguration extends Application{
     
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jfc.eclinic.REST;
+package com.jfc.eclinic.rest;
 
 import com.jfc.eclinic.services.AddressService;
 import javax.inject.Inject;
@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
  * @author jfc
  */
 @Path("address")
-public class Address {
+public class AddressRestEndPoint {
 
     @Inject AddressService addressService;
     
@@ -64,5 +64,13 @@ public class Address {
     {
         System.out.println(id);
         return Response.ok().entity("type POST"+ id).build();
+    }
+    @POST
+    @Path("editAddress")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response edit(com.jfc.eclinic.dto.Address a) throws Exception
+    {
+        addressService.update(a);
+        return Response.ok().build();
     }
 }
